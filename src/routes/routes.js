@@ -1,16 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
+import Home from '../pages/Home';
 
 const AppRoutes = () => {
     return (
         <>
-            <Routes >
-                <Route path="/" element={<h1>home</h1>} />
-
-
-
-
-
+            <Routes>
+                <Route path="/" element={<Home></Home>} />
                 {/* test */}
                 <Route path="/huong" element={<h1>huong</h1>}/>
                 <Route path="/hiep" element={<h1>hiep</h1>}/>
