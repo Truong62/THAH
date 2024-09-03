@@ -3,13 +3,19 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const AppRoutes = () => {
     return (
-        <Router>
-            <Routes>
+        <>
+            <Routes >
                 <Route path="/" element={<h1>home</h1>} />
-                <Route path="/about" element={<h1>about</h1>}/>
-                <Route path="/contact" element={<h1>contact</h1>}/>
+
+
+
+
+
+                {/* test */}
+                <Route path="/huong" element={<h1>huong</h1>}/>
+                <Route path="/hiep" element={<h1>hiep</h1>}/>
             </Routes>
-        </Router>
+        </>
     );
 };
 
