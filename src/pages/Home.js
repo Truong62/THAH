@@ -1,6 +1,6 @@
 import React from "react";
+import Card from "../components/Card/Card";
 import Layout from "../components/Layout";
-
 const Home = () => {
   return (
     <React.Fragment>
@@ -16,8 +16,8 @@ const Home = () => {
               <input className="h-full outline-none" placeholder="Sreach ...."></input>
             </div>
           </div>
-          <div>dsdasdsa</div>
         </div>
+        <Card></Card>
       </Layout>
     </React.Fragment>
   );
