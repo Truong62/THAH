@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "../components/Card/Card";
+import ErrorBoundary from "../components/ErrorBoundary";
 import Layout from "../components/Layout";
+
 const Home = () => {
   return (
     <React.Fragment>
@@ -17,7 +19,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <Card></Card>
+        <ErrorBoundary>
+          <Card></Card>
+        </ErrorBoundary>
       </Layout>
     </React.Fragment>
   );
