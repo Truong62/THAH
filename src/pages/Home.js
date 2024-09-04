@@ -60,6 +60,21 @@ const Home = () => {
                         </div>
                     ))}
                 </div>
+                <div className='overflow-hidden rounded-3xl relative'>
+                    <img
+                        className='w-full object-fill shadow-xl opacity-85 rounded-3xl transform transition-transform duration-1000 hover:scale-110'
+                        alt='banner'
+                        src='https://theme.hstatic.net/200000238513/1000665981/14/banner_project_1.jpg?v=23'
+                    />
+                    <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'>
+                        <div className='bg-amber-50 px-8 py-2 rounded-lg'>
+                            <p className='font-bold text-xl'>
+                                Buy Now
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </Layout>
         </React.Fragment>
     );
