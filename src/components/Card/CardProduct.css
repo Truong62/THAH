@@ -13,3 +13,12 @@
   .slick-dots li.slick-active div {
     @apply bg-black;
   }
+
+  .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Số dòng tối đa */
+    overflow-wrap: break-word;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
