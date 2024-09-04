@@ -1,9 +1,11 @@
 import React from "react";
 import Layout from "../components/Layout";
+import ImageSlider from "../components/ImageSlider";
 
 const Home = () => {
   return (
     <React.Fragment>
+
       <Layout>
         <div className="flex justify-around items-center my-6">
           <div className="flex items-center">
