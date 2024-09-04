@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import CardProduct from "../components/Card/Card";
+import ImageSlider from "../components/ImageSlider";
 
 const Home = () => {
     const objTest = [
@@ -34,6 +35,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+                <ImageSlider></ImageSlider>
                 <p className="text-2xl font-bold mb-5">Product new</p>
                 <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {objTest.map((item, index) => (
