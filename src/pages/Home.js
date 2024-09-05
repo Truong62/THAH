@@ -54,8 +54,6 @@ const Home = () => {
                     {objTest.map((item, index) => (
                         <div
                             key={index}
-                            className="border-2 border-black bg-white rounded-lg p-2 transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]"
-                            style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                         >
                             <CardProduct
                                 nameProduct={"Nike Air Jordan 1"}
@@ -72,8 +70,7 @@ const Home = () => {
                     {objTest.map((item, index) => (
                         <div
                             key={index}
-                            className="border-2 border-black bg-white rounded-lg p-2 transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]"
-                            style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
+                            
                         >
                             <CardProduct
                                 nameProduct={"sịp"}
