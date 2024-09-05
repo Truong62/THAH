@@ -28,7 +28,7 @@ const Home = () => {
 
     const truncateDescription = (description, maxLength) => {
         if (description.length > maxLength) {
-            return description.substring(0, maxLength) + '...';
+            return description.substring(170, maxLength) + '...';
         }
         return description;
     };
@@ -54,14 +54,15 @@ const Home = () => {
                     {objTest.map((item, index) => (
                         <div
                             key={index}
-                            className="border-3 border-gray-300 bg-white rounded-lg p-4 transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]"
+                            className="border-2 border-black bg-white rounded-lg p-2 transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]"
                             style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                         >
                             <CardProduct
                                 nameProduct={"Nike Air Jordan 1"}
-                                description={truncateDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 100)}
+                                description={truncateDescription("Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm còn cấp 13, giật cấp 16, vẫn rất mạnh. Với sức gió này, nhà mái tôn bị thổi bay nóc, tường bao có thể đổ. Bão sau đó đi vào các tỉnh Quảng Ninh - Ninh Bình và suy yếu thành áp thấp nhiệt đới.", 100)}
                                 price={formatCurrency(10000000)}
                                 brand={"Nike"}
+                                nametag={["#nike", "#jordan", "#sale"]}
                             />
                         </div>
                     ))}
@@ -71,7 +72,7 @@ const Home = () => {
                     {objTest.map((item, index) => (
                         <div
                             key={index}
-                            className="border-2 border-gray-300 bg-white rounded-lg p-4 transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]"
+                            className="border-2 border-black bg-white rounded-lg p-2 transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]"
                             style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                         >
                             <CardProduct
@@ -79,6 +80,8 @@ const Home = () => {
                                 description={truncateDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 100)}
                                 price={formatCurrency(10000000)}
                                 brand={"Nike"}
+                                nametag={["#nike", "#jordan", "#sale"]}
+
                             />
                         </div>
                     ))}
