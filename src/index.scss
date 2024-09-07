@@ -4,11 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&display=swap');
 
-@layer base {
-  body {
-    @apply font-body;
-  }
-}
 @layer components {
   .text-shadow {
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);

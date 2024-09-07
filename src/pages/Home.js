@@ -1,8 +1,9 @@
 import React from "react";
-import Layout from "../components/Layout";
 import CardProduct from "../components/Card/Card";
 import ImageSlider from "../components/ImageSlider";
 import {Link} from "react-router-dom";
+import Layout from "../components/Layout";
+import Footer from "../components/Footer/Footer";
 
 const Home = () => {
     const objTest = [
@@ -20,6 +21,19 @@ const Home = () => {
         }
     ];
 
+    const formatCurrency = (price) => {
+        return price.toLocaleString('vi-VN', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }) + 'VND';
+    };
+
+    const truncateDescription = (description, maxLength) => {
+        if (description.length > maxLength) {
+            return description.substring(170, maxLength) + '...';
+        }
+        return description;
+    };
 
     return (
         <React.Fragment>
@@ -34,7 +48,7 @@ const Home = () => {
                             />
                         </Link>
                         <div className="flex items-center ml-3 shadow-lg w-[250px] rounded-full p-4">
-                            <input className="h-full outline-none" placeholder="Sreach ...."></input>
+                            <input className="h-full outline-none" placeholder="Search ...."></input>
                         </div>
                     </div>
                 </div>
@@ -42,11 +56,15 @@ const Home = () => {
                 <p className="text-2xl font-bold mb-5 mt-10">Product new</p>
                 <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {objTest.map((item, index) => (
-                        <div className='grid' key={index}>
+                        <div
+                            key={index}
+                        >
                             <CardProduct
-                                nameProduct={"sịp"}
-                                description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
-                                price={'10000000 VND'}
+                                nameProduct={"Nike Air Jordan 1"}
+                                description={truncateDescription("Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm còn cấp 13, giật cấp 16, vẫn rất mạnh. Với sức gió này, nhà mái tôn bị thổi bay nóc, tường bao có thể đổ. Bão sau đó đi vào các tỉnh Quảng Ninh - Ninh Bình và suy yếu thành áp thấp nhiệt đới.", 100)}
+                                price={formatCurrency(10000000)}
+                                brand={"Nike"}
+                                nametag={["#nike", "#jordan", "#sale"]}
                             />
                         </div>
                     ))}
@@ -54,11 +72,17 @@ const Home = () => {
                 <p className="text-2xl font-bold mb-5">Product all</p>
                 <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {objTest.map((item, index) => (
-                        <div key={index}>
+                        <div
+                            key={index}
+
+                        >
                             <CardProduct
                                 nameProduct={"sịp"}
-                                description={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
-                                price={'10000000 VND'}
+                                description={truncateDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 100)}
+                                price={formatCurrency(10000000)}
+                                brand={"Nike"}
+                                nametag={["#nike", "#jordan", "#sale"]}
+
                             />
                         </div>
                     ))}
@@ -78,8 +102,8 @@ const Home = () => {
                         </div>
                     </Link>
                 </div>
-
             </Layout>
+            <Footer/>
         </React.Fragment>
     );
 };
