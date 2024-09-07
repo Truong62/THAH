@@ -1,29 +1,29 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
-const CardProduct = ({link, nameProduct, description, price, brand, nametag = []}) => {
+const CardProduct = ({ nameProduct, description, price, brand, nametag }) => {
     return (
-        <Link to={`/campaign/${link}`}>
-            <div
-                className="bg-white rounded-lg p-4 shadow-lg transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]">
-                <img src='../../images/AIR+ZOOM+PEGASUS+41+PQ.png' alt="Campaign" className="w-full h-auto object-cover"
-                     style={{aspectRatio: '1 / 1'}}/>
-                <span className=" font-semibold text-gray-500 mt-2">{brand}</span>
-                <h4 className="text-xl font-bold mb-2">{nameProduct}</h4>
-                <div className="flex items-center gap-1.25 text-sm">
-                    {nametag.map((item, index) => (
-                        <p key={index}
-                           className="text-lg px-1 rounded-xl bg-blue-200 mr-2 font-semibold text-[#303030]">
-                            {item}
-                        </p>
-                    ))}
+        <div className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col">
+            <img
+                className="w-[410px] h-[350px] object-cover"
+                src="../images/product/AIR+ZOOM+PEGASUS+41+PQ.png"
+                alt={nameProduct}
+            />
+            <div className="p-4 flex-grow flex flex-col justify-between">
+                <div>
+                    <h3 className="text-lg font-bold mb-2">{nameProduct}</h3>
+                    <p className="text-gray-600 mb-2">{brand}</p>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                        {nametag.map((tag, index) => (
+                            <span key={index} className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                    <p className="text-gray-700 mb-2">{description}</p>
                 </div>
-                <p className='mt-2'>{description}</p>
-                <div className="grid justify-end mt-3">
-                    <p className='text-red-500 text-xl font-bold'>{price}</p>
-                </div>
+                <p className="text-red-500 font-bold">{price}</p>
             </div>
-        </Link>
+        </div>
     );
 };
 
