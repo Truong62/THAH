@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 const ImageSlider = () => {
   const images = [
-    { src: 'https://vn-live-01.slatic.net/p/d82bec8c54c404d9e1afc6c6f369cd51.jpg', link: '#', brand: 'Brand A' },
-    { src: 'https://drake.vn/image/catalog/H%C3%ACnh%20content/hinh-anh-giay-vans/hinh-anh-giay-vans-9.jpg', link: '#', brand: 'Brand B' },
-    { src: 'https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lqpwlqnb93qv55', link: '#', brand: 'Brand C' },
+    { src: 'https://img.freepik.com/premium-psd/sport-sneakers-shoes-sale-social-media-instagram-post-facebook-web-banner-template_70055-1342.jpg', link: '#', brand: 'Brand A' },
+    { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmLHbND_C1HFcbNWa71Wh31LD7464feciCJw&s', link: '#', brand: 'Nike' },
+    { src: 'https://img.freepik.com/premium-psd/banner-sport-shoes-sale-social-media-post-facebook-web-banner-template_70055-854.jpg', link: '#', brand: 'Adidas' },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,7 +14,7 @@ const ImageSlider = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [images.length]);
@@ -28,7 +28,7 @@ const ImageSlider = () => {
 
   return (
     <div className="flex justify-center items-center h-[50vh] px-5">
-      <div className="relative w-full max-w-full h-[300px] overflow-hidden rounded-lg shadow-lg group">
+      <div className="relative w-full max-w-full h-[500px] overflow-hidden rounded-lg shadow-lg group">
         <img
           src={images[currentIndex].src}
           alt={`Slide ${currentIndex}`}
