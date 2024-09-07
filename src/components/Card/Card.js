@@ -1,24 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-const CardProduct = ({ link, nameProduct, description, price, brand, nametag = [] }) => {
+const CardProduct = ({link, nameProduct, description, price, brand, nametag = []}) => {
     return (
         <Link to={`/campaign/${link}`}>
-            <div className="bg-white rounded-lg p-4 shadow-lg transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]">
-                <img src='../../images/AIR+ZOOM+PEGASUS+41+PQ.png' alt="Campaign"
-                    className="w-full h-auto object-cover" style={{ aspectRatio: '1 / 1' }} />
-                <div className="flex flex-col gap-2.5 mt-2.5 flex-grow">
-                    <h4 className="text-2xl font-bold ">{nameProduct}</h4>
-                    <p style={{ whiteSpace: 'pre-line' }}>{description}</p>
+            <div
+                className="bg-white rounded-lg p-4 shadow-lg transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]">
+                <img src='../../images/AIR+ZOOM+PEGASUS+41+PQ.png' alt="Campaign" className="w-full h-auto object-cover"
+                     style={{aspectRatio: '1 / 1'}}/>
+                <span className=" font-semibold text-gray-500 mt-2">{brand}</span>
+                <h4 className="text-xl font-bold mb-2">{nameProduct}</h4>
+                <div className="flex items-center gap-1.25 text-sm">
+                    {nametag.map((item, index) => (
+                        <p key={index}
+                           className="text-lg px-1 rounded-xl bg-blue-200 mr-2 font-semibold text-[#303030]">
+                            {item}
+                        </p>
+                    ))}
                 </div>
-                <div className="flex flex-col gap-1.25 text-sm ">
-                    <span className='text-red-500 text-xl font-bold'>{price}</span>
-                </div>
-                <div className="flex flex-col gap-1.25 text-sm">
-                    <span className="text-lg font-semibold text-gray-500">{brand}</span>
-                </div>
-                <div className="flex flex-col gap-1.25 text-sm">
-                    <span className="text-lg font-semibold text-gray-500">{Array.isArray(nametag) ? nametag.join(' ') : nametag}</span>
+                <p className='mt-2'>{description}</p>
+                <div className="grid justify-end mt-3">
+                    <p className='text-red-500 text-xl font-bold'>{price}</p>
                 </div>
             </div>
         </Link>

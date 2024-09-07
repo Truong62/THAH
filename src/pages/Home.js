@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
+import {truncateDescription} from "../utils/truncateDescription";
 
 const Home = () => {
     const objTest = [
@@ -29,12 +30,7 @@ const Home = () => {
         }) + 'VND';
     };
 
-    const truncateDescription = (description, maxLength) => {
-        if (description.length > maxLength) {
-            return description.substring(170, maxLength) + '...';
-        }
-        return description;
-    };
+    const tag = ["#nike", "#jordan", "#sale"]
 
     return (
         <React.Fragment>
@@ -48,11 +44,11 @@ const Home = () => {
                             key={index}
                         >
                             <CardProduct
-                                nameProduct={"Nike Air Jordan 1"}
-                                description={truncateDescription("Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm còn cấp 13, giật cấp 16, vẫn rất mạnh. Với sức gió này, nhà mái tôn bị thổi bay nóc, tường bao có thể đổ. Bão sau đó đi vào các tỉnh Quảng Ninh - Ninh Bình và suy yếu thành áp thấp nhiệt đới.", 100)}
+                                nameProduct={truncateDescription("Nike Air Jordan 1", 20)}
+                                description={truncateDescription("Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm còn cấp 13, giật cấp 16, vẫn rất mạnh. Với sức gió này, nhà mái tôn bị thổi bay nóc, tường bao có thể đổ. Bão sau đó đi vào các tỉnh Quảng Ninh - Ninh Bình và suy yếu thành áp thấp nhiệt đới.", 60)}
                                 price={formatCurrency(10000000)}
                                 brand={"Nike"}
-                                nametag={["#nike", "#jordan", "#sale"]}
+                                nametag={tag}
                             />
                         </div>
                     ))}
@@ -60,16 +56,13 @@ const Home = () => {
                 <p className="text-2xl font-bold mb-5">Product all</p>
                 <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {objTest.map((item, index) => (
-                        <div
-                            key={index}
-                        >
+                        <div key={index} >
                             <CardProduct
-                                nameProduct={"sịp"}
-                                description={truncateDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 100)}
+                                nameProduct={truncateDescription("New Balance Fresh Foam X 860 v14 - Slate Grey / Chrome Blue", 20)}
+                                description={truncateDescription("Lorem ipsum dolor sit amet, conse ctetur adipiscing sdsd dsds dsd dsdfs dfsdf elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 70)}
                                 price={formatCurrency(10000000)}
                                 brand={"Nike"}
-                                nametag={["#nike", "#jordan", "#sale"]}
-
+                                nametag={tag}
                             />
                         </div>
                     ))}

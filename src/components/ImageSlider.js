@@ -28,7 +28,7 @@ const ImageSlider = () => {
 
   return (
     <div className="flex justify-center items-center h-[500px] px-5">
-      <div className="relative w-full max-w-full h-[500px] overflow-hidden rounded-lg shadow-lg group">
+      <div className="relative w-full max-w-full h-[500px] overflow-hidden rounded-lg ">
         <img
           src={images[currentIndex].src}
           alt={`Slide ${currentIndex}`}
