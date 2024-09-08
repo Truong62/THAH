@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 
 const Header = () => {
     return (
-        <div className="container flex flex-col mx-auto draggable">
-            <div
-                className="relative flex flex-wrap items-center justify-between w-full bg-white group py-7 shrink-0">
+        <div className={`container flex flex-col mx-auto fixed top-0 left-0 right-0 z-50 bg-white`}>
+            <div className="relative flex flex-wrap items-center justify-between w-full  group py-7 shrink-0">
                 <div className="flex items-center">
                     <Link to={'/'}>
                         <img
@@ -91,7 +90,8 @@ const Header = () => {
                     <button className="flex items-center text-sm text-black">
                         Log In
                     </button>
-                    <button className="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">
+                    <button
+                        className="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">
                         Sign Up
                     </button>
                 </div>
