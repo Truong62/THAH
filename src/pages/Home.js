@@ -37,7 +37,11 @@ const Home = () => {
             <Header/>
             <Layout>
                 <ImageSlider></ImageSlider>
-                <p className="text-2xl font-bold mb-5 mt-10">Product new</p>
+                <div className='flex items-center mt-3'>
+                    <img className='w-[40px] mr-2' src='../../images/shoe.gif' alt=''/>
+                    <p className="text-2xl font-bold ">Product new</p>
+                    <img className='w-[40px] ml-2 transform scale-x-[-1]' src='../../images/shoe.gif' alt=''/>
+                </div>
                 <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {objTest.map((item, index) => (
                         <div
@@ -53,10 +57,14 @@ const Home = () => {
                         </div>
                     ))}
                 </div>
-                <p className="text-2xl font-bold mb-5">Product all</p>
+                <div className='flex items-center mb-3'>
+                    <img className='w-[40px] mr-2' src='../../images/shoe.gif' alt=''/>
+                    <p className="text-2xl font-bold ">Product all</p>
+                    <img className='w-[40px] ml-2 transform scale-x-[-1]' src='../../images/shoe.gif' alt=''/>
+                </div>
                 <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {objTest.map((item, index) => (
-                        <div key={index} >
+                        <div key={index}>
                             <CardProduct
                                 nameProduct={truncateDescription("New Balance Fresh Foam X 860 v14 - Slate Grey / Chrome Blue", 20)}
                                 description={truncateDescription("Lorem ipsum dolor sit amet, conse ctetur adipiscing sdsđâsdasdsadsd dsds dsd dsdfs dfsdf elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 70)}
