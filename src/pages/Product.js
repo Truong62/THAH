@@ -96,6 +96,7 @@ const Product = () => {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [sortOption, setSortOption] = useState('popularity');
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const itemsPerPage = 6;
     const totalPages = Math.ceil(objTest.length / itemsPerPage);
 
@@ -110,11 +111,15 @@ const Product = () => {
         setCurrentPage(page);
     };
 
-    const handleSortChange = (option) => {
-        setSortOption(option);
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
     };
 
-    const sortedItems = [...objTest].sort((a, b) => {
+    const filteredItems = selectedCategory
+        ? objTest.filter(item => item.name.includes(selectedCategory))
+        : objTest;
+
+    const sortedItems = [...filteredItems].sort((a, b) => {
         switch (sortOption) {
             case 'priceLowToHigh':
                 return a.price - b.price;
@@ -182,12 +187,12 @@ const Product = () => {
             <Layout>
                 <div className="flex flex-col md:flex-row overflow-x-hidden">
                     <div className="w-full md:w-1/4 hidden md:block">
-                        <Sidebar />
+                        <Sidebar onCategoryChange={handleCategoryChange} />
                     </div>
                     <div className="w-full md:w-3/4 ml-0 md:ml-4">
                         <div className="flex justify-between items-center mb-5">
                             <p className="text-2xl font-bold">Product all</p>
-                            <SortBy onSortChange={handleSortChange} />
+                            <SortBy />
                         </div>
                         <div className="hidden md:grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
                             {currentItems.map((item, index) => (

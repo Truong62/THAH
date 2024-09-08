@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
-const SortBy = ({ onSortChange }) => {
+const SortBy = () => {
     const [sortOption, setSortOption] = useState('popularity');
 
     const handleSortChange = (event) => {
-        const selectedOption = event.target.value;
-        setSortOption(selectedOption);
-        onSortChange(selectedOption);
+        setSortOption(event.target.value);
     };
 
     return (

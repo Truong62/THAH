@@ -2,7 +2,7 @@ import React from 'react';
 
 const CardProduct = ({ nameProduct, description, price, brand, nametag }) => {
     return (
-        <div className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col">
+        <div className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col h-full transition-transform transform hover:scale-105 hover:shadow-lg">
             <img
                 className="w-[410px] h-[350px] object-cover"
                 src="../images/product/AIR+ZOOM+PEGASUS+41+PQ.png"
