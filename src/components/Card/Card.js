@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
-const CardProduct = ({link, nameProduct, description, price, brand, nametag = []}) => {
+const CardProduct = ({link, nameProduct, description, price, brand, nameTag = []}) => {
     return (
         <Link to={`/campaign/${link}`}>
             <div
@@ -11,7 +11,7 @@ const CardProduct = ({link, nameProduct, description, price, brand, nametag = []
                 <span className=" font-semibold text-gray-500 mt-2">{brand}</span>
                 <h4 className="text-xl font-bold mb-2">{nameProduct}</h4>
                 <div className="flex items-center gap-1.25 text-sm">
-                    {nametag.map((item, index) => (
+                    {nameTag.map((item, index) => (
                         <p key={index}
                            className=" px-1 rounded-xl bg-blue-200 mr-2  text-[#303030]">
                             {item}

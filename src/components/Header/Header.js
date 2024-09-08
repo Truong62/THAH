@@ -27,12 +27,12 @@ const Header = () => {
                     <Link to={'/'}
                           className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
                     >
-                        Features
+                        Pricing
                     </Link>
-                    <Link to={'/'}
+                    <Link to={'/blogs'}
                           className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
                     >
-                        Pricing
+                        Blogs
                     </Link>
                     <Link to={'/'}
                           className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
