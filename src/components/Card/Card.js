@@ -13,7 +13,7 @@ const CardProduct = ({link, nameProduct, description, price, brand, nametag = []
                 <div className="flex items-center gap-1.25 text-sm">
                     {nametag.map((item, index) => (
                         <p key={index}
-                           className="text-lg px-1 rounded-xl bg-blue-200 mr-2 font-semibold text-[#303030]">
+                           className=" px-1 rounded-xl bg-blue-200 mr-2  text-[#303030]">
                             {item}
                         </p>
                     ))}
