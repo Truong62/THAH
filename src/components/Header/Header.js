@@ -163,7 +163,7 @@ const Header = () => {
                             </svg>
                         </button>
                         <div className="w-full">
-                            <button
+                            {/* <button
                                 className="w-full flex justify-between items-center py-2 px-4 bg-gray-100 rounded-lg"
                                 onClick={() => toggleSubMenu('category')}
                             >
@@ -267,7 +267,7 @@ const Header = () => {
                                         </div>
                                     )}
                                 </div>
-                            )}
+                            )} */}
                             <Link to={'/Product'}
                                 className="w-full flex justify-between items-center py-2 px-4 bg-gray-100 rounded-lg mt-2"
                             >
