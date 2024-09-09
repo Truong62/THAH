@@ -27,7 +27,7 @@ const Home = () => {
         return price.toLocaleString('vi-VN', {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
-        }) + 'VND';
+        });
     };
 
     const tag = ["#nike", "#jordan", "#sale"]
@@ -50,7 +50,7 @@ const Home = () => {
                             <CardProduct
                                 nameProduct={truncateDescription("Nike Air Jordan 1", 20)}
                                 description={truncateDescription("Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm còn cấp 13, giật cấp 16, vẫn rất mạnh. Với sức gió này, nhà mái tôn bị thổi bay nóc, tường bao có thể đổ. Bão sau đó đi vào các tỉnh Quảng Ninh - Ninh Bình và suy yếu thành áp thấp nhiệt đới.", 70)}
-                                price={formatCurrency(10000000)}
+                                price={formatCurrency(10000000) + ' VND'}
                                 brand={"Nike"}
                                 nameTag={tag}
                             />
