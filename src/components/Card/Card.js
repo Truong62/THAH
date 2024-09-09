@@ -2,7 +2,7 @@ import React from 'react';
 
 const CardProduct = ({ nameProduct, description, price, brand, nametag }) => {
     return (
-        <div className="bg-white shadow-md rounded-lg overflow-hidden flex flex-col h-full transition-transform transform hover:scale-105 hover:shadow-lg">
+        <div className="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col h-full transition-transform transform hover:scale-105 hover:shadow-lg">
             <img
                 className="w-full h-[350px] object-cover"
                 src="../images/product/AIR+ZOOM+PEGASUS+41+PQ.png"
@@ -19,7 +19,9 @@ const CardProduct = ({ nameProduct, description, price, brand, nametag }) => {
                             </span>
                         ))}
                     </div>
-                    <p className="text-gray-700 mb-2">{description}</p>
+                    <p className="truncate overflow-hidden whitespace-nowrap text-ellipsis md:whitespace-normal md:overflow-visible md:text-clip">
+                        {description}
+                    </p>
                 </div>
                 <p className="text-red-500 font-bold">{price}</p>
             </div>

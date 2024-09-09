@@ -1,11 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import CardProduct from "../components/Card/Card";
-import ImageSlider from "../components/ImageSlider";
-import {Link} from "react-router-dom";
-import Layout from "../components/Layout";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
-import {truncateDescription} from "../utils/truncateDescription";
+import ImageSlider from "../components/ImageSlider";
+import Layout from "../components/Layout";
+import { truncateDescription } from "../utils/truncateDescription";
 
 const Home = () => {
     const objTest = [

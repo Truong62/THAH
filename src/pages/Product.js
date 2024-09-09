@@ -145,6 +145,11 @@ const Product = () => {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
+        appendDots: dots => (
+            <div style={{ position: 'relative', top: '-20px' }}> {/* Điều chỉnh vị trí của dots */}
+                <ul> {dots} </ul>
+            </div>
+        ),
         responsive: [
             {
                 breakpoint: 1024,
@@ -174,12 +179,11 @@ const Product = () => {
             }
         ]
     }), []);
-
     return (
         <React.Fragment>
             <Header />
             <Layout>
-                <div className="flex flex-col overflow-x-hidden">
+                <div className="flex flex-col overflow-hidden">
                     <div className="flex flex-col md:flex-row justify-between items-center mb-5 space-y-2 md:space-y-0">
                         <p className="text-2xl font-bold">Product All</p>
                         <SortBy />
@@ -214,6 +218,7 @@ const Product = () => {
                                     {currentItems.map((item, index) => (
                                         <div key={index} className="p-2">
                                             <CardProduct
+                                                key={index}
                                                 nameProduct={item.name}
                                                 description={truncateDescription(item.description, 14)} // Giới hạn số từ ở đây
                                                 price={formatCurrency(item.price)}
