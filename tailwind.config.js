@@ -7,7 +7,9 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
   experimental: {
     unknownAtRules: "ignore",
   },

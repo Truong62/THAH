@@ -3,11 +3,13 @@ import React from 'react';
 const CardProduct = ({ nameProduct, description, price, brand, nametag }) => {
     return (
         <div className="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col h-full transition-transform transform hover:scale-105 hover:shadow-lg">
-            <img
-                className="w-full h-[350px] object-cover"
-                src="../images/product/AIR+ZOOM+PEGASUS+41+PQ.png"
-                alt={nameProduct}
-            />
+            <div className="w-full aspect-w-1 aspect-h-1">
+                <img
+                    className="w-full h-full object-cover"
+                    src="../images/product/AIR+ZOOM+PEGASUS+41+PQ.png"
+                    alt={nameProduct}
+                />
+            </div>
             <div className="p-4 flex-grow flex flex-col justify-between">
                 <div>
                     <h3 className="text-lg font-bold mb-2">{nameProduct}</h3>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import SearchBarIcon from '../SearchBar';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -87,21 +88,7 @@ const Header = () => {
                 </div>
                 <div className="flex items-center md:hidden">
                     <button onClick={toggleSearch} className="mr-4">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={24}
-                            height={24}
-                            viewBox="0 0 24 24"
-                            fill="none"
-                        >
-                            <path
-                                d="M21 21l-4.35-4.35M10 18a8 8 0 100-16 8 8 0 000 16z"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            />
-                        </svg>
+                        <SearchBarIcon/>
                     </button>
                     <button onClick={toggleMenu}>
                         <svg
