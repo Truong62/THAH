@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import Layout from "../components/Layout";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
+
 import {truncateDescription} from "../utils/truncateDescription";
 
 const Home = () => {
