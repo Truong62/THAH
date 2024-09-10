@@ -1,48 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import ReactPlayer from "react-player";
+import Video from '../assets/intro.mp4'
 
 const ImageSlider = () => {
-  const images = [
-    { src: 'https://img.freepik.com/premium-psd/sport-sneakers-shoes-sale-social-media-instagram-post-facebook-web-banner-template_70055-1342.jpg', link: '#', brand: 'Brand A' },
-    { src: 'https://vsneakershop.weebly.com/uploads/6/3/3/8/63388329/vsneaker-banner-gi-y_orig.png', link: '#', brand: 'Nike' },
-    { src: 'https://img.freepik.com/premium-psd/banner-sport-shoes-sale-social-media-post-facebook-web-banner-template_70055-854.jpg', link: '#', brand: 'Adidas' },
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [images.length]);
-
-  const handleClick = () => {
-    const link = images[currentIndex].link;
-    if (link && link !== '#') {
-      window.location.href = link;
-    }
-  };
-
-  return (
-    <div className="flex justify-center items-center h-[500px] px-5">
-      <div className="relative w-full max-w-full h-[500px] overflow-hidden rounded-lg ">
-        <img
-          src={images[currentIndex].src}
-          alt={`Slide ${currentIndex}`}
-          className="w-full h-[500px] object-fill transition-transform duration-500 ease-in-out group-hover:scale-105"
-          onClick={handleClick}
-        />
-        <div className="absolute inset-0 flex justify-center items-center">
-          <h2 className="text-black text-3xl font-bold bg-opacity-50 p-2 rounded">
-            {images[currentIndex].brand}
-          </h2>
+    return (
+        <div className="rounded-3xl relative">
+            <ReactPlayer width='200' height='100' style={{borderRadius: '20px'}} url={Video} playing loop muted/>
+            <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 rounded-3xl"></div>
+            <p className="text-2xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center font-semibold text-white">Welcome
+                to our sports shoe store – where we bring you stylish and high-quality sneakers to make every step stand
+                out!</p>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default ImageSlider;
+

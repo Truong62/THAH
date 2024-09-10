@@ -36,7 +36,7 @@ const Home = () => {
         <React.Fragment>
             <Header/>
             <Layout>
-                <ImageSlider></ImageSlider>
+                <ImageSlider/>
                 <div className='flex items-center mt-3'>
                     <img className='w-[40px] mr-2' src='../../images/shoe.gif' alt=''/>
                     <p className="text-2xl font-bold ">Product new</p>
