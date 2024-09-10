@@ -6,7 +6,6 @@ const Blogs = () => {
     return (
         <>
             <Header/>
-            <Breadcrumb/>
             <Layout>
             </Layout>
             <Footer/>
