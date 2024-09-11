@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Link} from "react-router-dom";
+import SearchBarIcon from '../SearchBar';
 
 const Header = () => {
+
     return (
         <div className={`container flex flex-col mx-auto sticky top-0 left-0 right-0 z-50 bg-white`}>
             <div className="relative flex flex-wrap items-center justify-between w-full  group py-7 shrink-0">
@@ -18,19 +20,13 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="items-center justify-between hidden gap-12 text-black md:flex">
-                    <Link to={'/'}
-                          className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
-                    >
-                        Product
+                    <Link to={'/products'} className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold" >
+                        Products
                     </Link>
-                    <Link to={'/'}
-                          className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
-                    >
+                    <Link to={'/'} className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold" >
                         Pricing
                     </Link>
-                    <Link to={'/blogs'}
-                          className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
-                    >
+                    <Link to={'/blogs'}  className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold" >
                         Blogs
                     </Link>
                     <Link to={'/'}
