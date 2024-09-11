@@ -9,8 +9,7 @@ import useDeviceType from "../../hooks/useDeviceType";
 const ProductList = ({ products, selectedCategory, onCategoryChange, onRemoveCategory }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const { isMobile } = useDeviceType();
-    const itemsPerPage = 6;
-    const totalPages = Math.ceil(products.length / itemsPerPage);
+    const totalPages = Math.ceil(products.length / 6);
 
 
     const fetchMoreData = useCallback(() => {
@@ -25,11 +24,11 @@ const ProductList = ({ products, selectedCategory, onCategoryChange, onRemoveCat
 
     const currentItems = useMemo(() => {
         if (isMobile) {
-            return products.slice(0, currentPage * itemsPerPage);
+            return products.slice(0, currentPage * 6);
         } else {
-            return products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+            return products.slice((currentPage - 1) * 6, currentPage * 6);
         }
-    }, [products, currentPage, itemsPerPage, isMobile]);
+    }, [products, currentPage, 6, isMobile]);
 
     const truncateDescription = useCallback((description, maxWords) => {
         if (typeof description !== 'string') {
