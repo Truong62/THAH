@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FilterIcon from './FilterIcon';
+import FilterIconSvg from "../svg/FilterIconSVG";
 
 const SortBy = () => {
     const [sortOption, setSortOption] = useState('popularity');
@@ -11,7 +11,7 @@ const SortBy = () => {
     return (
         <div className="relative mb-4 flex items-center space-x-2">
             <span className="hidden md:inline">Sort by</span>
-            <FilterIcon className="md:hidden" />
+            <FilterIconSvg />
             <select
                 value={sortOption}
                 onChange={handleSortChange}
