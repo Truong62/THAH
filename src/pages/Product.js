@@ -84,7 +84,9 @@ const Product = () => {
     ], []);
 
     const [selectedCategory, setSelectedCategory] = useState([]);
-    console.log(selectedCategory)
+    const [sortOption, setSortOption] = useState('popularity');
+    console.log(sortOption)
+    // 2 cái này hợp làm 1 được thì BE đức dễ thở và đỡ tốn nhiều sroure
 
     const handleCategoryChange = useCallback((category) => {
         setSelectedCategory(prevCategories => {
@@ -107,7 +109,7 @@ const Product = () => {
                 <div className="flex flex-col overflow-hidden">
                     <div className="flex flex-col md:flex-row justify-between items-center mb-5 space-y-2 md:space-y-0">
                         <p className="text-2xl font-bold">Product All</p>
-                        <SortBy />
+                        <SortBy sortOption={sortOption} setSortOption={setSortOption}/>
                     </div>
 
                     <div className="flex flex-col md:flex-row">

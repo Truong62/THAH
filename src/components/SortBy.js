@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import FilterIconSvg from "../svg/FilterIconSVG";
+import React from 'react';
 
-const SortBy = () => {
-    const [sortOption, setSortOption] = useState('popularity');
+const SortBy = ({sortOption, setSortOption}) => {
 
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
@@ -11,7 +9,6 @@ const SortBy = () => {
     return (
         <div className="relative mb-4 flex items-center space-x-2">
             <span className="hidden md:inline">Sort by</span>
-            <FilterIconSvg />
             <select
                 value={sortOption}
                 onChange={handleSortChange}

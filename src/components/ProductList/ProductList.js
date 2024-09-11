@@ -28,7 +28,7 @@ const ProductList = ({ products, selectedCategory, onCategoryChange, onRemoveCat
         } else {
             return products.slice((currentPage - 1) * 6, currentPage * 6);
         }
-    }, [products, currentPage, 6, isMobile]);
+    }, [products, currentPage, isMobile]);
 
     const truncateDescription = useCallback((description, maxWords) => {
         if (typeof description !== 'string') {
