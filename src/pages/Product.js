@@ -84,6 +84,7 @@ const Product = () => {
     ], []);
 
     const [selectedCategory, setSelectedCategory] = useState([]);
+    console.log(selectedCategory)
 
     const handleCategoryChange = useCallback((category) => {
         setSelectedCategory(prevCategories => {
@@ -113,7 +114,6 @@ const Product = () => {
                         <div className="w-full md:w-1/4">
                             <Sidebar onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
                         </div>
-
                         <div className="w-full md:w-3/4 ml-0 md:ml-4">
                             <ProductList
                                 products={objTest}

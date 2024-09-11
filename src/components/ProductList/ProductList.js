@@ -80,7 +80,7 @@ const ProductList = ({ products, selectedCategory, onCategoryChange, onRemoveCat
                             <CardProduct
                                 key={index}
                                 nameProduct={item.name}
-                                description={truncateDescription(item.description, 14)} // Giới hạn số từ ở đây
+                                description={truncateDescription(item.description, 14)}
                                 price={formatCurrency(item.price)}
                                 brand={"Brand"}
                                 nametag={["#tag1", "#tag2", "#tag3"]}
