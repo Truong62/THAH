@@ -31,49 +31,49 @@ const Product = () => {
             originalPrice: 124,
             description: "Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm...",
             colors: 2
-        },{
+        }, {
             id: 4,
             name: "Autumn Dress",
             price: 85,
             originalPrice: 124,
             description: "Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm...",
             colors: 2
-        },{
+        }, {
             id: 5,
             name: "Autumn Dress",
             price: 85,
             originalPrice: 124,
             description: "Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm...",
             colors: 2
-        },{
+        }, {
             id: 6,
             name: "Autumn Dress",
             price: 85,
             originalPrice: 124,
             description: "Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm...",
             colors: 2
-        },{
+        }, {
             id: 7,
             name: "Autumn Dress",
             price: 85,
             originalPrice: 124,
             description: "Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm...",
             colors: 2
-        },{
+        }, {
             id: 8,
             name: "Autumn Dress",
             price: 85,
             originalPrice: 124,
             description: "Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm...",
             colors: 2
-        },{
+        }, {
             id: 9,
             name: "Autumn Dress",
             price: 85,
             originalPrice: 124,
             description: "Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm...",
             colors: 2
-        },{
+        }, {
             id: 10,
             name: "Autumn Dress",
             price: 85,
@@ -82,24 +82,25 @@ const Product = () => {
             colors: 2
         }
     ], []);
-
-    const [selectedCategory, setSelectedCategory] = useState([]);
-    const [sortOption, setSortOption] = useState('popularity');
-    console.log(sortOption)
-    // 2 cái này hợp làm 1 được thì BE đức dễ thở và đỡ tốn nhiều sroure
+    const [productFilters, setProductFilters] = useState({
+        selectedCategories: [],
+        sortOption: 'popularity',
+    });
 
     const handleCategoryChange = useCallback((category) => {
-        setSelectedCategory(prevCategories => {
-            if (prevCategories.includes(category)) {
-                return prevCategories.filter(c => c !== category);
-            } else {
-                return [...prevCategories, category];
-            }
-        });
+        setProductFilters(prevFilters => ({
+            ...prevFilters,
+            selectedCategories: prevFilters.selectedCategories.includes(category)
+                ? prevFilters.selectedCategories.filter(c => c !== category)
+                : [...prevFilters.selectedCategories, category]
+        }));
     }, []);
 
     const handleRemoveCategory = useCallback((category) => {
-        setSelectedCategory(prevCategories => prevCategories.filter(c => c !== category));
+        setProductFilters(prevFilters => ({
+            ...prevFilters,
+            selectedCategories: prevFilters.selectedCategories.filter(c => c !== category)
+        }));
     }, []);
 
     return (
@@ -109,17 +110,23 @@ const Product = () => {
                 <div className="flex flex-col overflow-hidden">
                     <div className="flex flex-col md:flex-row justify-between items-center mb-5 space-y-2 md:space-y-0">
                         <p className="text-2xl font-bold">Product All</p>
-                        <SortBy sortOption={sortOption} setSortOption={setSortOption}/>
+                        <SortBy
+                            sortOption={productFilters.sortOption}
+                            setSortOption={(newSortOption) => setProductFilters(prev => ({ ...prev, sortOption: newSortOption }))}
+                        />
                     </div>
 
                     <div className="flex flex-col md:flex-row">
                         <div className="w-full md:w-1/4">
-                            <Sidebar onCategoryChange={handleCategoryChange} selectedCategory={selectedCategory} />
+                            <Sidebar
+                                onCategoryChange={handleCategoryChange}
+                                selectedCategory={productFilters.selectedCategories}
+                            />
                         </div>
                         <div className="w-full md:w-3/4 ml-0 md:ml-4">
                             <ProductList
                                 products={objTest}
-                                selectedCategory={selectedCategory}
+                                selectedCategory={productFilters.selectedCategories}
                                 onCategoryChange={handleCategoryChange}
                                 onRemoveCategory={handleRemoveCategory}
                             />
