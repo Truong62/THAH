@@ -81,7 +81,7 @@ const Home = () => {
                         alt='banner'
                         src='https://theme.hstatic.net/200000238513/1000665981/14/banner_project_1.jpg?v=23'
                     />
-                    <Link to={'/product'}
+                    <Link to={'/products'}
                           className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transform transition-transform duration-1000'>
                         <div className='bg-amber-50 hover:bg-blue-500 px-8 py-2 rounded-lg '>
                             <p className='font-bold text-xl '>
