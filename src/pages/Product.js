@@ -1,10 +1,11 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, {useCallback, useMemo, useState} from "react";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import Layout from "../components/Layout";
 import ProductList from "../components/ProductList/ProductList";
 import Sidebar from "../components/Sidebar";
 import SortBy from "../components/SortBy";
+import BreadCrumb from "../components/BreadCrumb";
 
 const Product = () => {
   const objTest = useMemo(
@@ -102,11 +103,12 @@ const Product = () => {
     ],
     []
   );
+
   const [productFilters, setProductFilters] = useState({
     selectedCategories: {
-      brand: null,
-      price: null,
-      size: null,
+      brand: '',
+      price: '',
+      size: '',
     },
     sortOption: "popularity",
   });
@@ -115,59 +117,25 @@ const Product = () => {
     const [group, value] = category.split(":");
 
     setProductFilters((prevFilters) => {
-      const updatedFilters = {
+      return {
         ...prevFilters,
         selectedCategories: {
           ...prevFilters.selectedCategories,
-          [group]: value, // Cập nhật giá trị cho nhóm tương ứng
+          [group]: value,
         },
       };
-
-      // Gửi dữ liệu đến backend
-      sendDataToBackend(updatedFilters.selectedCategories);
-
-      return updatedFilters;
     });
   }, []);
 
-  const sendDataToBackend = async (selectedCategories) => {
-    const jsonData = JSON.stringify({ selectedCategories });
-
-    // try {
-    //   const response = await fetch("YOUR_BACKEND_URL", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: jsonData,
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error("Network response was not ok");
-    //   }
-
-    //   const data = await response.json();
-    //   console.log("Response from backend:", data);
-    // } catch (error) {
-    //   console.error("Error sending data to backend:", error);
-    // } //Chưa cần vì chưa gửi về BE được
-    console.log(jsonData);
-  };
-
   const handleRemoveCategory = useCallback((group) => {
     setProductFilters((prevFilters) => {
-      const updatedFilters = {
+      return {
         ...prevFilters,
         selectedCategories: {
           ...prevFilters.selectedCategories,
-          [group]: null, // Đặt lại giá trị cho nhóm tương ứng
+          [group]: null,
         },
       };
-
-      // Gửi dữ liệu đến backend
-      sendDataToBackend(updatedFilters.selectedCategories);
-
-      return updatedFilters;
     });
   }, []);
 
@@ -176,7 +144,7 @@ const Product = () => {
       <Header />
       <Layout>
         <div className="flex flex-col overflow-hidden">
-          <div className="flex flex-col md:flex-row justify-between items-center mb-5 space-y-2 md:space-y-0">
+          <div className="flex flex-col md:flex-row justify-between items-center  space-y-2 md:space-y-0">
             <p className="text-2xl font-bold">Product All</p>
             <SortBy
               sortOption={productFilters.sortOption}
@@ -188,7 +156,9 @@ const Product = () => {
               }
             />
           </div>
-
+          <div className='my-5'>
+            <BreadCrumb/>
+          </div>
           <div className="flex flex-col md:flex-row">
             <div className="w-full md:w-1/4">
               <Sidebar

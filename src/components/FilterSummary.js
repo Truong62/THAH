@@ -13,7 +13,7 @@ const FilterSummary = ({ selectedCategory, onRemoveCategory }) => {
       {/*        </span>*/}
       {/*    )}*/}
       {/*</div>*/}
-      {/*chư cần thiếu vì cần api*/}
+      {/*chư cần thiết vì cần api*/}
       <div className="flex items-center">
         <span className="mr-2">Filters by: </span>
         {Object.entries(selectedCategory).map(
