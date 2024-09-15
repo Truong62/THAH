@@ -19,7 +19,7 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="items-center justify-between hidden gap-12 text-black md:flex">
-                    <Link to={'/products'} className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold" >
+                    <Link to={'/Products'} className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold" >
                         Products
                     </Link>
                     <Link to={'/'} className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold" >
