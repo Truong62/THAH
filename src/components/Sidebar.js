@@ -2,9 +2,9 @@ import React, { useCallback, useMemo, useState } from "react";
 
 const Sidebar = ({ onCategoryChange, selectedCategory }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [openBrands, setOpenBrands] = useState(false);
-  const [openPrice, setOpenPrice] = useState(false);
-  const [openSize, setOpenSize] = useState(false);
+  const [openBrands, setOpenBrands] = useState(true);
+  const [openPrice, setOpenPrice] = useState(true);
+  const [openSize, setOpenSize] = useState(true);
 
   const toggleCategory = useCallback(() => {
     setIsCategoryOpen((prevState) => !prevState);

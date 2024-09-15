@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import Blogs from "../pages/Blogs";
 import BreadCrumb from "../components/BreadCrumb";
 import Product from '../pages/Product';
+import ProductDetail from "../pages/ProductDetail";
 
 const AppRoutes = () => {
     return (
@@ -11,7 +12,7 @@ const AppRoutes = () => {
             <Route path="/" element={<Home></Home>}/>
             <Route path="/blogs" element={<Blogs></Blogs>}/>
             <Route path="/products" element={<Product></Product>}/>
-            <Route path="/products/:id" element={<Product></Product>}/>
+            <Route path="/products/:id" element={<ProductDetail></ProductDetail>}/>
 
             {/* test */}
             <Route path="/blogs/huong" element={<BreadCrumb/>}/>

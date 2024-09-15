@@ -40,7 +40,7 @@ const Header = () => {
                         Log In
                     </button>
                     <button
-                        className="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-blue-500 hover:text-white transition duration-300">
+                        className="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 bg-blue-500 text-white">
                         Sign Up
                     </button>
                 </div>
