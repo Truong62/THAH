@@ -1,54 +1,44 @@
-// ProductCard.js
 import React, { useState, memo } from "react";
+import { useParams } from "react-router-dom";
+import products from "./ProductTest"; // Import the products array
+import { formatCurrency } from "../utils/formatCurrency"; // Import formatCurrency
 
-const ProductCard = () => {
+const ProductDetailsCard = () => {
+  const { link } = useParams();
+  const product = products.find((p) => p.link === link);
+
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState("black");
   const [selectedSize, setSelectedSize] = useState("M");
 
-  const images = [
-    "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/6a18d0cf-a263-438a-a506-e7bb908b098b/AIR+ZOOM+PEGASUS+41+PQ.png",
-    "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/95f9d764-c91c-4e34-8705-1da4459a8720/AIR+ZOOM+PEGASUS+41+PQ.png",
-    "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/878da08a-db23-48d3-ac25-809047cc0bda/AIR+ZOOM+PEGASUS+41+PQ.png",
-    "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/9668c246-c7aa-4738-b213-cca59adca473/AIR+ZOOM+PEGASUS+41+PQ.png",
-    "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/56fe99a7-5ca6-4c11-953e-7b4ad505c1eb/AIR+ZOOM+PEGASUS+41+PQ.png",
-    "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/5b0f957b-06a6-4196-b603-2552f9a90cb7/AIR+ZOOM+PEGASUS+41+PQ.png",
-  ];
-
-  const colors = [
-    { name: "black", color: "bg-black" },
-    { name: "red", color: "bg-red-500" },
-    { name: "orange", color: "bg-orange-500" },
-    { name: "yellow", color: "bg-yellow-500" },
-    { name: "green", color: "bg-green-500" },
-    { name: "blue", color: "bg-blue-500" },
-    { name: "purple", color: "bg-purple-500" },
-  ];
-
-  const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
+  if (!product) {
+    return <div>Product not found</div>;
+  }
 
   const handlePrevImage = () => {
     setMainImageIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? product.images.length - 1 : prevIndex - 1
     );
   };
 
   const handleNextImage = () => {
     setMainImageIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   return (
-    <div className="flex flex-col md:flex-row border rounded-lg bg-white p-6 max-w-4xl shadow-lg">
-      <div className="relative flex-1 mb-4 md:mb-0 md:mr-6">
-        <img
-          src={images[mainImageIndex]}
-          alt="Product"
-          className="w-full rounded-lg transition duration-300 ease-in-out"
-        />
+    <div className="flex flex-col md:flex-row rounded-lg bg-white p-6 max-w-6xl mx-auto">
+      <div className="relative w-full md:w-2/3 mb-4 md:mb-0 md:mr-6">
+        <div className="w-full aspect-w-1 aspect-h-1">
+          <img
+            src={product.images && product.images[mainImageIndex]}
+            alt="Product"
+            className="w-full h-full object-cover transition duration-300 ease-in-out"
+          />
+        </div>
         <button
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md"
+          className="absolute top-1/2 left-0 transform -translate-y-1/2 rounded-full p-2 hover:shadow-md"
           onClick={handlePrevImage}
         >
           <svg
@@ -67,7 +57,7 @@ const ProductCard = () => {
           </svg>
         </button>
         <button
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md"
+          className="absolute top-1/2 right-0 transform -translate-y-1/2 rounded-full p-2 hover:shadow-md"
           onClick={handleNextImage}
         >
           <svg
@@ -86,71 +76,71 @@ const ProductCard = () => {
           </svg>
         </button>
         <div className="flex mt-4 gap-2">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className={`w-20 h-20 rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${mainImageIndex === index ? "border-2 border-black scale-105" : ""}`}
-              onClick={() => setMainImageIndex(index)}
-            >
-              <img
-                src={image}
-                alt={`Product ${index}`}
-                className="w-full h-full object-cover transition duration-300 ease-in-out transform hover:scale-105"
-              />
-            </div>
-          ))}
+          {product.images &&
+            product.images.map((image, index) => (
+              <div
+                key={index}
+                className={`w-[92px] h-[92px] rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${mainImageIndex === index ? "border-2 border-black scale-105" : ""}`}
+                onClick={() => setMainImageIndex(index)}
+              >
+                <img
+                  src={image}
+                  alt={`Product ${index}`}
+                  className="w-[92px] h-[92px] object-cover transition duration-300 ease-in-out transform hover:scale-105"
+                />
+              </div>
+            ))}
         </div>
       </div>
       <div className="w-full md:w-1/3">
-        <div className="text-2xl font-bold mb-2">Badacore Tshirt</div>
-        <div className="text-xl text-gray-800 mb-2">USD $80</div>
+        <div className="text-4xl font-bold mb-2">{product.nameProduct}</div>
+        <div className="text-2xl text-gray-800 mb-2">
+          {formatCurrency(product.price)}
+        </div>
         <div className="mb-2">
-          <span className="font-bold">Color:</span>
+          <span className="font-bold text-2xl">Color:</span>
           <div className="flex gap-2 mt-1">
-            {colors.map((color) => (
-              <div
-                key={color.name}
-                className={`w-5 h-5 rounded-full cursor-pointer border ${color.color} ${selectedColor === color.name ? "ring-2 ring-black" : ""}`}
-                onClick={() => setSelectedColor(color.name)}
-              ></div>
-            ))}
+            {product.colors &&
+              product.colors.map((color) => (
+                <div
+                  key={color}
+                  className={`flex items-center justify-center w-24 h-10 rounded-full cursor-pointer border ${selectedColor === color ? "ring-2 ring-black" : ""}`}
+                  onClick={() => setSelectedColor(color)}
+                >
+                  <span className="text-sm">{color}</span>
+                </div>
+              ))}
           </div>
         </div>
         <div className="mb-2">
-          <span className="font-bold">Size:</span>
-          <div className="flex gap-2 mt-1">
-            {sizes.map((size) => (
-              <div
-                key={size}
-                className={`px-3 py-1 border rounded cursor-pointer ${selectedSize === size ? "bg-gray-300" : ""}`}
-                onClick={() => setSelectedSize(size)}
-              >
-                {size}
-              </div>
-            ))}
+          <span className="font-bold text-2xl">Size:</span>
+          <div className="flex flex-wrap gap-2 mt-1">
+            {product.sizes &&
+              product.sizes.map((size) => (
+                <div
+                  key={size}
+                  className={`px-3 py-1 border rounded-full cursor-pointer text-xl ${selectedSize === size ? "bg-gray-300" : ""}`}
+                  onClick={() => setSelectedSize(size)}
+                >
+                  {size}
+                </div>
+              ))}
           </div>
         </div>
-        <div className="flex gap-2 mb-2">
-          <button className="px-4 py-2 bg-black text-white rounded transition duration-300 ease-in-out transform hover:scale-105">
+        <div className="flex flex-col gap-2 mb-2">
+          <button className="px-4 py-2 bg-black text-white rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl">
             Buy Now
           </button>
-          <button className="px-4 py-2 bg-gray-300 rounded transition duration-300 ease-in-out transform hover:scale-105">
+          <button className="px-4 py-2 bg-white border border-black rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl">
             Add To Cart
           </button>
         </div>
         <div className="mt-4">
-          <p>
-            The Badacore T-shirt is a versatile piece that seamlessly blends
-            style and comfort. Designed with meticulous attention to detail,
-            this t-shirt is an ideal addition to your wardrobe, offering a
-            perfect harmony of fashion and ease. Its soothing soft brown color
-            provides a calming effect, making it suitable for various occasions
-            from casual gatherings with friends to relaxed workdays.
-          </p>
+          <p>{product.description}</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default memo(ProductCard);
+export default memo(ProductDetailsCard);

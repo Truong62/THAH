@@ -68,12 +68,13 @@ const ProductList = ({
             {currentItems.map((item, index) => (
               <CardProduct
                 key={index}
-                nameProduct={item.name}
+                nameProduct={item.nameProduct}
                 description={truncateDescription(item.description, 14)}
                 price={formatCurrency(item.price)}
-                brand={"Brand"}
-                nametag={["#tag1", "#tag2", "#tag3"]}
-                onClick={() => onProductClick(item.id)} // Pass the click handler
+                brand={item.brand}
+                nameTag={item.nameTag}
+                mainImage={item.mainImage}
+                onClick={() => onProductClick(item.link)} // Pass the click handler with link
               />
             ))}
           </div>
@@ -84,12 +85,13 @@ const ProductList = ({
             {currentItems.map((item, index) => (
               <CardProduct
                 key={index}
-                nameProduct={item.name}
+                nameProduct={item.nameProduct}
                 description={truncateDescription(item.description, 14)}
                 price={formatCurrency(item.price)}
-                brand={"Brand"}
-                nametag={["#tag1", "#tag2", "#tag3"]}
-                onClick={() => onProductClick(item.id)} // Pass the click handler
+                brand={item.brand}
+                nameTag={item.nameTag}
+                mainImage={item.mainImage}
+                onClick={() => onProductClick(item.link)} // Pass the click handler with link
               />
             ))}
           </div>
