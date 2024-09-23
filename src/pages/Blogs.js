@@ -6,10 +6,10 @@ import Layout from "../components/Layout";
 const Blogs = () => {
     return (
         <>
-            <Header/>
+            <Header />
             <Layout>
             </Layout>
-            <Footer/>
+            <Footer />
         </>
     );
 };

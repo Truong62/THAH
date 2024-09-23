@@ -5,6 +5,9 @@ import Blogs from "../pages/Blogs";
 import BreadCrumb from "../components/BreadCrumb";
 import Product from '../pages/Product';
 import ProductDetail from "../pages/ProductDetail";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
 
 const AppRoutes = () => {
     return (
