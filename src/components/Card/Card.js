@@ -34,7 +34,7 @@ const CardProduct = ({
             </p>
           ))}
         </div>
-        <p className="mt-2">{description}</p>
+        <p className="mt-2">{(description)}</p>
         <div className="grid justify-end mt-3">
           <p className="text-red-500 text-xl font-bold">{price}</p>
         </div>

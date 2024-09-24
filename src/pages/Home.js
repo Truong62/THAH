@@ -6,7 +6,7 @@ import Header from "../components/Header/Header";
 import ImageSlider from "../components/ImageSlider";
 import Layout from "../components/Layout";
 import {truncateDescription} from "../utils/truncateDescription";
-
+import { formatCurrency } from "../utils/formatCurrency";
 const Home = () => {
     const objTest = [
         {
@@ -23,12 +23,6 @@ const Home = () => {
         }
     ];
 
-    const formatCurrency = (price) => {
-        return price.toLocaleString('vi-VN', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        });
-    };
 
     const tag = ["#nike", "#jordan", "#sale"]
 
@@ -50,7 +44,7 @@ const Home = () => {
                             <CardProduct
                                 nameProduct={truncateDescription("Nike Air Jordan 1", 20)}
                                 description={truncateDescription("Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm còn cấp 13, giật cấp 16, vẫn rất mạnh. Với sức gió này, nhà mái tôn bị thổi bay nóc, tường bao có thể đổ. Bão sau đó đi vào các tỉnh Quảng Ninh - Ninh Bình và suy yếu thành áp thấp nhiệt đới.", 70)}
-                                price={formatCurrency(10000000) + ' VND'}
+                                price={formatCurrency(10000000)}
                                 brand={"Nike"}
                                 nameTag={tag}
                             />

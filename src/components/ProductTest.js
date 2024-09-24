@@ -4,7 +4,7 @@ const products = [
     link: "product-1",
     nameProduct: "Product 1",
     description: "Description for product 1",
-    sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44", "45"],
+    sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44"],
     colors: ["White", "Black", "Green", "Yellow", "Purple"],
     price: 2000000,
     brand: "Brand 1",
@@ -18,6 +18,9 @@ const products = [
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0f1e9ef6-6bde-406e-ab6e-abd04ac18967/WMNS+AIR+JORDAN+1+MM+LOW.png",
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/4f6cd331-e93e-49a1-9286-2555d72d8295/WMNS+AIR+JORDAN+1+MM+LOW.png",
     ],
+    whiteImages:[
+      
+    ]
   },
   {
     id: 2,

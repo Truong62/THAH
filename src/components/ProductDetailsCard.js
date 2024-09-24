@@ -94,7 +94,7 @@ const ProductDetailsCard = () => {
       </div>
       <div className="w-full md:w-1/3">
         <div className="text-4xl font-bold mb-2">{product.nameProduct}</div>
-        <div className="text-2xl text-gray-800 mb-2">
+        <div className="text-red-500 text-xl font-bold">
           {formatCurrency(product.price)}
         </div>
         <div className="mb-2">
