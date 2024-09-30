@@ -1,9 +1,15 @@
 import React from 'react';
-import {Link, useLocation} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const BreadCrumb = () => {
     const location = useLocation();
     const pathnames = location.pathname.split('/').filter((x) => x);
+
+    const breadcrumbNameMap = {
+        'products': 'Products',
+        'blogs': 'Blogs',
+    };
+
     const createLink = (index) => `/${pathnames.slice(0, index + 1).join('/')}`;
 
     return (
@@ -21,7 +27,7 @@ const BreadCrumb = () => {
                             to={createLink(index)}
                             className="text-sm font-medium text-dark-grey-700 hover:text-blue-400 cursor-pointer"
                         >
-                            {name}
+                            {breadcrumbNameMap[name] || name}
                         </Link>
                     </h3>
                 </React.Fragment>
