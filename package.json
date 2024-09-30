@@ -34,6 +34,7 @@
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.13",
+    "swiper": "^11.1.14",
     "swr": "^2.2.5",
     "video.js": "^8.17.3",
     "web-vitals": "^2.1.4",
