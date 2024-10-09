@@ -1,7 +1,4 @@
-export const formatCurrency = (price) => {
-    return price.toLocaleString('vi-VN', {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-    }) + ' VND';
-};
-
+export function formatCurrency(amount) {
+  const formattedAmount = new Intl.NumberFormat("vi-VN").format(amount);
+  return `${formattedAmount} VND`;
+}
