@@ -5,9 +5,10 @@ const BreadCrumb = () => {
     const location = useLocation();
     const pathnames = location.pathname.split('/').filter((x) => x);
 
-    const breadcrumbNameMap = {
-        'products': 'Products',
-        'blogs': 'Blogs',
+    const formatBreadcrumbName = (name) => {
+        return name
+            .replace(/-/g, ' ') 
+            .replace(/\b\w/g, (char) => char.toUpperCase()); 
     };
 
     const createLink = (index) => `/${pathnames.slice(0, index + 1).join('/')}`;
@@ -27,7 +28,7 @@ const BreadCrumb = () => {
                             to={createLink(index)}
                             className="text-sm font-medium text-dark-grey-700 hover:text-blue-400 cursor-pointer"
                         >
-                            {breadcrumbNameMap[name] || name}
+                            {formatBreadcrumbName(name)}
                         </Link>
                     </h3>
                 </React.Fragment>
