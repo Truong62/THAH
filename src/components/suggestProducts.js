@@ -5,9 +5,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-
-import './styles.css';
-
 import { Pagination } from 'swiper/modules';
 
 const SuggestProducts = ({ products }) => {
@@ -19,7 +16,7 @@ const SuggestProducts = ({ products }) => {
   };
 
   return (
-    <>
+    <div className="my-4">
       <Swiper
         slidesPerView={3}
         spaceBetween={10}
@@ -27,10 +24,10 @@ const SuggestProducts = ({ products }) => {
           clickable: true,
         }}
         modules={[Pagination]}
-        className="mySwiper"
+        className="w-full h-[300px]"
       >
         {products.map((item, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className="flex justify-center items-center bg-white text-center">
             <CardProduct
               nameProduct={item.name}
               description={truncateDescription(item.description, 14)}
@@ -41,7 +38,7 @@ const SuggestProducts = ({ products }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   );
 };
 
