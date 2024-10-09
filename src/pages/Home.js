@@ -6,7 +6,7 @@ import Header from "../components/Header/Header";
 import ImageSlider from "../components/ImageSlider";
 import Layout from "../components/Layout";
 import {truncateDescription} from "../utils/truncateDescription";
-
+import { formatCurrency } from "../utils/formatCurrency";
 const Home = () => {
     const objTest = [
         {
@@ -23,12 +23,6 @@ const Home = () => {
         }
     ];
 
-    const formatCurrency = (price) => {
-        return price.toLocaleString('vi-VN', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        });
-    };
 
     const tag = ["#nike", "#jordan", "#sale"]
 
@@ -50,7 +44,7 @@ const Home = () => {
                             <CardProduct
                                 nameProduct={truncateDescription("Nike Air Jordan 1", 20)}
                                 description={truncateDescription("Đến 10h ngày 7/9, tâm bão ở bắc vịnh Bắc Bộ, cách Quảng Ninh khoảng 120 km, sức gió giảm còn cấp 13, giật cấp 16, vẫn rất mạnh. Với sức gió này, nhà mái tôn bị thổi bay nóc, tường bao có thể đổ. Bão sau đó đi vào các tỉnh Quảng Ninh - Ninh Bình và suy yếu thành áp thấp nhiệt đới.", 70)}
-                                price={formatCurrency(10000000) + ' VND'}
+                                price={formatCurrency(10000000)}
                                 brand={"Nike"}
                                 nameTag={tag}
                             />
@@ -81,7 +75,7 @@ const Home = () => {
                         alt='banner'
                         src='https://theme.hstatic.net/200000238513/1000665981/14/banner_project_1.jpg?v=23'
                     />
-                    <Link to={'/products'}
+                    <Link to={'/Products'}
                           className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition-transform duration-1000'>
                         <div className='bg-amber-50 hover:bg-blue-500 px-8 py-2 rounded-lg '>
                             <p className='font-bold text-xl '>
