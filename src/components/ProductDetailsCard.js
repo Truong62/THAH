@@ -1,33 +1,34 @@
 import React, { useState, memo } from "react";
 import { useParams } from "react-router-dom";
-import products from "./ProductTest"; // Import the products array
-import { formatCurrency } from "../utils/formatCurrency"; // Import formatCurrency
-import ProductNotFound from "./404NotFound/_404ProductNotFound";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/cart/cartSlice"; // Import action addToCart
+import products from "./ProductTest";
+import { formatCurrency } from "../utils/formatCurrency";
 
 const ProductDetailsCard = () => {
   const { link } = useParams();
-  console.log("Link từ URL:", link); // Log giá trị của link
-
+  const dispatch = useDispatch();
   const product = products.find((p) => p.link === link);
-  console.log("Sản phẩm tìm thấy:", product); // Log sản phẩm tìm thấy
 
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState("black");
   const [selectedSize, setSelectedSize] = useState("M");
 
   if (!product) {
-    return <ProductNotFound />;
+    return window.location.href= '/not-found';
   }
 
-  const handlePrevImage = () => {
-    setMainImageIndex((prevIndex) =>
-      prevIndex === 0 ? product.images.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNextImage = () => {
-    setMainImageIndex((prevIndex) =>
-      prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.nameProduct,
+        price: product.price,
+        quantity: 1,
+        image: product.images[mainImageIndex],
+        color: selectedColor,
+        size: selectedSize,
+      })
     );
   };
 
@@ -41,50 +42,16 @@ const ProductDetailsCard = () => {
             className="w-full h-full object-cover transition duration-300 ease-in-out"
           />
         </div>
-        <button
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 rounded-full p-2 hover:shadow-md"
-          onClick={handlePrevImage}
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M15 19l-7-7 7-7"
-            ></path>
-          </svg>
-        </button>
-        <button
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 rounded-full p-2 hover:shadow-md"
-          onClick={handleNextImage}
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M9 5l7 7-7 7"
-            ></path>
-          </svg>
-        </button>
         <div className="flex mt-4 gap-2">
           {product.images &&
             product.images.map((image, index) => (
               <div
                 key={index}
-                className={`w-[92px] h-[92px] rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${mainImageIndex === index ? "border-2 border-black scale-105" : ""}`}
+                className={`w-[92px] h-[92px] rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${
+                  mainImageIndex === index
+                    ? "border-2 border-black scale-105"
+                    : ""
+                }`}
                 onClick={() => setMainImageIndex(index)}
               >
                 <img
@@ -108,7 +75,9 @@ const ProductDetailsCard = () => {
               product.colors.map((color) => (
                 <div
                   key={color}
-                  className={`flex items-center justify-center w-24 h-10 rounded-full cursor-pointer border ${selectedColor === color ? "ring-2 ring-black" : ""}`}
+                  className={`flex items-center justify-center w-24 h-10 rounded-full cursor-pointer border ${
+                    selectedColor === color ? "ring-2 ring-black" : ""
+                  }`}
                   onClick={() => setSelectedColor(color)}
                 >
                   <span className="text-sm">{color}</span>
@@ -123,7 +92,9 @@ const ProductDetailsCard = () => {
               product.sizes.map((size) => (
                 <div
                   key={size}
-                  className={`px-3 py-1 border rounded-full cursor-pointer text-xl ${selectedSize === size ? "bg-gray-300" : ""}`}
+                  className={`px-3 py-1 border rounded-full cursor-pointer text-xl ${
+                    selectedSize === size ? "bg-gray-300" : ""
+                  }`}
                   onClick={() => setSelectedSize(size)}
                 >
                   {size}
@@ -132,15 +103,12 @@ const ProductDetailsCard = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2 mb-2">
-          <button className="px-4 py-2 bg-black text-white rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl">
-            Buy Now
-          </button>
-          <button className="px-4 py-2 bg-white border border-black rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl">
+          <button
+            className="px-4 py-2 bg-black text-white rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl"
+            onClick={handleAddToCart}
+          >
             Add To Cart
           </button>
-        </div>
-        <div className="mt-4">
-          <p>{product.description}</p>
         </div>
       </div>
     </div>
