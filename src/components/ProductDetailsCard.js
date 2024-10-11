@@ -2,15 +2,20 @@ import React, { useState, memo } from "react";
 import { useParams } from "react-router-dom";
 import products from "./ProductTest"; // Import the products array
 import { formatCurrency } from "../utils/formatCurrency"; // Import formatCurrency
+import { addToCart } from "../redux/cart/cartSlice";
+import { useDispatch } from "react-redux";
+import Alert from "@mui/material/Alert";
 
 const ProductDetailsCard = () => {
   const { link } = useParams();
-
   const product = products.find((p) => p.link === link);
+  const dispatch = useDispatch();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const [mainImageIndex, setMainImageIndex] = useState(0);
-  const [selectedColor, setSelectedColor] = useState("black");
-  const [selectedSize, setSelectedSize] = useState("M");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState();
 
   if (!product) {
     window.location.href = "/notfound";
@@ -26,6 +31,38 @@ const ProductDetailsCard = () => {
     setMainImageIndex((prevIndex) =>
       prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
     );
+  };
+
+  const handleAddToCart = () => {
+    if (!selectedColor && !selectedSize) {
+      setError("REQUIRED TO CHOOSE COLOR AND SIZE");
+      setSuccess("");
+      return;
+    }
+    if (!selectedColor) {
+      setError("REQUIRED TO CHOOSE COLOR");
+      setSuccess("");
+      return;
+    }
+    if (!selectedSize) {
+      setError("Required to choose size");
+      setSuccess("");
+      return;
+    }
+
+    const cartItem = {
+      id: product.id,
+      name: product.nameProduct,
+      price: product.price,
+      color: selectedColor,
+      size: selectedSize,
+      quantity: 1,
+      image: product.images[0],
+    };
+
+    dispatch(addToCart(cartItem));
+    setError("");
+    setSuccess("ADD TO CART SUCCESSFULLY");
   };
 
   return (
@@ -139,11 +176,18 @@ const ProductDetailsCard = () => {
             </div>
           )}
         </div>
+        {error && <Alert severity="error">{error}</Alert>}
+        {success && <Alert severity="success">{success}</Alert>}
+        <br></br>
+
         <div className="flex flex-col gap-2 mb-2">
           <button className="px-4 py-2 bg-black text-white rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl">
             Buy Now
           </button>
-          <button className="px-4 py-2 bg-white border border-black rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl">
+          <button
+            className="px-4 py-2 bg-white border border-black rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl"
+            onClick={handleAddToCart} // Gọi hàm khi bấm nút
+          >
             Add To Cart
           </button>
         </div>
