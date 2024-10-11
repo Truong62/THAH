@@ -2,17 +2,21 @@ import React, { useState, memo } from "react";
 import { useParams } from "react-router-dom";
 import products from "./ProductTest"; // Import the products array
 import { formatCurrency } from "../utils/formatCurrency"; // Import formatCurrency
+import ProductNotFound from "./404NotFound/_404ProductNotFound";
 
 const ProductDetailsCard = () => {
   const { link } = useParams();
+  console.log("Link từ URL:", link); // Log giá trị của link
+
   const product = products.find((p) => p.link === link);
+  console.log("Sản phẩm tìm thấy:", product); // Log sản phẩm tìm thấy
 
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [selectedColor, setSelectedColor] = useState("black");
   const [selectedSize, setSelectedSize] = useState("M");
 
   if (!product) {
-    return <div>Product not found</div>;
+    return <ProductNotFound />;
   }
 
   const handlePrevImage = () => {

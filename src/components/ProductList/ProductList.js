@@ -17,6 +17,7 @@ const ProductList = ({
   const { isMobile } = useDeviceType();
   const totalPages = Math.ceil(products.length / 6);
 
+
   const fetchMoreData = useCallback(() => {
     if (currentPage < totalPages) {
       setCurrentPage((prevPage) => prevPage + 1);
