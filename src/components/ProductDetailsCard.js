@@ -15,9 +15,14 @@ const ProductDetailsCard = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const [mainImageIndex, setMainImageIndex] = useState(0);
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState(product.colors[0].name);
   const [selectedSize, setSelectedSize] = useState();
+
+  const currentColor = product.colors.find(
+    (color) => color.name === selectedColor
+  );
+
+  const [mainImageIndex, setMainImageIndex] = useState(0);
 
   if (!product) {
     window.location.href = "/notfound";
@@ -25,29 +30,19 @@ const ProductDetailsCard = () => {
 
   const handlePrevImage = () => {
     setMainImageIndex((prevIndex) =>
-      prevIndex === 0 ? product.images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? currentColor.images.length - 1 : prevIndex - 1
     );
   };
 
   const handleNextImage = () => {
     setMainImageIndex((prevIndex) =>
-      prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === currentColor.images.length - 1 ? 0 : prevIndex + 1
     );
   };
 
   const handleAddToCart = () => {
-    if (!selectedColor && !selectedSize) {
+    if (!selectedColor || !selectedSize) {
       setError("REQUIRED TO CHOOSE COLOR AND SIZE");
-      setSuccess("");
-      return;
-    }
-    if (!selectedColor) {
-      setError("REQUIRED TO CHOOSE COLOR");
-      setSuccess("");
-      return;
-    }
-    if (!selectedSize) {
-      setError("REQUIRED TO CHOOSE SIZE");
       setSuccess("");
       return;
     }
@@ -87,7 +82,7 @@ const ProductDetailsCard = () => {
         color: selectedColor,
         size: selectedSize,
         quantity: 1, // Default quantity set to 1
-        image: product.images[0],
+        image: currentColor.images[0],
         stock: product.stock, // Include stock information
       };
 
@@ -106,7 +101,7 @@ const ProductDetailsCard = () => {
       <div className="relative w-full md:w-2/3 mb-4 md:mb-0 md:mr-6">
         <div className="w-full aspect-w-1 aspect-h-1">
           <img
-            src={product.images && product.images[mainImageIndex]}
+            src={currentColor.images[mainImageIndex]}
             alt="Product"
             className="w-full h-full object-cover transition duration-300 ease-in-out"
           />
@@ -149,9 +144,9 @@ const ProductDetailsCard = () => {
             ></path>
           </svg>
         </button>
-        {product.images && (
+        {currentColor.images && (
           <div className="flex mt-4 gap-2">
-            {product.images.map((image, index) => (
+            {currentColor.images.map((image, index) => (
               <div
                 key={index}
                 className={`w-[92px] h-[92px] rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${
@@ -182,13 +177,16 @@ const ProductDetailsCard = () => {
             <div className="flex gap-2 mt-1">
               {product.colors.map((color) => (
                 <div
-                  key={color}
+                  key={color.name}
                   className={`flex items-center justify-center w-24 h-10 rounded-full cursor-pointer border ${
-                    selectedColor === color ? "ring-2 ring-black" : ""
+                    selectedColor === color.name ? "ring-2 ring-black" : ""
                   }`}
-                  onClick={() => setSelectedColor(color)}
+                  onClick={() => {
+                    setSelectedColor(color.name);
+                    setSelectedSize(null); // Reset size when color changes
+                  }}
                 >
-                  <span className="text-sm">{color}</span>
+                  <span className="text-sm">{color.name}</span>
                 </div>
               ))}
             </div>
@@ -196,9 +194,9 @@ const ProductDetailsCard = () => {
         </div>
         <div className="mb-2">
           <span className="font-bold text-2xl">Size:</span>
-          {product.sizes && (
+          {currentColor.sizes && (
             <div className="flex flex-wrap gap-2 mt-1">
-              {product.sizes.map((size) => (
+              {currentColor.sizes.map((size) => (
                 <div
                   key={size}
                   className={`px-3 py-1 border rounded-full cursor-pointer text-xl ${
@@ -213,7 +211,7 @@ const ProductDetailsCard = () => {
           )}
         </div>
         <span className="text-black font-bold">
-          Stock Available: {product.stock}
+          Stock Available: {currentColor.stock}
         </span>
         {error && <Alert severity="error">{error}</Alert>}
         {success && <Alert severity="success">{success}</Alert>}

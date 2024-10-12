@@ -5,21 +5,37 @@ const products = [
     nameProduct: "Product 1",
     description: "Description for product 1",
     sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44"],
-    colors: ["White", "Black", "Green", "Yellow", "Purple"],
     price: 2000000,
     brand: "Brand 1",
     stock: 11,
     nameTag: ["Tag1", "Tag2"],
     mainImage:
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/2ce111f2-d961-485d-ad03-6a22d1ea78bb/WMNS+AIR+JORDAN+1+MM+LOW.png",
-    images: [
-      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/d709d9aa-15a1-49e5-83eb-776bc1ee2944/WMNS+AIR+JORDAN+1+MM+LOW.png",
-      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/344aa6bf-4bc7-4c8b-9b61-41f3bf76fb59/WMNS+AIR+JORDAN+1+MM+LOW.png",
-      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/dfe05417-cbdb-49bb-90d8-0993abcbc554/WMNS+AIR+JORDAN+1+MM+LOW.png",
-      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0f1e9ef6-6bde-406e-ab6e-abd04ac18967/WMNS+AIR+JORDAN+1+MM+LOW.png",
-      "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/4f6cd331-e93e-49a1-9286-2555d72d8295/WMNS+AIR+JORDAN+1+MM+LOW.png",
+    colors: [
+      {
+        name: "White",
+        sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44"],
+        images: [
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/d709d9aa-15a1-49e5-83eb-776bc1ee2944/WMNS+AIR+JORDAN+1+MM+LOW.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/344aa6bf-4bc7-4c8b-9b61-41f3bf76fb59/WMNS+AIR+JORDAN+1+MM+LOW.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/dfe05417-cbdb-49bb-90d8-0993abcbc554/WMNS+AIR+JORDAN+1+MM+LOW.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0f1e9ef6-6bde-406e-ab6e-abd04ac18967/WMNS+AIR+JORDAN+1+MM+LOW.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/4f6cd331-e93e-49a1-9286-2555d72d8295/WMNS+AIR+JORDAN+1+MM+LOW.png",
+        ],
+        stock: 11,
+      },
+      {
+        name: "Black",
+        sizes: ["41", "42", "43", "44"],
+        images: [
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/73627869-5239-40d9-b41f-5dcdaba413e4/KILLSHOT+2+LEATHER.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/645d7b2c-d9b7-437c-b236-9777921997ab/KILLSHOT+2+LEATHER.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/93230cad-8b41-4849-b806-54f3a7d36329/KILLSHOT+2+LEATHER.png",
+          "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/4ea35e8b-c72f-419b-b0a1-1c5a3f8b9866/KILLSHOT+2+LEATHER.png",
+        ],
+        stock: 12,
+      },
     ],
-    whiteImages: [],
   },
   {
     id: 2,
