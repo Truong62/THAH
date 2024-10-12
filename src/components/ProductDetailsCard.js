@@ -2,14 +2,16 @@ import React, { useState, memo } from "react";
 import { useParams } from "react-router-dom";
 import products from "./ProductTest"; // Import the products array
 import { formatCurrency } from "../utils/formatCurrency"; // Import formatCurrency
-import { addToCart } from "../redux/cart/cartSlice";
-import { useDispatch } from "react-redux";
+import { addToCart, updateQuantity } from "../redux/cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 import Alert from "@mui/material/Alert";
 
 const ProductDetailsCard = () => {
   const { link } = useParams();
   const product = products.find((p) => p.link === link);
+
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -45,24 +47,58 @@ const ProductDetailsCard = () => {
       return;
     }
     if (!selectedSize) {
-      setError("Required to choose size");
+      setError("REQUIRED TO CHOOSE SIZE");
       setSuccess("");
       return;
     }
 
-    const cartItem = {
-      id: product.id,
-      name: product.nameProduct,
-      price: product.price,
-      color: selectedColor,
-      size: selectedSize,
-      quantity: 1,
-      image: product.images[0],
-    };
+    // Check for existing item with the same id, color, and size
+    const existingItem = cartItems.find(
+      (item) =>
+        item.id === product.id &&
+        item.color === selectedColor &&
+        item.size === selectedSize
+    );
 
-    dispatch(addToCart(cartItem));
+    if (existingItem) {
+      // Check if the quantity in the cart is already equal to the stock
+      if (existingItem.quantity >= product.stock) {
+        setError("Too enough stock available");
+        setSuccess("");
+        return;
+      }
+
+      // If the item exists and stock is available, update its quantity
+      dispatch(
+        updateQuantity({
+          id: product.id,
+          color: selectedColor,
+          size: selectedSize,
+          quantity: existingItem.quantity + 1,
+        })
+      );
+      setSuccess("Quantity updated successfully");
+    } else {
+      // If the item does not exist, add it to the cart
+      const cartItem = {
+        id: product.id,
+        name: product.nameProduct,
+        price: product.price,
+        color: selectedColor,
+        size: selectedSize,
+        quantity: 1, // Default quantity set to 1
+        image: product.images[0],
+        stock: product.stock, // Include stock information
+      };
+
+      dispatch(addToCart(cartItem));
+      setSuccess("Added to cart successfully");
+    }
+
     setError("");
-    setSuccess("ADD TO CART SUCCESSFULLY");
+    setTimeout(() => {
+      setSuccess("");
+    }, 2000);
   };
 
   return (
@@ -176,6 +212,9 @@ const ProductDetailsCard = () => {
             </div>
           )}
         </div>
+        <span className="text-black font-bold">
+          Stock Available: {product.stock}
+        </span>
         {error && <Alert severity="error">{error}</Alert>}
         {success && <Alert severity="success">{success}</Alert>}
         <br></br>

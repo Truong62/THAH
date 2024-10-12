@@ -8,6 +8,7 @@ const products = [
     colors: ["White", "Black", "Green", "Yellow", "Purple"],
     price: 2000000,
     brand: "Brand 1",
+    stock: 11,
     nameTag: ["Tag1", "Tag2"],
     mainImage:
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/2ce111f2-d961-485d-ad03-6a22d1ea78bb/WMNS+AIR+JORDAN+1+MM+LOW.png",
@@ -24,9 +25,12 @@ const products = [
     id: 2,
     link: "product-2",
     nameProduct: "Product 2",
-    description: "Description for product 2",
-    price: "2000000",
+    description: "Description for product 1",
+    sizes: ["36", "37", "38", "39", "40", "41", "42", "43", "44"],
+    colors: ["White", "Black", "Green", "Yellow", "Purple"],
+    price: 2000000,
     brand: "Brand 2",
+    stock: 14,
     nameTag: ["Tag3", "Tag4"],
     mainImage: "https://example.com/main-image-2.jpg",
     images: [
@@ -44,6 +48,7 @@ const products = [
     description: "Description for product 3",
     price: "2000000",
     brand: "Brand 3",
+    stock: 10,
     nameTag: ["Tag4", "Tag5"],
     mainImage: "https://example.com/main-image-2.jpg",
     images: [
@@ -61,6 +66,7 @@ const products = [
     description: "Description for product 4",
     price: "2000000",
     brand: "Brand 4",
+    stock: 10,
     nameTag: ["Tag5", "Tag6"],
     mainImage: "https://example.com/main-image-2.jpg",
     images: [
@@ -78,6 +84,7 @@ const products = [
     description: "Description for product 5",
     price: "2000000",
     brand: "Brand 5",
+    stock: 10,
     nameTag: ["Tag6", "Tag7"],
     mainImage: "https://example.com/main-image-2.jpg",
     images: [
@@ -95,6 +102,7 @@ const products = [
     description: "Description for product 6",
     price: "2000000",
     brand: "Brand 6",
+    stock: 10,
     nameTag: ["Tag7", "Tag8"],
     mainImage: "https://example.com/main-image-2.jpg",
     images: [
@@ -112,6 +120,7 @@ const products = [
     description: "Description for product 6",
     price: "2000000",
     brand: "Brand 6",
+    quantityStock: 10,
     nameTag: ["Tag7", "Tag8"],
     mainImage: "https://example.com/main-image-2.jpg",
     images: [
@@ -129,6 +138,7 @@ const products = [
     description: "Description for product 6",
     price: "2000000",
     brand: "Brand 6",
+    stock: 10,
     nameTag: ["Tag7", "Tag8"],
     mainImage: "https://example.com/main-image-2.jpg",
     images: [
@@ -144,6 +154,7 @@ const products = [
     link: "product-6",
     nameProduct: "Product 6",
     description: "Description for product 6",
+    stock: 10,
     sizes: [
       "36",
       "37",

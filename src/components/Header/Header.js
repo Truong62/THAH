@@ -61,17 +61,16 @@ const Header = () => {
           </Link>
         </div>
         <div className="items-center hidden gap-8 md:flex">
-          <button
-            onClick={handleOpenModal}
-            className="relative flex items-center px-4 py-2 text-sm font-bold text-gray-800 hover:text-blue-400 transition duration-300"
-          >
-            <FontAwesomeIcon icon={faCartShopping} className="mr-2" />
-            {uniqueItemsCount > 0 && (
-              <span className="absolute font-semibold top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
-                {uniqueItemsCount}
-              </span>
-            )}
-          </button>
+          <Link to="/cart">
+            <button className="relative flex items-center px-4 py-2 text-sm font-bold text-gray-800 hover:text-blue-400 transition duration-300">
+              <FontAwesomeIcon icon={faCartShopping} className="mr-2" />
+              {uniqueItemsCount > 0 && (
+                <span className="absolute font-semibold top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
+                  {uniqueItemsCount}
+                </span>
+              )}
+            </button>
+          </Link>
           <button className="flex items-center text-sm text-gray-800 hover:text-blue-400 font-bold transition duration-300">
             Log In
           </button>

@@ -1,14 +1,15 @@
-// src/components/CartModal.js
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { updateQuantity } from "../../redux/cart/cartSlice";
+import Alert from "@mui/material/Alert"; // Import Alert
 
 const CartModal = ({ isOpen, onClose }) => {
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const [alert, setAlert] = React.useState(null); // State for alert
 
   if (!isOpen) return null;
 
@@ -20,9 +21,17 @@ const CartModal = ({ isOpen, onClose }) => {
   };
 
   const handleQuantityChange = (id, color, size, quantity) => {
-    if (quantity >= 0) {
-      dispatch(updateQuantity({ id, color, size, quantity }));
+    if (quantity < 1) {
+      setAlert("Quantity cannot be less than 1");
+      return;
     }
+    dispatch(updateQuantity({ id, color, size, quantity }));
+    setAlert(null);
+  };
+
+  const handleRemoveItem = (id, color, size) => {
+    // Logic to remove item from cart
+    setAlert("Item removed from cart");
   };
 
   return (
@@ -39,9 +48,10 @@ const CartModal = ({ isOpen, onClose }) => {
             <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
+        {alert && <Alert severity="warning">{alert}</Alert>}
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center">
-            <p>Not item in cart.</p>
+            <p>No item in cart.</p>
             <button
               onClick={onClose}
               className="mt-4 px-4 py-2 border border-blue-500 text-blue-500 rounded"
@@ -102,6 +112,14 @@ const CartModal = ({ isOpen, onClose }) => {
                       +
                     </button>
                   </div>
+                  <button
+                    className="mt-2 text-red-500"
+                    onClick={() =>
+                      handleRemoveItem(item.id, item.color, item.size)
+                    }
+                  >
+                    Remove
+                  </button>
                 </div>
                 <p className="text-lg font-bold text-red-500">
                   {formatCurrency(item.price * item.quantity)}
