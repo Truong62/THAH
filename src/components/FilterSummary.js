@@ -23,7 +23,7 @@ const FilterSummary = ({ selectedCategory, onRemoveCategory }) => {
                 key={key}
                 className="flex items-center px-2 rounded-xl bg-blue-200 mr-2 text-[#303030]"
               >
-                <span>{`${key}: ${value}`}</span>
+                <span>{`${value}`}</span>
                 <button
                   className="ml-2 text-red-500 font-bold"
                   onClick={() => onRemoveCategory(key)}

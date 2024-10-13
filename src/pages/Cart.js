@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formatCurrency } from "../utils/formatCurrency";
 import { updateQuantity, removeItem } from "../redux/cart/cartSlice";
@@ -6,11 +6,43 @@ import Alert from "@mui/material/Alert";
 import Header from "../components/Header/Header";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Footer from "../components/Footer/Footer";
+
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const [alert, setAlert] = useState(null);
   const [selectedItems, setSelectedItems] = useState({});
+  const [visibleItems, setVisibleItems] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Number of items to show per page
+  const [lastScrollTop, setLastScrollTop] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > lastScrollTop) {
+        // Scrolling down
+        if (currentPage * itemsPerPage < cartItems.length) {
+          setCurrentPage((prevPage) => prevPage + 1);
+        }
+      } else {
+        // Scrolling up
+        if (currentPage > 1) {
+          setCurrentPage((prevPage) => prevPage - 1);
+        }
+      }
+      setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [currentPage, lastScrollTop, cartItems.length]);
+
+  useEffect(() => {
+    const newVisibleItems = cartItems.slice(0, currentPage * itemsPerPage);
+    setVisibleItems(newVisibleItems);
+  }, [currentPage, cartItems]);
 
   const handleCheckboxChange = (id, color, size) => {
     const key = `${id}-${color}-${size}`;
@@ -75,10 +107,10 @@ const CartPage = () => {
         {alert && <Alert severity="warning">{alert}</Alert>}
         <div className="flex flex-col lg:flex-row">
           <div className="w-full lg:w-2/3 pr-4">
-            {cartItems.length === 0 ? (
+            {visibleItems.length === 0 ? (
               <p>Your cart is empty.</p>
             ) : (
-              cartItems.map((item) => {
+              visibleItems.map((item) => {
                 const key = `${item.id}-${item.color}-${item.size}`;
                 return (
                   <div
@@ -228,7 +260,6 @@ const CartPage = () => {
           </button>
         </div>
       </div>
-      <Footer />
     </React.Fragment>
   );
 };
