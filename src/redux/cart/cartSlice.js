@@ -38,6 +38,15 @@ const cartSlice = createSlice({
         saveState(state);
       }
     },
+    updateCategory: (state, action) => {
+      const { id, color, size, category } = action.payload;
+      const item = state.find(
+        (item) => item.id === id && item.color === color && item.size === size
+      );
+      if (item) {
+        item.category = category;
+      }
+    },
     removeItem: (state, action) => {
       const { id, color, size } = action.payload;
       const newState = state.filter(
