@@ -2,38 +2,55 @@ import React from 'react';
 import CardProduct from '../components/Card/Card';
 import { formatCurrency } from '../utils/formatCurrency';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { truncateDescription } from '../utils/truncateDescription';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+
 import { Pagination } from 'swiper/modules';
 
 const SuggestProducts = ({ products }) => {
-  const truncateDescription = (description, maxLength) => {
-    if (description.length > maxLength) {
-      return description.slice(0, maxLength) + '...';
-    }
-    return description;
-  };
-
   return (
-    <div className="my-4">
+    <div className="my-8">
       <Swiper
-        slidesPerView={3}
-        spaceBetween={10}
+        spaceBetween={20}
         pagination={{
           clickable: true,
         }}
         modules={[Pagination]}
-        className="w-full h-[300px]"
+        className="w-full"
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          480: {
+            slidesPerView: 1.5,
+            spaceBetween: 15,
+          },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+        }}
       >
         {products.map((item, index) => (
-          <SwiperSlide key={index} className="flex justify-center items-center bg-white text-center">
+          <SwiperSlide key={index} className="flex justify-center">
             <CardProduct
-              nameProduct={item.name}
-              description={truncateDescription(item.description, 14)}
+              nameProduct={item.nameProduct}
+              description={truncateDescription(item.description, 60)}
               price={formatCurrency(item.price)}
-              brand={item.brand || "Brand"}
-              nametag={["#tag1", "#tag2", "#tag3"]}
+              brand={item.brand}
+              nameTag={item.nameTag}
+              mainImage={item.mainImage}
             />
           </SwiperSlide>
         ))}
