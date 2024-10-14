@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 import {Route, Routes} from "react-router-dom";
-import Home from '../pages/Home';
+import Home from "../pages/Home";
 import Blogs from "../pages/Blogs";
 import BreadCrumb from "../components/BreadCrumb";
-import Product from '../pages/Product';
+import Product from "../pages/Product";
 import ProductDetail from "../pages/ProductDetail";
+import PageNotFound from "../components/404NotFound/_404PageNotFound";
 
 const AppRoutes = () => {
     return (
@@ -14,9 +15,11 @@ const AppRoutes = () => {
             <Route path="/products" element={<Product></Product>}/>
             <Route path="/products/:link" element={<ProductDetail></ProductDetail>}/>
             <Route path="/productdetails" element={<ProductDetail></ProductDetail>}/>
-                {/* test */}
+            {/* test */}
             <Route path="/blogs/huong" element={<BreadCrumb/>}/>
             <Route path="/hiep" element={<h1>hiep</h1>}/>
+
+            <Route path="*" element={<PageNotFound/>}/>
         </Routes>
     );
 };

@@ -9,7 +9,7 @@ const CardProduct = ({
   description,
   price,
   brand,
-  nameTag = [],
+  nameTag = [], // Mặc định là mảng rỗng
   mainImage,
   onClick,
 }) => {
@@ -25,16 +25,22 @@ const CardProduct = ({
         <span className="font-semibold text-gray-500 mt-2">{brand}</span>
         <h4 className="text-xl font-bold mb-2">{nameProduct}</h4>
         <div className="flex items-center gap-1.25 text-sm">
-          {nameTag.map((item, index) => (
-            <p
-              key={index}
-              className="px-2 rounded-xl bg-blue-200 mr-2 text-[#303030]"
-            >
-              {item}
+          {Array.isArray(nameTag) ? (
+            nameTag.map((item, index) => (
+              <p
+                key={index}
+                className="px-2 rounded-xl bg-blue-200 mr-2 text-[#303030]"
+              >
+                {item}
+              </p>
+            ))
+          ) : (
+            <p className="px-2 rounded-xl bg-blue-200 mr-2 text-[#303030]">
+              {nameTag}
             </p>
-          ))}
+          )}
         </div>
-        <p className="mt-2">{(description)}</p>
+        <p className="mt-2">{description}</p>
         <div className="grid justify-end mt-3">
           <p className="text-red-500 text-xl font-bold">{price}</p>
         </div>

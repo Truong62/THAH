@@ -18,9 +18,7 @@ const products = [
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0f1e9ef6-6bde-406e-ab6e-abd04ac18967/WMNS+AIR+JORDAN+1+MM+LOW.png",
       "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/4f6cd331-e93e-49a1-9286-2555d72d8295/WMNS+AIR+JORDAN+1+MM+LOW.png",
     ],
-    whiteImages:[
-      
-    ]
+    whiteImages: [],
   },
   {
     id: 2,
@@ -74,7 +72,7 @@ const products = [
     ],
   },
   {
-    id: 2,
+    id: 5,
     link: "product-5",
     nameProduct: "Product 5",
     description: "Description for product 5",
@@ -108,7 +106,7 @@ const products = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     link: "product-6",
     nameProduct: "Product 6",
     description: "Description for product 6",
@@ -125,7 +123,7 @@ const products = [
     ],
   },
   {
-    id: 6,
+    id: 8,
     link: "product-6",
     nameProduct: "Product 6",
     description: "Description for product 6",
@@ -142,7 +140,7 @@ const products = [
     ],
   },
   {
-    id: 6,
+    id: 9,
     link: "product-6",
     nameProduct: "Product 6",
     description: "Description for product 6",
