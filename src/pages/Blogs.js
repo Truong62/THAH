@@ -6,7 +6,6 @@ import BreadCrumb from "../components/BreadCrumb";
 
 
 const Blogs = () => {
-<<<<<<< HEAD
     return (
         <>
             <Header />
@@ -15,17 +14,6 @@ const Blogs = () => {
             <Footer />
         </>
     );
-=======
-  return (
-    <>
-      <Header />
-      <Layout>
-        <BreadCrumb />
-      </Layout>
-      <Footer />
-    </>
-  );
->>>>>>> 85af6f5dde84a5c04a8ed52dc271161f1ca49a28
 };
 
 export default Blogs;
