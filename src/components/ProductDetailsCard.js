@@ -5,7 +5,7 @@ import { formatCurrency } from "../utils/formatCurrency"; // Import formatCurren
 import SuggestProducts from "../components/suggestProducts";
 
 const ProductDetailsCard = () => {
-    const { link } = useParams();
+    const {link} = useParams();
     const product = products.find((p) => p.link === link);
 
     const [mainImageIndex, setMainImageIndex] = useState(0);
@@ -13,7 +13,7 @@ const ProductDetailsCard = () => {
     const [selectedSize, setSelectedSize] = useState("M");
 
     if (!product) {
-        return <div>Product not found</div>; // tạo một trang 404 ở route nếu không có thì đi tới trang đó
+        window.location.href = '/notfound';
     }
 
     const handlePrevImage = () => {
