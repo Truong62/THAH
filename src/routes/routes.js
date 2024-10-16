@@ -5,7 +5,6 @@ import Blogs from "../pages/Blogs";
 import BreadCrumb from "../components/BreadCrumb";
 import Product from "../pages/Product";
 import ProductDetail from "../pages/ProductDetail";
-
 const AppRoutes = () => {
     return (
         <Routes>
@@ -18,7 +17,7 @@ const AppRoutes = () => {
             <Route path="/blogs/huong" element={<BreadCrumb/>}/>
             <Route path="/hiep" element={<h1>hiep</h1>}/>
 
-            <Route path="*" element={<PageNotFound/>}/>
+            {/* <Route path="*" element={<PageNotFound/>}/> */}
         </Routes>
     );
 };
