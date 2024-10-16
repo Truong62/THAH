@@ -25,46 +25,58 @@ const ProductDetailsCard = () => {
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart);
-  const [snackbarOpen, setSnackbarOpen] = useState(false); // State to control Snackbar visibility
-  const [snackbarMessage, setSnackbarMessage] = useState(""); // State to store Snackbar message
-  const [snackbarType, setSnackbarType] = useState(""); // State to store Snackbar type
+  const [snackbarQueue, setSnackbarQueue] = useState([]);
+  const [currentSnackbar, setCurrentSnackbar] = useState(null);
 
   const [selectedColor, setSelectedColor] = useState(
-    product.variants[0].colorName
+    product ? product.variants[0].colorName : ""
   );
   const [selectedSize, setSelectedSize] = useState();
 
-  const currentVariant = product.variants.find(
-    (variant) => variant.colorName === selectedColor
-  );
+  const currentVariant = product
+    ? product.variants.find((variant) => variant.colorName === selectedColor)
+    : null;
 
   const [mainImageIndex, setMainImageIndex] = useState(0);
 
-  const { isMobile } = useDeviceType(); // Determine if the device is mobile
+  const { isMobile } = useDeviceType();
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
-  const [showFullDescription, setShowFullDescription] = useState(false); // State to control description visibility
+  useEffect(() => {
+    if (!product) {
+      window.location.href = "/page-not-found";
+    }
+  }, [product]);
 
-  if (!product) {
-    window.location.href = "/notfound";
-  }
+  useEffect(() => {
+    if (!currentSnackbar && snackbarQueue.length > 0) {
+      setCurrentSnackbar(snackbarQueue[0]);
+      setSnackbarQueue((prevQueue) => prevQueue.slice(1));
+    }
+  }, [snackbarQueue, currentSnackbar]);
 
   const handlePrevImage = () => {
-    setMainImageIndex((prevIndex) =>
-      prevIndex === 0 ? currentVariant.images.length - 1 : prevIndex - 1
-    );
+    if (currentVariant) {
+      setMainImageIndex((prevIndex) =>
+        prevIndex === 0 ? currentVariant.images.length - 1 : prevIndex - 1
+      );
+    }
   };
 
   const handleNextImage = () => {
-    setMainImageIndex((prevIndex) =>
-      prevIndex === currentVariant.images.length - 1 ? 0 : prevIndex + 1
-    );
+    if (currentVariant) {
+      setMainImageIndex((prevIndex) =>
+        prevIndex === currentVariant.images.length - 1 ? 0 : prevIndex + 1
+      );
+    }
   };
 
   const handleAddToCart = () => {
     if (!selectedColor || !selectedSize) {
-      setSnackbarMessage("REQUIRED TO CHOOSE COLOR AND SIZE");
-      setSnackbarType("error");
-      setSnackbarOpen(true);
+      setSnackbarQueue((prevQueue) => [
+        ...prevQueue,
+        { message: "REQUIRED TO CHOOSE COLOR AND SIZE", type: "error" },
+      ]);
       return;
     }
 
@@ -82,9 +94,10 @@ const ProductDetailsCard = () => {
           (size) => size.sizeValue === selectedSize
         ).quantity
       ) {
-        setSnackbarMessage("OUT OF STOCK");
-        setSnackbarType("error");
-        setSnackbarOpen(true);
+        setSnackbarQueue((prevQueue) => [
+          ...prevQueue,
+          { message: "OUT OF STOCK", type: "error" },
+        ]);
         return;
       }
 
@@ -96,8 +109,10 @@ const ProductDetailsCard = () => {
           quantity: existingItem.quantity + 1,
         })
       );
-      setSnackbarMessage("QUANTITY UPDATED");
-      setSnackbarType("success");
+      setSnackbarQueue((prevQueue) => [
+        ...prevQueue,
+        { message: "QUANTITY UPDATED", type: "success" },
+      ]);
     } else {
       const cartItem = {
         id: product.brandId,
@@ -113,25 +128,20 @@ const ProductDetailsCard = () => {
       };
 
       dispatch(addToCart(cartItem));
-      setSnackbarMessage("ADDED TO CART");
-      setSnackbarType("success");
+      setSnackbarQueue((prevQueue) => [
+        ...prevQueue,
+        { message: "ADDED TO CART", type: "success" },
+      ]);
     }
-
-    setSnackbarOpen(true);
   };
 
   const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
+    setCurrentSnackbar(null);
   };
 
-  useEffect(() => {
-    if (snackbarOpen) {
-      const timer = setTimeout(() => {
-        setSnackbarOpen(false);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [snackbarOpen]);
+  if (!product) {
+    return null; // Render nothing while redirecting
+  }
 
   return (
     <div className="flex flex-col md:flex-row rounded-lg bg-white p-6 max-w-6xl mx-auto">
@@ -315,26 +325,29 @@ const ProductDetailsCard = () => {
           </Button>
         </div>
       </div>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-        TransitionComponent={SlideTransition} // Use Slide transition
-        message={
-          <span style={{ display: "flex", alignItems: "center" }}>
-            {snackbarType === "error" && (
-              <WarningAmberIcon style={{ marginRight: 8 }} />
-            )}
-            {snackbarMessage}
-          </span>
-        }
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        ContentProps={{
-          style: {
-            backgroundColor: snackbarType === "success" ? "#33CC33" : "#FFCC33",
-          },
-        }}
-      />
+      {currentSnackbar && (
+        <Snackbar
+          open={!!currentSnackbar}
+          autoHideDuration={5000}
+          onClose={handleSnackbarClose}
+          TransitionComponent={SlideTransition}
+          message={
+            <span style={{ display: "flex", alignItems: "center" }}>
+              {currentSnackbar.type === "error" && (
+                <WarningAmberIcon style={{ marginRight: 8 }} />
+              )}
+              {currentSnackbar.message}
+            </span>
+          }
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          ContentProps={{
+            style: {
+              backgroundColor:
+                currentSnackbar.type === "success" ? "#33CC33" : "#FFCC33",
+            },
+          }}
+        />
+      )}
     </div>
   );
 };

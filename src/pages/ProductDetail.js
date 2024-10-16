@@ -12,7 +12,6 @@ const ProductDetail = () => {
       <Layout>
         <BreadCrumb />
         <ProductDetailsCard />
-        <div className="h-[500px]"></div>
       </Layout>
       <Footer />
     </div>
