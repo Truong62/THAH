@@ -8,6 +8,7 @@ const Blogs = () => {
   return (
     <>
       <Header />
+      <BreadCrumb />
       <Layout></Layout>
       <Footer />
     </>

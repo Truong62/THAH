@@ -7,22 +7,8 @@ import ImageSlider from '../components/ImageSlider';
 import Layout from '../components/Layout';
 import { truncateDescription } from '../utils/truncateDescription';
 import { formatCurrency } from '../utils/formatCurrency';
+import { productData } from '../utils/data';
 const Home = () => {
-  const objTest = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 4,
-    },
-  ];
-
   const tag = ['#nike', '#jordan', '#sale'];
 
   return (
@@ -30,16 +16,16 @@ const Home = () => {
       <Header />
       <Layout>
         <ImageSlider />
-        <div className="flex items-center mt-3">
-          <img className="w-[40px] mr-2" src="../../images/shoe.gif" alt="" />
+        <div className="mt-3 flex items-center">
+          <img className="mr-2 w-[40px]" src="../../images/shoe.gif" alt="" />
           <p className="text-2xl font-bold ">Product new</p>
           <img
-            className="w-[40px] ml-2 transform scale-x-[-1]"
+            className="ml-2 w-[40px] -scale-x-100"
             src="../../images/shoe.gif"
             alt=""
           />
         </div>
-        <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mb-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {objTest.map((item, index) => (
             <div key={index}>
               <CardProduct
@@ -55,17 +41,17 @@ const Home = () => {
             </div>
           ))}
         </div>
-        <div className="flex items-center mb-3">
-          <img className="w-[40px] mr-2" src="../../images/shoe.gif" alt="" />
+        <div className="mb-3 flex items-center">
+          <img className="mr-2 w-[40px]" src="../../images/shoe.gif" alt="" />
           <p className="text-2xl font-bold ">Product all</p>
           <img
-            className="w-[40px] ml-2 transform scale-x-[-1]"
+            className="ml-2 w-[40px] -scale-x-100"
             src="../../images/shoe.gif"
             alt=""
           />
         </div>
-        <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {objTest.map((item, index) => (
+        <div className="mb-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {productData.map((item, index) => (
             <div key={index}>
               <CardProduct
                 nameProduct={truncateDescription(
@@ -83,18 +69,18 @@ const Home = () => {
             </div>
           ))}
         </div>
-        <div className="overflow-hidden rounded-3xl relative">
+        <div className="relative overflow-hidden rounded-3xl">
           <img
-            className="w-full object-fill shadow-xl rounded-3xl transform transition-transform duration-1000 hover:scale-110"
+            className="w-full rounded-3xl object-fill shadow-xl transition-transform duration-1000 hover:scale-110"
             alt="banner"
             src="https://theme.hstatic.net/200000238513/1000665981/14/banner_project_1.jpg?v=23"
           />
           <Link
             to={'/Products'}
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition-transform duration-1000"
+            className="absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 transition-transform duration-1000"
           >
-            <div className="bg-amber-50 hover:bg-blue-500 px-8 py-2 rounded-lg ">
-              <p className="font-bold text-xl ">Buy Now</p>
+            <div className="rounded-lg bg-amber-50 px-8 py-2 hover:bg-blue-500 ">
+              <p className="text-xl font-bold ">Buy Now</p>
             </div>
           </Link>
         </div>

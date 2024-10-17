@@ -18,24 +18,31 @@ const BreadCrumb = () => {
       <h3 className="p-2 pl-0 ">
         <Link
           to="/"
-          className="text-sm font-medium text-dark-grey-700 hover:text-blue-400 cursor-pointer"
+          className={`text-sm font-medium text-dark-grey-700 hover:text-[#A8DCE7] cursor-pointer`}
         >
           Home
         </Link>
       </h3>
-      {pathnames.map((name, index) => (
-        <React.Fragment key={index}>
-          <h3 className="p-2"> &gt; </h3>
-          <h3 className="p-2 pl-0 ">
-            <Link
-              to={createLink(index)}
-              className="text-sm font-medium text-dark-grey-700 hover:text-blue-400 cursor-pointer"
-            >
-              {formatBreadcrumbName(name)}
-            </Link>
-          </h3>
-        </React.Fragment>
-      ))}
+      {pathnames.map((name, index) => {
+        const isActive = index === pathnames.length - 1;
+        return (
+          <React.Fragment key={index}>
+            <h3 className="p-2"> &gt; </h3>
+            <h3 className="p-2 pl-0 ">
+              <Link
+                to={createLink(index)}
+                className={`text-sm font-medium ${
+                  isActive
+                    ? 'text-blue-400'
+                    : 'text-dark-grey-700 hover:text-[#A8DCE7]'
+                } cursor-pointer`}
+              >
+                {formatBreadcrumbName(name)}
+              </Link>
+            </h3>
+          </React.Fragment>
+        );
+      })}
     </div>
   );
 };

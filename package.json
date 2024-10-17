@@ -45,7 +45,7 @@
     "lint": "eslint . --ext .js,.jsx",
     "format": "prettier --write .",
     "prestart": "npm run lint && npm run format",
-    "start": "npm run prestart && react-scripts start"
+    "start": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.25.8",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "autoprefixer": "^10.4.20",
     "css-loader": "^7.1.2",
