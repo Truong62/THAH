@@ -1,4 +1,3 @@
-// src/pages/Cart.js
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formatCurrency } from "../utils/formatCurrency";
@@ -14,11 +13,11 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [alert, setAlert] = useState(null);
-  const [selectedItems, setSelectedItems] = useState({});
   const [visibleItems, setVisibleItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // Number of items to show per page
   const [lastScrollTop, setLastScrollTop] = useState(0);
+  const [subtotal, setSubtotal] = useState(0); // State to store subtotal
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,33 +46,13 @@ const CartPage = () => {
     setVisibleItems(newVisibleItems);
   }, [currentPage, cartItems]);
 
-  const handleCheckboxChange = (id, color, size) => {
-    const key = `${id}-${color}-${size}`;
-    setSelectedItems((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
-  const calculateSubtotal = () => {
-    return cartItems.reduce((total, item) => {
-      const key = `${item.id}-${item.color}-${item.size}`;
-      if (selectedItems[key]) {
-        return total + item.price * item.quantity;
-      }
-      return total;
+  // Calculate subtotal whenever cartItems change
+  useEffect(() => {
+    const newSubtotal = cartItems.reduce((total, item) => {
+      return total + item.price * item.quantity;
     }, 0);
-  };
-
-  const calculateTotalItems = () => {
-    return cartItems.reduce((count, item) => {
-      const key = `${item.id}-${item.color}-${item.size}`;
-      if (selectedItems[key]) {
-        return count + item.quantity;
-      }
-      return count;
-    }, 0);
-  };
+    setSubtotal(newSubtotal);
+  }, [cartItems]);
 
   const handleQuantityChange = (id, color, size, quantity, stock) => {
     if (quantity < 1) {
@@ -129,14 +108,6 @@ const CartPage = () => {
                     className="flex flex-col lg:flex-row justify-between items-center mb-4 border-b pb-4"
                   >
                     <div className="flex items-center w-full lg:w-1/3">
-                      <input
-                        type="checkbox"
-                        checked={!!selectedItems[key]}
-                        onChange={() =>
-                          handleCheckboxChange(item.id, item.color, item.size)
-                        }
-                        className="mr-4"
-                      />
                       <img
                         src={item.image}
                         alt={item.name}
@@ -220,7 +191,7 @@ const CartPage = () => {
             <h2 className="text-xl font-bold mb-4">Summary</h2>
             <div className="flex justify-between mb-2">
               <span>Subtotal</span>
-              <span>{formatCurrency(calculateSubtotal())}</span>
+              <span>{formatCurrency(subtotal)}</span>
             </div>
             <div className="flex justify-between mb-2">
               <span>Estimated Shipping & Handling</span>
@@ -232,13 +203,12 @@ const CartPage = () => {
             </div>
             <div className="flex justify-between font-bold mb-4">
               <span>Total</span>
-              <span className="text-red-500">
-                {formatCurrency(calculateSubtotal())}
-              </span>
+              <span className="text-red-500">{formatCurrency(subtotal)}</span>
             </div>
             <button
-              className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+              className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${
+                cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+              }`}
               onClick={handleCheckout}
               disabled={cartItems.length === 0}
             >
@@ -251,8 +221,8 @@ const CartPage = () => {
         </div>
         <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white p-4 shadow-md">
           <div className="flex justify-between mb-2">
-            <span>{calculateTotalItems()} Items</span>
-            <span>{formatCurrency(calculateSubtotal())}</span>
+            <span>{cartItems.length} Items</span>
+            <span>{formatCurrency(subtotal)}</span>
           </div>
           <div className="flex justify-between mb-2">
             <span>Estimated Shipping & Handling</span>
@@ -264,13 +234,12 @@ const CartPage = () => {
           </div>
           <div className="flex justify-between font-bold mb-4">
             <span>Total</span>
-            <span className="text-red-500">
-              {formatCurrency(calculateSubtotal())}
-            </span>
+            <span className="text-red-500">{formatCurrency(subtotal)}</span>
           </div>
           <button
-            className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+            className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${
+              cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             onClick={handleCheckout}
             disabled={cartItems.length === 0}
           >
