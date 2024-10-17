@@ -3,11 +3,10 @@ import CardProduct from '../components/Card/Card';
 import { formatCurrency } from '../utils/formatCurrency';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { truncateDescription } from '../utils/truncateDescription';
-
 import 'swiper/css';
 import 'swiper/css/pagination';
-
 import { Pagination } from 'swiper/modules';
+import PropTypes from 'prop-types';
 
 const SuggestProducts = ({ products }) => {
   return (
@@ -60,3 +59,7 @@ const SuggestProducts = ({ products }) => {
 };
 
 export default SuggestProducts;
+
+SuggestProducts.propTypes = {
+  products: PropTypes.array.isRequired,
+};
