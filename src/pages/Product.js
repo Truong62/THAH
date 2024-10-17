@@ -1,28 +1,28 @@
-import React, { useCallback, useMemo, useState } from "react";
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
-import Layout from "../components/Layout";
-import ProductList from "../components/ProductList/ProductList";
-import Sidebar from "../components/Sidebar";
-import SortBy from "../components/SortBy";
-import BreadCrumb from "../components/BreadCrumb";
-import { useNavigate } from "react-router-dom";
-import products from "../components/ProductTest"; // Import products from ProductTest
+import React, { useCallback, useMemo, useState } from 'react';
+import Footer from '../components/Footer/Footer';
+import Header from '../components/Header/Header';
+import Layout from '../components/Layout';
+import ProductList from '../components/ProductList/ProductList';
+import Sidebar from '../components/Sidebar';
+import SortBy from '../components/SortBy';
+import BreadCrumb from '../components/BreadCrumb';
+import { useNavigate } from 'react-router-dom';
+import products from '../components/ProductTest'; // Import products from ProductTest
 
 const Product = () => {
   const navigate = useNavigate();
 
   const [productFilters, setProductFilters] = useState({
     selectedCategories: {
-      brand: "",
-      price: "",
-      size: "",
+      brand: '',
+      price: '',
+      size: '',
     },
-    sortOption: "popularity",
+    sortOption: 'popularity',
   });
 
   const handleCategoryChange = useCallback((category) => {
-    const [group, value] = category.split(":");
+    const [group, value] = category.split(':');
 
     setProductFilters((prevFilters) => {
       return {

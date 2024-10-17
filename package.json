@@ -13,12 +13,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
     "formik": "^2.4.6",
     "jest": "^27.5.1",
-    "prettier": "^3.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
@@ -41,10 +37,13 @@
     "zod": "^3.23.8"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .js,.jsx",
+    "format": "prettier --write .",
+    "prestart": "npm run lint && npm run format",
+    "start": "npm run prestart && react-scripts start"
   },
   "eslintConfig": {
     "extends": [
@@ -68,7 +67,13 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "autoprefixer": "^10.4.20",
     "css-loader": "^7.1.2",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.1",
+    "eslint-plugin-tailwindcss": "^3.17.5",
     "postcss": "^8.4.44",
+    "prettier": "^3.3.3",
     "sass": "^1.77.8",
     "sass-loader": "^16.0.1",
     "style-loader": "^4.0.0",

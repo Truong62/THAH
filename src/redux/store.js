@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const tempReducer = (state = {}, action) => {
   return state;
@@ -11,7 +11,7 @@ const rootReducer = {
 };
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
 };
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from 'react';
 
 const Sidebar = ({ onCategoryChange, selectedCategory }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
@@ -26,7 +26,7 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
     () =>
       ({ isOpen }) => (
         <svg
-          className={`w-4 h-4 transform transition-transform ${isOpen ? "rotate-90" : ""}`}
+          className={`w-4 h-4 transform transition-transform ${isOpen ? 'rotate-90' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -54,7 +54,7 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
           <span className="text-xl font-bold">Category</span>
           <ArrowIcon isOpen={isCategoryOpen} />
         </button>
-        <div className={`mt-2 ${isCategoryOpen ? "block" : "hidden"} md:block`}>
+        <div className={`mt-2 ${isCategoryOpen ? 'block' : 'hidden'} md:block`}>
           <div className="w-full flex justify-between items-center py-2 px-4 rounded-lg md:block hidden">
             <span className="text-xl font-bold">Category</span>
           </div>
@@ -73,8 +73,8 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
                   type="radio"
                   name="brand"
                   className="mr-2"
-                  onChange={() => onCategoryChange("brand:Brand 1")}
-                  checked={selectedCategory.brand === "Brand 1"}
+                  onChange={() => onCategoryChange('brand:Brand 1')}
+                  checked={selectedCategory.brand === 'Brand 1'}
                 />
                 <label htmlFor="brand1">Brand 1</label>
                 <span className="ml-auto">(10)</span>
@@ -84,8 +84,8 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
                   type="radio"
                   name="brand"
                   className="mr-2"
-                  onChange={() => onCategoryChange("brand:Brand 2")}
-                  checked={selectedCategory.brand === "Brand 2"}
+                  onChange={() => onCategoryChange('brand:Brand 2')}
+                  checked={selectedCategory.brand === 'Brand 2'}
                 />
                 <label htmlFor="brand2">Brand 2</label>
                 <span className="ml-auto">(15)</span>
@@ -109,8 +109,8 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
                   type="radio"
                   name="price"
                   className="mr-2"
-                  onChange={() => onCategoryChange("price:Under $50")}
-                  checked={selectedCategory.price === "Under $50"}
+                  onChange={() => onCategoryChange('price:Under $50')}
+                  checked={selectedCategory.price === 'Under $50'}
                 />
                 <label htmlFor="price1">Under $50</label>
                 <span className="ml-auto">(20)</span>
@@ -120,8 +120,8 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
                   type="radio"
                   name="price"
                   className="mr-2"
-                  onChange={() => onCategoryChange("price:$50 to $100")}
-                  checked={selectedCategory.price === "$50 to $100"}
+                  onChange={() => onCategoryChange('price:$50 to $100')}
+                  checked={selectedCategory.price === '$50 to $100'}
                 />
                 <label htmlFor="price2">$50 to $100</label>
                 <span className="ml-auto">(30)</span>
@@ -145,8 +145,8 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
                   type="radio"
                   name="size"
                   className="mr-2"
-                  onChange={() => onCategoryChange("size:Small")}
-                  checked={selectedCategory.size === "Small"}
+                  onChange={() => onCategoryChange('size:Small')}
+                  checked={selectedCategory.size === 'Small'}
                 />
                 <label htmlFor="size1">Small</label>
                 <span className="ml-auto">(25)</span>
@@ -156,8 +156,8 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
                   type="radio"
                   name="size"
                   className="mr-2"
-                  onChange={() => onCategoryChange("size:Medium")}
-                  checked={selectedCategory.size === "Medium"}
+                  onChange={() => onCategoryChange('size:Medium')}
+                  checked={selectedCategory.size === 'Medium'}
                 />
                 <label htmlFor="size2">Medium</label>
                 <span className="ml-auto">(35)</span>

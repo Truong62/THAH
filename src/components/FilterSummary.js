@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 const FilterSummary = ({ selectedCategory, onRemoveCategory }) => {
   return (
     <div
       className="flex justify-between items-center p-4 border border-gray-300 rounded-lg mb-4"
-      style={{ minHeight: "50px" }}
+      style={{ minHeight: '50px' }}
     >
       {/*<div className="hidden md:block">*/}
       {/*    {selectedCategory.length > 0 && (*/}
