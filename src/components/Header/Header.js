@@ -1,16 +1,15 @@
-// src/components/Header/Header.js
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux"; // Import useSelector
-import CartModal from "../Cart/CartModal";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { useSelector } from 'react-redux'; // Import useSelector
+import CartModal from '../Cart/CartModal.js';
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const cartItems = useSelector((state) => state.cart);
+  const cartItems = useSelector((state) => state.cart || []); // Ensure cartItems is an array
 
-  // Tính toán số lượng sản phẩm khác nhau
+  // Calculate the number of unique items
   const uniqueItemsCount = cartItems.length;
 
   const handleCloseModal = () => setIsModalOpen(false);
@@ -19,7 +18,7 @@ const Header = () => {
     <div className="container flex flex-col mx-auto sticky top-0 left-0 right-0 z-50 bg-white">
       <div className="relative flex flex-wrap items-center justify-between w-full group py-7 shrink-0">
         <div className="flex items-center">
-          <Link to={"/"}>
+          <Link to={'/'}>
             <img
               className="w-[50px] rounded-2xl"
               src="https://yt3.googleusercontent.com/HnAnUZS7d8LFtPHaHRtPH9nMoUmrsBBy_FDD-T-YQIycPW55peuWo1NO_rxPIswDbukXYlk7=s160-c-k-c0x00ffffff-no-rj"
@@ -35,25 +34,25 @@ const Header = () => {
         </div>
         <div className="items-center justify-between hidden gap-12 text-black md:flex">
           <Link
-            to={"/Products"}
+            to={'/Products'}
             className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
           >
             Products
           </Link>
           <Link
-            to={"/"}
+            to={'/'}
             className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
           >
             Pricing
           </Link>
           <Link
-            to={"/blogs"}
+            to={'/blogs'}
             className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
           >
             Blogs
           </Link>
           <Link
-            to={"/"}
+            to={'/'}
             className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
           >
             Company
@@ -93,25 +92,25 @@ const Header = () => {
         </button>
         <div className="absolute flex md:hidden transition-all duration-300 ease-in-out flex-col items-start shadow-main justify-center w-full gap-3 overflow-hidden bg-white max-h-0 group-[.open]:py-4 px-4 rounded-2xl group-[.open]:max-h-64 top-full">
           <Link
-            to={"/"}
+            to={'/'}
             className="text-sm text-dark-grey-700 hover:text-dark-grey-900"
           >
             Product
           </Link>
           <Link
-            to={"/"}
+            to={'/'}
             className="text-sm text-dark-grey-700 hover:text-dark-grey-900"
           >
             Features
           </Link>
           <Link
-            to={"/"}
+            to={'/'}
             className="text-sm text-dark-grey-700 hover:text-dark-grey-900"
           >
             Pricing
           </Link>
           <Link
-            to={"/"}
+            to={'/'}
             className="text-sm text-dark-grey-700 hover:text-dark-grey-900"
           >
             Company

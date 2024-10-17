@@ -1,6 +1,6 @@
-import React from "react";
-import { truncateDescription } from "../../utils/truncateDescription";
-import { formatCurrency } from "../../utils/formatCurrency";
+import React from 'react';
+import { truncateDescription } from '../../utils/truncateDescription.js';
+import { formatCurrency } from '../../utils/formatCurrency';
 
 const CardProduct = ({
   id,
@@ -20,7 +20,7 @@ const CardProduct = ({
           src={mainImage}
           alt={nameProduct}
           className="w-full rounded-t-lg h-auto object-cover"
-          style={{ aspectRatio: "1 / 1" }}
+          style={{ aspectRatio: '1 / 1' }}
         />
         <span className="font-semibold text-gray-500 mt-2">{brand}</span>
         <h4 className="text-xl font-bold mb-2">{nameProduct}</h4>

@@ -1,19 +1,19 @@
-import React, { useState, useEffect, memo } from "react";
-import { useParams } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import products from "./ProductTest"; // Import the products array
-import { formatCurrency } from "../utils/formatCurrency"; // Import formatCurrency
-import { addToCart, updateQuantity } from "../redux/cart/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
-import Snackbar from "@mui/material/Snackbar"; // Import Snackbar
-import Slide from "@mui/material/Slide"; // Import Slide for transition
-import Collapse from "@mui/material/Collapse"; // Import Collapse for description
-import Button from "@mui/material/Button"; // Import Button for toggling
-import useDeviceType from "../hooks/useDeviceType"; // Import the device type hook
-import WarningAmberIcon from "@mui/icons-material/WarningAmber"; // Import WarningAmberIcon
+import React, { useState, useEffect, memo } from 'react';
+import { useParams } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import products from '../data.json'; // Import the products array
+import { formatCurrency } from '../utils/formatCurrency'; // Import formatCurrency
+import { addToCart, updateQuantity } from '../redux/cart/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import Snackbar from '@mui/material/Snackbar'; // Import Snackbar
+import Slide from '@mui/material/Slide'; // Import Slide for transition
+import Collapse from '@mui/material/Collapse'; // Import Collapse for description
+import Button from '@mui/material/Button'; // Import Button for toggling
+import useDeviceType from '../hooks/useDeviceType'; // Import the device type hook
+import WarningAmberIcon from '@mui/icons-material/WarningAmber'; // Import WarningAmberIcon
 
 const SlideTransition = (props) => {
   return <Slide {...props} direction="left" />;
@@ -29,7 +29,7 @@ const ProductDetailsCard = () => {
   const [currentSnackbar, setCurrentSnackbar] = useState(null);
 
   const [selectedColor, setSelectedColor] = useState(
-    product ? product.variants[0].colorName : ""
+    product ? product.variants[0].colorName : ''
   );
   const [selectedSize, setSelectedSize] = useState();
 
@@ -44,7 +44,7 @@ const ProductDetailsCard = () => {
 
   useEffect(() => {
     if (!product) {
-      window.location.href = "/page-not-found";
+      window.location.href = '/page-not-found';
     }
   }, [product]);
 
@@ -75,7 +75,25 @@ const ProductDetailsCard = () => {
     if (!selectedColor || !selectedSize) {
       setSnackbarQueue((prevQueue) => [
         ...prevQueue,
-        { message: "REQUIRED TO CHOOSE COLOR AND SIZE", type: "error" },
+        { message: 'REQUIRED TO CHOOSE COLOR AND SIZE', type: 'error' },
+      ]);
+      return;
+    }
+
+    if (!product || !currentVariant) {
+      // Handle the case where product or currentVariant is not found
+      return;
+    }
+
+    const sizeInfo = currentVariant.productColorSize?.find(
+      (size) => size.sizeValue === selectedSize
+    );
+
+    if (!sizeInfo) {
+      // Handle the case where sizeInfo is not found
+      setSnackbarQueue((prevQueue) => [
+        ...prevQueue,
+        { message: 'SIZE NOT AVAILABLE', type: 'error' },
       ]);
       return;
     }
@@ -88,15 +106,10 @@ const ProductDetailsCard = () => {
     );
 
     if (existingItem) {
-      if (
-        existingItem.quantity >=
-        currentVariant.productColorSize.find(
-          (size) => size.sizeValue === selectedSize
-        ).quantity
-      ) {
+      if (existingItem.quantity >= sizeInfo.quantity) {
         setSnackbarQueue((prevQueue) => [
           ...prevQueue,
-          { message: "OUT OF STOCK", type: "error" },
+          { message: 'OUT OF STOCK', type: 'error' },
         ]);
         return;
       }
@@ -111,7 +124,7 @@ const ProductDetailsCard = () => {
       );
       setSnackbarQueue((prevQueue) => [
         ...prevQueue,
-        { message: "QUANTITY UPDATED", type: "success" },
+        { message: 'QUANTITY UPDATED', type: 'success' },
       ]);
     } else {
       const cartItem = {
@@ -122,15 +135,13 @@ const ProductDetailsCard = () => {
         size: selectedSize,
         quantity: 1,
         image: currentVariant.images[0],
-        stock: currentVariant.productColorSize.find(
-          (size) => size.sizeValue === selectedSize
-        ).quantity,
+        stock: sizeInfo.quantity,
       };
 
       dispatch(addToCart(cartItem));
       setSnackbarQueue((prevQueue) => [
         ...prevQueue,
-        { message: "ADDED TO CART", type: "success" },
+        { message: 'ADDED TO CART', type: 'success' },
       ]);
     }
   };
@@ -216,8 +227,8 @@ const ProductDetailsCard = () => {
                   key={index}
                   className={`w-[92px] h-[92px] rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${
                     mainImageIndex === index
-                      ? "border-2 border-black scale-105"
-                      : ""
+                      ? 'border-2 border-black scale-105'
+                      : ''
                   }`}
                   onClick={() => setMainImageIndex(index)}
                 >
@@ -235,7 +246,7 @@ const ProductDetailsCard = () => {
       <div className="w-full md:w-1/3">
         <div className="text-4xl font-bold mb-2">{product.productName}</div>
         <span className="text-black font-bold">
-          Stock Available:{" "}
+          Stock Available:{' '}
           {currentVariant.productColorSize.find(
             (size) => size.sizeValue === selectedSize
           )?.quantity || 0}
@@ -252,8 +263,8 @@ const ProductDetailsCard = () => {
                   key={variant.colorName}
                   className={`flex items-center justify-center w-24 h-10 rounded-full cursor-pointer border ${
                     selectedColor === variant.colorName
-                      ? "ring-2 ring-black"
-                      : ""
+                      ? 'ring-2 ring-black'
+                      : ''
                   }`}
                   onClick={() => {
                     setSelectedColor(variant.colorName);
@@ -277,9 +288,9 @@ const ProductDetailsCard = () => {
                     key={size.sizeValue}
                     className={`px-3 py-1 border rounded-full text-xl ${
                       isSizeOutOfStock
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "cursor-pointer"
-                    } ${selectedSize === size.sizeValue ? "bg-gray-300" : ""}`}
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'cursor-pointer'
+                    } ${selectedSize === size.sizeValue ? 'bg-gray-300' : ''}`}
                     onClick={() =>
                       !isSizeOutOfStock && setSelectedSize(size.sizeValue)
                     }
@@ -309,9 +320,9 @@ const ProductDetailsCard = () => {
           <Collapse in={showFullDescription} collapsedSize={100}>
             <div
               style={{
-                maxHeight: showFullDescription ? "300px" : "100px",
-                overflowY: showFullDescription ? "auto" : "hidden",
-                transition: "max-height 0.3s ease",
+                maxHeight: showFullDescription ? '300px' : '100px',
+                overflowY: showFullDescription ? 'auto' : 'hidden',
+                transition: 'max-height 0.3s ease',
               }}
             >
               <p>{product.productDescription}</p>
@@ -321,7 +332,7 @@ const ProductDetailsCard = () => {
             onClick={() => setShowFullDescription(!showFullDescription)}
             color="primary"
           >
-            {showFullDescription ? "Show Less" : "Read More"}
+            {showFullDescription ? 'Show Less' : 'Read More'}
           </Button>
         </div>
       </div>
@@ -332,18 +343,18 @@ const ProductDetailsCard = () => {
           onClose={handleSnackbarClose}
           TransitionComponent={SlideTransition}
           message={
-            <span style={{ display: "flex", alignItems: "center" }}>
-              {currentSnackbar.type === "error" && (
+            <span style={{ display: 'flex', alignItems: 'center' }}>
+              {currentSnackbar.type === 'error' && (
                 <WarningAmberIcon style={{ marginRight: 8 }} />
               )}
               {currentSnackbar.message}
             </span>
           }
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
           ContentProps={{
             style: {
               backgroundColor:
-                currentSnackbar.type === "success" ? "#33CC33" : "#FFCC33",
+                currentSnackbar.type === 'success' ? '#33CC33' : '#FFCC33',
             },
           }}
         />

@@ -1,11 +1,11 @@
-import React, { useCallback, useMemo, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { formatCurrency } from "../../utils/formatCurrency";
-import CardProduct from "../Card/Card";
-import FilterSummary from "../FilterSummary";
-import Pagination from "../Pagination";
-import useDeviceType from "../../hooks/useDeviceType";
-
+import React, { useCallback, useMemo, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { formatCurrency } from '../../utils/formatCurrency';
+import CardProduct from '../Card/Card';
+import FilterSummary from '../FilterSummary';
+import Pagination from '../Pagination';
+import useDeviceType from '../../hooks/useDeviceType';
+import products from '../../data.json';
 const ProductList = ({
   products,
   selectedCategory,
@@ -36,12 +36,12 @@ const ProductList = ({
   }, [products, currentPage, isMobile]);
 
   const truncateDescription = useCallback((description, maxWords) => {
-    if (typeof description !== "string") {
+    if (typeof description !== 'string') {
       return description;
     }
-    const words = description.split(" ");
+    const words = description.split(' ');
     if (words.length > maxWords) {
-      return words.slice(0, maxWords).join(" ") + "...";
+      return words.slice(0, maxWords).join(' ') + '...';
     }
     return description;
   }, []);
@@ -65,18 +65,18 @@ const ProductList = ({
           endMessage={<p className="text-center">You have seen all products</p>}
         >
           <div className="grid gap-2 sm:gap-3 lg:gap-5 mb-10 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-            {currentItems.map((product, index) => (
+            {products.map((product, index) => (
               <CardProduct
                 key={index}
                 nameProduct={product.productName}
                 description={truncateDescription(
-                  product.productDescription,
+                  product.productDescription || '',
                   14
                 )}
                 price={formatCurrency(product.variants[0].price)}
                 brand={product.brandName}
-                mainImage={product.variants[0].images[0]} // Use the first image of the first variant
-                onClick={() => onProductClick(product.productName)} // Adjust as needed
+                mainImage={product.variants[0].images[0]}
+                onClick={() => onProductClick(product.productName)}
               />
             ))}
           </div>
@@ -94,8 +94,8 @@ const ProductList = ({
                 )}
                 price={formatCurrency(product.variants[0].price)}
                 brand={product.brandName}
-                mainImage={product.variants[0].images[0]} // Use the first image of the first variant
-                onClick={() => onProductClick(product.productName)} // Adjust as needed
+                mainImage={product.variants[0].images[0]}
+                onClick={() => onProductClick(product.productName)}
               />
             ))}
           </div>

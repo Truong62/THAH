@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { formatCurrency } from "../utils/formatCurrency";
-import { updateQuantity, removeItem } from "../redux/cart/cartSlice";
-import Alert from "@mui/material/Alert";
-import Header from "../components/Header/Header";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Footer from "../components/Footer/Footer";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { formatCurrency } from '../utils/formatCurrency';
+import { updateQuantity, removeItem } from '../redux/cart/cartSlice';
+import Alert from '@mui/material/Alert';
+import Header from '../components/Header/Header';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Footer from '../components/Footer/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart);
@@ -37,8 +37,8 @@ const CartPage = () => {
       setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [currentPage, lastScrollTop, cartItems.length]);
 
   useEffect(() => {
@@ -56,14 +56,14 @@ const CartPage = () => {
 
   const handleQuantityChange = (id, color, size, quantity, stock) => {
     if (quantity < 1) {
-      setAlert("Quantity cannot be less than 1");
+      setAlert('Quantity cannot be less than 1');
       setTimeout(() => {
         setAlert(null);
       }, 3000);
       return;
     }
     if (quantity > stock) {
-      setAlert("Not enough stock available");
+      setAlert('Not enough stock available');
       setTimeout(() => {
         setAlert(null);
       }, 3000);
@@ -75,7 +75,7 @@ const CartPage = () => {
 
   const handleRemoveItem = (id, color, size) => {
     dispatch(removeItem({ id, color, size }));
-    setAlert("Item removed from cart");
+    setAlert('Item removed from cart');
     setTimeout(() => {
       setAlert(null);
     }, 3000);
@@ -83,9 +83,9 @@ const CartPage = () => {
 
   const handleCheckout = () => {
     if (cartItems.length > 0) {
-      navigate("/checkout");
+      navigate('/checkout');
     } else {
-      setAlert("Your cart is empty. Please add items before checking out.");
+      setAlert('Your cart is empty. Please add items before checking out.');
     }
   };
 
@@ -141,9 +141,9 @@ const CartPage = () => {
                         onChange={(e) => {
                           const newQuantity = parseInt(e.target.value);
                           if (newQuantity < 1) {
-                            setAlert("Quantity cannot be less than 1");
+                            setAlert('Quantity cannot be less than 1');
                           } else if (newQuantity > item.stock) {
-                            setAlert("Not enough stock available");
+                            setAlert('Not enough stock available');
                           } else {
                             handleQuantityChange(
                               item.id,
@@ -207,7 +207,7 @@ const CartPage = () => {
             </div>
             <button
               className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${
-                cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+                cartItems.length === 0 ? 'opacity-50 cursor-not-allowed' : ''
               }`}
               onClick={handleCheckout}
               disabled={cartItems.length === 0}
@@ -238,7 +238,7 @@ const CartPage = () => {
           </div>
           <button
             className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${
-              cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+              cartItems.length === 0 ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             onClick={handleCheckout}
             disabled={cartItems.length === 0}

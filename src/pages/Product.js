@@ -1,51 +1,49 @@
-import React, { useCallback, useMemo, useState } from "react";
-import Footer from "../components/Footer/Footer";
-import Header from "../components/Header/Header";
-import Layout from "../components/Layout";
-import ProductList from "../components/ProductList/ProductList";
-import Sidebar from "../components/Sidebar";
-import SortBy from "../components/SortBy";
-import BreadCrumb from "../components/BreadCrumb";
-import { useNavigate } from "react-router-dom";
-import products from "../components/ProductTest"; // Import products from ProductTest
+import React, { useCallback, useState, useEffect } from 'react';
+import Footer from '../components/Footer/Footer';
+import Header from '../components/Header/Header';
+import Layout from '../components/Layout';
+import ProductList from '../components/ProductList/ProductList';
+import Sidebar from '../components/Sidebar.js';
+import SortBy from '../components/SortBy';
+import BreadCrumb from '../components/BreadCrumb.js';
+import { useNavigate } from 'react-router-dom';
+import products from '../data.json'; // Ensure this path is correct
 
 const Product = () => {
   const navigate = useNavigate();
 
   const [productFilters, setProductFilters] = useState({
-    selectedCategories: {
-      brand: "",
-      price: "",
-      size: "",
-    },
-    sortOption: "popularity",
+    brand: '',
+    price: '',
+    size: '',
+    sortOption: 'Popularity',
   });
 
-  const handleCategoryChange = useCallback((category) => {
-    const [group, value] = category.split(":");
+  useEffect(() => {
+    console.log('Current productFilters:', productFilters);
+  }, [productFilters]);
 
-    setProductFilters((prevFilters) => {
-      return {
-        ...prevFilters,
-        selectedCategories: {
-          ...prevFilters.selectedCategories,
-          [group]: value,
-        },
-      };
-    });
+  const updateProductFilters = useCallback((updates) => {
+    setProductFilters((prevFilters) => ({
+      ...prevFilters,
+      ...updates,
+    }));
   }, []);
 
-  const handleRemoveCategory = useCallback((group) => {
-    setProductFilters((prevFilters) => {
-      return {
-        ...prevFilters,
-        selectedCategories: {
-          ...prevFilters.selectedCategories,
-          [group]: null,
-        },
-      };
-    });
-  }, []);
+  const handleCategoryChange = useCallback(
+    (category) => {
+      const [group, value] = category.split(':');
+      updateProductFilters({ [group]: value });
+    },
+    [updateProductFilters]
+  );
+
+  const handleRemoveCategory = useCallback(
+    (group) => {
+      updateProductFilters({ [group]: '' });
+    },
+    [updateProductFilters]
+  );
 
   const handleProductClick = (id) => {
     navigate(`/Products/${id}`);
@@ -61,10 +59,7 @@ const Product = () => {
             <SortBy
               sortOption={productFilters.sortOption}
               setSortOption={(newSortOption) =>
-                setProductFilters((prev) => ({
-                  ...prev,
-                  sortOption: newSortOption,
-                }))
+                updateProductFilters({ sortOption: newSortOption })
               }
             />
           </div>
@@ -75,13 +70,13 @@ const Product = () => {
             <div className="w-full md:w-1/4">
               <Sidebar
                 onCategoryChange={handleCategoryChange}
-                selectedCategory={productFilters.selectedCategories}
+                selectedCategory={productFilters} // Pass the entire filters object
               />
             </div>
             <div className="w-full md:w-3/4 ml-0 md:ml-4">
               <ProductList
                 products={products}
-                selectedCategory={productFilters.selectedCategories}
+                selectedCategory={productFilters} // Pass the entire filters object
                 onCategoryChange={handleCategoryChange}
                 onRemoveCategory={handleRemoveCategory}
                 onProductClick={handleProductClick} // Pass the click handler

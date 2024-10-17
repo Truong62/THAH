@@ -1,12 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 // Helper functions for local storage
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem("cart");
+    const serializedState = localStorage.getItem('cart');
     return serializedState ? JSON.parse(serializedState) : [];
   } catch (e) {
-    console.error("Could not load state", e);
+    console.error('Could not load state', e);
     return [];
   }
 };
@@ -14,14 +14,14 @@ const loadState = () => {
 const saveState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem("cart", serializedState);
+    localStorage.setItem('cart', serializedState);
   } catch (e) {
-    console.error("Could not save state", e);
+    console.error('Could not save state', e);
   }
 };
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState: loadState(),
   reducers: {
     addToCart: (state, action) => {

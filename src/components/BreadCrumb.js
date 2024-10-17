@@ -1,18 +1,18 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const BreadCrumb = () => {
   const location = useLocation();
-  const pathnames = location.pathname.split("/").filter((x) => x);
+  const pathnames = location.pathname.split('/').filter((x) => x);
 
   const formatBreadcrumbName = (name) => {
     const decodedName = decodeURIComponent(name); // Decode the URL component
     return decodedName
-      .replace(/-/g, " ")
+      .replace(/-/g, ' ')
       .replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
-  const createLink = (index) => `/${pathnames.slice(0, index + 1).join("/")}`;
+  const createLink = (index) => `/${pathnames.slice(0, index + 1).join('/')}`;
 
   return (
     <div className="flex">

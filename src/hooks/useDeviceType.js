@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const useDeviceType = () => {
   const [deviceType, setDeviceType] = useState({
@@ -8,9 +8,9 @@ const useDeviceType = () => {
 
   useEffect(() => {
     const checkDeviceType = () => {
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
       const isTablet = window.matchMedia(
-        "(min-width: 768px) and (max-width: 1024px)"
+        '(min-width: 768px) and (max-width: 1024px)'
       ).matches;
 
       setDeviceType({
@@ -20,10 +20,10 @@ const useDeviceType = () => {
     };
     checkDeviceType();
 
-    window.addEventListener("resize", checkDeviceType);
+    window.addEventListener('resize', checkDeviceType);
 
     return () => {
-      window.removeEventListener("resize", checkDeviceType);
+      window.removeEventListener('resize', checkDeviceType);
     };
   }, []);
 

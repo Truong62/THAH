@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { formatCurrency } from "../utils/formatCurrency";
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { formatCurrency } from '../utils/formatCurrency';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const CheckoutPage = React.memo(() => {
   const cartItems = useSelector((state) => state.cart);
@@ -17,32 +17,32 @@ const CheckoutPage = React.memo(() => {
 
   useEffect(() => {
     if (cartItems.length === 0) {
-      navigate("/cart");
+      navigate('/cart');
     }
   }, [cartItems, navigate]);
 
   useEffect(() => {
     axios
-      .get("https://vapi.vnappmob.com/api/province/")
+      .get('https://vapi.vnappmob.com/api/province/')
       .then((response) => setProvinces(response.data.results))
-      .catch((error) => console.error("Error fetching provinces:", error));
+      .catch((error) => console.error('Error fetching provinces:', error));
   }, []);
 
   const handleProvinceChange = useCallback(
     (e, setFieldValue) => {
       const provinceId = e.target.value;
       const province = provinces.find((p) => p.province_id === provinceId);
-      setFieldValue("selectedProvince", province ? province.province_name : "");
+      setFieldValue('selectedProvince', province ? province.province_name : '');
 
       axios
         .get(`https://vapi.vnappmob.com/api/province/district/${provinceId}`)
         .then((response) => {
           setDistricts(response.data.results);
           setWards([]);
-          setFieldValue("selectedDistrict", "");
-          setFieldValue("selectedWard", "");
+          setFieldValue('selectedDistrict', '');
+          setFieldValue('selectedWard', '');
         })
-        .catch((error) => console.error("Error fetching districts:", error));
+        .catch((error) => console.error('Error fetching districts:', error));
     },
     [provinces]
   );
@@ -51,15 +51,15 @@ const CheckoutPage = React.memo(() => {
     (e, setFieldValue) => {
       const districtId = e.target.value;
       const district = districts.find((d) => d.district_id === districtId);
-      setFieldValue("selectedDistrict", district ? district.district_name : "");
+      setFieldValue('selectedDistrict', district ? district.district_name : '');
 
       axios
         .get(`https://vapi.vnappmob.com/api/province/ward/${districtId}`)
         .then((response) => {
           setWards(response.data.results);
-          setFieldValue("selectedWard", "");
+          setFieldValue('selectedWard', '');
         })
-        .catch((error) => console.error("Error fetching wards:", error));
+        .catch((error) => console.error('Error fetching wards:', error));
     },
     [districts]
   );
@@ -68,7 +68,7 @@ const CheckoutPage = React.memo(() => {
     (e, setFieldValue) => {
       const wardId = e.target.value;
       const ward = wards.find((w) => w.ward_id === wardId);
-      setFieldValue("selectedWard", ward ? ward.ward_name : "");
+      setFieldValue('selectedWard', ward ? ward.ward_name : '');
     },
     [wards]
   );
@@ -76,22 +76,22 @@ const CheckoutPage = React.memo(() => {
   const validationSchema = useMemo(
     () =>
       Yup.object().shape({
-        fullName: Yup.string().required("Full name is required"),
+        fullName: Yup.string().required('Full name is required'),
         email: Yup.string()
-          .email("Invalid email")
-          .required("Email is required"),
-        phoneNumber: Yup.string().required("Phone number is required"),
-        detailAddress: Yup.string().required("Address is required"),
-        selectedProvince: Yup.string().required("Province is required"),
-        selectedDistrict: Yup.string().required("District is required"),
-        selectedWard: Yup.string().required("Ward is required"),
+          .email('Invalid email')
+          .required('Email is required'),
+        phoneNumber: Yup.string().required('Phone number is required'),
+        detailAddress: Yup.string().required('Address is required'),
+        selectedProvince: Yup.string().required('Province is required'),
+        selectedDistrict: Yup.string().required('District is required'),
+        selectedWard: Yup.string().required('Ward is required'),
       }),
     []
   );
 
   const handleCheckout = useCallback(
     (values) => {
-      console.log("Order Information:", {
+      console.log('Order Information:', {
         ...values,
         cartItems,
       });
@@ -144,13 +144,13 @@ const CheckoutPage = React.memo(() => {
             <h2 className="text-2xl font-bold mb-4">Shipping Information</h2>
             <Formik
               initialValues={{
-                fullName: "",
-                email: "",
-                phoneNumber: "",
-                detailAddress: "",
-                selectedProvince: "",
-                selectedDistrict: "",
-                selectedWard: "",
+                fullName: '',
+                email: '',
+                phoneNumber: '',
+                detailAddress: '',
+                selectedProvince: '',
+                selectedDistrict: '',
+                selectedWard: '',
               }}
               validationSchema={validationSchema}
               onSubmit={handleCheckout}
@@ -216,7 +216,7 @@ const CheckoutPage = React.memo(() => {
                       value={
                         provinces.find(
                           (p) => p.province_name === values.selectedProvince
-                        )?.province_id || ""
+                        )?.province_id || ''
                       }
                       onChange={(e) => handleProvinceChange(e, setFieldValue)}
                     >
@@ -243,7 +243,7 @@ const CheckoutPage = React.memo(() => {
                       value={
                         districts.find(
                           (d) => d.district_name === values.selectedDistrict
-                        )?.district_id || ""
+                        )?.district_id || ''
                       }
                       onChange={(e) => handleDistrictChange(e, setFieldValue)}
                     >
@@ -269,7 +269,7 @@ const CheckoutPage = React.memo(() => {
                       className="w-full p-2 border rounded"
                       value={
                         wards.find((w) => w.ward_name === values.selectedWard)
-                          ?.ward_id || ""
+                          ?.ward_id || ''
                       }
                       onChange={(e) => handleWardChange(e, setFieldValue)}
                     >

@@ -1,10 +1,10 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { formatCurrency } from "../../utils/formatCurrency";
-import { updateQuantity } from "../../redux/cart/cartSlice";
-import Alert from "@mui/material/Alert"; // Import Alert
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { formatCurrency } from '../../utils/formatCurrency.js';
+import { updateQuantity } from '../../redux/cart/cartSlice.js';
+import Alert from '@mui/material/Alert'; // Import Alert
 
 const CartModal = ({ isOpen, onClose }) => {
   const cartItems = useSelector((state) => state.cart);
@@ -22,7 +22,7 @@ const CartModal = ({ isOpen, onClose }) => {
 
   const handleQuantityChange = (id, color, size, quantity) => {
     if (quantity < 1) {
-      setAlert("Quantity cannot be less than 1");
+      setAlert('Quantity cannot be less than 1');
       return;
     }
     dispatch(updateQuantity({ id, color, size, quantity }));
@@ -31,7 +31,7 @@ const CartModal = ({ isOpen, onClose }) => {
 
   const handleRemoveItem = (id, color, size) => {
     // Logic to remove item from cart
-    setAlert("Item removed from cart");
+    setAlert('Item removed from cart');
   };
 
   return (

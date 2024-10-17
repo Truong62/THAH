@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { formatCurrency } from "../utils/formatCurrency";
-import { updateQuantity, removeItem } from "../redux/cart/cartSlice";
-import Alert from "@mui/material/Alert";
-import Header from "../components/Header/Header";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { formatCurrency } from '../utils/formatCurrency';
+import { updateQuantity, removeItem } from '../redux/cart/cartSlice';
+import Alert from '@mui/material/Alert';
+import Header from '../components/Header/Header.js';
 
 const CartHandle = () => {
-  const cartItems = useSelector((state) => state.cart);
+  const cartItems = useSelector((state) => state.cart || []);
   const dispatch = useDispatch();
   const [alert, setAlert] = useState(null);
   const [selectedItems, setSelectedItems] = useState({});
@@ -31,11 +31,11 @@ const CartHandle = () => {
 
   const handleQuantityChange = (id, color, size, quantity, stock) => {
     if (quantity < 1) {
-      setAlert("Quantity cannot be less than 1");
+      setAlert('Quantity cannot be less than 1');
       return;
     }
     if (quantity > stock) {
-      setAlert("Not enough stock available");
+      setAlert('Not enough stock available');
       return;
     }
     dispatch(updateQuantity({ id, color, size, quantity }));
@@ -44,7 +44,7 @@ const CartHandle = () => {
 
   const handleRemoveItem = (id, color, size) => {
     dispatch(removeItem({ id, color, size }));
-    setAlert("Item removed from cart");
+    setAlert('Item removed from cart');
   };
 
   return (
@@ -105,9 +105,9 @@ const CartHandle = () => {
                           onChange={(e) => {
                             const newQuantity = parseInt(e.target.value);
                             if (newQuantity < 1) {
-                              setAlert("Quantity cannot be less than 1");
+                              setAlert('Quantity cannot be less than 1');
                             } else if (newQuantity > item.quantityStock) {
-                              setAlert("Not enough stock available");
+                              setAlert('Not enough stock available');
                             } else {
                               handleQuantityChange(
                                 item.id,

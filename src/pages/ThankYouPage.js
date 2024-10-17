@@ -1,6 +1,6 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import { formatCurrency } from "../utils/formatCurrency"; // Ensure this utility is imported
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import { formatCurrency } from '../utils/formatCurrency'; // Ensure this utility is imported
 
 const ThankYouPage = () => {
   const location = useLocation();
@@ -31,7 +31,7 @@ const ThankYouPage = () => {
           <strong>Phone Number:</strong> {orderDetails.phoneNumber}
         </p>
         <p>
-          <strong>Address:</strong> {orderDetails.detailAddress},{" "}
+          <strong>Address:</strong> {orderDetails.detailAddress},{' '}
           {orderDetails.ward}, {orderDetails.district}, {orderDetails.province}
         </p>
       </div>

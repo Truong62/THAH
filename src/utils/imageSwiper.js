@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useSwipeable } from "react-swipeable";
+import { useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 
 const useImageSwiper = (images) => {
   const [currentIndex, setCurrentIndex] = useState(0);
