@@ -8,22 +8,19 @@ import ProductDetail from "../pages/ProductDetail";
 import PageNotFound from "../components/404NotFound/_404PageNotFound";
 import CartPage from "../pages/Cart";
 import CheckoutPage from "../pages/Checkout";
+import ThankYouPage from "../pages/ThankYouPage"; // Import the Thank You page
+
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home></Home>} />
-      <Route path="/blogs" element={<Blogs></Blogs>} />
-      <Route path="/products" element={<Product></Product>} />
-      <Route path="/products/:link" element={<ProductDetail></ProductDetail>} />
-      <Route path="/productdetails" element={<ProductDetail></ProductDetail>} />
-      <Route path="/cart" element={<CartPage></CartPage>} />
-      <Route path="/checkout" element={<CheckoutPage></CheckoutPage>} />
-
-      {/* test */}
-      {/* test */}
-      <Route path="/blogs/huong" element={<BreadCrumb />} />
-      <Route path="/hiep" element={<h1>hiep</h1>} />
-
+      <Route path="/" element={<Home />} />
+      <Route path="/blogs" element={<Blogs />} />
+      <Route path="/products" element={<Product />} />
+      <Route path="/products/:link" element={<ProductDetail />} />
+      <Route path="/productdetails" element={<ProductDetail />} />
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/thank-you" element={<ThankYouPage />} />{" "}
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
