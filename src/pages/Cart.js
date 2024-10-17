@@ -1,3 +1,4 @@
+// src/pages/Cart.js
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formatCurrency } from "../utils/formatCurrency";
@@ -6,10 +7,12 @@ import Alert from "@mui/material/Alert";
 import Header from "../components/Header/Header";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Footer from "../components/Footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [alert, setAlert] = useState(null);
   const [selectedItems, setSelectedItems] = useState({});
   const [visibleItems, setVisibleItems] = useState([]);
@@ -97,6 +100,14 @@ const CartPage = () => {
     setTimeout(() => {
       setAlert(null);
     }, 3000);
+  };
+
+  const handleCheckout = () => {
+    if (cartItems.length > 0) {
+      navigate("/checkout");
+    } else {
+      setAlert("Your cart is empty. Please add items before checking out.");
+    }
   };
 
   return (
@@ -225,8 +236,13 @@ const CartPage = () => {
                 {formatCurrency(calculateSubtotal())}
               </span>
             </div>
-            <button className="w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800">
-              Checkout
+            <button
+              className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              onClick={handleCheckout}
+              disabled={cartItems.length === 0}
+            >
+              Continue to Checkout
             </button>
             <button className="w-full py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-600">
               PayPal
@@ -252,8 +268,13 @@ const CartPage = () => {
               {formatCurrency(calculateSubtotal())}
             </span>
           </div>
-          <button className="w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800">
-            Checkout
+          <button
+            className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${cartItems.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            onClick={handleCheckout}
+            disabled={cartItems.length === 0}
+          >
+            Continue to Checkout
           </button>
           <button className="w-full py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-600">
             PayPal

@@ -13,7 +13,6 @@ const Header = () => {
   // Tính toán số lượng sản phẩm khác nhau
   const uniqueItemsCount = cartItems.length;
 
-  const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
   return (
