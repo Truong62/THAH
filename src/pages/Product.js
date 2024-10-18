@@ -19,9 +19,9 @@ const Product = () => {
     sortOption: 'Popularity',
   });
 
-  useEffect(() => {
-    console.log('Current productFilters:', productFilters);
-  }, [productFilters]);
+  // useEffect(() => {
+  //   console.log('Current productFilters:', productFilters);
+  // }, [productFilters]);
 
   const updateProductFilters = useCallback((updates) => {
     setProductFilters((prevFilters) => ({
@@ -46,7 +46,7 @@ const Product = () => {
   );
 
   const handleProductClick = (id) => {
-    navigate(`/Products/${id}`);
+    navigate(`/products/${id}`);
   };
 
   return (
@@ -79,7 +79,7 @@ const Product = () => {
                 selectedCategory={productFilters} // Pass the entire filters object
                 onCategoryChange={handleCategoryChange}
                 onRemoveCategory={handleRemoveCategory}
-                onProductClick={handleProductClick} // Pass the click handler
+                onProductClick={handleProductClick}
               />
             </div>
           </div>

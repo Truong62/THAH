@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CardProduct from '../components/Card/Card';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
@@ -11,7 +11,12 @@ import products from '../data.json'; // Import the JSON data
 
 const Home = () => {
   const tag = ['#nike', '#jordan', '#sale'];
+  const navigate = useNavigate();
 
+  const handleProductClick = (id) => {
+    // console.log(`Navigating to product with id: ${id}`); // Thêm dòng này để kiểm tra
+    navigate(`/products/${id}`);
+  };
   return (
     <React.Fragment>
       <Header />
@@ -33,11 +38,13 @@ const Home = () => {
                 nameProduct={truncateDescription(product.productName, 20)}
                 description={truncateDescription(
                   product.productDescription,
-                  70
+                  45
                 )}
                 price={formatCurrency(product.variants[0].price)}
                 brand={product.brandName}
                 nameTag={tag}
+                imageUrl={product.variants[0].images[0]}
+                onClick={() => handleProductClick(product.productName)}
               />
             </div>
           ))}
@@ -58,11 +65,13 @@ const Home = () => {
                 nameProduct={truncateDescription(product.productName, 20)}
                 description={truncateDescription(
                   product.productDescription,
-                  70
+                  45
                 )}
                 price={formatCurrency(product.variants[0].price)}
                 brand={product.brandName}
                 nameTag={tag}
+                imageUrl={product.variants[0].images[0]}
+                onClick={() => handleProductClick(product.productName)}
               />
             </div>
           ))}
@@ -74,7 +83,7 @@ const Home = () => {
             src="https://theme.hstatic.net/200000238513/1000665981/14/banner_project_1.jpg?v=23"
           />
           <Link
-            to={'/Products'}
+            to={'/products'}
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition-transform duration-1000"
           >
             <div className="bg-amber-50 hover:bg-blue-500 px-8 py-2 rounded-lg ">

@@ -10,14 +10,14 @@ const CardProduct = ({
   price,
   brand,
   nameTag = [], // Mặc định là mảng rỗng
-  mainImage,
+  imageUrl,
   onClick,
 }) => {
   return (
     <div onClick={onClick} className="cursor-pointer">
       <div className="bg-white rounded-lg p-3 border-gray-200 border transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]">
         <img
-          src={mainImage}
+          src={imageUrl}
           alt={nameProduct}
           className="w-full rounded-t-lg h-auto object-cover"
           style={{ aspectRatio: '1 / 1' }}

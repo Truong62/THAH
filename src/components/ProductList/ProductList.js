@@ -94,7 +94,7 @@ const ProductList = ({
                 )}
                 price={formatCurrency(product.variants[0].price)}
                 brand={product.brandName}
-                mainImage={product.variants[0].images[0]}
+                imageUrl={product.variants[0].images[0]}
                 onClick={() => onProductClick(product.productName)}
               />
             ))}

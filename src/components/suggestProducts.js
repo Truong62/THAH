@@ -49,7 +49,7 @@ const SuggestProducts = ({ products }) => {
               price={formatCurrency(item.variants[0].price)}
               brand={item.brandName}
               nameTag={item.nameTag}
-              mainImage={item.variants[0].images[0]}
+              imageUrl={item.variants[0].images[0]}
             />
           </SwiperSlide>
         ))}

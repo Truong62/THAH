@@ -34,7 +34,7 @@ const Header = () => {
         </div>
         <div className="items-center justify-between hidden gap-12 text-black md:flex">
           <Link
-            to={'/Products'}
+            to={'/products'}
             className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
           >
             Products
