@@ -6,8 +6,8 @@ import FilterSummary from '../FilterSummary';
 import Pagination from '../Pagination';
 import useDeviceType from '../../hooks/useDeviceType';
 import products from '../../data.json';
+
 const ProductList = ({
-  products,
   selectedCategory,
   onCategoryChange,
   onRemoveCategory,
@@ -65,17 +65,17 @@ const ProductList = ({
           endMessage={<p className="text-center">You have seen all products</p>}
         >
           <div className="grid gap-2 sm:gap-3 lg:gap-5 mb-10 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-            {products.map((product, index) => (
+            {currentItems.map((product, index) => (
               <CardProduct
                 key={index}
                 nameProduct={product.productName}
                 description={truncateDescription(
-                  product.productDescription || '',
+                  product.productDescription || 'No description available', // Cung cấp giá trị mặc định
                   14
                 )}
-                price={formatCurrency(product.variants[0].price)}
+                price={formatCurrency(product.variants?.[0]?.unitPrice || 0)} // Kiểm tra variants
                 brand={product.brandName}
-                mainImage={product.variants[0].images[0]}
+                imageUrl={product.variant.$values[0].imagePath.$values[0]} // Lấy hình ảnh đầu tiên từ biến thể
                 onClick={() => onProductClick(product.productName)}
               />
             ))}
@@ -89,12 +89,12 @@ const ProductList = ({
                 key={index}
                 nameProduct={product.productName}
                 description={truncateDescription(
-                  product.productDescription,
+                  product.productDescription || 'No description available', // Cung cấp giá trị mặc định
                   14
                 )}
-                price={formatCurrency(product.variants[0].price)}
+                price={product.variant.$values[0].unitPrice} // Kiểm tra variants
                 brand={product.brandName}
-                imageUrl={product.variants[0].images[0]}
+                imageUrl={product.variant.$values[0].imagePath.$values[0]} // Lấy hình ảnh đầu tiên từ biến thể
                 onClick={() => onProductClick(product.productName)}
               />
             ))}

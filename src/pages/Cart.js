@@ -5,7 +5,6 @@ import { updateQuantity, removeItem } from '../redux/cart/cartSlice';
 import Alert from '@mui/material/Alert';
 import Header from '../components/Header/Header';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Footer from '../components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
@@ -55,21 +54,15 @@ const CartPage = () => {
   }, [cartItems]);
 
   const handleQuantityChange = (id, color, size, quantity, stock) => {
-    if (quantity < 1) {
-      setAlert('Quantity cannot be less than 1');
-      setTimeout(() => {
-        setAlert(null);
-      }, 3000);
-      return;
-    }
-    if (quantity > stock) {
+    const validQuantity = Math.max(1, quantity); // Đảm bảo quantity không nhỏ hơn 1
+    if (validQuantity > stock) {
       setAlert('Not enough stock available');
       setTimeout(() => {
         setAlert(null);
       }, 3000);
       return;
     }
-    dispatch(updateQuantity({ id, color, size, quantity }));
+    dispatch(updateQuantity({ id, color, size, quantity: validQuantity }));
     setAlert(null);
   };
 
@@ -138,8 +131,11 @@ const CartPage = () => {
                       <input
                         type="number"
                         value={item.quantity}
+                        min="1" // Thiết lập giá trị tối thiểu là 1
                         onChange={(e) => {
-                          const newQuantity = parseInt(e.target.value);
+                          const inputValue = e.target.value;
+                          const newQuantity =
+                            inputValue === '' ? 1 : parseInt(inputValue, 10); // Đặt lại thành 1 nếu trống
                           if (newQuantity < 1) {
                             setAlert('Quantity cannot be less than 1');
                           } else if (newQuantity > item.stock) {

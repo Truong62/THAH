@@ -6,18 +6,18 @@ const CardProduct = ({
   id,
   link,
   nameProduct,
-  description,
-  price,
+  description = '', // Cung cấp giá trị mặc định
+  price = '', // Cung cấp giá trị mặc định
   brand,
   nameTag = [], // Mặc định là mảng rỗng
-  imageUrl,
+  imageUrl = '', // Cung cấp hình ảnh mặc định
   onClick,
 }) => {
   return (
     <div onClick={onClick} className="cursor-pointer">
       <div className="bg-white rounded-lg p-3 border-gray-200 border transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]">
         <img
-          src={imageUrl}
+          src={imageUrl} // Cung cấp hình ảnh mặc định nếu không có
           alt={nameProduct}
           className="w-full rounded-t-lg h-auto object-cover"
           style={{ aspectRatio: '1 / 1' }}
@@ -40,9 +40,13 @@ const CardProduct = ({
             </p>
           )}
         </div>
-        <p className="mt-2">{description}</p>
+        <p className="mt-2">{truncateDescription(description, 20)}</p>{' '}
+        {/* Cắt ngắn mô tả nếu cần */}
         <div className="grid justify-end mt-3">
-          <p className="text-red-500 text-xl font-bold">{price}</p>
+          <p className="text-red-500 text-xl font-bold">
+            {formatCurrency(price)}
+          </p>{' '}
+          {/* Định dạng giá */}
         </div>
       </div>
     </div>

@@ -14,9 +14,9 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleProductClick = (id) => {
-    // console.log(`Navigating to product with id: ${id}`); // Thêm dòng này để kiểm tra
     navigate(`/products/${id}`);
   };
+
   return (
     <React.Fragment>
       <Header />
@@ -40,10 +40,10 @@ const Home = () => {
                   product.productDescription,
                   45
                 )}
-                price={formatCurrency(product.variants[0].price)}
+                price={formatCurrency(product.variants?.[0]?.price || 0)} // Kiểm tra variants
                 brand={product.brandName}
                 nameTag={tag}
-                imageUrl={product.variants[0].images[0]}
+                imageUrl={product.variants?.[0]?.images?.[0] || ''} // Kiểm tra images
                 onClick={() => handleProductClick(product.productName)}
               />
             </div>
@@ -67,10 +67,10 @@ const Home = () => {
                   product.productDescription,
                   45
                 )}
-                price={formatCurrency(product.variants[0].price)}
+                price={formatCurrency(product.variants?.[0]?.price || 0)} // Kiểm tra variants
                 brand={product.brandName}
                 nameTag={tag}
-                imageUrl={product.variants[0].images[0]}
+                imageUrl={product.variants?.[0]?.images?.[0] || ''} // Kiểm tra images
                 onClick={() => handleProductClick(product.productName)}
               />
             </div>

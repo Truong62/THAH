@@ -1,0 +1,14 @@
+[
+  {
+    "role": "admin",
+    "email": "admin@gmail.com",
+    "password": "admin123",
+    "active_code": "123456"
+  },
+  {
+    "role": "user",
+    "email": "user@gmail.com",
+    "password": "user123",
+    "active_code": "234567  "
+  }
+]

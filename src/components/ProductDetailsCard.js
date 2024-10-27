@@ -29,12 +29,20 @@ const ProductDetailsCard = () => {
   const [currentSnackbar, setCurrentSnackbar] = useState(null);
 
   const [selectedColor, setSelectedColor] = useState(
-    product ? product.variants[0].colorName : ''
+    product && product.variant.$values.length > 0
+      ? product.variant.$values[0].colorName
+      : ''
   );
   const [selectedSize, setSelectedSize] = useState();
 
+  const handleSnackbarClose = () => {
+    setCurrentSnackbar(null);
+  };
+
   const currentVariant = product
-    ? product.variants.find((variant) => variant.colorName === selectedColor)
+    ? product.variant.$values.find(
+        (variant) => variant.colorName === selectedColor
+      )
     : null;
 
   const [mainImageIndex, setMainImageIndex] = useState(0);
@@ -56,22 +64,26 @@ const ProductDetailsCard = () => {
   }, [snackbarQueue, currentSnackbar]);
 
   const handlePrevImage = () => {
-    if (currentVariant) {
+    if (currentVariant && currentVariant.imagePath.$values.length > 0) {
       setMainImageIndex((prevIndex) =>
-        prevIndex === 0 ? currentVariant.images.length - 1 : prevIndex - 1
+        prevIndex === 0
+          ? currentVariant.imagePath.$values.length - 1
+          : prevIndex - 1
       );
     }
   };
 
   const handleNextImage = () => {
-    if (currentVariant) {
+    if (currentVariant && currentVariant.imagePath.$values.length > 0) {
       setMainImageIndex((prevIndex) =>
-        prevIndex === currentVariant.images.length - 1 ? 0 : prevIndex + 1
+        prevIndex === currentVariant.imagePath.$values.length - 1
+          ? 0
+          : prevIndex + 1
       );
     }
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!selectedColor || !selectedSize) {
       setSnackbarQueue((prevQueue) => [
         ...prevQueue,
@@ -81,16 +93,14 @@ const ProductDetailsCard = () => {
     }
 
     if (!product || !currentVariant) {
-      // Handle the case where product or currentVariant is not found
-      return;
+      return; // Handle the case where product or currentVariant is not found
     }
 
-    const sizeInfo = currentVariant.productColorSize?.find(
+    const sizeInfo = currentVariant.productColorSize.$values.find(
       (size) => size.sizeValue === selectedSize
     );
 
     if (!sizeInfo) {
-      // Handle the case where sizeInfo is not found
       setSnackbarQueue((prevQueue) => [
         ...prevQueue,
         { message: 'SIZE NOT AVAILABLE', type: 'error' },
@@ -100,10 +110,25 @@ const ProductDetailsCard = () => {
 
     const existingItem = cartItems.find(
       (item) =>
-        item.id === product.brandId &&
+        item.id === product.productId &&
         item.color === selectedColor &&
         item.size === selectedSize
     );
+
+    const cartItem = {
+      id: product.productId,
+      name: product.productName,
+      price: currentVariant.unitPrice || 0, // Cung cấp giá trị mặc định
+      color: selectedColor,
+      size: selectedSize,
+      quantity: existingItem ? existingItem.quantity + 1 : 1,
+      image:
+        currentVariant.imagePath.$values[0] ||
+        'https://via.placeholder.com/300', // Cung cấp hình ảnh mặc định
+      stock: sizeInfo.quantity,
+    };
+
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
 
     if (existingItem) {
       if (existingItem.quantity >= sizeInfo.quantity) {
@@ -116,10 +141,10 @@ const ProductDetailsCard = () => {
 
       dispatch(
         updateQuantity({
-          id: product.brandId,
+          id: product.productId,
           color: selectedColor,
           size: selectedSize,
-          quantity: existingItem.quantity + 1,
+          quantity: cartItem.quantity,
         })
       );
       setSnackbarQueue((prevQueue) => [
@@ -127,27 +152,13 @@ const ProductDetailsCard = () => {
         { message: 'QUANTITY UPDATED', type: 'success' },
       ]);
     } else {
-      const cartItem = {
-        id: product.brandId,
-        name: product.productName,
-        price: currentVariant.price,
-        color: selectedColor,
-        size: selectedSize,
-        quantity: 1,
-        image: currentVariant.images[0],
-        stock: sizeInfo.quantity,
-      };
-
-      dispatch(addToCart(cartItem));
-      setSnackbarQueue((prevQueue) => [
-        ...prevQueue,
-        { message: 'ADDED TO CART', type: 'success' },
-      ]);
+      if (isAuthenticated) {
+        const userEmail = localStorage.getItem('userEmail');
+        // Call API to save product to user's cart
+      } else {
+        // Save to localStorage
+      }
     }
-  };
-
-  const handleSnackbarClose = () => {
-    setCurrentSnackbar(null);
   };
 
   if (!product) {
@@ -164,7 +175,7 @@ const ProductDetailsCard = () => {
             spaceBetween={10}
             slidesPerView={1}
           >
-            {currentVariant.images.map((image, index) => (
+            {currentVariant.imagePath.$values.map((image, index) => (
               <SwiperSlide key={index}>
                 <img
                   src={image}
@@ -178,7 +189,7 @@ const ProductDetailsCard = () => {
           <>
             <div className="w-full aspect-w-1 aspect-h-1">
               <img
-                src={currentVariant.images[mainImageIndex]}
+                src={currentVariant.imagePath.$values[mainImageIndex]}
                 alt="Product"
                 className="w-full h-full object-cover transition duration-300 ease-in-out"
               />
@@ -187,42 +198,16 @@ const ProductDetailsCard = () => {
               className="absolute top-1/2 left-0 transform -translate-y-1/2 rounded-full p-2 hover:shadow-md"
               onClick={handlePrevImage}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M15 19l-7-7 7-7"
-                ></path>
-              </svg>
+              {/* Previous button SVG */}
             </button>
             <button
               className="absolute top-1/2 right-0 transform -translate-y-1/2 rounded-full p-2 hover:shadow-md"
               onClick={handleNextImage}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
-              </svg>
+              {/* Next button SVG */}
             </button>
             <div className="flex mt-4 gap-2">
-              {currentVariant.images.map((image, index) => (
+              {currentVariant.imagePath.$values.map((image, index) => (
                 <div
                   key={index}
                   className={`w-[92px] h-[92px] rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${
@@ -247,18 +232,19 @@ const ProductDetailsCard = () => {
         <div className="text-4xl font-bold mb-2">{product.productName}</div>
         <span className="text-black font-bold">
           Stock Available:{' '}
-          {currentVariant.productColorSize.find(
+          {currentVariant.productColorSize.$values.find(
             (size) => size.sizeValue === selectedSize
           )?.quantity || 0}
         </span>
         <div className="text-red-500 text-xl font-bold">
-          {formatCurrency(currentVariant.price)}
+          {formatCurrency(currentVariant.unitPrice || 0)}{' '}
+          {/* Cung cấp giá trị mặc định */}
         </div>
         <div className="mb-2">
           <span className="font-bold text-2xl">Color:</span>
-          {product.variants && (
+          {product.variant.$values && (
             <div className="flex gap-2 mt-1">
-              {product.variants.map((variant) => (
+              {product.variant.$values.map((variant) => (
                 <div
                   key={variant.colorName}
                   className={`flex items-center justify-center w-24 h-10 rounded-full cursor-pointer border ${
@@ -279,9 +265,9 @@ const ProductDetailsCard = () => {
         </div>
         <div className="mb-2">
           <span className="font-bold text-2xl">Size:</span>
-          {currentVariant.productColorSize && (
+          {currentVariant.productColorSize.$values && (
             <div className="flex flex-wrap gap-2 mt-1">
-              {currentVariant.productColorSize.map((size) => {
+              {currentVariant.productColorSize.$values.map((size) => {
                 const isSizeOutOfStock = size.quantity === 0;
                 return (
                   <div
@@ -325,7 +311,8 @@ const ProductDetailsCard = () => {
                 transition: 'max-height 0.3s ease',
               }}
             >
-              <p>{product.productDescription}</p>
+              <p>{product.productDescription || 'No description available'}</p>{' '}
+              {/* Cung cấp mô tả mặc định */}
             </div>
           </Collapse>
           <Button
