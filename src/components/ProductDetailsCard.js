@@ -128,14 +128,14 @@ const ProductDetailsCard = () => {
       ]);
     } else {
       const cartItem = {
-        id: product.brandId,
-        name: product.productName,
-        price: currentVariant.price,
+        id: product?.brandId,
+        name: product?.productName,
+        price: currentVariant?.price,
         color: selectedColor,
         size: selectedSize,
         quantity: 1,
-        image: currentVariant.images[0],
-        stock: sizeInfo.quantity,
+        image: currentVariant?.images[0],
+        stock: sizeInfo?.quantity,
       };
 
       dispatch(addToCart(cartItem));
@@ -149,10 +149,6 @@ const ProductDetailsCard = () => {
   const handleSnackbarClose = () => {
     setCurrentSnackbar(null);
   };
-
-  if (!product) {
-    return null; // Render nothing while redirecting
-  }
 
   return (
     <div className="flex flex-col md:flex-row rounded-lg bg-white p-6 max-w-6xl mx-auto">
@@ -180,7 +176,7 @@ const ProductDetailsCard = () => {
               <img
                 src={currentVariant.images[mainImageIndex]}
                 alt="Product"
-                className="w-full h-full object-cover transition duration-300 ease-in-out"
+                className="w-full h-[500px] object-contain transition duration-300 ease-in-out"
               />
             </div>
             <button
@@ -245,12 +241,6 @@ const ProductDetailsCard = () => {
       </div>
       <div className="w-full md:w-1/3">
         <div className="text-4xl font-bold mb-2">{product.productName}</div>
-        <span className="text-black font-bold">
-          Stock Available:{' '}
-          {currentVariant.productColorSize.find(
-            (size) => size.sizeValue === selectedSize
-          )?.quantity || 0}
-        </span>
         <div className="text-red-500 text-xl font-bold">
           {formatCurrency(currentVariant.price)}
         </div>
@@ -277,8 +267,8 @@ const ProductDetailsCard = () => {
             </div>
           )}
         </div>
-        <div className="mb-2">
-          <span className="font-bold text-2xl">Size:</span>
+        <div className="my-4">
+          <span className=" font-bold text-xl">Size:</span>
           {currentVariant.productColorSize && (
             <div className="flex flex-wrap gap-2 mt-1">
               {currentVariant.productColorSize.map((size) => {
@@ -288,7 +278,7 @@ const ProductDetailsCard = () => {
                     key={size.sizeValue}
                     className={`px-3 py-1 border rounded-full text-xl ${
                       isSizeOutOfStock
-                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        ? 'bg-[#272B3B] text-gray-500 cursor-not-allowed'
                         : 'cursor-pointer'
                     } ${selectedSize === size.sizeValue ? 'bg-gray-300' : ''}`}
                     onClick={() =>
@@ -301,11 +291,18 @@ const ProductDetailsCard = () => {
               })}
             </div>
           )}
+          <span className="font-medium text-sm text-gray-500">
+            {`Stock Available: ${
+              currentVariant.productColorSize.find(
+                (size) => size.sizeValue === selectedSize
+              )?.quantity || 0
+            }`}
+          </span>
         </div>
         <br></br>
 
         <div className="flex flex-col gap-2 mb-2">
-          <button className="px-4 py-2 bg-black text-white rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl">
+          <button className="px-4 py-2 bg-[#101422] text-white rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl">
             Buy Now
           </button>
           <button

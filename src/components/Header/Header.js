@@ -35,41 +35,41 @@ const Header = () => {
         <div className="items-center justify-between hidden gap-12 text-black md:flex">
           <Link
             to={'/products'}
-            className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
+            className="text-sm text-dark-grey-700 hover:text-[#272B3B] font-bold"
           >
             Products
           </Link>
           <Link
             to={'/'}
-            className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
+            className="text-sm text-dark-grey-700 hover:text-[#272B3B] font-bold"
           >
             Pricing
           </Link>
           <Link
             to={'/blogs'}
-            className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
+            className="text-sm text-dark-grey-700 hover:text-[#272B3B] font-bold"
           >
             Blogs
           </Link>
           <Link
             to={'/'}
-            className="text-sm text-dark-grey-700 hover:text-blue-400 font-bold"
+            className="text-sm text-dark-grey-700 hover:text-[#272B3B] font-bold"
           >
             Company
           </Link>
         </div>
         <div className="items-center hidden gap-8 md:flex">
           <Link to="/cart">
-            <button className="relative flex items-center px-4 py-2 text-sm font-bold text-gray-800 hover:text-blue-400 transition duration-300">
+            <button className="relative flex items-center py-2 text-sm font-bold text-gray-800 hover:text-[#272B3B] transition duration-300">
               <FontAwesomeIcon icon={faCartShopping} className="mr-2" />
               {uniqueItemsCount > 0 && (
-                <span className="absolute font-semibold top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
+                <p className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full px-2 py-1 text-xs font-bold">
                   {uniqueItemsCount}
-                </span>
+                </p>
               )}
             </button>
           </Link>
-          <button className="flex items-center text-sm text-gray-800 hover:text-blue-400 font-bold transition duration-300">
+          <button className="flex items-center text-sm text-gray-800 hover:text-[#272B3B] font-bold transition duration-300">
             Log In
           </button>
           <button className="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">

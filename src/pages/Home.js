@@ -86,7 +86,7 @@ const Home = () => {
             to={'/products'}
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition-transform duration-1000"
           >
-            <div className="bg-amber-50 hover:bg-blue-500 px-8 py-2 rounded-lg ">
+            <div className="bg-amber-50 hover:bg-[#A8DCE7] px-8 py-2 rounded-lg ">
               <p className="font-bold text-xl ">Buy Now</p>
             </div>
           </Link>

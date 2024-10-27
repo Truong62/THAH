@@ -27,17 +27,12 @@ const CardProduct = ({
         <div className="flex items-center gap-1.25 text-sm">
           {Array.isArray(nameTag) ? (
             nameTag.map((item, index) => (
-              <p
-                key={index}
-                className="px-2 rounded-xl bg-blue-200 mr-2 text-[#303030]"
-              >
+              <p key={index} className="px-2 rounded-xl bg-[#A8DCE7] mr-2">
                 {item}
               </p>
             ))
           ) : (
-            <p className="px-2 rounded-xl bg-blue-200 mr-2 text-[#303030]">
-              {nameTag}
-            </p>
+            <p className="px-2 rounded-xl bg-[#A8DCE7] mr-2 ">{nameTag}</p>
           )}
         </div>
         <p className="mt-2">{description}</p>
