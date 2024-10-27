@@ -31,7 +31,7 @@ const ProductDetailsCard = () => {
   const [selectedColor, setSelectedColor] = useState(
     product ? product.variants[0].colorName : ''
   );
-  const [selectedSize, setSelectedSize] = useState();
+  const [selectedSize, setSelectedSize] = useState(null);
 
   const currentVariant = product
     ? product.variants.find((variant) => variant.colorName === selectedColor)
@@ -291,13 +291,15 @@ const ProductDetailsCard = () => {
               })}
             </div>
           )}
-          <span className="font-medium text-sm text-gray-500">
-            {`Stock Available: ${
-              currentVariant.productColorSize.find(
-                (size) => size.sizeValue === selectedSize
-              )?.quantity || 0
-            }`}
-          </span>
+          {selectedSize && (
+            <span className="font-medium text-sm text-gray-500">
+              {`Stock Available: ${
+                currentVariant.productColorSize.find(
+                  (size) => size.sizeValue === selectedSize
+                )?.quantity || 0
+              }`}
+            </span>
+          )}
         </div>
         <br></br>
 
