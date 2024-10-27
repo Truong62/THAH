@@ -6,7 +6,7 @@ const BreadCrumb = () => {
   const pathnames = location.pathname.split('/').filter((x) => x);
 
   const formatBreadcrumbName = (name) => {
-    const decodedName = decodeURIComponent(name); // Decode the URL component
+    const decodedName = decodeURIComponent(name);
     return decodedName
       .replace(/-/g, ' ')
       .replace(/\b\w/g, (char) => char.toUpperCase());

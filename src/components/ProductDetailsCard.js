@@ -15,6 +15,12 @@ import Button from '@mui/material/Button'; // Import Button for toggling
 import useDeviceType from '../hooks/useDeviceType'; // Import the device type hook
 import WarningAmberIcon from '@mui/icons-material/WarningAmber'; // Import WarningAmberIcon
 
+/**
+ *
+ * @param props
+ * @returns {Element}
+ * @constructor
+ */
 const SlideTransition = (props) => {
   return <Slide {...props} direction="left" />;
 };

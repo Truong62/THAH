@@ -5,6 +5,11 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux'; // Import useSelector
 import CartModal from '../Cart/CartModal.js';
 
+/**
+ *
+ * @returns {Element}
+ * @constructor
+ */
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const cartItems = useSelector((state) => state.cart || []); // Ensure cartItems is an array

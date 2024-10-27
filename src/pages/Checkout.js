@@ -8,6 +8,10 @@ import Footer from '../components/Footer/Footer';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+/**
+ *
+ * @type {React.NamedExoticComponent<object>}
+ */
 const CheckoutPage = React.memo(() => {
   const cartItems = useSelector((state) => state.cart);
   const navigate = useNavigate();

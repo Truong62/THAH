@@ -1,15 +1,23 @@
 import React from 'react';
-import { truncateDescription } from '../../utils/truncateDescription.js';
-import { formatCurrency } from '../../utils/formatCurrency';
 
+/**
+ *
+ * @param nameProduct
+ * @param description
+ * @param price
+ * @param brand
+ * @param nameTag
+ * @param imageUrl
+ * @param onClick
+ * @returns {Element}
+ * @constructor
+ */
 const CardProduct = ({
-  id,
-  link,
   nameProduct,
   description,
   price,
   brand,
-  nameTag = [], // Mặc định là mảng rỗng
+  nameTag = [],
   imageUrl,
   onClick,
 }) => {

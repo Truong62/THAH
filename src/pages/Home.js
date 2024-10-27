@@ -14,7 +14,6 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleProductClick = (id) => {
-    // console.log(`Navigating to product with id: ${id}`); // Thêm dòng này để kiểm tra
     navigate(`/products/${id}`);
   };
   return (

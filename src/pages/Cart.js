@@ -5,7 +5,6 @@ import { updateQuantity, removeItem } from '../redux/cart/cartSlice';
 import Alert from '@mui/material/Alert';
 import Header from '../components/Header/Header';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Footer from '../components/Footer/Footer';
 import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
@@ -15,78 +14,69 @@ const CartPage = () => {
   const [alert, setAlert] = useState(null);
   const [visibleItems, setVisibleItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; // Number of items to show per page
+  const itemsPerPage = 5;
   const [lastScrollTop, setLastScrollTop] = useState(0);
-  const [subtotal, setSubtotal] = useState(0); // State to store subtotal
+  const [subtotal, setSubtotal] = useState(0);
 
+  // Handle scrolling for pagination
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop > lastScrollTop) {
-        // Scrolling down
-        if (currentPage * itemsPerPage < cartItems.length) {
-          setCurrentPage((prevPage) => prevPage + 1);
-        }
-      } else {
-        // Scrolling up
-        if (currentPage > 1) {
-          setCurrentPage((prevPage) => prevPage - 1);
-        }
+      if (
+        scrollTop > lastScrollTop &&
+        currentPage * itemsPerPage < cartItems.length
+      ) {
+        setCurrentPage((prevPage) => prevPage + 1);
+      } else if (scrollTop < lastScrollTop && currentPage > 1) {
+        setCurrentPage((prevPage) => prevPage - 1);
       }
-      setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop);
+      setLastScrollTop(Math.max(scrollTop, 0));
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [currentPage, lastScrollTop, cartItems.length]);
 
+  // Update visible items based on the current page
   useEffect(() => {
-    const newVisibleItems = cartItems.slice(0, currentPage * itemsPerPage);
-    setVisibleItems(newVisibleItems);
+    setVisibleItems(cartItems.slice(0, currentPage * itemsPerPage));
   }, [currentPage, cartItems]);
 
-  // Calculate subtotal whenever cartItems change
+  // Calculate subtotal when cartItems change
   useEffect(() => {
-    const newSubtotal = cartItems.reduce((total, item) => {
-      return total + item.price * item.quantity;
-    }, 0);
+    const newSubtotal = cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
     setSubtotal(newSubtotal);
   }, [cartItems]);
 
   const handleQuantityChange = (id, color, size, quantity, stock) => {
-    if (quantity < 1) {
-      setAlert('Quantity cannot be less than 1');
-      setTimeout(() => {
-        setAlert(null);
-      }, 3000);
-      return;
-    }
-    if (quantity > stock) {
-      setAlert('Not enough stock available');
-      setTimeout(() => {
-        setAlert(null);
-      }, 3000);
+    if (quantity < 1 || quantity > stock) {
+      setAlert(
+        quantity < 1
+          ? 'Quantity cannot be less than 1'
+          : 'Not enough stock available'
+      );
+      setTimeout(() => setAlert(null), 3000);
       return;
     }
     dispatch(updateQuantity({ id, color, size, quantity }));
-    setAlert(null);
   };
 
   const handleRemoveItem = (id, color, size) => {
     dispatch(removeItem({ id, color, size }));
     setAlert('Item removed from cart');
-    setTimeout(() => {
-      setAlert(null);
-    }, 3000);
+    setTimeout(() => setAlert(null), 3000);
   };
 
   const handleCheckout = () => {
-    if (cartItems.length > 0) {
-      navigate('/checkout');
-    } else {
+    if (cartItems.length === 0) {
       setAlert('Your cart is empty. Please add items before checking out.');
+      return;
     }
+    navigate('/checkout');
   };
 
   return (
@@ -237,9 +227,8 @@ const CartPage = () => {
             <span className="text-red-500">{formatCurrency(subtotal)}</span>
           </div>
           <button
-            className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${
-              cartItems.length === 0 ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
+            className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 
+            ${cartItems.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={handleCheckout}
             disabled={cartItems.length === 0}
           >

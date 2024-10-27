@@ -9,6 +9,11 @@ import BreadCrumb from '../components/BreadCrumb.js';
 import { useNavigate } from 'react-router-dom';
 import products from '../data.json'; // Ensure this path is correct
 
+/**
+ *
+ * @returns {Element}
+ * @constructor
+ */
 const Product = () => {
   const navigate = useNavigate();
 
@@ -18,10 +23,6 @@ const Product = () => {
     size: '',
     sortOption: 'Popularity',
   });
-
-  // useEffect(() => {
-  //   console.log('Current productFilters:', productFilters);
-  // }, [productFilters]);
 
   const updateProductFilters = useCallback((updates) => {
     setProductFilters((prevFilters) => ({
