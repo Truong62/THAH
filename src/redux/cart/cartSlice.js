@@ -38,15 +38,6 @@ const cartSlice = createSlice({
         saveState(state);
       }
     },
-    updateCategory: (state, action) => {
-      const { id, color, size, category } = action.payload;
-      const item = state.find(
-        (item) => item.id === id && item.color === color && item.size === size
-      );
-      if (item) {
-        item.category = category;
-      }
-    },
     removeItem: (state, action) => {
       const { id, color, size } = action.payload;
       const newState = state.filter(
@@ -56,8 +47,14 @@ const cartSlice = createSlice({
       saveState(newState);
       return newState;
     },
+    clearCart: (state) => {
+      // Xóa toàn bộ sản phẩm trong giỏ hàng
+      saveState([]); // Lưu trạng thái rỗng vào localStorage
+      return []; // Trả về trạng thái giỏ hàng rỗng
+    },
   },
 });
 
-export const { addToCart, updateQuantity, removeItem } = cartSlice.actions;
+export const { addToCart, updateQuantity, removeItem, clearCart } =
+  cartSlice.actions;
 export default cartSlice.reducer;

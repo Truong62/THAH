@@ -8,10 +8,7 @@
     "status": false,
     "tag": {
       "$id": "2",
-      "$values": [
-        "Nike",
-        "Air Force 1"
-      ]
+      "$values": ["Nike", "Air Force 1"]
     },
     "variant": {
       "$id": "3",
@@ -58,7 +55,7 @@
           "productId": 1,
           "colorId": 2,
           "colorName": "Black",
-          "unitPrice": 140000,
+          "unitPrice": 100000,
           "imagePath": {
             "$id": "10",
             "$values": [
@@ -94,7 +91,7 @@
           "productId": 1,
           "colorId": 3,
           "colorName": "White Navy",
-          "unitPrice": 140000,
+          "unitPrice": 100000,
           "imagePath": {
             "$id": "15",
             "$values": [
@@ -136,10 +133,7 @@
     "status": false,
     "tag": {
       "$id": "20",
-      "$values": [
-        "Adidas",
-        "UltraBoost"
-      ]
+      "$values": ["Adidas", "UltraBoost"]
     },
     "variant": {
       "$id": "21",
@@ -228,10 +222,7 @@
     "status": false,
     "tag": {
       "$id": "33",
-      "$values": [
-        "Puma",
-        "RS-X"
-      ]
+      "$values": ["Puma", "RS-X"]
     },
     "variant": {
       "$id": "34",
@@ -320,10 +311,7 @@
     "status": false,
     "tag": {
       "$id": "46",
-      "$values": [
-        "Reebok",
-        "Classic"
-      ]
+      "$values": ["Reebok", "Classic"]
     },
     "variant": {
       "$id": "47",

@@ -19,9 +19,10 @@ const Product = () => {
     sortOption: 'Popularity',
   });
 
-  // useEffect(() => {
-  //   console.log('Current productFilters:', productFilters);
-  // }, [productFilters]);
+  useEffect(() => {
+    console.log('Current productFilters:', productFilters);
+    console.log('Products:', products);
+  }, [productFilters]);
 
   const updateProductFilters = useCallback((updates) => {
     setProductFilters((prevFilters) => ({

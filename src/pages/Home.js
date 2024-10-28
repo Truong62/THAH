@@ -40,10 +40,10 @@ const Home = () => {
                   product.productDescription,
                   45
                 )}
-                price={formatCurrency(product.variants?.[0]?.price || 0)} // Kiểm tra variants
+                price={product.variant.$values[0]?.unitPrice || 0} // Kiểm tra variants
                 brand={product.brandName}
                 nameTag={tag}
-                imageUrl={product.variants?.[0]?.images?.[0] || ''} // Kiểm tra images
+                imageUrl={product.variant.$values[0].imagePath.$values[0] || ''} // Kiểm tra images
                 onClick={() => handleProductClick(product.productName)}
               />
             </div>
@@ -67,10 +67,10 @@ const Home = () => {
                   product.productDescription,
                   45
                 )}
-                price={formatCurrency(product.variants?.[0]?.price || 0)} // Kiểm tra variants
+                price={product.variant.$values[0]?.unitPrice || 0} // Kiểm tra variants
                 brand={product.brandName}
                 nameTag={tag}
-                imageUrl={product.variants?.[0]?.images?.[0] || ''} // Kiểm tra images
+                imageUrl={product.variant.$values[0].imagePath.$values[0] || ''} // Kiểm tra images
                 onClick={() => handleProductClick(product.productName)}
               />
             </div>

@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux'; // Import useDispatch
+
+import { clearCart } from '../redux/cart/cartSlice'; // Import action clearCart
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { formatCurrency } from '../utils/formatCurrency';
@@ -17,6 +20,8 @@ const CheckoutPage = React.memo(() => {
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
+  const dispatch = useDispatch();
+  const [snackbarQueue, setSnackbarQueue] = useState([]);
 
   useEffect(() => {
     if (cartItems.length === 0) {
@@ -100,8 +105,18 @@ const CheckoutPage = React.memo(() => {
         ...values,
         cartItems,
       });
+
+      setSnackbarQueue((prevQueue) => [
+        ...prevQueue,
+        { message: 'CHECKOUT SUCCESSFUL! CART CLEARED.', type: 'success' },
+      ]);
+
+      // setTimeout(() => {
+
+      //   dispatch(clearCart());
+      // }, 3000);
     },
-    [cartItems]
+    [cartItems] //thêm dispatch sau
   );
 
   return (
@@ -314,7 +329,7 @@ const CheckoutPage = React.memo(() => {
                       <div className="text-red-500">{errors.selectedWard}</div>
                     )}
                   </div>
-                  <button 
+                  <button
                     type="submit"
                     className="w-full py-2 bg-black text-white font-bold rounded-full hover:bg-gray-800 col-span-1 md:col-span-2"
                   >

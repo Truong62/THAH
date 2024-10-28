@@ -84,7 +84,10 @@ const ProductDetailsCard = () => {
   };
 
   const handleAddToCart = async () => {
+    console.log('Adding to cart...');
+
     if (!selectedColor || !selectedSize) {
+      console.log('Error: Color or size not selected.');
       setSnackbarQueue((prevQueue) => [
         ...prevQueue,
         { message: 'REQUIRED TO CHOOSE COLOR AND SIZE', type: 'error' },
@@ -93,7 +96,8 @@ const ProductDetailsCard = () => {
     }
 
     if (!product || !currentVariant) {
-      return; // Handle the case where product or currentVariant is not found
+      console.log('Error: Product or current variant not found.');
+      return;
     }
 
     const sizeInfo = currentVariant.productColorSize.$values.find(
@@ -101,6 +105,7 @@ const ProductDetailsCard = () => {
     );
 
     if (!sizeInfo) {
+      console.log('Error: Size not available.');
       setSnackbarQueue((prevQueue) => [
         ...prevQueue,
         { message: 'SIZE NOT AVAILABLE', type: 'error' },
@@ -118,20 +123,22 @@ const ProductDetailsCard = () => {
     const cartItem = {
       id: product.productId,
       name: product.productName,
-      price: currentVariant.unitPrice || 0, // Cung cấp giá trị mặc định
+      price: currentVariant.unitPrice || 0,
       color: selectedColor,
       size: selectedSize,
       quantity: existingItem ? existingItem.quantity + 1 : 1,
       image:
         currentVariant.imagePath.$values[0] ||
-        'https://via.placeholder.com/300', // Cung cấp hình ảnh mặc định
+        'https://via.placeholder.com/300',
       stock: sizeInfo.quantity,
     };
 
-    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    console.log('Cart item to be added:', cartItem);
 
     if (existingItem) {
+      console.log('Existing item found in cart:', existingItem);
       if (existingItem.quantity >= sizeInfo.quantity) {
+        console.log('Error: Out of stock.');
         setSnackbarQueue((prevQueue) => [
           ...prevQueue,
           { message: 'OUT OF STOCK', type: 'error' },
@@ -139,6 +146,7 @@ const ProductDetailsCard = () => {
         return;
       }
 
+      // Cập nhật số lượng sản phẩm trong giỏ hàng
       dispatch(
         updateQuantity({
           id: product.productId,
@@ -152,12 +160,13 @@ const ProductDetailsCard = () => {
         { message: 'QUANTITY UPDATED', type: 'success' },
       ]);
     } else {
-      if (isAuthenticated) {
-        const userEmail = localStorage.getItem('userEmail');
-        // Call API to save product to user's cart
-      } else {
-        // Save to localStorage
-      }
+      console.log('Adding new item to cart.');
+      // Thêm sản phẩm mới vào giỏ hàng
+      dispatch(addToCart(cartItem)); // Gọi action addToCart từ Redux
+      setSnackbarQueue((prevQueue) => [
+        ...prevQueue,
+        { message: 'ITEM ADDED TO CART', type: 'success' },
+      ]);
     }
   };
 

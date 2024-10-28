@@ -73,7 +73,7 @@ const ProductList = ({
                   product.productDescription || 'No description available', // Cung cấp giá trị mặc định
                   14
                 )}
-                price={formatCurrency(product.variants?.[0]?.unitPrice || 0)} // Kiểm tra variants
+                price={product.variant.$values[0]?.unitPrice || 0} // Kiểm tra variants
                 brand={product.brandName}
                 imageUrl={product.variant.$values[0].imagePath.$values[0]} // Lấy hình ảnh đầu tiên từ biến thể
                 onClick={() => onProductClick(product.productName)}
