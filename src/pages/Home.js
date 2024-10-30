@@ -6,34 +6,54 @@ import Header from '../components/Header/Header';
 import ImageSlider from '../components/ImageSlider';
 import Layout from '../components/Layout';
 import { truncateDescription } from '../utils/truncateDescription';
-import { formatCurrency } from '../utils/formatCurrency';
 import products from '../data.json'; // Import the JSON data
+import { Swiper, SwiperSlide } from 'swiper/react'; // Import Swiper and SwiperSlide
+import 'swiper/swiper-bundle.css'; // Import Swiper styles
 
 const Home = () => {
   const tag = ['#nike', '#jordan', '#sale'];
   const navigate = useNavigate();
 
-  const handleProductClick = (id) => {
-    navigate(`/products/${id}`);
+  const handleProductClick = (productId) => {
+    navigate(`/products/${productId}`);
   };
+
+  // Lọc sản phẩm mới (giả sử có thuộc tính isNew)
+  const newProducts = products.filter((product) => product.isNew);
 
   return (
     <React.Fragment>
       <Header />
       <Layout>
         <ImageSlider />
+
+        {/* Sản phẩm mới */}
         <div className="flex items-center mt-3">
           <img className="w-[40px] mr-2" src="../../images/shoe.gif" alt="" />
-          <p className="text-2xl font-bold ">Product new</p>
+          <p className="text-2xl font-bold ">Product New</p>
           <img
             className="w-[40px] ml-2 transform scale-x-[-1]"
             src="../../images/shoe.gif"
             alt=""
           />
         </div>
-        <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={1}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }}
+        >
           {products.map((product, index) => (
-            <div key={index}>
+            <SwiperSlide key={index}>
               <CardProduct
                 nameProduct={truncateDescription(product.productName, 20)}
                 description={truncateDescription(
@@ -44,23 +64,39 @@ const Home = () => {
                 brand={product.brandName}
                 nameTag={tag}
                 imageUrl={product.variant.$values[0].imagePath.$values[0] || ''} // Kiểm tra images
-                onClick={() => handleProductClick(product.productName)}
+                onClick={() => handleProductClick(product.productId)}
               />
-            </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
+
+        {/* Sản phẩm tất cả */}
         <div className="flex items-center mb-3">
           <img className="w-[40px] mr-2" src="../../images/shoe.gif" alt="" />
-          <p className="text-2xl font-bold ">Product all</p>
+          <p className="text-2xl font-bold ">Product All</p>
           <img
             className="w-[40px] ml-2 transform scale-x-[-1]"
             src="../../images/shoe.gif"
             alt=""
           />
         </div>
-        <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={1}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }}
+        >
           {products.map((product, index) => (
-            <div key={index}>
+            <SwiperSlide key={index}>
               <CardProduct
                 nameProduct={truncateDescription(product.productName, 20)}
                 description={truncateDescription(
@@ -71,11 +107,12 @@ const Home = () => {
                 brand={product.brandName}
                 nameTag={tag}
                 imageUrl={product.variant.$values[0].imagePath.$values[0] || ''} // Kiểm tra images
-                onClick={() => handleProductClick(product.productName)}
+                onClick={() => handleProductClick(product.productId)}
               />
-            </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
+
         <div className="overflow-hidden rounded-3xl relative">
           <img
             className="w-full object-fill shadow-xl rounded-3xl transform transition-transform duration-1000 hover:scale-110"

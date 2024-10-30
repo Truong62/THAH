@@ -9,22 +9,20 @@ import PageNotFound from '../components/404NotFound/_404PageNotFound';
 import CartPage from '../pages/Cart';
 import CheckoutPage from '../pages/Checkout';
 import Auth from '../pages/Auth';
+
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home></Home>} />
-      <Route path="/blogs" element={<Blogs></Blogs>} />
-      <Route path="/products" element={<Product></Product>} />
-      <Route path="/products/:link" element={<ProductDetail></ProductDetail>} />
-      <Route path="/productdetails" element={<ProductDetail></ProductDetail>} />
-      <Route path="/cart" element={<CartPage></CartPage>} />
-      <Route path="/checkout" element={<CheckoutPage></CheckoutPage>} />
-      {/* test */}
-      <Route path="/auth" element={<Auth></Auth>} />
-      {/* test */}
+      <Route path="/" element={<Home />} />
+      <Route path="/blogs" element={<Blogs />} />
+      <Route path="/products" element={<Product />} />
+      <Route path="/products/:productId" element={<ProductDetail />} />
+      <Route path="/productdetails" element={<ProductDetail />} />
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="/checkout" element={<CheckoutPage />} />
+      <Route path="/auth" element={<Auth />} />
       <Route path="/blogs/huong" element={<BreadCrumb />} />
       <Route path="/hiep" element={<h1>hiep</h1>} />
-
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

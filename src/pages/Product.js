@@ -7,7 +7,8 @@ import Sidebar from '../components/Sidebar.js';
 import SortBy from '../components/SortBy';
 import BreadCrumb from '../components/BreadCrumb.js';
 import { useNavigate } from 'react-router-dom';
-import products from '../data.json'; // Ensure this path is correct
+import products from '../data.json'; // Đảm bảo đường dẫn này đúng
+import details from '../details.json'; // Nhập tệp details.json
 
 const Product = () => {
   const navigate = useNavigate();
@@ -46,8 +47,17 @@ const Product = () => {
     [updateProductFilters]
   );
 
-  const handleProductClick = (id) => {
-    navigate(`/products/${id}`);
+  const handleProductClick = (productId) => {
+    console.log('Navigating to product with ID:', productId); // Kiểm tra giá trị productId
+    // Tìm chi tiết sản phẩm từ details.json
+    const productDetail = details.find(
+      (detail) => detail.productId === productId
+    ); // Tìm sản phẩm trong mảng
+    if (productDetail) {
+      navigate(`/products/${productId}`, { state: { productDetail } }); // Điều hướng đến trang chi tiết sản phẩm
+    } else {
+      console.log('Chi tiết sản phẩm không tìm thấy.'); // Thông báo nếu không tìm thấy
+    }
   };
 
   return (
@@ -80,7 +90,7 @@ const Product = () => {
                 selectedCategory={productFilters} // Pass the entire filters object
                 onCategoryChange={handleCategoryChange}
                 onRemoveCategory={handleRemoveCategory}
-                onProductClick={handleProductClick}
+                onProductClick={handleProductClick} // Truyền hàm click sản phẩm
               />
             </div>
           </div>

@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { formatCurrency } from '../../utils/formatCurrency';
 import CardProduct from '../Card/Card';
 import FilterSummary from '../FilterSummary';
 import Pagination from '../Pagination';
@@ -75,8 +74,8 @@ const ProductList = ({
                 )}
                 price={product.variant.$values[0]?.unitPrice || 0} // Kiểm tra variants
                 brand={product.brandName}
-                imageUrl={product.variant.$values[0].imagePath.$values[0]} // Lấy hình ảnh đầu tiên từ biến thể
-                onClick={() => onProductClick(product.productName)}
+                imageUrl={product.variant.$values[0].imagePath.$values[0]}
+                onClick={() => onProductClick(product.productId)}
               />
             ))}
           </div>
@@ -95,7 +94,7 @@ const ProductList = ({
                 price={product.variant.$values[0].unitPrice} // Kiểm tra variants
                 brand={product.brandName}
                 imageUrl={product.variant.$values[0].imagePath.$values[0]} // Lấy hình ảnh đầu tiên từ biến thể
-                onClick={() => onProductClick(product.productName)}
+                onClick={() => onProductClick(product.productId)}
               />
             ))}
           </div>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux'; // Import useDispatch
 
-import { clearCart } from '../redux/cart/cartSlice'; // Import action clearCart
+// import { clearCart } from '../redux/cart/cartSlice'; // Import action clearCart
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { formatCurrency } from '../utils/formatCurrency';
@@ -20,8 +19,8 @@ const CheckoutPage = React.memo(() => {
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
-  const dispatch = useDispatch();
-  const [snackbarQueue, setSnackbarQueue] = useState([]);
+  // const dispatch = useDispatch();
+  // const [snackbarQueue, setSnackbarQueue] = useState([]);
 
   useEffect(() => {
     if (cartItems.length === 0) {
@@ -106,10 +105,10 @@ const CheckoutPage = React.memo(() => {
         cartItems,
       });
 
-      setSnackbarQueue((prevQueue) => [
-        ...prevQueue,
-        { message: 'CHECKOUT SUCCESSFUL! CART CLEARED.', type: 'success' },
-      ]);
+      // setSnackbarQueue((prevQueue) => [
+      //   ...prevQueue,
+      //   { message: 'CHECKOUT SUCCESSFUL! CART CLEARED.', type: 'success' },
+      // ]);
 
       // setTimeout(() => {
 

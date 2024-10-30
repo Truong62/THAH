@@ -1,102 +1,65 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, memo } from 'react';
 import { useParams } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import products from '../data.json'; // Import the products array
 import { formatCurrency } from '../utils/formatCurrency'; // Import formatCurrency
 import { addToCart, updateQuantity } from '../redux/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import Snackbar from '@mui/material/Snackbar'; // Import Snackbar
+import CustomSnackbar from './Snackbar'; // Import CustomSnackbar
 import Slide from '@mui/material/Slide'; // Import Slide for transition
 import Collapse from '@mui/material/Collapse'; // Import Collapse for description
 import Button from '@mui/material/Button'; // Import Button for toggling
-import useDeviceType from '../hooks/useDeviceType'; // Import the device type hook
-import WarningAmberIcon from '@mui/icons-material/WarningAmber'; // Import WarningAmberIcon
+import { ArrowBack, ArrowForward } from '@mui/icons-material'; // Import icons for navigation
+import useDeviceType from '../hooks/useDeviceType';
 
-const SlideTransition = (props) => {
-  return <Slide {...props} direction="left" />;
-};
-
-const ProductDetailsCard = () => {
-  const { link } = useParams();
-  const product = products.find((p) => p.productName === link);
-
-  const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart);
-  const [snackbarQueue, setSnackbarQueue] = useState([]);
-  const [currentSnackbar, setCurrentSnackbar] = useState(null);
-
+const ProductDetailsCard = ({ productDetail }) => {
   const [selectedColor, setSelectedColor] = useState(
-    product && product.variant.$values.length > 0
-      ? product.variant.$values[0].colorName
-      : ''
+    productDetail.variant.$values[0].colorName
   );
-  const [selectedSize, setSelectedSize] = useState();
-
-  const handleSnackbarClose = () => {
-    setCurrentSnackbar(null);
-  };
-
-  const currentVariant = product
-    ? product.variant.$values.find(
-        (variant) => variant.colorName === selectedColor
-      )
-    : null;
-
+  const [selectedSize, setSelectedSize] = useState(
+    productDetail.variant.$values[0].productColorSize.$values[0].sizeValue
+  );
   const [mainImageIndex, setMainImageIndex] = useState(0);
+  const [snackbarOpen, setSnackbarOpen] = useState(false); // Trạng thái cho snackbar
+  const [snackbarMessage, setSnackbarMessage] = useState(''); // Thông điệp snackbar
+  const [snackbarType, setSnackbarType] = useState('success'); // Loại snackbar
+  const [showFullDescription, setShowFullDescription] = useState(false); // Trạng thái cho mô tả đầy đủ
+  const dispatch = useDispatch();
 
-  const { isMobile } = useDeviceType();
-  const [showFullDescription, setShowFullDescription] = useState(false);
+  // Lấy cartItems từ Redux store
+  const cartItems = useSelector((state) => state.cart.items || []);
 
-  useEffect(() => {
-    if (!product) {
-      window.location.href = '/page-not-found';
-    }
-  }, [product]);
+  const currentVariant = productDetail.variant.$values.find(
+    (variant) => variant.colorName === selectedColor
+  );
 
-  useEffect(() => {
-    if (!currentSnackbar && snackbarQueue.length > 0) {
-      setCurrentSnackbar(snackbarQueue[0]);
-      setSnackbarQueue((prevQueue) => prevQueue.slice(1));
-    }
-  }, [snackbarQueue, currentSnackbar]);
-
-  const handlePrevImage = () => {
-    if (currentVariant && currentVariant.imagePath.$values.length > 0) {
-      setMainImageIndex((prevIndex) =>
-        prevIndex === 0
-          ? currentVariant.imagePath.$values.length - 1
-          : prevIndex - 1
-      );
-    }
-  };
-
-  const handleNextImage = () => {
-    if (currentVariant && currentVariant.imagePath.$values.length > 0) {
-      setMainImageIndex((prevIndex) =>
-        prevIndex === currentVariant.imagePath.$values.length - 1
-          ? 0
-          : prevIndex + 1
-      );
-    }
-  };
+  if (!currentVariant) {
+    return <div>Không tìm thấy biến thể cho màu đã chọn.</div>;
+  }
 
   const handleAddToCart = async () => {
-    console.log('Adding to cart...');
-
     if (!selectedColor || !selectedSize) {
       console.log('Error: Color or size not selected.');
-      setSnackbarQueue((prevQueue) => [
-        ...prevQueue,
-        { message: 'REQUIRED TO CHOOSE COLOR AND SIZE', type: 'error' },
-      ]);
+      setSnackbarMessage('REQUIRED TO CHOOSE COLOR AND SIZE');
+      setSnackbarType('error');
+      setSnackbarOpen(true);
       return;
     }
 
-    if (!product || !currentVariant) {
+    if (!productDetail || !currentVariant) {
       console.log('Error: Product or current variant not found.');
+      return;
+    }
+
+    // Kiểm tra xem productColorSize và $values có tồn tại không
+    if (
+      !currentVariant.productColorSize ||
+      !currentVariant.productColorSize.$values
+    ) {
+      console.log('Error: Product color size information is not available.');
+      setSnackbarMessage('PRODUCT COLOR SIZE NOT AVAILABLE');
+      setSnackbarType('error');
+      setSnackbarOpen(true);
       return;
     }
 
@@ -106,154 +69,149 @@ const ProductDetailsCard = () => {
 
     if (!sizeInfo) {
       console.log('Error: Size not available.');
-      setSnackbarQueue((prevQueue) => [
-        ...prevQueue,
-        { message: 'SIZE NOT AVAILABLE', type: 'error' },
-      ]);
+      setSnackbarMessage('SIZE NOT AVAILABLE');
+      setSnackbarType('error');
+      setSnackbarOpen(true);
       return;
     }
 
     const existingItem = cartItems.find(
       (item) =>
-        item.id === product.productId &&
+        item.id === productDetail.productId &&
         item.color === selectedColor &&
         item.size === selectedSize
     );
 
-    const cartItem = {
-      id: product.productId,
-      name: product.productName,
-      price: currentVariant.unitPrice || 0,
-      color: selectedColor,
-      size: selectedSize,
-      quantity: existingItem ? existingItem.quantity + 1 : 1,
-      image:
-        currentVariant.imagePath.$values[0] ||
-        'https://via.placeholder.com/300',
-      stock: sizeInfo.quantity,
-    };
-
-    console.log('Cart item to be added:', cartItem);
-
     if (existingItem) {
-      console.log('Existing item found in cart:', existingItem);
+      // Nếu sản phẩm đã tồn tại, chỉ cần cập nhật số lượng
       if (existingItem.quantity >= sizeInfo.quantity) {
         console.log('Error: Out of stock.');
-        setSnackbarQueue((prevQueue) => [
-          ...prevQueue,
-          { message: 'OUT OF STOCK', type: 'error' },
-        ]);
+        setSnackbarMessage('OUT OF STOCK');
+        setSnackbarType('error');
+        setSnackbarOpen(true);
         return;
       }
 
       // Cập nhật số lượng sản phẩm trong giỏ hàng
       dispatch(
         updateQuantity({
-          id: product.productId,
+          id: productDetail.productId,
           color: selectedColor,
           size: selectedSize,
-          quantity: cartItem.quantity,
+          quantity: existingItem.quantity + 1, // Tăng số lượng lên 1
         })
       );
-      setSnackbarQueue((prevQueue) => [
-        ...prevQueue,
-        { message: 'QUANTITY UPDATED', type: 'success' },
-      ]);
+      setSnackbarMessage('QUANTITY UPDATED');
+      setSnackbarType('success');
+      setSnackbarOpen(true);
     } else {
-      console.log('Adding new item to cart.');
-      // Thêm sản phẩm mới vào giỏ hàng
+      // Nếu sản phẩm chưa tồn tại, thêm sản phẩm mới vào giỏ hàng
+      const cartItem = {
+        id: productDetail.productId,
+        name: productDetail.productName,
+        price: currentVariant.unitPrice || 0,
+        color: selectedColor,
+        size: selectedSize,
+        quantity: 1, // Khởi tạo số lượng là 1
+        image:
+          currentVariant.imagePath.$values[0] ||
+          'https://via.placeholder.com/300',
+        stock: sizeInfo.quantity,
+      };
+
+      console.log('Adding new item to cart:', cartItem);
       dispatch(addToCart(cartItem)); // Gọi action addToCart từ Redux
-      setSnackbarQueue((prevQueue) => [
-        ...prevQueue,
-        { message: 'ITEM ADDED TO CART', type: 'success' },
-      ]);
+      setSnackbarMessage('ITEM ADDED TO CART');
+      setSnackbarType('success');
+      setSnackbarOpen(true);
     }
   };
 
-  if (!product) {
-    return null; // Render nothing while redirecting
-  }
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
+  const handlePrevImage = () => {
+    setMainImageIndex((prevIndex) =>
+      prevIndex === 0
+        ? currentVariant.imagePath.$values.length - 1
+        : prevIndex - 1
+    );
+  };
+
+  const handleNextImage = () => {
+    setMainImageIndex((prevIndex) =>
+      prevIndex === currentVariant.imagePath.$values.length - 1
+        ? 0
+        : prevIndex + 1
+    );
+  };
 
   return (
-    <div className="flex flex-col md:flex-row rounded-lg bg-white p-6 max-w-6xl mx-auto">
-      <div className="relative w-full md:w-2/3 mb-4 md:mb-0 md:mr-6">
-        {isMobile ? (
-          <Swiper
-            modules={[Pagination]}
-            pagination={{ clickable: true }}
-            spaceBetween={10}
-            slidesPerView={1}
+    <div>
+      <CustomSnackbar
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        message={snackbarMessage}
+        severity={snackbarType}
+      />
+
+      <div className="flex flex-col md:flex-row rounded-lg bg-white p-6 max-w-6xl mx-auto">
+        <div className="relative w-full md:w-2/3 mb-4 md:mb-0 md:mr-6">
+          <img
+            src={currentVariant.imagePath.$values[mainImageIndex]}
+            alt="Product"
+            className="w-full h-full object-cover transition duration-300 ease-in-out"
+          />
+          <button
+            className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:opacity-80 transition-opacity duration-300"
+            onClick={handlePrevImage}
           >
+            <ArrowBack />
+          </button>
+          <button
+            className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:opacity-80 transition-opacity duration-300"
+            onClick={handleNextImage}
+          >
+            <ArrowForward />
+          </button>
+          <div className="flex mt-4 gap-2">
             {currentVariant.imagePath.$values.map((image, index) => (
-              <SwiperSlide key={index}>
+              <div
+                key={index}
+                className={`w-[92px] h-[92px] rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${
+                  mainImageIndex === index
+                    ? 'border-2 border-black scale-105'
+                    : ''
+                }`}
+                onClick={() => setMainImageIndex(index)}
+              >
                 <img
                   src={image}
-                  alt={`Product ${index}`}
-                  className="w-full h-full object-cover transition duration-300 ease-in-out"
+                  alt={`Thumbnail ${index}`}
+                  className="w-full h-full object-cover transition duration-300 ease-in-out transform hover:scale-105"
                 />
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
-        ) : (
-          <>
-            <div className="w-full aspect-w-1 aspect-h-1">
-              <img
-                src={currentVariant.imagePath.$values[mainImageIndex]}
-                alt="Product"
-                className="w-full h-full object-cover transition duration-300 ease-in-out"
-              />
-            </div>
-            <button
-              className="absolute top-1/2 left-0 transform -translate-y-1/2 rounded-full p-2 hover:shadow-md"
-              onClick={handlePrevImage}
-            >
-              {/* Previous button SVG */}
-            </button>
-            <button
-              className="absolute top-1/2 right-0 transform -translate-y-1/2 rounded-full p-2 hover:shadow-md"
-              onClick={handleNextImage}
-            >
-              {/* Next button SVG */}
-            </button>
-            <div className="flex mt-4 gap-2">
-              {currentVariant.imagePath.$values.map((image, index) => (
-                <div
-                  key={index}
-                  className={`w-[92px] h-[92px] rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${
-                    mainImageIndex === index
-                      ? 'border-2 border-black scale-105'
-                      : ''
-                  }`}
-                  onClick={() => setMainImageIndex(index)}
-                >
-                  <img
-                    src={image}
-                    alt={`Product ${index}`}
-                    className="w-[92px] h-[92px] object-cover transition duration-300 ease-in-out transform hover:scale-105"
-                  />
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
-      <div className="w-full md:w-1/3">
-        <div className="text-4xl font-bold mb-2">{product.productName}</div>
-        <span className="text-black font-bold">
-          Stock Available:{' '}
-          {currentVariant.productColorSize.$values.find(
-            (size) => size.sizeValue === selectedSize
-          )?.quantity || 0}
-        </span>
-        <div className="text-red-500 text-xl font-bold">
-          {formatCurrency(currentVariant.unitPrice || 0)}{' '}
-          {/* Cung cấp giá trị mặc định */}
+          </div>
         </div>
-        <div className="mb-2">
-          <span className="font-bold text-2xl">Color:</span>
-          {product.variant.$values && (
+        <div className="w-full md:w-1/3">
+          <div className="text-4xl font-bold mb-2">
+            {productDetail.productName}
+          </div>
+          <span className="text-black font-bold">
+            Stock Available:{' '}
+            {currentVariant.productColorSize.$values.find(
+              (size) => size.sizeValue === selectedSize
+            )?.quantity || 0}
+          </span>
+          <div className="text-red-500 text-xl font-bold">
+            {formatCurrency(currentVariant.unitPrice || 0)}{' '}
+          </div>
+          <div className="mb-2">
+            <span className="font-bold text-2xl">Color:</span>
             <div className="flex gap-2 mt-1">
-              {product.variant.$values.map((variant) => (
+              {productDetail.variant.$values.map((variant) => (
                 <div
                   key={variant.colorName}
                   className={`flex items-center justify-center w-24 h-10 rounded-full cursor-pointer border ${
@@ -263,98 +221,76 @@ const ProductDetailsCard = () => {
                   }`}
                   onClick={() => {
                     setSelectedColor(variant.colorName);
-                    setSelectedSize(null);
+                    setSelectedSize(
+                      variant.productColorSize.$values[0].sizeValue
+                    ); // Reset size khi đổi màu
                   }}
                 >
                   <span className="text-sm">{variant.colorName}</span>
                 </div>
               ))}
             </div>
-          )}
-        </div>
-        <div className="mb-2">
-          <span className="font-bold text-2xl">Size:</span>
-          {currentVariant.productColorSize.$values && (
-            <div className="flex flex-wrap gap-2 mt-1">
-              {currentVariant.productColorSize.$values.map((size) => {
-                const isSizeOutOfStock = size.quantity === 0;
-                return (
-                  <div
-                    key={size.sizeValue}
-                    className={`px-3 py-1 border rounded-full text-xl ${
-                      isSizeOutOfStock
-                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                        : 'cursor-pointer'
-                    } ${selectedSize === size.sizeValue ? 'bg-gray-300' : ''}`}
-                    onClick={() =>
-                      !isSizeOutOfStock && setSelectedSize(size.sizeValue)
-                    }
-                  >
-                    {size.sizeValue}
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-        <br></br>
+          </div>
 
-        <div className="flex flex-col gap-2 mb-2">
-          <button className="px-4 py-2 bg-black text-white rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl">
-            Buy Now
-          </button>
-          <button
-            className="px-4 py-2 bg-white border border-black rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl"
-            onClick={handleAddToCart}
-          >
-            Add To Cart
-          </button>
-        </div>
-        <div className="mt-4">
-          <div className="text-xl font-bold">Description</div>
-          <Collapse in={showFullDescription} collapsedSize={100}>
-            <div
-              style={{
-                maxHeight: showFullDescription ? '300px' : '100px',
-                overflowY: showFullDescription ? 'auto' : 'hidden',
-                transition: 'max-height 0.3s ease',
-              }}
-            >
-              <p>{product.productDescription || 'No description available'}</p>{' '}
-              {/* Cung cấp mô tả mặc định */}
+          {/* Chọn kích thước */}
+          <div className="mb-2">
+            <span className="font-bold text-2xl">Size:</span>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {currentVariant.productColorSize.$values.map((size) => (
+                <div
+                  key={`${size.sizeValue}-${selectedColor}`} // Kết hợp sizeValue và selectedColor để tạo khóa duy nhất
+                  className={`px-3 py-1 border rounded-full text-xl cursor-pointer ${
+                    size.quantity === 0
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : ''
+                  } ${selectedSize === size.sizeValue ? 'bg-gray-300' : ''}`}
+                  onClick={() =>
+                    size.quantity > 0 && setSelectedSize(size.sizeValue)
+                  }
+                >
+                  {size.sizeValue}
+                </div>
+              ))}
             </div>
-          </Collapse>
-          <Button
-            onClick={() => setShowFullDescription(!showFullDescription)}
-            color="primary"
-          >
-            {showFullDescription ? 'Show Less' : 'Read More'}
-          </Button>
+          </div>
+
+          <div className="flex flex-col gap-2 mb-2">
+            <button className="px-4 py-2 bg-black text-white rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl">
+              Buy Now
+            </button>
+            <button
+              className="px-4 py-2 bg-white border border-black rounded-full transition duration-300 ease-in-out transform hover:scale-105 text-xl"
+              onClick={handleAddToCart}
+            >
+              Add To Cart
+            </button>
+          </div>
+
+          <div className="mt-4">
+            <div className="text-xl font-bold">Description</div>
+            <Collapse in={showFullDescription} collapsedSize={100}>
+              <div
+                style={{
+                  maxHeight: showFullDescription ? '300px' : '100px',
+                  overflowY: showFullDescription ? 'auto' : 'hidden',
+                  transition: 'max-height 0.3s ease',
+                }}
+              >
+                <p>
+                  {productDetail.productDescription ||
+                    'No description available'}
+                </p>
+              </div>
+            </Collapse>
+            <Button
+              onClick={() => setShowFullDescription(!showFullDescription)}
+              color="primary"
+            >
+              {showFullDescription ? 'Show Less' : 'Read More'}
+            </Button>
+          </div>
         </div>
       </div>
-      {currentSnackbar && (
-        <Snackbar
-          open={!!currentSnackbar}
-          autoHideDuration={5000}
-          onClose={handleSnackbarClose}
-          TransitionComponent={SlideTransition}
-          message={
-            <span style={{ display: 'flex', alignItems: 'center' }}>
-              {currentSnackbar.type === 'error' && (
-                <WarningAmberIcon style={{ marginRight: 8 }} />
-              )}
-              {currentSnackbar.message}
-            </span>
-          }
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          ContentProps={{
-            style: {
-              backgroundColor:
-                currentSnackbar.type === 'success' ? '#33CC33' : '#FFCC33',
-            },
-          }}
-        />
-      )}
     </div>
   );
 };

@@ -70,7 +70,7 @@ export default function Footer() {
           scrolling="no"
           marginHeight="0"
           marginWidth="0"
-          src="https://maps.google.com/maps?q=18%20Tam%20Trinh,%20H%C3%A0%20N%E1%BB%99i&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+          src="https://maps.google.com/maps?q=VTC%20HONLINE%20BUILDING,%20H%C3%A0%20N%E1%BB%99i&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
         ></iframe>
       </div>
 

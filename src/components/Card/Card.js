@@ -3,7 +3,7 @@ import { truncateDescription } from '../../utils/truncateDescription.js';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const CardProduct = ({
-  id,
+  id, // Thêm id vào props
   link,
   nameProduct,
   description = '', // Cung cấp giá trị mặc định
@@ -14,7 +14,9 @@ const CardProduct = ({
   onClick,
 }) => {
   return (
-    <div onClick={onClick} className="cursor-pointer">
+    <div onClick={() => onClick(id)} className="cursor-pointer">
+      {' '}
+      {/* Sử dụng id trong onClick */}
       <div className="bg-white rounded-lg p-3 border-gray-200 border transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]">
         <img
           src={imageUrl} // Cung cấp hình ảnh mặc định nếu không có

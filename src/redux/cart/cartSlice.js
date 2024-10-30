@@ -25,7 +25,18 @@ const cartSlice = createSlice({
   initialState: loadState(),
   reducers: {
     addToCart: (state, action) => {
-      state.push(action.payload);
+      const { id, color, size } = action.payload;
+      const existingItem = state.find(
+        (item) => item.id === id && item.color === color && item.size === size
+      );
+
+      if (existingItem) {
+        // Nếu sản phẩm đã tồn tại, chỉ cần cập nhật số lượng
+        existingItem.quantity += 1; // Tăng số lượng lên 1
+      } else {
+        // Nếu sản phẩm chưa tồn tại, thêm sản phẩm mới vào giỏ hàng
+        state.push(action.payload);
+      }
       saveState(state);
     },
     updateQuantity: (state, action) => {
