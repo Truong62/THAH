@@ -15,12 +15,6 @@ import Button from '@mui/material/Button'; // Import Button for toggling
 import useDeviceType from '../hooks/useDeviceType'; // Import the device type hook
 import WarningAmberIcon from '@mui/icons-material/WarningAmber'; // Import WarningAmberIcon
 
-/**
- *
- * @param props
- * @returns {Element}
- * @constructor
- */
 const SlideTransition = (props) => {
   return <Slide {...props} direction="left" />;
 };
@@ -35,7 +29,7 @@ const ProductDetailsCard = () => {
   const [currentSnackbar, setCurrentSnackbar] = useState(null);
 
   const [selectedColor, setSelectedColor] = useState(
-    product ? product.variants[0].colorName : ''
+    product && product.variants.length > 0 ? product.variants[0].colorName : ''
   );
   const [selectedSize, setSelectedSize] = useState(null);
 
@@ -44,7 +38,6 @@ const ProductDetailsCard = () => {
     : null;
 
   const [mainImageIndex, setMainImageIndex] = useState(0);
-
   const { isMobile } = useDeviceType();
   const [showFullDescription, setShowFullDescription] = useState(false);
 
@@ -62,7 +55,7 @@ const ProductDetailsCard = () => {
   }, [snackbarQueue, currentSnackbar]);
 
   const handlePrevImage = () => {
-    if (currentVariant) {
+    if (currentVariant && currentVariant.images) {
       setMainImageIndex((prevIndex) =>
         prevIndex === 0 ? currentVariant.images.length - 1 : prevIndex - 1
       );
@@ -70,7 +63,7 @@ const ProductDetailsCard = () => {
   };
 
   const handleNextImage = () => {
-    if (currentVariant) {
+    if (currentVariant && currentVariant.images) {
       setMainImageIndex((prevIndex) =>
         prevIndex === currentVariant.images.length - 1 ? 0 : prevIndex + 1
       );
@@ -87,8 +80,7 @@ const ProductDetailsCard = () => {
     }
 
     if (!product || !currentVariant) {
-      // Handle the case where product or currentVariant is not found
-      return;
+      return; // Handle the case where product or currentVariant is not found
     }
 
     const sizeInfo = currentVariant.productColorSize?.find(
@@ -96,7 +88,6 @@ const ProductDetailsCard = () => {
     );
 
     if (!sizeInfo) {
-      // Handle the case where sizeInfo is not found
       setSnackbarQueue((prevQueue) => [
         ...prevQueue,
         { message: 'SIZE NOT AVAILABLE', type: 'error' },
@@ -166,24 +157,28 @@ const ProductDetailsCard = () => {
             spaceBetween={10}
             slidesPerView={1}
           >
-            {currentVariant.images.map((image, index) => (
-              <SwiperSlide key={index}>
-                <img
-                  src={image}
-                  alt={`Product ${index}`}
-                  className="w-full h-full object-cover transition duration-300 ease-in-out"
-                />
-              </SwiperSlide>
-            ))}
+            {currentVariant &&
+              currentVariant.images &&
+              currentVariant.images.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <img
+                    src={image}
+                    alt={`Product ${index}`}
+                    className="w-full h-full object-cover transition duration-300 ease-in-out"
+                  />
+                </SwiperSlide>
+              ))}
           </Swiper>
         ) : (
           <>
             <div className="w-full aspect-w-1 aspect-h-1">
-              <img
-                src={currentVariant.images[mainImageIndex]}
-                alt="Product"
-                className="w-full h-[500px] object-contain transition duration-300 ease-in-out"
-              />
+              {currentVariant && currentVariant.images && (
+                <img
+                  src={currentVariant.images[mainImageIndex]}
+                  alt="Product"
+                  className="w-full h-[500px] object-contain transition duration-300 ease-in-out"
+                />
+              )}
             </div>
             <button
               className="absolute top-1/2 left-0 transform -translate-y-1/2 rounded-full p-2 hover:shadow-md"
@@ -224,35 +219,37 @@ const ProductDetailsCard = () => {
               </svg>
             </button>
             <div className="flex mt-4 gap-2">
-              {currentVariant.images.map((image, index) => (
-                <div
-                  key={index}
-                  className={`w-[92px] h-[92px] rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${
-                    mainImageIndex === index
-                      ? 'border-2 border-black scale-105'
-                      : ''
-                  }`}
-                  onClick={() => setMainImageIndex(index)}
-                >
-                  <img
-                    src={image}
-                    alt={`Product ${index}`}
-                    className="w-[92px] h-[92px] object-cover transition duration-300 ease-in-out transform hover:scale-105"
-                  />
-                </div>
-              ))}
+              {currentVariant &&
+                currentVariant.images &&
+                currentVariant.images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`w-[92px] h-[92px] rounded-lg cursor-pointer border overflow-hidden transition duration-300 ease-in-out transform ${
+                      mainImageIndex === index
+                        ? 'border-2 border-black scale-105'
+                        : ''
+                    }`}
+                    onClick={() => setMainImageIndex(index)}
+                  >
+                    <img
+                      src={image}
+                      alt={`Product ${index}`}
+                      className="w-[92px] h-[92px] object-cover transition duration-300 ease-in-out transform hover:scale-105"
+                    />
+                  </div>
+                ))}
             </div>
           </>
         )}
       </div>
       <div className="w-full md:w-1/3">
-        <div className="text-4xl font-bold mb-2">{product.productName}</div>
+        <div className="text-4xl font-bold mb-2">{product?.productName}</div>
         <div className="text-red-500 text-xl font-bold">
-          {formatCurrency(currentVariant.price)}
+          {formatCurrency(currentVariant?.price)}
         </div>
         <div className="mb-2">
           <span className="font-bold text-2xl">Color:</span>
-          {product.variants && (
+          {product?.variants && (
             <div className="flex gap-2 mt-1">
               {product.variants.map((variant) => (
                 <div
@@ -274,8 +271,8 @@ const ProductDetailsCard = () => {
           )}
         </div>
         <div className="my-4">
-          <span className=" font-bold text-xl">Size:</span>
-          {currentVariant.productColorSize && (
+          <span className="font-bold text-xl">Size:</span>
+          {currentVariant?.productColorSize && (
             <div className="flex flex-wrap gap-2 mt-1">
               {currentVariant.productColorSize.map((size) => {
                 const isSizeOutOfStock = size.quantity === 0;
@@ -330,7 +327,7 @@ const ProductDetailsCard = () => {
                 transition: 'max-height 0.3s ease',
               }}
             >
-              <p>{product.productDescription}</p>
+              <p>{product?.productDescription}</p>
             </div>
           </Collapse>
           <Button
