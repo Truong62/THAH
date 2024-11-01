@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import CardProduct from '../components/Card/Card.js';
 import { formatCurrency } from '../utils/formatCurrency.js';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,6 +10,12 @@ import { Pagination } from 'swiper/modules';
 import PropTypes from 'prop-types';
 
 const SuggestProducts = ({ products }) => {
+  const navigate = useNavigate(); // Khởi tạo useNavigate để điều hướng
+
+  const handleProductClick = (productName) => {
+    navigate(`/products/${productName}`); // Điều hướng đến trang chi tiết sản phẩm
+  };
+
   return (
     <div className="my-8">
       <Swiper
@@ -17,7 +24,7 @@ const SuggestProducts = ({ products }) => {
           clickable: true,
         }}
         modules={[Pagination]}
-        className="w-full"
+        className="w-full pb-10"
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -41,15 +48,16 @@ const SuggestProducts = ({ products }) => {
           },
         }}
       >
-        {products.map((item, index) => (
+        {products.map((product, index) => (
           <SwiperSlide key={index} className="flex justify-center">
             <CardProduct
-              nameProduct={item.nameProduct}
-              description={truncateDescription(item.productDescription, 60)}
-              price={formatCurrency(item.variants[0].price)}
-              brand={item.brandName}
-              nameTag={item.nameTag}
-              imageUrl={item.variants[0].images[0]}
+              key={index}
+              nameProduct={product.productName}
+              description={truncateDescription(product.productDescription, 14)}
+              price={formatCurrency(product.variants[0].price)}
+              brand={product.brandName}
+              imageUrl={product.variants[0].images[0]}
+              onClick={() => handleProductClick(product.productName)}
             />
           </SwiperSlide>
         ))}
