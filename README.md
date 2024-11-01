@@ -1,6 +1,7 @@
 ### Ngọc Trường
 
 Color:
+
 <div style="background-color: #A8DCE7; width: 100px; height: 30px; border: 1px solid #000;">
 #A8DCE7
 </div>
