@@ -10,10 +10,15 @@ import { Pagination } from 'swiper/modules';
 import PropTypes from 'prop-types';
 
 const SuggestProducts = ({ products }) => {
-  const navigate = useNavigate(); // Khởi tạo useNavigate để điều hướng
+  const navigate = useNavigate();
 
   const handleProductClick = (productName) => {
-    navigate(`/products/${productName}`); // Điều hướng đến trang chi tiết sản phẩm
+    navigate(`/products/${productName}`);
+    
+    window.scrollTo(0, 0);
+    window.location.href = `/product/${productName}`;
+    
+    window.location.reload();
   };
 
   return (
