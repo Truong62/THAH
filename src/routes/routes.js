@@ -8,8 +8,8 @@ import ProductDetail from '../pages/ProductDetail';
 import PageNotFound from '../components/404NotFound/_404PageNotFound';
 import CartPage from '../pages/Cart';
 import CheckoutPage from '../pages/Checkout';
-import Auth from '../pages/Auth';
-
+import SignUpForm from '../pages/Signup';
+import LoginForm from '../pages/Login';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -20,10 +20,11 @@ const AppRoutes = () => {
       <Route path="/productdetails" element={<ProductDetail />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/checkout" element={<CheckoutPage />} />
-      <Route path="/auth" element={<Auth />} />
       <Route path="/blogs/huong" element={<BreadCrumb />} />
       <Route path="/hiep" element={<h1>hiep</h1>} />
       <Route path="*" element={<PageNotFound />} />
+      <Route path="/signup" element={<SignUpForm />} />{' '}
+      <Route path="/login" element={<LoginForm />} />{' '}
     </Routes>
   );
 };

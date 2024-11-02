@@ -175,7 +175,7 @@ const Header = () => {
                   </>
                 ) : (
                   <Link
-                    to="/auth"
+                    to="/login"
                     className="block px-4 py-2 hover:bg-gray-600"
                   >
                     Đăng Nhập

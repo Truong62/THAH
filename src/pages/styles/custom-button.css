@@ -1,0 +1,31 @@
+/* styles.css */
+.custom-button {
+  background-color: rgba(29, 192, 113, 1);
+}
+
+.custom-button:hover {
+  background-color: rgba(
+    34,
+    197,
+    94,
+    1
+  ); /* Change to your desired hover color */
+}
+.custom-button-su {
+  background-color: rgba(16, 20, 34, 1);
+}
+
+.custom-button-su:hover {
+  background-color: rgba(
+    16,
+    20,
+    34,
+    1
+  ); /* Change to your desired hover color */
+}
+@media (max-width: 768px) {
+  .login-form {
+    width: 327px; /* Set width for smaller screens */
+    height: 511px; /* Set height for smaller screens */
+  }
+}
