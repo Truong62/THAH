@@ -10,13 +10,18 @@
   }
 }
 
-*{
+* {
   user-select: none;
 }
 
 video {
   border-radius: 20px !important;
   border: rgba(0, 0, 0, 0.5) 1px solid;
+}
+
+video::-webkit-media-controls {
+  display: none !important;
+  -webkit-appearance: none;
 }
 
 p,

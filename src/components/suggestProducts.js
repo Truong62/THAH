@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import CardProduct from '../components/Card/Card.js';
 import { formatCurrency } from '../utils/formatCurrency.js';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,11 +9,22 @@ import 'swiper/css/pagination';
 import PropTypes from 'prop-types';
 
 const SuggestProducts = ({ products }) => {
+  const navigate = useNavigate();
+
+  const handleProductClick = (productName) => {
+    navigate(`/products/${productName}`);
+
+    window.scrollTo(0, 0);
+    window.location.href = `/product/${productName}`;
+
+    window.location.reload();
+  };
+
   return (
     <div className="my-8">
       <Swiper
         spaceBetween={20}
-        className="w-full"
+        className="w-full pb-10"
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -45,6 +57,7 @@ const SuggestProducts = ({ products }) => {
               brand={item.brandName}
               nameTag={item.nameTag}
               imageUrl={item.variants[0].images[0]}
+              onClick={() => handleProductClick(item.productName)}
             />
           </SwiperSlide>
         ))}

@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import Video from '../assets/intro.mp4';
 
 const ImageSlider = () => {
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+    console.log(isIOS);
+
+    if (isIOS) {
+      const videoElements = document.querySelectorAll('video');
+      videoElements.forEach((video) => {
+        video.controls = false;
+      });
+    }
+  }, []);
+
   return (
     <div className="rounded-3xl relative">
       <ReactPlayer
