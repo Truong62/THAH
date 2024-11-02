@@ -1,6 +1,11 @@
 import React from 'react';
 import AppRoutes from './routes/routes';
 
+/**
+ *
+ * @returns {Element}
+ * @constructor
+ */
 function App() {
   return (
     <div>

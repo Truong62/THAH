@@ -8,6 +8,12 @@ import ProductDetail from '../pages/ProductDetail';
 import PageNotFound from '../components/404NotFound/_404PageNotFound';
 import CartPage from '../pages/Cart';
 import CheckoutPage from '../pages/Checkout';
+
+/**
+ *
+ * @returns {Element}
+ * @constructor
+ */
 const AppRoutes = () => {
   return (
     <Routes>
@@ -19,7 +25,6 @@ const AppRoutes = () => {
       <Route path="/cart" element={<CartPage></CartPage>} />
       <Route path="/checkout" element={<CheckoutPage></CheckoutPage>} />
 
-      {/* test */}
       {/* test */}
       <Route path="/blogs/huong" element={<BreadCrumb />} />
       <Route path="/hiep" element={<h1>hiep</h1>} />

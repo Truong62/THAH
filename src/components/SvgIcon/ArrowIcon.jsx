@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param isOpen
+ * @returns {React.JSX.Element}
+ * @constructor
+ */
 const ArrowIcon = ({ isOpen }) => (
   <svg
     className={`w-4 h-4 transform transition-transform ${isOpen ? 'rotate-90' : ''}`}

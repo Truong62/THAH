@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param sortOption
+ * @param setSortOption
+ * @returns {Element}
+ * @constructor
+ */
 const SortBy = ({ sortOption, setSortOption }) => {
   const handleSortChange = (event) => {
     setSortOption(event.target.value);

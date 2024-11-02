@@ -5,7 +5,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { truncateDescription } from '../utils/truncateDescription';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
 import PropTypes from 'prop-types';
 
 const SuggestProducts = ({ products }) => {
@@ -13,10 +12,6 @@ const SuggestProducts = ({ products }) => {
     <div className="my-8">
       <Swiper
         spaceBetween={20}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
         className="w-full"
         breakpoints={{
           320: {

@@ -2,6 +2,13 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import ArrowIcon from './SvgIcon/ArrowIcon';
 
+/**
+ *
+ * @param onCategoryChange
+ * @param selectedCategory
+ * @returns {Element}
+ * @constructor
+ */
 const Sidebar = ({ onCategoryChange, selectedCategory }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [openBrands, setOpenBrands] = useState(true);

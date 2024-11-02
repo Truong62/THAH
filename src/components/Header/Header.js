@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
@@ -12,12 +12,22 @@ import CartModal from '../Cart/CartModal.js';
  */
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const cartItems = useSelector((state) => state.cart || []); // Ensure cartItems is an array
-
-  // Calculate the number of unique items
+  const cartItems = useSelector((state) => state.cart || []);
   const uniqueItemsCount = cartItems.length;
 
   const handleCloseModal = () => setIsModalOpen(false);
+
+  const [activeLink, setActiveLink] = useState('/');
+
+  useEffect(() => {
+    const path = window.location.pathname.split('/');
+
+    if (path.length > 1) {
+      setActiveLink(`/${path[1]}`);
+    } else {
+      setActiveLink('/');
+    }
+  }, []);
 
   return (
     <div className="container flex flex-col mx-auto sticky top-0 left-0 right-0 z-50 bg-white">
@@ -40,31 +50,34 @@ const Header = () => {
         <div className="items-center justify-between hidden gap-12 text-black md:flex">
           <Link
             to={'/products'}
-            className="text-sm text-dark-grey-700 hover:text-[#272B3B] font-bold"
+            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/products' ? 'bg-[#A8DCE7]' : ''}`}
           >
             Products
           </Link>
           <Link
-            to={'/'}
-            className="text-sm text-dark-grey-700 hover:text-[#272B3B] font-bold"
+            to={'/pricing'}
+            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/pricing' ? 'bg-[#A8DCE7]' : ''}`}
           >
             Pricing
           </Link>
           <Link
             to={'/blogs'}
-            className="text-sm text-dark-grey-700 hover:text-[#272B3B] font-bold"
+            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/blogs' ? 'bg-[#A8DCE7]' : ''}`}
           >
             Blogs
           </Link>
           <Link
-            to={'/'}
-            className="text-sm text-dark-grey-700 hover:text-[#272B3B] font-bold"
+            to={'/company'}
+            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/company' ? 'bg-[#A8DCE7]' : ''}`}
           >
             Company
           </Link>
         </div>
         <div className="items-center hidden gap-8 md:flex">
-          <Link to="/cart">
+          <Link
+            to="/cart"
+            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/company' ? 'bg-[#A8DCE7]' : ''}`}
+          >
             <button className="relative flex items-center py-2 text-sm font-bold text-gray-800 hover:text-[#272B3B] transition duration-300">
               <FontAwesomeIcon icon={faCartShopping} className="mr-2" />
               {uniqueItemsCount > 0 && (

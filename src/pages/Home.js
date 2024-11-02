@@ -31,7 +31,7 @@ const Home = () => {
           />
         </div>
         <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product, index) => (
+          {products.slice(0, 8).map((product, index) => (
             <div key={index}>
               <CardProduct
                 nameProduct={truncateDescription(product.productName, 20)}
@@ -50,7 +50,7 @@ const Home = () => {
         </div>
         <div className="flex items-center mb-3">
           <img className="w-[40px] mr-2" src="../../images/shoe.gif" alt="" />
-          <p className="text-2xl font-bold ">Product all</p>
+          <p className="text-2xl font-bold ">Products</p>
           <img
             className="w-[40px] ml-2 transform scale-x-[-1]"
             src="../../images/shoe.gif"
@@ -58,7 +58,7 @@ const Home = () => {
           />
         </div>
         <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product, index) => (
+          {products.slice(0, 4).map((product, index) => (
             <div key={index}>
               <CardProduct
                 nameProduct={truncateDescription(product.productName, 20)}

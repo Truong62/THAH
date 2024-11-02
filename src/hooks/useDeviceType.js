@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 
+/**
+ *
+ * @returns {{isTablet: boolean, isMobile: boolean}}
+ */
 const useDeviceType = () => {
   const [deviceType, setDeviceType] = useState({
     isMobile: false,

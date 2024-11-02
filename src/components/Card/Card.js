@@ -24,13 +24,17 @@ const CardProduct = ({
 }) => {
   return (
     <div onClick={onClick} className="cursor-pointer">
-      <div className="bg-white rounded-lg p-3 border-gray-200 border transition-transform duration-300 ease-in-out flex flex-col justify-between h-full hover:translate-y-[-5px]">
-        <img
-          src={imageUrl}
-          alt={nameProduct}
-          className="w-full rounded-t-lg h-auto object-cover"
+      <div className="bg-white rounded-lg p-3 border-gray-200 border ease-in-out flex flex-col justify-between h-full ">
+        <div
+          className="overflow-hidden rounded-t-lg"
           style={{ aspectRatio: '1 / 1' }}
-        />
+        >
+          <img
+            src={imageUrl}
+            alt={nameProduct}
+            className="w-full h-auto object-cover transition-all duration-500 ease-in-out transform hover:scale-110"
+          />
+        </div>
         <span className="font-semibold text-gray-500 mt-2">{brand}</span>
         <h4 className="text-xl font-bold mb-2">{nameProduct}</h4>
         <div className="flex items-center gap-1.25 text-sm">
@@ -41,12 +45,14 @@ const CardProduct = ({
               </p>
             ))
           ) : (
-            <p className="px-2 rounded-xl bg-[#A8DCE7] mr-2 ">{nameTag}</p>
+            <p className="px-2 rounded-xl bg-[#A8DCE7] mr-2">{nameTag}</p>
           )}
         </div>
         <p className="mt-2">{description}</p>
-        <div className="grid justify-end mt-3">
-          <p className="text-red-500 text-xl font-bold">{price}</p>
+        <div className="grid justify-end mt-3 ">
+          <p className="text-[#101422] text-lg font-bold px-1 py-2 border-2 border-[#A8DCE7] rounded-lg">
+            {price}
+          </p>
         </div>
       </div>
     </div>

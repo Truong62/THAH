@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param currentPage
+ * @param totalPages
+ * @param onPageChange
+ * @returns {Element}
+ * @constructor
+ */
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const getPageNumbers = () => {
     const pageNumbers = [];

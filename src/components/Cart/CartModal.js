@@ -5,8 +5,15 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { formatCurrency } from '../../utils/formatCurrency.js';
 import { updateQuantity } from '../../redux/cart/cartSlice.js';
 import Alert from '@mui/material/Alert';
-import PropTypes from 'prop-types'; // Import Alert
+import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param isOpen
+ * @param onClose
+ * @returns {React.JSX.Element|null}
+ * @constructor
+ */
 const CartModal = ({ isOpen, onClose }) => {
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();

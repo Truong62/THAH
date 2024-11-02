@@ -56,7 +56,7 @@ const Product = () => {
       <Layout>
         <div className="flex flex-col overflow-hidden">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
-            <p className="text-2xl font-bold">Product All</p>
+            <p className="text-2xl font-bold">Products</p>
             <SortBy
               sortOption={productFilters.sortOption}
               setSortOption={(newSortOption) =>
@@ -71,13 +71,13 @@ const Product = () => {
             <div className="w-full md:w-1/4">
               <Sidebar
                 onCategoryChange={handleCategoryChange}
-                selectedCategory={productFilters} // Pass the entire filters object
+                selectedCategory={productFilters}
               />
             </div>
             <div className="w-full md:w-3/4 ml-0 md:ml-4">
               <ProductList
                 products={products}
-                selectedCategory={productFilters} // Pass the entire filters object
+                selectedCategory={productFilters}
                 onCategoryChange={handleCategoryChange}
                 onRemoveCategory={handleRemoveCategory}
                 onProductClick={handleProductClick}

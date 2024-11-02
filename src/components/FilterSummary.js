@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param selectedCategory
+ * @param onRemoveCategory
+ * @returns {Element}
+ * @constructor
+ */
 const FilterSummary = ({ selectedCategory, onRemoveCategory }) => {
   return (
     <div

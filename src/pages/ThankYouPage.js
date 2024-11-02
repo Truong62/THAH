@@ -2,6 +2,11 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { formatCurrency } from '../utils/formatCurrency'; // Ensure this utility is imported
 
+/**
+ *
+ * @returns {Element}
+ * @constructor
+ */
 const ThankYouPage = () => {
   const location = useLocation();
   const orderDetails = location.state?.orderDetails;
