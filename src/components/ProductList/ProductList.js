@@ -5,11 +5,19 @@ import CardProduct from '../Card/Card';
 import FilterSummary from '../FilterSummary';
 import Pagination from '../Pagination';
 import useDeviceType from '../../hooks/useDeviceType';
-import products from '../../data.json';
+
+/**
+ *
+ * @param products{ProductType}
+ * @param selectedCategory
+ * @param onRemoveCategory
+ * @param onProductClick
+ * @returns {Element}
+ * @constructor
+ */
 const ProductList = ({
   products,
   selectedCategory,
-  onCategoryChange,
   onRemoveCategory,
   onProductClick,
 }) => {
