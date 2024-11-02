@@ -24,7 +24,7 @@ const CardProduct = ({
 }) => {
   return (
     <div onClick={onClick} className="cursor-pointer">
-      <div className="bg-white rounded-lg p-3 border-gray-200 border ease-in-out flex flex-col justify-between h-full ">
+      <div className="h-full bg-white rounded-lg p-3 border-gray-200 border ease-in-out flex flex-col justify-between">
         <div
           className="overflow-hidden rounded-t-lg"
           style={{ aspectRatio: '1 / 1' }}
@@ -48,7 +48,7 @@ const CardProduct = ({
             <p className="px-2 rounded-xl bg-[#A8DCE7] mr-2">{nameTag}</p>
           )}
         </div>
-        <p className="mt-2">{description}</p>
+        <div className="mt-2 max-h-[50px] min-h-[50px]">{description}</div>
         <div className="grid justify-end mt-3 ">
           <p className="text-[#101422] text-lg font-bold px-1 py-2 border-2 border-[#A8DCE7] rounded-lg">
             {price}
