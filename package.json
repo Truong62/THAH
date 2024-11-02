@@ -16,6 +16,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@vitejs/plugin-react": "^4.3.3",
     "axios": "^1.7.7",
     "formik": "^2.4.6",
     "install": "^0.13.0",
@@ -40,18 +41,20 @@
     "swiper": "^11.1.14",
     "swr": "^2.2.5",
     "video.js": "^8.17.3",
+    "vite": "^5.4.10",
     "web-vitals": "^2.1.4",
     "yup": "^1.4.0",
     "zod": "^3.23.8"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "lint": "eslint . --ext .js,.jsx",
     "format": "prettier --write .",
     "prestart": "npm run lint && npm run format",
-    "start": "react-scripts start"
+    "start": "npm run prestart && react-scripts start"
   },
   "eslintConfig": {
     "extends": [
