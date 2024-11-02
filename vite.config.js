@@ -6,4 +6,8 @@ export default defineConfig({
   server: {
     port: 8386,
   },
+  esbuild: {
+    loader: 'jsx',
+    include: /src\/.*\.[tj]sx?$/,
+  },
 });

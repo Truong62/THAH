@@ -3,9 +3,9 @@ import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import Layout from '../components/Layout';
 import ProductList from '../components/ProductList/ProductList';
-import Sidebar from '../components/Sidebar.js';
+import Sidebar from '../components/Sidebar.jsx';
 import SortBy from '../components/SortBy';
-import BreadCrumb from '../components/BreadCrumb.js';
+import BreadCrumb from '../components/BreadCrumb.jsx';
 import { useNavigate } from 'react-router-dom';
 import products from '../data.json'; // Ensure this path is correct
 

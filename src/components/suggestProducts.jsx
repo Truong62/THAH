@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import CardProduct from '../components/Card/Card.js';
+import CardProduct from './Card/Card.jsx';
 import { formatCurrency } from '../utils/formatCurrency.js';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { truncateDescription } from '../utils/truncateDescription';
