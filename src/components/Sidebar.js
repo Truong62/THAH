@@ -1,4 +1,6 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import PropTypes from 'prop-types';
+import ArrowIcon from './SvgIcon/ArrowIcon';
 
 const Sidebar = ({ onCategoryChange, selectedCategory }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
@@ -22,27 +24,6 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
     setOpenSize((prevState) => !prevState);
   }, []);
 
-  const ArrowIcon = useMemo(
-    () =>
-      ({ isOpen }) => (
-        <svg
-          className={`w-4 h-4 transform transition-transform ${isOpen ? 'rotate-90' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M9 5l7 7-7 7"
-          ></path>
-        </svg>
-      ),
-    []
-  );
-
   return (
     <div className="p-4 bg-white border border-gray-300 rounded-lg">
       <div className="mb-4">
@@ -55,10 +36,9 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
           <ArrowIcon isOpen={isCategoryOpen} />
         </button>
         <div className={`mt-2 ${isCategoryOpen ? 'block' : 'hidden'} md:block`}>
-          <div className="w-full flex justify-between items-center py-2 px-4 rounded-lg md:block hidden">
+          <div className="w-full flex justify-between items-center py-2 px-4 rounded-lg md:block ">
             <span className="text-xl font-bold">Category</span>
           </div>
-          {/* Brands */}
           <button
             className="w-full flex justify-between items-center py-2 px-4"
             onClick={toggleBrands}
@@ -171,3 +151,12 @@ const Sidebar = ({ onCategoryChange, selectedCategory }) => {
 };
 
 export default React.memo(Sidebar);
+
+Sidebar.propTypes = {
+  onCategoryChange: PropTypes.func.isRequired,
+  selectedCategory: PropTypes.shape({
+    brand: PropTypes.string,
+    price: PropTypes.string,
+    size: PropTypes.string,
+  }).isRequired,
+};

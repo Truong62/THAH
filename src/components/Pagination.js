@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const getPageNumbers = () => {
@@ -6,36 +7,24 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     const maxPagesToShow = 3;
 
     if (totalPages <= 6) {
-      for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i);
-      }
+      pageNumbers.push(...Array.from({ length: totalPages }, (_, i) => i + 1));
     } else {
       if (currentPage <= maxPagesToShow) {
-        for (let i = 1; i <= maxPagesToShow; i++) {
-          pageNumbers.push(i);
-        }
+        pageNumbers.push(
+          ...Array.from({ length: maxPagesToShow }, (_, i) => i + 1)
+        );
         pageNumbers.push('...');
-        for (let i = totalPages - 2; i <= totalPages; i++) {
-          pageNumbers.push(i);
-        }
+        pageNumbers.push(totalPages - 1, totalPages);
       } else if (currentPage > totalPages - maxPagesToShow) {
-        for (let i = 1; i <= 3; i++) {
-          pageNumbers.push(i);
-        }
+        pageNumbers.push(1, 2, 3);
         pageNumbers.push('...');
-        for (let i = totalPages - 2; i <= totalPages; i++) {
-          pageNumbers.push(i);
-        }
+        pageNumbers.push(totalPages - 1, totalPages);
       } else {
-        for (let i = 1; i <= 3; i++) {
-          pageNumbers.push(i);
-        }
+        pageNumbers.push(1, 2, 3);
         pageNumbers.push('...');
         pageNumbers.push(currentPage);
         pageNumbers.push('...');
-        for (let i = totalPages - 2; i <= totalPages; i++) {
-          pageNumbers.push(i);
-        }
+        pageNumbers.push(totalPages - 1, totalPages);
       }
     }
 
@@ -70,6 +59,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       </button>
     </div>
   );
+};
+
+Pagination.propTypes = {
+  currentPage: PropTypes.number,
+  totalPages: PropTypes.number,
+  onPageChange: PropTypes.func,
 };
 
 export default Pagination;

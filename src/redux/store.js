@@ -1,6 +1,5 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore } from 'redux-persist';
 import cartReducer from './cart/cartSlice';
 
 const store = configureStore({

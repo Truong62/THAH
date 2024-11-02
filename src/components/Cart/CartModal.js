@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { formatCurrency } from '../../utils/formatCurrency.js';
 import { updateQuantity } from '../../redux/cart/cartSlice.js';
-import Alert from '@mui/material/Alert'; // Import Alert
+import Alert from '@mui/material/Alert';
+import PropTypes from 'prop-types'; // Import Alert
 
 const CartModal = ({ isOpen, onClose }) => {
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const [alert, setAlert] = React.useState(null); // State for alert
+  const [alert, setAlert] = React.useState(null);
 
   if (!isOpen) return null;
 
@@ -29,8 +30,7 @@ const CartModal = ({ isOpen, onClose }) => {
     setAlert(null);
   };
 
-  const handleRemoveItem = (id, color, size) => {
-    // Logic to remove item from cart
+  const handleRemoveItem = () => {
     setAlert('Item removed from cart');
   };
 
@@ -143,3 +143,8 @@ const CartModal = ({ isOpen, onClose }) => {
 };
 
 export default CartModal;
+
+CartModal.propTypes = {
+  isOpen: PropTypes.bool,
+  onClose: PropTypes.func.isRequired,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FilterSummary = ({ selectedCategory, onRemoveCategory }) => {
   return (
@@ -29,6 +30,11 @@ const FilterSummary = ({ selectedCategory, onRemoveCategory }) => {
       </div>
     </div>
   );
+};
+
+FilterSummary.propTypes = {
+  selectedCategory: PropTypes.object.isRequired,
+  onRemoveCategory: PropTypes.func.isRequired,
 };
 
 export default FilterSummary;

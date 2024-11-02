@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  *
@@ -53,3 +54,13 @@ const CardProduct = ({
 };
 
 export default CardProduct;
+
+CardProduct.propTypes = {
+  nameProduct: PropTypes.string,
+  description: PropTypes.string,
+  price: PropTypes.string | PropTypes.number,
+  brand: PropTypes.string,
+  nameTag: PropTypes.arrayOf(PropTypes.string),
+  imageUrl: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+};

@@ -308,3 +308,4 @@ const CheckoutPage = React.memo(() => {
 });
 
 export default CheckoutPage;
+CheckoutPage.displayName = 'CheckoutPage';

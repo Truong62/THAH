@@ -1,6 +1,17 @@
 import React from 'react';
-const Layout = ({ children }) => {
-  return <div className="max-w-[1280px] my-0 mx-auto">{children}</div>;
+import PropTypes from 'prop-types';
+
+const Layout = ({ children, w = '1280px' }) => {
+  return (
+    <div className="my-0 mx-auto" style={{ maxWidth: w }}>
+      {children}
+    </div>
+  );
 };
 
 export default Layout;
+
+Layout.propTypes = {
+  children: PropTypes.node,
+  w: PropTypes.string,
+};

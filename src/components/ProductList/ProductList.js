@@ -5,6 +5,7 @@ import CardProduct from '../Card/Card';
 import FilterSummary from '../FilterSummary';
 import Pagination from '../Pagination';
 import useDeviceType from '../../hooks/useDeviceType';
+import PropTypes from 'prop-types';
 
 /**
  *
@@ -119,3 +120,10 @@ const ProductList = ({
 };
 
 export default ProductList;
+
+ProductList.propTypes = {
+  products: PropTypes.object,
+  selectedCategory: PropTypes.object.isRequired,
+  onRemoveCategory: PropTypes.func.isRequired,
+  onProductClick: PropTypes.func.isRequired,
+};
