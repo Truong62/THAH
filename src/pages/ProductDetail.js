@@ -7,6 +7,11 @@ import ProductDetailsCard from '../components/ProductDetailsCard';
 import SuggestProducts from '../components/suggestProducts';
 import products from '../data.json'; // Import the products array from data.json
 
+/**
+ *
+ * @returns {Element}
+ * @constructor
+ */
 const ProductDetail = () => {
   return (
     <div>

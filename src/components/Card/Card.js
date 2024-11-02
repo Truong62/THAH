@@ -64,7 +64,7 @@ export default CardProduct;
 CardProduct.propTypes = {
   nameProduct: PropTypes.string,
   description: PropTypes.string,
-  price: PropTypes.string | PropTypes.number,
+  price: PropTypes.number | PropTypes.string,
   brand: PropTypes.string,
   nameTag: PropTypes.arrayOf(PropTypes.string),
   imageUrl: PropTypes.string,
