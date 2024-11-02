@@ -48,7 +48,7 @@
   },
   "scripts": {
     "dev": "npm run checkType && vite",
-    "build": "vite build",
+    "build": "react-scripts build",
     "preview": "vite preview",
     "test": "react-scripts test",
     "lint": "eslint . --ext .js,.jsx",
