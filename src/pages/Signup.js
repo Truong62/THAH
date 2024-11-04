@@ -33,10 +33,18 @@ export default function SignUpForm() {
       setFullNameError('Full Name is required');
       valid = false;
     }
+    const containsDiacritics = (str) => {
+      // Biểu thức chính quy để kiểm tra ký tự có dấu
+      const regex = /[àáảãạâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộùúủũụưừứửữựỳýỷỹỵ]/;
+      return regex.test(str);
+    };
 
     // Validate email
     if (!email) {
       setEmailError('Email is required');
+      valid = false;
+    } else if (containsDiacritics(email)) {
+      setEmailError('Email is invalid');
       valid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       setEmailError('Email is invalid');
