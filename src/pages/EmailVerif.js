@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import userData from '../user.json';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../components/Icon/Back';
@@ -91,9 +91,9 @@ export default function EmailVerification() {
         </div>
         {error && <div className="text-red-500 mb-2">{error}</div>}
         <div className="flex justify-between w-full mt-4">
-          <a href="#" className="text-purple-500 mb-3">
+          <Link href="#" className="text-purple-500 mb-3">
             Resend OTP
-          </a>
+          </Link>
         </div>
         <button
           type="submit"

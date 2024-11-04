@@ -19,12 +19,6 @@ export default function SignUpForm() {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const navigate = useNavigate();
 
-  const handleFocus = (field) => {
-    if (field === 'email') {
-      setEmailError('');
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     let valid = true;
