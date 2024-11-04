@@ -28,6 +28,20 @@ export default function EmailVerification() {
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
+
+    // Move to the next input if the current one is filled
+    if (value && index < otp.length - 1) {
+      const nextInput = document.getElementById(`otp-input-${index + 1}`);
+      if (nextInput) {
+        nextInput.focus();
+      }
+    } else if (!value && index > 0) {
+      // Move to the previous input if the current one is empty
+      const prevInput = document.getElementById(`otp-input-${index - 1}`);
+      if (prevInput) {
+        prevInput.focus();
+      }
+    }
   };
 
   const handleSubmit = (e) => {
@@ -80,6 +94,7 @@ export default function EmailVerification() {
           {otp.map((digit, index) => (
             <input
               key={index}
+              id={`otp-input-${index}`} // Unique ID for each input
               type="text"
               value={digit}
               onChange={(e) => handleChange(index, e.target.value)}

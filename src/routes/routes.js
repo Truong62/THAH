@@ -29,7 +29,6 @@ const AppRoutes = () => {
       <Route path="/login" element={<LoginForm />} />{' '}
       <Route path="/email-verification" element={<EmailVerification />} />
       <Route path="/congratulations" element={<Congratulations />} />
-
     </Routes>
   );
 };

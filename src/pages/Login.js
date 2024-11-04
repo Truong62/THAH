@@ -134,7 +134,7 @@ export default function LoginForm() {
             label="Email *"
             type="text"
             value={email}
-            placeholder='example@gmail.com'
+            placeholder="example@gmail.com"
             onChange={(e) => setEmail(e.target.value)}
             onFocus={() => handleFocus('email')}
             className={`w-full p-2 rounded-md ${emailError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
@@ -148,7 +148,7 @@ export default function LoginForm() {
             label="Password *"
             type="password"
             value={password}
-            placeholder='Enter password'
+            placeholder="Enter password"
             onChange={(e) => setPassword(e.target.value)}
             onFocus={() => handleFocus('password')}
             showPassword={showPassword}
