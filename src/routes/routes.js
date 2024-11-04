@@ -10,6 +10,8 @@ import CartPage from '../pages/Cart';
 import CheckoutPage from '../pages/Checkout';
 import SignUpForm from '../pages/Signup';
 import LoginForm from '../pages/Login';
+import EmailVerification from '../pages/EmailVerif';
+import Congratulations from '../pages/Congratulations';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -25,6 +27,9 @@ const AppRoutes = () => {
       <Route path="*" element={<PageNotFound />} />
       <Route path="/signup" element={<SignUpForm />} />{' '}
       <Route path="/login" element={<LoginForm />} />{' '}
+      <Route path="/email-verification" element={<EmailVerification />} />
+      <Route path="/congratulations" element={<Congratulations />} />
+
     </Routes>
   );
 };

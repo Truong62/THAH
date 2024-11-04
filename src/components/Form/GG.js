@@ -1,8 +1,9 @@
-// src/components/Auth/GoogleSignInButton.jsx
 import React from 'react';
 
 const GoogleSignInButton = () => (
-  <button className="flex items-center justify-center w-full p-3 border border-gray-300 rounded-lg mb-4">
+  <button
+    className="flex items-center justify-center border border-gray-300 rounded-lg mb-4 w-full max-w-[430px] h-[52px]" // Đặt chiều rộng và chiều cao cụ thể
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"

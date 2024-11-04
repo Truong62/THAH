@@ -23,6 +23,18 @@
     1
   ); /* Change to your desired hover color */
 }
+
+.input-error {
+  border: 1px solid red;
+  color: red;
+}
+
+.error-message {
+  margin-top: 2px; /* Điều chỉnh khoảng cách theo ý muốn */
+  color: red; /* Màu chữ cho thông báo lỗi */
+  font-size: 0.875rem; /* Kích thước chữ nhỏ hơn */
+}
+
 @media (max-width: 768px) {
   .login-form {
     width: 327px; /* Set width for smaller screens */

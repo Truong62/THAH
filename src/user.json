@@ -2,13 +2,22 @@
   {
     "role": "admin",
     "email": "admin@gmail.com",
-    "password": "admin123",
-    "active_code": "123456"
+    "password": "admin1234",
+    "active_code": "1234",
+    "isActive": true
   },
   {
     "role": "user",
     "email": "user@gmail.com",
-    "password": "user123",
-    "active_code": "234567"
+    "password": "user1234",
+    "active_code": "2341",
+    "isActive": true
+  },
+  {
+    "role": "user",
+    "email": "user2@gmail.com",
+    "password": "user1234",
+    "active_code": "3412",
+    "isActive": false
   }
 ]
