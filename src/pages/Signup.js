@@ -33,18 +33,10 @@ export default function SignUpForm() {
       setFullNameError('Full Name is required');
       valid = false;
     }
-    const containsDiacritics = (str) => {
-      // Biểu thức chính quy để kiểm tra ký tự có dấu
-      const regex = /[àáảãạâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộùúủũụưừứửữựỳýỷỹỵ]/;
-      return regex.test(str);
-    };
 
     // Validate email
     if (!email) {
       setEmailError('Email is required');
-      valid = false;
-    } else if (containsDiacritics(email)) {
-      setEmailError('Email is invalid');
       valid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       setEmailError('Email is invalid');
@@ -78,8 +70,8 @@ export default function SignUpForm() {
 
     // If valid, proceed with sign-up logic
     if (valid) {
-      console.log('Signing up with:', { fullName, email, password });
-      navigate('/email-verification', { state: { email } });
+      // Navigate to OTP verification page
+      navigate('/email-verification', { state: { email, password } });
     }
   };
 
@@ -110,7 +102,7 @@ export default function SignUpForm() {
       style={{
         padding: '24px',
         gap: '10px',
-        opacity: '1', // Đặt opacity thành 1 để hiển thị
+        opacity: '1',
       }}
     >
       <div className="absolute top-4 right-4">

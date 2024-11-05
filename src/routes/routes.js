@@ -12,6 +12,10 @@ import SignUpForm from '../pages/Signup';
 import LoginForm from '../pages/Login';
 import EmailVerification from '../pages/EmailVerif';
 import Congratulations from '../pages/Congratulations';
+import ResetSuccess from '../pages/ResetPassword/Reset-Success';
+import ForgotPassword from '../pages/ResetPassword/Forgot-password';
+import EnterOtp from '../pages/ResetPassword/resetOTP';
+import CreateNewPassword from '../pages/ResetPassword/CreateNewPassword';
 const AppRoutes = () => {
   return (
     <Routes>
@@ -29,6 +33,10 @@ const AppRoutes = () => {
       <Route path="/login" element={<LoginForm />} />{' '}
       <Route path="/email-verification" element={<EmailVerification />} />
       <Route path="/congratulations" element={<Congratulations />} />
+      <Route path="/reset-success" element={<ResetSuccess />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/enter-otp" element={<EnterOtp />} />
+      <Route path="/create-new-password" element={<CreateNewPassword />} />
     </Routes>
   );
 };

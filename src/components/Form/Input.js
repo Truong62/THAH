@@ -1,3 +1,4 @@
+// src/components/Form/Input.js
 import React from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -11,13 +12,15 @@ const InputField = ({
   className = '',
   showPassword,
   togglePasswordVisibility,
-  placeholder, // Add placeholder prop
-  isDarkMode, // Add isDarkMode prop
+  placeholder,
+  isDarkMode,
 }) => {
   return (
     <div className="mb-2 w-full max-w-[436px]">
-      {/* Đặt kích thước cho toàn bộ thành phần */}
-      <label className="block text-sm font-medium text-gray-700 mb-1">
+      <label
+        className="block text-sm font-medium mb-1"
+        style={{ color: 'rgba(128, 129, 145, 1)' }} // Đặt màu cho label
+      >
         {label}
       </label>
       <div className="relative">
@@ -26,15 +29,15 @@ const InputField = ({
           value={value}
           onChange={onChange}
           onFocus={onFocus}
-          placeholder={placeholder} // Render the placeholder
+          placeholder={placeholder}
           className={`p-2 border rounded-md ${className}`}
           style={{
-            width: '100%', // Đặt chiều rộng là 100% để sử dụng tối đa không gian
-            height: '52px', // Đặt chiều cao cố định
+            width: '100%',
+            height: '52px',
             boxSizing: 'border-box',
             fontSize: '14px',
-            backgroundColor: isDarkMode ? 'rgba(28, 28, 36, 1)' : 'white', // Set background color based on dark mode
-            color: isDarkMode ? 'white' : 'black', // Set text color based on dark mode
+            backgroundColor: isDarkMode ? 'rgba(28, 28, 36, 1)' : 'white',
+            color: isDarkMode ? 'white' : 'black',
           }}
         />
 
@@ -52,6 +55,11 @@ const InputField = ({
           </button>
         )}
       </div>
+      <style>{`
+        input::placeholder {
+          color: rgba(75, 82, 100, 1);
+        }
+      `}</style>
     </div>
   );
 };

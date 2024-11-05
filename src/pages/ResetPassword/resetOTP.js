@@ -1,13 +1,14 @@
+// src/pages/EnterOtp.js
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import userData from '../user.json';
+import userData from '../../user.json';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import BackIcon from '../components/Icon/Back';
+import BackIcon from '../../components/Icon/Back';
 
-export default function EmailVerification() {
+export default function EnterOtp() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { email, password } = location.state || {}; // Nhận email và password từ state
+  const { email } = location.state || {}; // Nhận email từ state
 
   const [otp, setOtp] = useState(['', '', '', '']);
   const [error, setError] = useState('');
@@ -17,16 +18,10 @@ export default function EmailVerification() {
     setIsDarkMode(!isDarkMode);
   };
 
-  // Kiểm tra nếu không có email thì chuyển hướng về trang đăng ký
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
-
     if (!email) {
       navigate('/signup'); // Chuyển hướng về trang đăng ký nếu không có email
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [email, navigate]);
 
   const handleChange = (index, value) => {
@@ -54,6 +49,14 @@ export default function EmailVerification() {
     }
   };
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const otpString = otp.join('');
@@ -62,12 +65,9 @@ export default function EmailVerification() {
     const user = userData.find((user) => user.email === email);
 
     // Kiểm tra mã OTP
-    if (user && otpString === user.active_code) {
-      // Set verification status in local storage
-      localStorage.setItem('isVerified', 'true'); // Example using local storage
-      console.log('Email:', email);
-      console.log('Password:', password); // Kiểm tra xem password có được nhận hay không
-      navigate('/congratulations'); // Navigate to the Congratulations page
+    if (user && otpString === user.reset_code) {
+      localStorage.setItem('isVerified', 'true');
+      navigate('/create-new-password');
     } else {
       setError('Invalid OTP. Please try again.');
     }
@@ -75,7 +75,8 @@ export default function EmailVerification() {
 
   return (
     <div
-      className={`relative flex items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
+      className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
+      style={{ fontFamily: 'Epilogue', padding: '24px' }}
     >
       <div className="absolute top-4 right-4">
         <LightbulbIcon
@@ -93,16 +94,17 @@ export default function EmailVerification() {
         }}
       ></div>
       <div
-        className={`p-8 rounded-lg w-[455px] h-[467px] shadow-lg z-10 flex flex-col ${isDarkMode ? 'bg-[rgba(28,28,36,1)] text-white' : 'bg-white text-black'}`}
+        className={`p-6 md:p-8 rounded-lg w-full max-w-[455px] h-auto shadow-lg z-10 flex flex-col items-center ${isDarkMode ? 'bg-[rgba(28,28,36,1)] text-white' : 'bg-white text-black'}`}
       >
-        <h2 className="text-2xl font-bold mb-4" style={{ fontSize: '25px' }}>
-          Email Verification
-        </h2>
-        <p className="mb-2" style={{ color: 'rgba(178, 179, 189, 1)' }}>
-          Please Enter the OTP you receive to
+        <h2 className="text-2xl font-bold mb-4 text-left">Forgot Password</h2>
+        <p
+          className="mb-2 text-left"
+          style={{ color: 'rgba(178, 179, 189, 1)' }}
+        >
+          Please Enter the OTP you received to
         </p>
-        <p className="mb-4">{email}</p>
-        <div className="space-x-2 mb-4">
+        <p className="mb-4 text-center">{email}</p>
+        <div className="space-x-2 mb-4 flex justify-center">
           {otp.map((digit, index) => (
             <input
               key={index}
@@ -118,7 +120,7 @@ export default function EmailVerification() {
         </div>
         {error && <div className="text-red-500 mb-2">{error}</div>}
         <div className="flex justify-between w-full mt-4">
-          <Link href="#" className="text-purple-500 mb-3">
+          <Link to="#" className="text-purple-500 mb-3">
             Resend OTP
           </Link>
         </div>
