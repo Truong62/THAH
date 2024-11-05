@@ -161,8 +161,8 @@ export default function LoginForm() {
           )}
 
           <div className="mb-2 w-full flex justify-end">
-            <Link href="/forgotpassword" className="text-green-500 text-sm">
-              Forgot password?
+            <Link to="/forgotpassword" className="text-green-500">
+              Forgot Password?
             </Link>
           </div>
 
