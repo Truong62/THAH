@@ -34,8 +34,8 @@ const AppRoutes = () => {
 
       {/* test */}
       <Route path="/blogs/huong" element={<BreadCrumb />} />
-      <Route path="/login" element={<LoginForm />} />
       <Route path="/signup" element={<SignUpForm />} />
+      <Route path="/login" element={<LoginForm />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/enter-otp" element={<EnterOtp />} />
       <Route path="/create-new-password" element={<CreateNewPassword />} />
