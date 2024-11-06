@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CardProduct from '../components/Card/Card';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
@@ -81,14 +81,14 @@ const Home = () => {
             alt="banner"
             src="https://theme.hstatic.net/200000238513/1000665981/14/banner_project_1.jpg?v=23"
           />
-          <Link
-            to={'/products'}
+          <a
+            href={'/products'}
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 transition-transform duration-1000"
           >
             <div className="bg-amber-50 hover:bg-[#A8DCE7] px-8 py-2 rounded-lg ">
               <p className="font-bold text-xl ">Buy Now</p>
             </div>
-          </Link>
+          </a>
         </div>
       </Layout>
       <Footer />

@@ -8,7 +8,14 @@ import ProductDetail from '../pages/ProductDetail';
 import PageNotFound from '../components/404NotFound/_404PageNotFound';
 import CartPage from '../pages/Cart';
 import CheckoutPage from '../pages/Checkout';
-
+import LoginForm from '../pages/Login';
+import SignUpForm from '../pages/Signup';
+import ForgotPassword from '../pages/ResetPassword/Forgot-password';
+import EnterOtp from '../pages/ResetPassword/resetOTP';
+import CreateNewPassword from '../pages/ResetPassword/CreateNewPassword';
+import ResetSuccess from '../pages/ResetPassword/Reset-Success';
+import EmailVerification from '../pages/EmailVerif';
+import Congratulations from '../pages/Congratulations';
 /**
  *
  * @returns {Element}
@@ -27,6 +34,15 @@ const AppRoutes = () => {
 
       {/* test */}
       <Route path="/blogs/huong" element={<BreadCrumb />} />
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/signup" element={<SignUpForm />} />
+      <Route path="/forgotpassword" element={<ForgotPassword />} />
+      <Route path="/enter-otp" element={<EnterOtp />} />
+      <Route path="/create-new-password" element={<CreateNewPassword />} />
+      <Route path="/reset-success" element={<ResetSuccess />} />
+      <Route path="/email-verification" element={<EmailVerification />} />
+      <Route path="/congratulations" element={<Congratulations />} />
+
       <Route path="/hiep" element={<h1>hiep</h1>} />
 
       <Route path="*" element={<PageNotFound />} />

@@ -1,23 +1,27 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+
+// import { clearCart } from '../redux/cart/cartSlice'; // Import action clearCart
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { formatCurrency } from '../utils/formatCurrency';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select'; // Import Select từ MUI
+import MenuItem from '@mui/material/MenuItem'; // Import MenuItem từ MUI
 
-/**
- *
- * @type {React.NamedExoticComponent<object>}
- */
+// eslint-disable-next-line react/display-name
 const CheckoutPage = React.memo(() => {
   const cartItems = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
+  // const dispatch = useDispatch();
+  // const [snackbarQueue, setSnackbarQueue] = useState([]);
 
   useEffect(() => {
     if (cartItems.length === 0) {
@@ -84,7 +88,9 @@ const CheckoutPage = React.memo(() => {
         email: Yup.string()
           .email('Invalid email')
           .required('Email is required'),
-        phoneNumber: Yup.string().required('Phone number is required'),
+        phoneNumber: Yup.string()
+          .required('Phone number is required')
+          .matches(/^[0-9]+$/, 'Phone number must be numeric'),
         detailAddress: Yup.string().required('Address is required'),
         selectedProvince: Yup.string().required('Province is required'),
         selectedDistrict: Yup.string().required('District is required'),
@@ -99,9 +105,18 @@ const CheckoutPage = React.memo(() => {
         ...values,
         cartItems,
       });
-      // Handle successful checkout logic here
+
+      // setSnackbarQueue((prevQueue) => [
+      //   ...prevQueue,
+      //   { message: 'CHECKOUT SUCCESSFUL! CART CLEARED.', type: 'success' },
+      // ]);
+
+      // setTimeout(() => {
+
+      //   dispatch(clearCart());
+      // }, 3000);
     },
-    [cartItems]
+    [cartItems] //thêm dispatch sau
   );
 
   return (
@@ -159,140 +174,164 @@ const CheckoutPage = React.memo(() => {
               validationSchema={validationSchema}
               onSubmit={handleCheckout}
             >
-              {({ setFieldValue, values }) => (
+              {({ setFieldValue, values, errors, touched }) => (
                 <Form className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="col-span-1 md:col-span-2">
-                    <Field
-                      type="text"
+                    <TextField
+                      fullWidth
+                      id="fullName"
                       name="fullName"
-                      placeholder="Full Name"
-                      className="w-full p-2 border rounded"
-                    />
-                    <ErrorMessage
-                      name="fullName"
-                      component="div"
-                      className="text-red-500"
+                      label="Full Name"
+                      value={values.fullName}
+                      onChange={(e) =>
+                        setFieldValue('fullName', e.target.value)
+                      }
+                      error={touched.fullName && Boolean(errors.fullName)}
+                      helperText={touched.fullName && errors.fullName}
                     />
                   </div>
                   <div>
-                    <Field
-                      type="email"
+                    <TextField
+                      fullWidth
+                      id="email"
                       name="email"
-                      placeholder="Email"
-                      className="w-full p-2 border rounded"
-                    />
-                    <ErrorMessage
-                      name="email"
-                      component="div"
-                      className="text-red-500"
+                      label="Email"
+                      value={values.email}
+                      onChange={(e) => setFieldValue('email', e.target.value)}
+                      error={touched.email && Boolean(errors.email)}
+                      helperText={touched.email && errors.email}
                     />
                   </div>
                   <div>
-                    <Field
-                      type="tel"
+                    <TextField
+                      fullWidth
+                      id="phoneNumber"
                       name="phoneNumber"
-                      placeholder="Phone Number"
-                      className="w-full p-2 border rounded"
-                    />
-                    <ErrorMessage
-                      name="phoneNumber"
-                      component="div"
-                      className="text-red-500"
+                      label="Phone Number"
+                      value={values.phoneNumber}
+                      onChange={(e) =>
+                        setFieldValue('phoneNumber', e.target.value)
+                      }
+                      error={touched.phoneNumber && Boolean(errors.phoneNumber)}
+                      helperText={touched.phoneNumber && errors.phoneNumber}
                     />
                   </div>
                   <div className="col-span-1 md:col-span-2">
-                    <Field
-                      as="textarea"
+                    <TextField
+                      fullWidth
+                      id="detailAddress"
                       name="detailAddress"
-                      placeholder="Detail Address"
-                      className="w-full p-2 border rounded"
-                    />
-                    <ErrorMessage
-                      name="detailAddress"
-                      component="div"
-                      className="text-red-500"
+                      label="Detail Address"
+                      multiline
+                      rows={4}
+                      value={values.detailAddress}
+                      onChange={(e) =>
+                        setFieldValue('detailAddress', e.target.value)
+                      }
+                      error={
+                        touched.detailAddress && Boolean(errors.detailAddress)
+                      }
+                      helperText={touched.detailAddress && errors.detailAddress}
                     />
                   </div>
                   <div>
-                    <select
+                    <Select
                       name="selectedProvince"
-                      className="w-full p-2 border rounded"
                       value={
                         provinces.find(
                           (p) => p.province_name === values.selectedProvince
                         )?.province_id || ''
                       }
                       onChange={(e) => handleProvinceChange(e, setFieldValue)}
+                      displayEmpty
+                      fullWidth
+                      error={
+                        touched.selectedProvince &&
+                        Boolean(errors.selectedProvince)
+                      }
                     >
-                      <option value="">Select Province</option>
+                      <MenuItem value="">
+                        <em>Select Province</em>
+                      </MenuItem>
                       {provinces.map((province) => (
-                        <option
+                        <MenuItem
                           key={province.province_id}
                           value={province.province_id}
                         >
                           {province.province_name}
-                        </option>
+                        </MenuItem>
                       ))}
-                    </select>
-                    <ErrorMessage
-                      name="selectedProvince"
-                      component="div"
-                      className="text-red-500"
-                    />
+                    </Select>
+                    {errors.selectedProvince && touched.selectedProvince && (
+                      <div className="text-red-500">
+                        {errors.selectedProvince}
+                      </div>
+                    )}
                   </div>
                   <div>
-                    <select
+                    <Select
                       name="selectedDistrict"
-                      className="w-full p-2 border rounded"
                       value={
                         districts.find(
                           (d) => d.district_name === values.selectedDistrict
                         )?.district_id || ''
                       }
                       onChange={(e) => handleDistrictChange(e, setFieldValue)}
+                      displayEmpty
+                      fullWidth
+                      error={
+                        touched.selectedDistrict &&
+                        Boolean(errors.selectedDistrict)
+                      }
                     >
-                      <option value="">Select District</option>
+                      <MenuItem value="">
+                        <em>Select District</em>
+                      </MenuItem>
                       {districts.map((district) => (
-                        <option
+                        <MenuItem
                           key={district.district_id}
                           value={district.district_id}
                         >
                           {district.district_name}
-                        </option>
+                        </MenuItem>
                       ))}
-                    </select>
-                    <ErrorMessage
-                      name="selectedDistrict"
-                      component="div"
-                      className="text-red-500"
-                    />
+                    </Select>
+                    {errors.selectedDistrict && touched.selectedDistrict && (
+                      <div className="text-red-500">
+                        {errors.selectedDistrict}
+                      </div>
+                    )}
                   </div>
                   <div className="col-span-1 md:col-span-2">
-                    <select
+                    <Select
                       name="selectedWard"
-                      className="w-full p-2 border rounded"
                       value={
                         wards.find((w) => w.ward_name === values.selectedWard)
                           ?.ward_id || ''
                       }
                       onChange={(e) => handleWardChange(e, setFieldValue)}
+                      displayEmpty
+                      fullWidth
+                      error={
+                        touched.selectedWard && Boolean(errors.selectedWard)
+                      }
                     >
-                      <option value="">Select Ward</option>
+                      <MenuItem value="">
+                        <em>Select Ward</em>
+                      </MenuItem>
                       {wards.map((ward) => (
-                        <option key={ward.ward_id} value={ward.ward_id}>
+                        <MenuItem key={ward.ward_id} value={ward.ward_id}>
                           {ward.ward_name}
-                        </option>
+                        </MenuItem>
                       ))}
-                    </select>
-                    <ErrorMessage
-                      name="selectedWard"
-                      component="div"
-                      className="text-red-500"
-                    />
+                    </Select>
+                    {errors.selectedWard && touched.selectedWard && (
+                      <div className="text-red-500">{errors.selectedWard}</div>
+                    )}
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 col-span-1 md:col-span-2"
+                    className="w-full py-2 bg-black text-white font-bold rounded-full hover:bg-gray-800 col-span-1 md:col-span-2"
                   >
                     Checkout
                   </button>
@@ -308,4 +347,3 @@ const CheckoutPage = React.memo(() => {
 });
 
 export default CheckoutPage;
-CheckoutPage.displayName = 'CheckoutPage';

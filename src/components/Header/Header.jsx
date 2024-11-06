@@ -88,10 +88,10 @@ const Header = () => {
             </button>
           </Link>
           <button className="flex items-center text-sm text-gray-800 hover:text-[#272B3B] font-bold transition duration-300">
-            Log In
+            <a href="/login">Log In</a>
           </button>
           <button className="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">
-            Sign Up
+            <a href="/signup">Sign up</a>
           </button>
         </div>
         <button className="flex md:hidden">
