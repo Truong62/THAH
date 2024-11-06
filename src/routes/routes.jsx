@@ -34,14 +34,26 @@ const AppRoutes = () => {
 
       {/* test */}
       <Route path="/blogs/huong" element={<BreadCrumb />} />
-      <Route path="/signup" element={<SignUpForm />} />
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/forgotpassword" element={<ForgotPassword />} />
-      <Route path="/enter-otp" element={<EnterOtp />} />
-      <Route path="/create-new-password" element={<CreateNewPassword />} />
-      <Route path="/reset-success" element={<ResetSuccess />} />
-      <Route path="/email-verification" element={<EmailVerification />} />
-      <Route path="/congratulations" element={<Congratulations />} />
+      <Route path="/signup" element={<SignUpForm></SignUpForm>} />
+      <Route path="/login" element={<LoginForm></LoginForm>} />
+      <Route
+        path="/forgotpassword"
+        element={<ForgotPassword></ForgotPassword>}
+      />
+      <Route path="/enter-otp" element={<EnterOtp></EnterOtp>} />
+      <Route
+        path="/create-new-password"
+        element={<CreateNewPassword></CreateNewPassword>}
+      />
+      <Route path="/reset-success" element={<ResetSuccess></ResetSuccess>} />
+      <Route
+        path="/email-verification"
+        element={<EmailVerification></EmailVerification>}
+      />
+      <Route
+        path="/congratulations"
+        element={<Congratulations></Congratulations>}
+      />
 
       <Route path="/hiep" element={<h1>hiep</h1>} />
 
