@@ -21,6 +21,6 @@
     "password": "user1234",
     "active_code": "3412",
     "reset_code": "2201",
-    "isActive": false
+    "isActive": true
   }
 ]

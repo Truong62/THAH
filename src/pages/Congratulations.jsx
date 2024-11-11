@@ -18,6 +18,24 @@ const Congratulations = () => {
     setIsDarkMode(!isDarkMode);
   };
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDarkMode(mediaQuery.matches);
+
+    const handleChange = (e) => {
+      setIsDarkMode(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   return (
     <div
       className={`relative flex items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}

@@ -54,10 +54,11 @@ export default function SignUpForm() {
             '* This account is not activated. Please check your email for the activation code.'
           );
           valid = false;
-        } else {
-          setEmailError('* This email is already registered');
-          valid = false;
-        }
+        } //check xem email đã được đăng kí hay chưa
+        //  else {
+        //   setEmailError('* This email is already registered');
+        //   valid = false;
+        // }
       }
     }
 
