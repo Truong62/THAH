@@ -35,7 +35,11 @@ export default function ForgotPassword() {
   return (
     <div
       className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
-      style={{ padding: '24px', gap: '10px' }}
+      style={{
+        padding: '24px',
+        gap: '10px',
+        opacity: '1',
+      }}
     >
       <div className="absolute top-4 right-4">
         <LightbulbIcon

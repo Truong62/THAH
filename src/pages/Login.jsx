@@ -32,9 +32,11 @@ export default function LoginForm() {
     e.preventDefault();
     let valid = true;
 
+    // Reset lỗi
     setEmailError('');
     setPasswordError('');
 
+    // Kiểm tra email
     if (!email) {
       setEmailError(errorMessages.emailRequired.message);
       valid = false;
@@ -49,21 +51,24 @@ export default function LoginForm() {
       }
     }
 
-    if (valid) {
-      if (!password) {
-        setPasswordError(errorMessages.passwordRequired.message);
+    // Kiểm tra password
+    if (!password) {
+      setPasswordError(errorMessages.passwordRequired.message);
+      valid = false;
+    } else if (valid) {
+      // Chỉ kiểm tra mật khẩu nếu email hợp lệ
+      const user = userData.find(
+        (user) => user.email === email && user.password === password
+      );
+      if (!user) {
+        setPasswordError(errorMessages.incorrectPassword.message);
         valid = false;
-      } else {
-        const user = userData.find(
-          (user) => user.email === email && user.password === password
-        );
-        if (user) {
-          console.log('Logging in with:', { email, password });
-        } else {
-          setPasswordError(errorMessages.incorrectPassword.message);
-          valid = false;
-        }
       }
+    }
+
+    // Xử lý khi form hợp lệ
+    if (valid) {
+      console.log('Logging in with:', { email, password });
     }
   };
 
@@ -95,7 +100,7 @@ export default function LoginForm() {
       style={{
         padding: '24px',
         gap: '10px',
-        opacity: '1', // Đặt opacity thành 1 để hiển thị
+        opacity: '1',
       }}
     >
       <div className="absolute top-4 right-4">
@@ -131,49 +136,61 @@ export default function LoginForm() {
 
         <form
           onSubmit={handleSubmit}
-          className="w-full flex flex-col items-center"
+          className="w-full flex flex-col items-center gap-y-3" // Khoảng cách cố định giữa các trường input
           style={{ fontFamily: 'Epilogue' }}
         >
-          <InputField
-            label="Email *"
-            type="text"
-            value={email}
-            placeholder="example@gmail.com"
-            onChange={(e) => setEmail(e.target.value)}
-            onFocus={() => handleFocus('email')}
-            className={`w-full p-2 rounded-md ${emailError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
-            isDarkMode={isDarkMode}
-          />
-          {emailError && (
-            <div className="text-red-500 text-sm mb-2">{emailError}</div>
-          )}
+          {/* Email Input Field */}
+          <div className="w-full flex flex-col items-center">
+            <InputField
+              label="Email *"
+              type="text"
+              value={email}
+              placeholder="example@gmail.com"
+              onChange={(e) => setEmail(e.target.value)}
+              onFocus={() => handleFocus('email')}
+              className={`w-full p-2 rounded-md ${emailError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
+              isDarkMode={isDarkMode}
+            />
+            <div className="text-red-500 text-sm text-left w-full min-h-[24px] pl-7">
+              {emailError || '\u00A0'} {/* Khoảng trống nếu không có lỗi */}
+            </div>
+          </div>
 
-          <InputField
-            label="Password *"
-            type="password"
-            value={password}
-            placeholder="Enter password"
-            onChange={(e) => setPassword(e.target.value)}
-            onFocus={() => handleFocus('password')}
-            showPassword={showPassword}
-            togglePasswordVisibility={() => setShowPassword(!showPassword)}
-            className={`w-full p-2 rounded-md ${passwordError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
-            isDarkMode={isDarkMode}
-          />
-          {passwordError && (
-            <div className="text-red-500 text-sm mb-2">{passwordError}</div>
-          )}
+          {/* Password Input Field */}
+          <div className="w-full flex flex-col items-center">
+            <InputField
+              label="Password *"
+              type="password"
+              value={password}
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => handleFocus('password')}
+              showPassword={showPassword}
+              togglePasswordVisibility={() => setShowPassword(!showPassword)}
+              className={`w-full p-2 rounded-md ${passwordError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
+              isDarkMode={isDarkMode}
+            />
+            <div className="text-red-500 text-sm text-left w-full min-h-[24px] pl-7">
+              {passwordError || '\u00A0'} {/* Khoảng trống nếu không có lỗi */}
+            </div>
+          </div>
 
+          {/* Forgot Password */}
           <div className="mb-2 w-full flex justify-end">
             <Link to="/forgotpassword" className="text-green-500">
               Forgot Password?
             </Link>
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full custom-button text-white py-3 rounded-lg hover:bg-green-700"
-            style={{ height: '52px', opacity: '1' }} // Kích thước button
+            style={{
+              height: '52px',
+              opacity: '1',
+              backgroundColor: 'rgba(29, 192, 113, 1)',
+            }}
           >
             Sign in
           </button>

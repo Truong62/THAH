@@ -20,11 +20,16 @@ export default function CreateNewPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newPassword !== confirmPassword) {
+
+    if (!newPassword || !confirmPassword) {
+      setError('Password must not be empty.');
+    } else if (newPassword !== confirmPassword) {
       setError('Password not matched.');
+    } else if (newPassword.length < 8) {
+      setError('Password must be at least 8 characters.');
     } else {
       console.log('New password set:', newPassword);
-      navigate('/reset-success'); // Chuyển hướng về trang đăng nhập
+      navigate('/reset-success'); // Redirect to a success page
     }
   };
 

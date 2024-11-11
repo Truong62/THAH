@@ -94,7 +94,11 @@ export default function EnterOtp() {
         }}
       ></div>
       <div
-        className={`p-6 md:p-8 rounded-lg w-full max-w-[455px] h-auto shadow-lg z-10 flex flex-col items-center ${isDarkMode ? 'bg-[rgba(28,28,36,1)] text-white' : 'bg-white text-black'}`}
+        className={`p-6 md:p-8 rounded-lg w-full max-w-[455px] h-auto shadow-lg z-10 flex flex-col items-center ${
+          isDarkMode
+            ? 'bg-[rgba(28,28,36,1)] text-white'
+            : 'bg-white text-black'
+        }`}
       >
         <h2 className="text-2xl font-bold mb-4 text-left">Forgot Password</h2>
         <p
@@ -103,7 +107,15 @@ export default function EnterOtp() {
         >
           Please Enter the OTP you received to
         </p>
-        <p className="mb-4 text-center text-white">{email}</p>
+        <p
+          className={`mb-4 text-center `}
+          style={{
+            color: isDarkMode ? 'white' : 'rgba(23, 23, 37, 1)',
+          }}
+        >
+          {email}
+        </p>
+
         <div className="space-x-2 mb-4 flex justify-center">
           {otp.map((digit, index) => (
             <input
