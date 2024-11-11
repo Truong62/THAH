@@ -148,7 +148,7 @@ export default function LoginForm() {
               placeholder="example@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
               onFocus={() => handleFocus('email')}
-              className={`w-full p-2 rounded-md ${emailError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
+              className={`w-full p-2 rounded-md mb-2 ${emailError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
               isDarkMode={isDarkMode}
             />
             <div className="text-red-500 text-sm text-left w-full min-h-[24px] pl-7">
@@ -167,7 +167,7 @@ export default function LoginForm() {
               onFocus={() => handleFocus('password')}
               showPassword={showPassword}
               togglePasswordVisibility={() => setShowPassword(!showPassword)}
-              className={`w-full p-2 rounded-md ${passwordError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
+              className={`w-full p-2 rounded-md mb-2 ${passwordError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
               isDarkMode={isDarkMode}
             />
             <div className="text-red-500 text-sm text-left w-full min-h-[24px] pl-7">

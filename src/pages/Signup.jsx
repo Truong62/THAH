@@ -173,7 +173,7 @@ export default function SignUpForm() {
                   setFullName(e.target.value);
                   if (e.target.value) setFullNameError('');
                 }}
-                className={`w-full p-2 rounded-md ${fullNameError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
+                className={`w-full p-2 rounded-md mb-2 ${fullNameError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
                 isDarkMode={isDarkMode}
               />
               <div className="text-red-500 text-sm text-left w-full min-h-[20px] pl-7">
@@ -191,7 +191,7 @@ export default function SignUpForm() {
                   setEmail(e.target.value);
                   if (e.target.value) setEmailError('');
                 }}
-                className={`w-full p-2 rounded-md ${emailError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
+                className={`w-full p-2 rounded-md mb-2 ${emailError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
                 isDarkMode={isDarkMode}
               />
               <div className="text-red-500 text-sm text-left w-full min-h-[20px] pl-7">
@@ -209,7 +209,7 @@ export default function SignUpForm() {
                 onChange={(e) => setPassword(e.target.value)}
                 showPassword={showPassword}
                 togglePasswordVisibility={() => setShowPassword(!showPassword)}
-                className={`w-full p-2 rounded-md ${passwordError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
+                className={`w-full p-2 rounded-md mb-2 ${passwordError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
                 isDarkMode={isDarkMode}
               />
               <div className="text-red-500 text-sm text-left w-full min-h-[20px] pl-7">
