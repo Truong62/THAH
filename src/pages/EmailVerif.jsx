@@ -101,7 +101,14 @@ export default function EmailVerification() {
         <p className="mb-2" style={{ color: 'rgba(178, 179, 189, 1)' }}>
           Please Enter the OTP you receive to
         </p>
-        <p className="mb-4 text-white">{email}</p>
+        <p
+          className="mb-4 text-white"
+          style={{
+            color: isDarkMode ? 'white' : 'rgba(23, 23, 37, 1)',
+          }}
+        >
+          {email}
+        </p>
         <div className="space-x-2 mb-4">
           {otp.map((digit, index) => (
             <input

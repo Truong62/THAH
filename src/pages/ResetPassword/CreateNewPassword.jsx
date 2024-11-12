@@ -1,5 +1,5 @@
 // src/pages/CreateNewPassword.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../../components/Icon/Back';
@@ -20,13 +20,36 @@ export default function CreateNewPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newPassword !== confirmPassword) {
+
+    if (!newPassword || !confirmPassword) {
+      setError('Password must not be empty.');
+    } else if (newPassword !== confirmPassword) {
       setError('Password not matched.');
+    } else if (newPassword.length < 8) {
+      setError('Password must be at least 8 characters.');
     } else {
       console.log('New password set:', newPassword);
-      navigate('/reset-success'); // Chuyển hướng về trang đăng nhập
+      navigate('/reset-success'); // Redirect to a success page
     }
   };
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDarkMode(mediaQuery.matches);
+
+    const handleChange = (e) => {
+      setIsDarkMode(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   return (
     <div

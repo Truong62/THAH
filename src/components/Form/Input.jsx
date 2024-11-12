@@ -16,9 +16,9 @@ const InputField = ({
   isDarkMode,
 }) => {
   return (
-    <div className="mb-2 w-full max-w-[436px]">
+    <div className=" w-full max-w-[436px]">
       <label
-        className="block text-sm font-medium mb-1"
+        className="block text-sm font-medium"
         style={{ color: 'rgba(128, 129, 145, 1)' }} // Đặt màu cho label
       >
         {label}

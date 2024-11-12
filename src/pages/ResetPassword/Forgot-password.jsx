@@ -1,5 +1,5 @@
 // src/pages/ForgotPassword.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../../components/Icon/Back';
@@ -32,10 +32,32 @@ export default function ForgotPassword() {
     }
   };
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDarkMode(mediaQuery.matches);
+
+    const handleChange = (e) => {
+      setIsDarkMode(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   return (
     <div
       className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
-      style={{ padding: '24px', gap: '10px' }}
+      style={{
+        padding: '24px',
+        gap: '10px',
+        opacity: '1',
+      }}
     >
       <div className="absolute top-4 right-4">
         <LightbulbIcon
