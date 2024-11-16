@@ -8,6 +8,7 @@ import ProductDetail from '../pages/ProductDetail';
 import PageNotFound from '../components/404NotFound/_404PageNotFound';
 import CartPage from '../pages/Cart';
 import CheckoutPage from '../pages/Checkout';
+import Company from '../pages/Company';
 
 /**
  *
@@ -24,8 +25,8 @@ const AppRoutes = () => {
       <Route path="/productdetails" element={<ProductDetail></ProductDetail>} />
       <Route path="/cart" element={<CartPage></CartPage>} />
       <Route path="/checkout" element={<CheckoutPage></CheckoutPage>} />
+      <Route path="/company" element={<Company></Company>} />
 
-      {/* test */}
       <Route path="/blogs/huong" element={<BreadCrumb />} />
       <Route path="/hiep" element={<h1>hiep</h1>} />
 

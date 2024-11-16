@@ -76,7 +76,7 @@ const Header = () => {
         <div className="items-center hidden gap-8 md:flex">
           <Link
             to="/cart"
-            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/company' ? 'bg-[#A8DCE7]' : ''}`}
+            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/cart' ? 'bg-[#A8DCE7]' : ''}`}
           >
             <button className="relative flex items-center py-2 text-sm font-bold text-gray-800 hover:text-[#272B3B] transition duration-300">
               <FontAwesomeIcon icon={faCartShopping} className="mr-2" />
