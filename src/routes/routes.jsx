@@ -16,6 +16,8 @@ import CreateNewPassword from '../pages/ResetPassword/CreateNewPassword';
 import ResetSuccess from '../pages/ResetPassword/Reset-Success';
 import EmailVerification from '../pages/EmailVerif';
 import Congratulations from '../pages/Congratulations';
+import Company from '../pages/Company';
+
 /**
  *
  * @returns {Element}
@@ -51,9 +53,7 @@ const AppRoutes = () => {
         path="/congratulations"
         element={<Congratulations></Congratulations>}
       />
-
-      <Route path="/hiep" element={<h1>hiep</h1>} />
-
+      <Route path="/company" element={<Company></Company>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
