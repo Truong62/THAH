@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import Blogs from '../pages/Blogs';
-import BreadCrumb from '../components/BreadCrumb';
 import Product from '../pages/Product';
 import ProductDetail from '../pages/ProductDetail';
 import PageNotFound from '../components/404NotFound/_404PageNotFound';

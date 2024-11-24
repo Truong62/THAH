@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/Layout';
-import BreadCrumb from '../components/BreadCrumb';
 import StrategyIcon from '../components/SvgIcon/StrategyIcon';
 import TechnologyIcon from '../components/SvgIcon/TechnologyIcon';
 import ConsultingIcon from '../components/SvgIcon/ConsultingIcon';
