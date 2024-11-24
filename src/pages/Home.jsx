@@ -7,7 +7,8 @@ import ImageSlider from '../components/ImageSlider';
 import Layout from '../components/Layout';
 import { truncateDescription } from '../utils/truncateDescription';
 import { formatCurrency } from '../utils/formatCurrency';
-import products from '../data.json'; // Import the JSON data
+import products from '../data.json';
+import { motion } from 'framer-motion';
 
 const Home = () => {
   const tag = ['#nike', '#jordan', '#sale'];
@@ -21,15 +22,22 @@ const Home = () => {
       <Header />
       <Layout>
         <ImageSlider />
-        <div className="flex items-center mt-3">
-          <img className="w-[40px] mr-2" src="../../images/shoe.gif" alt="" />
-          <p className="text-2xl font-bold ">Product new</p>
-          <img
-            className="w-[40px] ml-2 transform scale-x-[-1]"
-            src="../../images/shoe.gif"
-            alt=""
-          />
-        </div>
+
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.0 }}
+        >
+          <div className="flex items-center mt-3">
+            <img className="w-[40px] mr-2" src="../../images/shoe.gif" alt="" />
+            <p className="text-2xl font-bold ">Product new</p>
+            <img
+              className="w-[40px] ml-2 transform scale-x-[-1]"
+              src="../../images/shoe.gif"
+              alt=""
+            />
+          </div>
+        </motion.div>
         <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.slice(0, 8).map((product, index) => (
             <div key={index}>
@@ -48,15 +56,21 @@ const Home = () => {
             </div>
           ))}
         </div>
-        <div className="flex items-center mb-3">
-          <img className="w-[40px] mr-2" src="../../images/shoe.gif" alt="" />
-          <p className="text-2xl font-bold ">Products</p>
-          <img
-            className="w-[40px] ml-2 transform scale-x-[-1]"
-            src="../../images/shoe.gif"
-            alt=""
-          />
-        </div>
+        <motion.div
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.0 }}
+        >
+          <div className="flex items-center mb-3">
+            <img className="w-[40px] mr-2" src="../../images/shoe.gif" alt="" />
+            <p className="text-2xl font-bold ">Products</p>
+            <img
+              className="w-[40px] ml-2 transform scale-x-[-1]"
+              src="../../images/shoe.gif"
+              alt=""
+            />
+          </div>
+        </motion.div>
         <div className="grid gap-5 mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {products.slice(0, 4).map((product, index) => (
             <div key={index}>

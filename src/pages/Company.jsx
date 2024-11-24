@@ -60,15 +60,15 @@ const Company = () => {
           <div className="flex flex-col md:flex-row justify-between gap-4 my-4">
             <div className="w-full md:w-1/3 p-8 md:p-20 text-center bg-blue-50 rounded-md">
               <h1 className="text-2xl font-bold">10+</h1>
-              <p className="text-sm md:text-xs">years of service</p>
+              <p className="text-sm ">years of service</p>
             </div>
             <div className="w-full md:w-1/3 p-8 md:p-20 text-center bg-blue-50 rounded-md">
               <h1 className="text-2xl font-bold">20K</h1>
-              <p className="text-sm md:text-xs">happy customers</p>
+              <p className="text-sm ">happy customers</p>
             </div>
             <div className="w-full md:w-1/3 p-8 md:p-20 text-center bg-blue-50 rounded-md">
               <h1 className="text-2xl font-bold">94%</h1>
-              <p className="text-sm md:text-xs">customer satisfaction</p>
+              <p className="text-sm ">customer satisfaction</p>
             </div>
           </div>
 
@@ -78,7 +78,7 @@ const Company = () => {
                 <StrategyIcon />
               </div>
               <h1 className="font-bold text-xl mb-2">Strategy</h1>
-              <p className="text-xs mb-4">
+              <p className="text-sm mb-4">
                 There are many variations of passage of Lorem Ipsum available,
                 but the majority have suffered alteration.
               </p>
@@ -92,7 +92,7 @@ const Company = () => {
                 <TechnologyIcon />
               </div>
               <h1 className="font-bold text-xl mb-2">Technology</h1>
-              <p className="text-xs mb-4">
+              <p className="text-sm mb-4">
                 There are many variations of passage of Lorem Ipsum available,
                 but the majority have suffered alteration.
               </p>
@@ -106,7 +106,7 @@ const Company = () => {
                 <ConsultingIcon />
               </div>
               <h1 className="font-bold text-xl mb-2">Consulting</h1>
-              <p className="text-xs mb-4">
+              <p className="text-sm mb-4">
                 There are many variations of passage of Lorem Ipsum available,
                 but the majority have suffered alteration.
               </p>

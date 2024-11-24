@@ -136,10 +136,9 @@ export default function LoginForm() {
 
         <form
           onSubmit={handleSubmit}
-          className="w-full flex flex-col items-center gap-y-3" // Khoảng cách cố định giữa các trường input
+          className="w-full flex flex-col items-center gap-y-3"
           style={{ fontFamily: 'Epilogue' }}
         >
-          {/* Email Input Field */}
           <div className="w-full flex flex-col items-center">
             <InputField
               label="Email *"
@@ -152,11 +151,10 @@ export default function LoginForm() {
               isDarkMode={isDarkMode}
             />
             <div className="text-red-500 text-sm text-left w-full min-h-[24px] pl-7">
-              {emailError || '\u00A0'} {/* Khoảng trống nếu không có lỗi */}
+              {emailError || '\u00A0'}
             </div>
           </div>
 
-          {/* Password Input Field */}
           <div className="w-full flex flex-col items-center">
             <InputField
               label="Password *"
@@ -171,18 +169,16 @@ export default function LoginForm() {
               isDarkMode={isDarkMode}
             />
             <div className="text-red-500 text-sm text-left w-full min-h-[24px] pl-7">
-              {passwordError || '\u00A0'} {/* Khoảng trống nếu không có lỗi */}
+              {passwordError || '\u00A0'}
             </div>
           </div>
 
-          {/* Forgot Password */}
           <div className="mb-2 w-full flex justify-end">
             <Link to="/forgotpassword" className="text-green-500">
               Forgot Password?
             </Link>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full custom-button text-white py-3 rounded-lg hover:bg-green-700"
