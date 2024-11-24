@@ -76,9 +76,12 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.25.8",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-react": "^7.25.9",
     "autoprefixer": "^10.4.20",
+    "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",

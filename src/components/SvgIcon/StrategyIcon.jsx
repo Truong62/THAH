@@ -18,8 +18,8 @@ const StrategyIcon = ({
 );
 
 StrategyIcon.propTypes = {
-  width: PropTypes.string,
-  height: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
   fill: PropTypes.string,
 };
 
