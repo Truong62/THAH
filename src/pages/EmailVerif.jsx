@@ -1,52 +1,53 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import userData from '../user.json';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../components/Icon/Back';
 
 export default function EmailVerification() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { email, password } = location.state || {}; // Nhận email và password từ state
+  const { email, password } = location.state || {};
 
   const [otp, setOtp] = useState(['', '', '', '']);
   const [error, setError] = useState('');
-  const [isDarkMode, setIsDarkMode] = useState(true); // State for dark mode
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
-  // Kiểm tra nếu không có email thì chuyển hướng về trang đăng ký
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
     if (!email) {
-      navigate('/signup'); // Chuyển hướng về trang đăng ký nếu không có email
+      navigate('/signup');
     }
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDarkMode(mediaQuery.matches);
+
+    const handleChange = (e) => {
+      setIsDarkMode(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
     return () => {
+      mediaQuery.removeEventListener('change', handleChange);
       document.body.style.overflow = 'unset';
     };
   }, [email, navigate]);
 
   const handleChange = (index, value) => {
-    // Kiểm tra xem giá trị nhập vào có phải là số không
     if (!/^\d*$/.test(value)) {
-      return; // Nếu không phải số, không làm gì cả
+      return;
     }
 
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Move to the next input if the current one is filled
     if (value && index < otp.length - 1) {
       const nextInput = document.getElementById(`otp-input-${index + 1}`);
       if (nextInput) {
         nextInput.focus();
       }
     } else if (!value && index > 0) {
-      // Move to the previous input if the current one is empty
       const prevInput = document.getElementById(`otp-input-${index - 1}`);
       if (prevInput) {
         prevInput.focus();
@@ -74,13 +75,6 @@ export default function EmailVerification() {
     <div
       className={`relative flex items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
     >
-      <div className="absolute top-4 right-4">
-        <LightbulbIcon
-          onClick={toggleDarkMode}
-          className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-          fontSize="large"
-        />
-      </div>
       <div
         className="absolute w-full h-full bottom-0 transform translate-y-1/2"
         style={{

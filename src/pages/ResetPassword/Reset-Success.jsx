@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 
 const ResetSuccess = () => {
   const navigate = useNavigate();
@@ -8,32 +7,30 @@ const ResetSuccess = () => {
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDarkMode(mediaQuery.matches);
 
     const isVerified = localStorage.getItem('isVerified');
     if (isVerified !== 'true') {
-      navigate('/email-verification'); // Redirect if not verified
+      navigate('/email-verification');
     }
+    const handleChange = (e) => {
+      setIsDarkMode(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+
     return () => {
+      mediaQuery.removeEventListener('change', handleChange);
       document.body.style.overflow = 'unset';
     };
   }, [navigate]);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
 
   return (
     <div
       className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
       style={{ fontFamily: 'Epilogue', padding: '24px' }}
     >
-      <div className="absolute top-4 right-4">
-        <LightbulbIcon
-          onClick={toggleDarkMode}
-          className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-          fontSize="large"
-        />
-      </div>
       <div
         className="absolute w-full h-full bottom-0 transform translate-y-1/2"
         style={{

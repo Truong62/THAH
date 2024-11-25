@@ -1,7 +1,6 @@
 // ... existing imports ...
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import './styles/custom-button.css';
 import InputField from '../components/Form/Input';
 import GoogleSignInButton from '../components/Form/GG';
@@ -84,6 +83,7 @@ export default function SignUpForm() {
     document.body.style.overflow = 'hidden';
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     setIsDarkMode(mediaQuery.matches);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     const handleChange = (e) => {
       setIsDarkMode(e.matches);
@@ -96,10 +96,6 @@ export default function SignUpForm() {
       document.body.style.overflow = 'unset';
     };
   }, []);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -118,13 +114,6 @@ export default function SignUpForm() {
           opacity: '1',
         }}
       >
-        <div className="absolute top-4 right-4">
-          <LightbulbIcon
-            onClick={toggleDarkMode}
-            className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-            fontSize="large"
-          />
-        </div>
         <div
           className="absolute w-full h-full bottom-0 transform translate-y-1/2"
           style={{

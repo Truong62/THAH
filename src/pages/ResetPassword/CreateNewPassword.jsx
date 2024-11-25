@@ -1,22 +1,17 @@
 // src/pages/CreateNewPassword.js
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../../components/Icon/Back';
-import InputField from '../../components/Form/Input'; // Import InputField
+import InputField from '../../components/Form/Input';
 
 export default function CreateNewPassword() {
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [isDarkMode, setIsDarkMode] = useState(true); // State for dark mode
-  const [showNewPassword, setShowNewPassword] = useState(false); // State to toggle visibility of new password
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State to toggle visibility of confirm password
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,13 +51,6 @@ export default function CreateNewPassword() {
       className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
       style={{ fontFamily: 'Epilogue', padding: '24px' }}
     >
-      <div className="absolute top-4 right-4">
-        <LightbulbIcon
-          onClick={toggleDarkMode}
-          className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-          fontSize="large"
-        />
-      </div>
       <div
         className="absolute w-full h-full bottom-0 transform translate-y-1/2"
         style={{

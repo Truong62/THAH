@@ -8,6 +8,7 @@ import SortBy from '../components/SortBy';
 import BreadCrumb from '../components/BreadCrumb.jsx';
 import { useNavigate } from 'react-router-dom';
 import products from '../data.json';
+
 /**
  *
  * @returns {Element}

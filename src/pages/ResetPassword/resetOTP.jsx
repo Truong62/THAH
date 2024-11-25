@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import userData from '../../user.json';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../../components/Icon/Back';
 
 export default function EnterOtp() {
@@ -14,14 +13,21 @@ export default function EnterOtp() {
   const [error, setError] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(true); // State for dark mode
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   useEffect(() => {
     if (!email) {
       navigate('/signup'); // Chuyển hướng về trang đăng ký nếu không có email
     }
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const handleChange = (e) => {
+      setIsDarkMode(e.matches);
+    };
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+      document.body.style.overflow = 'unset';
+    };
   }, [email, navigate]);
 
   const handleChange = (index, value) => {
@@ -75,13 +81,6 @@ export default function EnterOtp() {
       className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
       style={{ fontFamily: 'Epilogue', padding: '24px' }}
     >
-      <div className="absolute top-4 right-4">
-        <LightbulbIcon
-          onClick={toggleDarkMode}
-          className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-          fontSize="large"
-        />
-      </div>
       <div
         className="absolute w-full h-full bottom-0 transform translate-y-1/2"
         style={{
@@ -117,7 +116,7 @@ export default function EnterOtp() {
           {otp.map((digit, index) => (
             <input
               key={index}
-              id={`otp-input-${index}`} // Unique ID for each input
+              id={`otp-input-${index}`}
               type="text"
               value={digit}
               onChange={(e) => handleChange(index, e.target.value)}
@@ -129,7 +128,7 @@ export default function EnterOtp() {
         </div>
         {error && <div className="text-red-500 mb-2">{error}</div>}
         <div className="flex justify-between w-full mt-4">
-          <Link to="#" className="text-purple-500 mb-3">
+          <Link to="" className="text-purple-500 mb-3">
             Resend OTP
           </Link>
         </div>

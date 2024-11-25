@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import userData from '../user.json';
 import './styles/custom-button.css';
 import { Link } from 'react-router-dom';
@@ -85,10 +84,6 @@ export default function LoginForm() {
     };
   }, []);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   return (
     <div
       className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
@@ -98,13 +93,14 @@ export default function LoginForm() {
         opacity: '1',
       }}
     >
-      <div className="absolute top-4 right-4">
-        <LightbulbIcon
-          onClick={toggleDarkMode}
-          className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-          fontSize="large"
+      <div className="absolute top-6 left-6 z-20">
+        <img
+          src="/images/Logo.png"
+          alt="Logo"
+          className="w-[40px] h-[40px] sm:w-[52px] sm:h-[52px]"
         />
       </div>
+
       <div
         className="absolute w-full h-full bottom-0 transform translate-y-1/2"
         style={{
@@ -113,6 +109,7 @@ export default function LoginForm() {
           backgroundPosition: 'center',
         }}
       ></div>
+
       <div
         className={`p-8 rounded-lg w-full max-w-[556px] h-auto shadow-lg z-10 flex flex-col items-center ${isDarkMode ? 'bg-[rgba(28,28,36,1)] text-white' : 'bg-white text-black'}`}
       >

@@ -14,10 +14,10 @@ const InputField = ({
   isDarkMode,
 }) => {
   return (
-    <div className=" w-full max-w-[436px]">
+    <div className="w-full max-w-[436px]">
       <label
         className="block text-sm font-medium"
-        style={{ color: 'rgba(128, 129, 145, 1)' }} // Đặt màu cho label
+        style={{ color: 'rgba(128, 129, 145, 1)' }}
       >
         {label}
       </label>
@@ -34,6 +34,7 @@ const InputField = ({
             height: '52px',
             boxSizing: 'border-box',
             fontSize: '14px',
+            borderColor: '#3A3A43',
             backgroundColor: isDarkMode ? 'rgba(28, 28, 36, 1)' : 'white',
             color: isDarkMode ? 'white' : 'black',
           }}
@@ -53,11 +54,6 @@ const InputField = ({
           </button>
         )}
       </div>
-      <style>{`
-        input::placeholder {
-          color: rgba(75, 82, 100, 1);
-        }
-      `}</style>
     </div>
   );
 };

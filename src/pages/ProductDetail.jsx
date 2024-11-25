@@ -11,6 +11,7 @@ import products from '../data.json';
  * @returns {Element}
  * @constructor
  */
+
 const ProductDetail = () => {
   return (
     <div>
