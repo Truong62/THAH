@@ -15,6 +15,7 @@ import ResetSuccess from '../pages/ResetPassword/Reset-Success';
 import EmailVerification from '../pages/EmailVerif';
 import Congratulations from '../pages/Congratulations';
 import Company from '../pages/Company';
+import React from 'react';
 
 /**
  *

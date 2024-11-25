@@ -1,6 +1,7 @@
 import ConsultingIcon from '../../components/SvgIcon/ConsultingIcon';
 import StrategyIcon from '../../components/SvgIcon/StrategyIcon';
 import TechnologyIcon from '../../components/SvgIcon/TechnologyIcon';
+import React from 'react';
 
 export const STATS = [
   { title: '10+', description: 'years of service', direction: 'left' },

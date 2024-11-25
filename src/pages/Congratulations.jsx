@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TrophyIcon from '../components/Icon/Trophy';
+import React from 'react';
 
 const Congratulations = () => {
   const navigate = useNavigate();

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import BackIcon from '../../components/Icon/Back';
 import InputField from '../../components/Form/Input'; // Import InputField
 import userData from '../../user.json'; // Import dữ liệu người dùng
+import React from 'react';
 
 export default function ForgotPassword() {
   const navigate = useNavigate();

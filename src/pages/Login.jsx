@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import userData from '../user.json';
 import './styles/custom-button.css';

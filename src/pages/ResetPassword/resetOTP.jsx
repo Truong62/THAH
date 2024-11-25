@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import userData from '../../user.json';
 import BackIcon from '../../components/Icon/Back';
+import React from 'react';
 
 export default function EnterOtp() {
   const location = useLocation();

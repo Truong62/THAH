@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BackIcon from '../../components/Icon/Back';
 import InputField from '../../components/Form/Input';
+import React from 'react';
 
 export default function CreateNewPassword() {
   const navigate = useNavigate();
