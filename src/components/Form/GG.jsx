@@ -1,5 +1,3 @@
-import React from 'react';
-
 const GoogleSignInButton = () => (
   <button
     className="flex items-center justify-center border border-gray-300 rounded-lg mb-4 w-full max-w-[430px] h-[52px]" // Đặt chiều rộng và chiều cao cụ thể

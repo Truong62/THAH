@@ -1,5 +1,3 @@
-// src/components/Form/Input.js
-import React from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import PropTypes from 'prop-types';

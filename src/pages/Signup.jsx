@@ -1,5 +1,5 @@
 // ... existing imports ...
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import './styles/custom-button.css';
@@ -7,8 +7,8 @@ import InputField from '../components/Form/Input';
 import GoogleSignInButton from '../components/Form/GG';
 import userData from '../user.json';
 import Checkbox from '@mui/material/Checkbox';
-import Snackbar from '@mui/material/Snackbar'; // Thêm import Snackbar
-import MuiAlert from '@mui/material/Alert'; // Thêm import Alert
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 export default function SignUpForm() {
   const [fullName, setFullName] = useState('');
@@ -20,26 +20,23 @@ export default function SignUpForm() {
   const [fullNameError, setFullNameError] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false); // Thêm state cho Snackbar
-  const [snackbarMessage, setSnackbarMessage] = useState(''); // Thêm state cho thông điệp Snackbar
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let valid = true;
 
-    // Reset errors
     setEmailError('');
     setPasswordError('');
     setFullNameError('');
 
-    // Validate full name
     if (fullName === '') {
       setFullNameError('* Full Name is required');
       valid = false;
     }
 
-    // Validate email
     if (!email) {
       setEmailError('* Email is required');
       valid = false;
@@ -62,7 +59,6 @@ export default function SignUpForm() {
       }
     }
 
-    // Validate password
     if (!password) {
       setPasswordError('* Password is required');
       valid = false;
@@ -73,10 +69,9 @@ export default function SignUpForm() {
       return;
     }
 
-    // Check if terms are accepted
     if (!termsAccepted) {
-      setSnackbarMessage('* You must accept the terms and conditions.'); // Cập nhật thông điệp
-      setSnackbarOpen(true); // Mở Snackbar
+      setSnackbarMessage('* You must accept the terms and conditions.');
+      setSnackbarOpen(true);
       valid = false;
     }
 
@@ -110,7 +105,7 @@ export default function SignUpForm() {
     if (reason === 'clickaway') {
       return;
     }
-    setSnackbarOpen(false); // Đóng Snackbar
+    setSnackbarOpen(false);
   };
 
   return (
@@ -163,7 +158,6 @@ export default function SignUpForm() {
             style={{ fontFamily: 'Epilogue' }}
             className="w-full flex flex-col items-center gap-y-3" // Giảm khoảng cách tổng thể giữa các nhóm
           >
-            {/* Full Name Field */}
             <div className="w-full flex flex-col items-center">
               <InputField
                 label="Full Name *"
@@ -181,7 +175,6 @@ export default function SignUpForm() {
               </div>
             </div>
 
-            {/* Email Field */}
             <div className="w-full flex flex-col items-center">
               <InputField
                 label="Email *"
@@ -199,14 +192,16 @@ export default function SignUpForm() {
               </div>
             </div>
 
-            {/* Password Field */}
             <div className="w-full flex flex-col items-center">
               <InputField
                 label="Password *"
                 type="password"
                 placeholder="Create a password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (e.target.value) setPasswordError('');
+                }}
                 showPassword={showPassword}
                 togglePasswordVisibility={() => setShowPassword(!showPassword)}
                 className={`w-full p-2 rounded-md mb-2 ${passwordError ? 'border-red-500 text-red-500' : 'border-gray-300'}`}
@@ -217,7 +212,6 @@ export default function SignUpForm() {
               </div>
             </div>
 
-            {/* Terms and Conditions */}
             <div className="flex flex-col w-auto mb-4">
               <div className="flex items-start">
                 <Checkbox

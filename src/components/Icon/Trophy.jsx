@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 const TrophyIcon = ({ width = 69, height = 70, className = '' }) => {
   return (

@@ -1,5 +1,5 @@
 // src/pages/EnterOtp.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import userData from '../../user.json';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
@@ -25,23 +25,22 @@ export default function EnterOtp() {
   }, [email, navigate]);
 
   const handleChange = (index, value) => {
-    // Kiểm tra xem giá trị nhập vào có phải là số không
     if (!/^\d*$/.test(value)) {
-      return; // Nếu không phải số, không làm gì cả
+      return;
     }
+
+    setError('');
 
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Move to the next input if the current one is filled
     if (value && index < otp.length - 1) {
       const nextInput = document.getElementById(`otp-input-${index + 1}`);
       if (nextInput) {
         nextInput.focus();
       }
     } else if (!value && index > 0) {
-      // Move to the previous input if the current one is empty
       const prevInput = document.getElementById(`otp-input-${index - 1}`);
       if (prevInput) {
         prevInput.focus();
@@ -61,10 +60,8 @@ export default function EnterOtp() {
     e.preventDefault();
     const otpString = otp.join('');
 
-    // Tìm người dùng dựa trên email
     const user = userData.find((user) => user.email === email);
 
-    // Kiểm tra mã OTP
     if (user && otpString === user.reset_code) {
       localStorage.setItem('isVerified', 'true');
       navigate('/create-new-password');
@@ -138,7 +135,7 @@ export default function EnterOtp() {
         </div>
         <button
           type="submit"
-          className="bg-green-500 text-white py-2 px-4 rounded w-full mt-2"
+          className="bg-[#1DC071] text-white py-2 px-4 rounded w-full mt-2"
           onClick={handleSubmit}
         >
           Confirm

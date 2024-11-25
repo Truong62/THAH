@@ -1,4 +1,3 @@
-import React from 'react';
 import ConsultingIcon from '../../components/SvgIcon/ConsultingIcon';
 import StrategyIcon from '../../components/SvgIcon/StrategyIcon';
 import TechnologyIcon from '../../components/SvgIcon/TechnologyIcon';

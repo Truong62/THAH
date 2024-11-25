@@ -1,16 +1,16 @@
-import { React, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TrophyIcon from '../components/Icon/Trophy';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 
 const Congratulations = () => {
   const navigate = useNavigate();
-  const [isDarkMode, setIsDarkMode] = useState(true); // State for dark mode
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
     const isVerified = localStorage.getItem('isVerified');
     if (isVerified !== 'true') {
-      navigate('/email-verification'); // Redirect if not verified
+      navigate('/email-verification');
     }
   }, [navigate]);
 
@@ -70,7 +70,7 @@ const Congratulations = () => {
         </p>
         <button
           onClick={() => navigate('/')}
-          className="bg-[rgba(29,192,113,1)] text-white py-2 px-4 rounded mt-4 w-[356px] h-[52px] transition duration-200 ease-in-out hover:bg-green-700"
+          className="bg-[#1DC071] text-white py-2 px-4 rounded mt-4 w-[356px] h-[52px] transition duration-200 ease-in-out hover:bg-green-700"
           style={{ fontSize: '16px' }}
         >
           Got to homepage

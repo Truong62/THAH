@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/Layout';
@@ -7,7 +6,7 @@ import TechnologyIcon from '../components/SvgIcon/TechnologyIcon';
 import ConsultingIcon from '../components/SvgIcon/ConsultingIcon';
 import BannerCompany from '../components/SvgIcon/bannerCompany';
 import { motion } from 'framer-motion';
-import { CARDS, STATS } from '../utils/Company/company';
+import { STATS } from '../utils/Company/company';
 
 const Company = () => {
   const cardVariants = {

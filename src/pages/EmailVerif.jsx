@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import userData from '../user.json';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
@@ -58,16 +58,13 @@ export default function EmailVerification() {
     e.preventDefault();
     const otpString = otp.join('');
 
-    // Tìm người dùng dựa trên email
     const user = userData.find((user) => user.email === email);
 
-    // Kiểm tra mã OTP
     if (user && otpString === user.active_code) {
-      // Set verification status in local storage
-      localStorage.setItem('isVerified', 'true'); // Example using local storage
+      localStorage.setItem('isVerified', 'true');
       console.log('Email:', email);
-      console.log('Password:', password); // Kiểm tra xem password có được nhận hay không
-      navigate('/congratulations'); // Navigate to the Congratulations page
+      console.log('Password:', password);
+      navigate('/congratulations');
     } else {
       setError('Invalid OTP. Please try again.');
     }
@@ -113,7 +110,7 @@ export default function EmailVerification() {
           {otp.map((digit, index) => (
             <input
               key={index}
-              id={`otp-input-${index}`} // Unique ID for each input
+              id={`otp-input-${index}`}
               type="text"
               value={digit}
               onChange={(e) => handleChange(index, e.target.value)}
@@ -131,7 +128,7 @@ export default function EmailVerification() {
         </div>
         <button
           type="submit"
-          className="bg-green-500 text-white py-2 px-4 rounded w-full mt-2"
+          className="bg-[#1DC071] text-white py-2 px-4 rounded w-full mt-2"
           onClick={handleSubmit}
         >
           Confirm

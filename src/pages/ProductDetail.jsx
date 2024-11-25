@@ -1,11 +1,10 @@
-import React from 'react';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/Layout';
 import BreadCrumb from '../components/BreadCrumb';
 import ProductDetailsCard from '../components/ProductDetailsCard';
 import SuggestProducts from '../components/suggestProducts';
-import products from '../data.json'; // Import the products array from data.json
+import products from '../data.json';
 
 /**
  *

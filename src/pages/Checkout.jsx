@@ -10,8 +10,8 @@ import Footer from '../components/Footer/Footer';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select'; // Import Select từ MUI
-import MenuItem from '@mui/material/MenuItem'; // Import MenuItem từ MUI
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 // eslint-disable-next-line react/display-name
 const CheckoutPage = React.memo(() => {
@@ -116,7 +116,7 @@ const CheckoutPage = React.memo(() => {
       //   dispatch(clearCart());
       // }, 3000);
     },
-    [cartItems] //thêm dispatch sau
+    [cartItems]
   );
 
   return (

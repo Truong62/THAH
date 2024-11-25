@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 
@@ -57,7 +57,7 @@ const ResetSuccess = () => {
         </p>
         <button
           onClick={() => navigate('/')}
-          className="bg-[rgba(29,192,113,1)] text-white py-2 px-4 rounded mt-4 w-full max-w-[356px] h-[52px] transition duration-200 ease-in-out hover:bg-green-700"
+          className="bg-[#1DC071] text-white py-2 px-4 rounded mt-4 w-full max-w-[356px] h-[52px] transition duration-200 ease-in-out hover:bg-green-700"
           style={{ fontSize: '16px' }}
         >
           Go to homepage

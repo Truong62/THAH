@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { formatCurrency } from '../../utils/formatCurrency';
 import CardProduct from '../Card/Card';

@@ -7,8 +7,7 @@ import Sidebar from '../components/Sidebar.jsx';
 import SortBy from '../components/SortBy';
 import BreadCrumb from '../components/BreadCrumb.jsx';
 import { useNavigate } from 'react-router-dom';
-import products from '../data.json'; // Ensure this path is correct
-
+import products from '../data.json';
 /**
  *
  * @returns {Element}

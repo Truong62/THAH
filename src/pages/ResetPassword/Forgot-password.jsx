@@ -1,5 +1,5 @@
 // src/pages/ForgotPassword.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../../components/Icon/Back';
@@ -89,7 +89,10 @@ export default function ForgotPassword() {
           type="email"
           label="Email *"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setError('');
+          }}
           placeholder="example@gmail.com"
           className={`border rounded p-2 mb-4 ${isDarkMode ? 'bg-gray-700 text-white border-gray-600' : 'border-gray-300'}`}
           isDarkMode={isDarkMode}
@@ -98,7 +101,7 @@ export default function ForgotPassword() {
         {error && <div className="text-red-500 mb-2">{error}</div>}
         <button
           type="submit"
-          className="bg-green-500 text-white py-2 px-4 rounded w-full mt-2"
+          className="bg-[#1DC071] text-white py-2 px-4 rounded w-full mt-2"
           onClick={handleSubmit}
         >
           Send Reset Link

@@ -18,7 +18,6 @@ const CartPage = () => {
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
 
-  // Handle scrolling for pagination
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop =
@@ -38,12 +37,10 @@ const CartPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [currentPage, lastScrollTop, cartItems.length]);
 
-  // Update visible items based on the current page
   useEffect(() => {
     setVisibleItems(cartItems.slice(0, currentPage * itemsPerPage));
   }, [currentPage, cartItems]);
 
-  // Calculate subtotal when cartItems change
   useEffect(() => {
     const newSubtotal = cartItems.reduce(
       (total, item) => total + item.price * item.quantity,

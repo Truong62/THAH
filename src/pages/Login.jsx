@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import userData from '../user.json';
 import './styles/custom-button.css';
@@ -32,11 +32,9 @@ export default function LoginForm() {
     e.preventDefault();
     let valid = true;
 
-    // Reset lỗi
     setEmailError('');
     setPasswordError('');
 
-    // Kiểm tra email
     if (!email) {
       setEmailError(errorMessages.emailRequired.message);
       valid = false;
@@ -51,12 +49,10 @@ export default function LoginForm() {
       }
     }
 
-    // Kiểm tra password
     if (!password) {
       setPasswordError(errorMessages.passwordRequired.message);
       valid = false;
     } else if (valid) {
-      // Chỉ kiểm tra mật khẩu nếu email hợp lệ
       const user = userData.find(
         (user) => user.email === email && user.password === password
       );
@@ -66,7 +62,6 @@ export default function LoginForm() {
       }
     }
 
-    // Xử lý khi form hợp lệ
     if (valid) {
       console.log('Logging in with:', { email, password });
     }

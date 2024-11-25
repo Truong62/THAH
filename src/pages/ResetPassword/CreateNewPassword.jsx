@@ -1,5 +1,5 @@
 // src/pages/CreateNewPassword.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../../components/Icon/Back';
@@ -88,32 +88,38 @@ export default function CreateNewPassword() {
           type="password"
           label="New Password *"
           value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
+          onChange={(e) => {
+            setNewPassword(e.target.value);
+            setError(''); // Ẩn thông báo lỗi khi người dùng nhập lại
+          }}
           placeholder="New Password"
           className={`border rounded p-2 mb-2 ${isDarkMode ? 'bg-gray-700 text-white border-gray-600' : 'border-gray-300'}`}
           isDarkMode={isDarkMode}
           showPassword={showNewPassword}
-          togglePasswordVisibility={() => setShowNewPassword(!showNewPassword)} // Toggle visibility
+          togglePasswordVisibility={() => setShowNewPassword(!showNewPassword)}
         />
 
         <InputField
           type="password"
           label="Confirm New Password *"
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onChange={(e) => {
+            setConfirmPassword(e.target.value);
+            setError('');
+          }}
           placeholder="Confirm Password"
           className={`border rounded p-2 mb-2 ${isDarkMode ? 'bg-gray-700 text-white border-gray-600' : 'border-gray-300'}`}
           isDarkMode={isDarkMode}
           showPassword={showConfirmPassword}
           togglePasswordVisibility={() =>
             setShowConfirmPassword(!showConfirmPassword)
-          } // Toggle visibility
+          }
         />
 
         {error && <div className="text-red-500 mb-2">{error}</div>}
         <button
           type="submit"
-          className="bg-green-500 text-white py-2 px-4 rounded w-full mt-2"
+          className="bg-[#1DC071] text-white py-2 px-4 rounded w-full mt-2"
           onClick={handleSubmit}
         >
           Set New Password
