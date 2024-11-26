@@ -48,24 +48,29 @@ export default function ForgotPassword() {
 
   return (
     <div
-      className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
+      className="relative flex flex-col items-center justify-center min-h-screen !bg-[#13131A]"
       style={{
         padding: '24px',
         gap: '10px',
         opacity: '1',
       }}
     >
+      <div className="absolute top-6 left-6 z-20">
+        <img
+          src="/images/Logo.png"
+          alt="Logo"
+          className="w-[40px] h-[40px] sm:w-[52px] sm:h-[52px]"
+        />
+      </div>
       <div
-        className="absolute w-full h-full bottom-0 transform translate-y-1/2"
+        className="absolute w-full h-full bottom-0 transform translate-y-1/2 hidden md:block"
         style={{
           background: 'url(/images/EllipseBL.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       ></div>
-      <div
-        className={`p-6 md:p-8 rounded-lg w-full max-w-[455px] h-auto shadow-lg z-10 flex flex-col items-center ${isDarkMode ? 'bg-[rgba(28,28,36,1)] text-white' : 'bg-white text-black'}`}
-      >
+      <div className="p-6 md:p-8 rounded-lg w-full max-w-[455px] h-auto shadow-lg z-10 flex flex-col items-center bg-[#1C1C24] text-white">
         <h2 className="text-2xl font-bold mb-4 text-center">Forgot Password</h2>
         <p
           className="mb-2 text-center"

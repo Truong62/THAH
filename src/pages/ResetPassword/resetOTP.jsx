@@ -79,24 +79,25 @@ export default function EnterOtp() {
 
   return (
     <div
-      className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
+      className="relative flex flex-col items-center justify-center min-h-screen !bg-[#13131A]"
       style={{ fontFamily: 'Epilogue', padding: '24px' }}
     >
+      <div className="absolute top-6 left-6 z-20">
+        <img
+          src="/images/Logo.png"
+          alt="Logo"
+          className="w-[40px] h-[40px] sm:w-[52px] sm:h-[52px]"
+        />
+      </div>
       <div
-        className="absolute w-full h-full bottom-0 transform translate-y-1/2"
+        className="absolute w-full h-full bottom-0 transform translate-y-1/2 hidden md:block"
         style={{
           background: 'url(/images/EllipseBL.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       ></div>
-      <div
-        className={`p-6 md:p-8 rounded-lg w-full max-w-[455px] h-auto shadow-lg z-10 flex flex-col items-center ${
-          isDarkMode
-            ? 'bg-[rgba(28,28,36,1)] text-white'
-            : 'bg-white text-black'
-        }`}
-      >
+      <div className="p-6 md:p-8 rounded-lg w-full max-w-[455px] h-auto shadow-lg z-10 flex flex-col items-center bg-[#1C1C24] text-white">
         <h2 className="text-2xl font-bold mb-4 text-left">Forgot Password</h2>
         <p
           className="mb-2 text-left"
@@ -122,14 +123,14 @@ export default function EnterOtp() {
               value={digit}
               onChange={(e) => handleChange(index, e.target.value)}
               maxLength="1"
-              className={`border rounded p-2 w-12 text-center ${isDarkMode ? 'bg-gray-700 text-white border-gray-600' : 'border-gray-300'}`}
+              className={`border rounded p-2 w-12 text-center ${isDarkMode ? 'bg-[#1c1c24] text-white border-gray-600' : 'border-gray-300'}`}
               style={{ height: '65px' }}
             />
           ))}
         </div>
         {error && <div className="text-red-500 mb-2">{error}</div>}
         <div className="flex justify-between w-full mt-4">
-          <Link to="" className="text-purple-500 mb-3">
+          <Link to="" className="text-[#8C6DFD] mb-3">
             Resend OTP
           </Link>
         </div>
@@ -140,7 +141,7 @@ export default function EnterOtp() {
         >
           Confirm
         </button>
-        <a href="/login" className="text-purple-500 mt-2 flex items-center">
+        <a href="/login" className="flex text-[#8c6dfd] w-full mt-4">
           <BackIcon className="mr-2" /> Back to login
         </a>
       </div>

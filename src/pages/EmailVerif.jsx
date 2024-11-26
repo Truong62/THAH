@@ -74,19 +74,25 @@ export default function EmailVerification() {
 
   return (
     <div
-      className={`relative flex items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
+      className="relative flex items-center justify-center min-h-screen !bg-[#13131A]"
+      style={{ fontFamily: 'Epilogue', padding: '24px' }}
     >
+      <div className="absolute top-6 left-6 z-20">
+        <img
+          src="/images/Logo.png"
+          alt="Logo"
+          className="w-[40px] h-[40px] sm:w-[52px] sm:h-[52px]"
+        />
+      </div>
       <div
-        className="absolute w-full h-full bottom-0 transform translate-y-1/2"
+        className="absolute w-full h-full bottom-0 transform translate-y-1/2 hidden md:block"
         style={{
           background: 'url(/images/EllipseBL.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       ></div>
-      <div
-        className={`p-8 rounded-lg w-[455px] h-[467px] shadow-lg z-10 flex flex-col ${isDarkMode ? 'bg-[rgba(28,28,36,1)] text-white' : 'bg-white text-black'}`}
-      >
+      <div className="p-8 rounded-lg w-full max-w-[455px] mx-2.5 md:mx-0 shadow-lg z-10 flex flex-col bg-[#1C1C24] text-white">
         <h2 className="text-2xl font-bold mb-4" style={{ fontSize: '25px' }}>
           Email Verification
         </h2>
@@ -110,7 +116,7 @@ export default function EmailVerification() {
               value={digit}
               onChange={(e) => handleChange(index, e.target.value)}
               maxLength="1"
-              className={`border rounded p-2 w-12 text-center ${isDarkMode ? 'bg-gray-700 text-white border-gray-600' : 'border-gray-300'}`}
+              className={`border rounded p-2 w-12 text-center ${isDarkMode ? 'bg-[#1c1c24] text-white border-gray-600' : 'border-gray-300'}`}
               style={{ height: '65px' }}
             />
           ))}

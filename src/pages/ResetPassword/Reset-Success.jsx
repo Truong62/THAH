@@ -29,11 +29,18 @@ const ResetSuccess = () => {
 
   return (
     <div
-      className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
+      className={`relative flex flex-col items-center justify-center min-h-screen bg-[#13131A] ${isDarkMode ? 'bg-[#13131A]' : 'bg-white'}`}
       style={{ fontFamily: 'Epilogue', padding: '24px' }}
     >
+      <div className="absolute top-6 left-6 z-20">
+        <img
+          src="/images/Logo.png"
+          alt="Logo"
+          className="w-[40px] h-[40px] sm:w-[52px] sm:h-[52px]"
+        />
+      </div>
       <div
-        className="absolute w-full h-full bottom-0 transform translate-y-1/2"
+        className="absolute w-full h-full bottom-0 transform translate-y-1/2 hidden md:block"
         style={{
           background: 'url(/images/EllipseBL.png)',
           backgroundSize: 'cover',
@@ -41,22 +48,35 @@ const ResetSuccess = () => {
         }}
       ></div>
       <div
-        className={`p-6 md:p-8 rounded-lg w-full max-w-[525px] h-auto shadow-lg z-10 flex flex-col items-center justify-center ${isDarkMode ? 'bg-[rgba(28,28,36,1)] text-white' : 'bg-white text-gray-800'}`}
+        className={`p-6 md:p-8 rounded-lg w-full max-w-[525px] h-auto shadow-lg z-10 flex flex-col items-center justify-center ${isDarkMode ? 'bg-[#1C1C24]' : 'bg-white text-gray-800'}`}
+        style={{ fontFamily: 'Epilogue', padding: '24px' }}
       >
-        <div>
-          <img src="/images/Clap.png" alt="Clap Icon" className="mb-4" />
+        <div className="absolute top-6 left-6 z-20">
+          <img
+            src="/images/Logo.png"
+            alt="Logo"
+            className="w-[40px] h-[40px] sm:w-[52px] sm:h-[52px]"
+          />
         </div>
-        <h2 className="text-2xl font-bold mb-4">Password reset successful</h2>
+        <div>
+          <img
+            src="/images/Clap.png"
+            alt="Clap Icon"
+            className="mb-4 w-[64px] h-[64px] md:w-auto md:h-auto"
+          />
+        </div>
+        <h2 className="text-xl md:text-2xl font-bold mb-4 text-white">
+          Password reset successful
+        </h2>
         <p
-          className="text-center mb-4"
-          style={{ color: 'rgba(128, 129, 145, 1)', fontSize: '14px' }} // Corrected font size style
+          className="text-center mb-4 text-sm md:text-base"
+          style={{ color: 'rgba(128, 129, 145, 1)' }}
         >
           You can now use your new password to log in to your account.
         </p>
         <button
           onClick={() => navigate('/')}
-          className="bg-[#1DC071] text-white py-2 px-4 rounded mt-4 w-full max-w-[356px] h-[52px] transition duration-200 ease-in-out hover:bg-green-700"
-          style={{ fontSize: '16px' }}
+          className="bg-[#1DC071] text-white py-2 px-4 rounded mt-4 w-full max-w-[356px] h-[52px] text-sm md:text-base transition duration-200 ease-in-out hover:bg-green-700"
         >
           Go to homepage
         </button>

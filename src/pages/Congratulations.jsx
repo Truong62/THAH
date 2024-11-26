@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TrophyIcon from '../components/Icon/Trophy';
 import React from 'react';
 
 const Congratulations = () => {
   const navigate = useNavigate();
-  const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
     const isVerified = localStorage.getItem('isVerified');
@@ -17,37 +16,32 @@ const Congratulations = () => {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(mediaQuery.matches);
-
-    const handleChange = (e) => {
-      setIsDarkMode(e.matches);
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-
     return () => {
-      mediaQuery.removeEventListener('change', handleChange);
       document.body.style.overflow = 'unset';
     };
   }, []);
 
   return (
     <div
-      className={`relative flex items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
-      style={{ fontFamily: 'Epilogue' }}
+      className="relative flex items-center justify-center min-h-screen !bg-[#13131A]"
+      style={{ fontFamily: 'Epilogue', padding: '24px' }}
     >
+      <div className="absolute top-6 left-6 z-20">
+        <img
+          src="/images/Logo.png"
+          alt="Logo"
+          className="w-[40px] h-[40px] sm:w-[52px] sm:h-[52px]"
+        />
+      </div>
       <div
-        className="absolute w-full h-full bottom-0 transform translate-y-1/2"
+        className="absolute w-full h-full bottom-0 transform translate-y-1/2 hidden md:block"
         style={{
           background: 'url(/images/EllipseBL.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       ></div>
-      <div
-        className={`p-8 rounded-lg w-[525px] h-[421px] shadow-lg z-10 flex flex-col items-center justify-center ${isDarkMode ? 'bg-[rgba(28,28,36,1)] text-white' : 'bg-white text-gray-800'}`}
-      >
+      <div className="p-8 rounded-lg w-[525px] h-[421px] shadow-lg z-10 flex flex-col items-center justify-center bg-[#1C1C24] text-white">
         <TrophyIcon className="mb-4" />
         <h2 className="text-2xl font-bold mb-4">Congratulations!</h2>
         <p

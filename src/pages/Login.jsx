@@ -87,7 +87,7 @@ export default function LoginForm() {
 
   return (
     <div
-      className={`relative flex flex-col items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
+      className="relative flex flex-col items-center justify-center min-h-screen !bg-[#13131A]"
       style={{
         padding: '24px',
         gap: '10px',
@@ -103,7 +103,7 @@ export default function LoginForm() {
       </div>
 
       <div
-        className="absolute w-full h-full bottom-0 transform translate-y-1/2"
+        className="absolute w-full h-full bottom-0 transform translate-y-1/2 hidden md:block"
         style={{
           background: 'url(/images/Ellipse65.png)',
           backgroundSize: 'cover',
@@ -111,9 +111,7 @@ export default function LoginForm() {
         }}
       ></div>
 
-      <div
-        className={`p-8 rounded-lg w-full max-w-[556px] h-auto shadow-lg z-10 flex flex-col items-center ${isDarkMode ? 'bg-[rgba(28,28,36,1)] text-white' : 'bg-white text-black'}`}
-      >
+      <div className="p-8 rounded-lg w-full max-w-[556px] h-auto shadow-lg z-10 flex flex-col items-center bg-[#1C1C24] text-white">
         <h2 className="text-2xl font-bold text-center ">Welcome Back!</h2>
         <p
           className="text-center mb-2"
