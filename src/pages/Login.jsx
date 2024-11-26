@@ -152,7 +152,10 @@ export default function LoginForm() {
               type="password"
               value={password}
               placeholder="Enter password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (e.target.value) setPasswordError('');
+              }}
               onFocus={() => handleFocus('password')}
               showPassword={showPassword}
               togglePasswordVisibility={() => setShowPassword(!showPassword)}
