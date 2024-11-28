@@ -55,7 +55,8 @@
     "lint": "eslint . --ext .js,.jsx",
     "format": "prettier --write .",
     "checkType": "npm run lint && npm run format",
-    "start": "npm run checkType && vite"
+    "start": "npm run checkType && vite",
+    "backend": "npm run devBE --prefix ./BE-demo"
   },
   "eslintConfig": {
     "extends": [
