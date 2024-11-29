@@ -9,7 +9,7 @@ import { truncateDescription } from '../utils/truncateDescription';
 import { formatCurrency } from '../utils/formatCurrency';
 import products from '../data.json';
 import { motion } from 'framer-motion';
-
+import ChatPopup from '../components/Chat/ChatPopup';
 const Home = () => {
   const tag = ['#nike', '#jordan', '#sale'];
   const navigate = useNavigate();
@@ -105,6 +105,7 @@ const Home = () => {
           </a>
         </div>
       </Layout>
+      <ChatPopup></ChatPopup>
       <Footer />
     </React.Fragment>
   );

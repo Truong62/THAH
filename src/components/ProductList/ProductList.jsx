@@ -6,6 +6,7 @@ import FilterSummary from '../FilterSummary';
 import Pagination from '../Pagination';
 import useDeviceType from '../../hooks/useDeviceType';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
  *

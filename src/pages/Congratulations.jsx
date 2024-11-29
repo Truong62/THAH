@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TrophyIcon from '../components/Icon/Trophy';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import React from 'react';
 
 const Congratulations = () => {
   const navigate = useNavigate();

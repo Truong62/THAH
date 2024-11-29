@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import userData from '../../user.json';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../../components/Icon/Back';
+import React from 'react';
 
 export default function EnterOtp() {
   const location = useLocation();
