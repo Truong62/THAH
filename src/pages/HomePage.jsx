@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { Collapse, IconButton } from '@mui/material';
+import { Collapse, IconButton, Skeleton } from '@mui/material'; // Thêm import Skeleton
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import axios from 'axios';
@@ -9,8 +10,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { formatCurrency } from '../utils/formatCurrency';
 import introVideo from '../assets/intro.mp4';
+import introVideo2 from '../assets/intro2.mp4';
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [expanded, setExpanded] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({
@@ -40,7 +44,7 @@ const Home = () => {
           name: product.productName,
           description: product.productDescription,
           brand: product.brandName,
-          image: product.imagePath,
+          image: product.imagePath || 'https://placehold.co/300x300',
           tags: product.tag,
           price: product.price,
         }));
@@ -51,6 +55,8 @@ const Home = () => {
         }
       } catch (error) {
         console.error('Fail to get data:', error);
+      } finally {
+        setLoading(false); // Đặt loading thành false sau khi tải xong
       }
     };
 
@@ -75,10 +81,7 @@ const Home = () => {
   };
 
   return (
-    <div
-      className="max-w-[1440px] mx-auto"
-      style={{ fontFamily: 'La Rosaleda Serif' }}
-    >
+    <div className="max-w-[1440px] mx-auto">
       <nav className="flex flex-col md:flex-row justify-between items-center py-4 px-4 md:px-6">
         <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-8 mb-4 md:mb-0">
           <a
@@ -131,18 +134,24 @@ const Home = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 px-4 md:px-6">
         <div className="col-span-1 md:col-span-6">
-          <div className="aspect-square w-full rounded overflow-hidden group">
-            <img
-              src={currentProduct.image}
-              alt={currentProduct.name}
-              className="w-full h-full object-cover object-center transition-all duration-500 group-hover:scale-105"
-            />
+          <div className="aspect-square overflow-hidden group">
+            <video
+              className="aspect-square object-cover w-full h-full"
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              <source src={introVideo2} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
           <div className="mt-4">
             <Collapse in={expanded} collapsedSize={48}>
-              <p className="text-l text-gray-600">
-                {currentProduct.description}
-              </p>
+              <p
+                className="text-l text-gray-600"
+                style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
+              ></p>
             </Collapse>
             {currentProduct.description.length > 150 && (
               <div className="flex items-center">
@@ -161,7 +170,7 @@ const Home = () => {
                   ) : (
                     <KeyboardArrowDownIcon />
                   )}
-                  <span className="text-sm ml-1">
+                  <span className="text-sm ml-2">
                     {expanded ? 'Show Less' : 'See More'}
                   </span>
                 </IconButton>
@@ -179,13 +188,13 @@ const Home = () => {
           <div className="flex gap-2 md:gap-4 mb-8">
             <button
               onClick={() => handleNavigation('prev')}
-              className="slider-prev border border-gray-300 w-full md:w-[200px] px-4 md:px-8 py-2 hover:border-black"
+              className="slider-prev border border-gray-300 w-full md:w-[300px] px-4 md:px-8 py-2 hover:border-black"
             >
               ←
             </button>
             <button
               onClick={() => handleNavigation('next')}
-              className="slider-next bg-[#5AA1E3] w-full md:w-[200px] text-white px-4 md:px-8 py-2"
+              className="slider-next bg-[#5AA1E3] w-full md:w-[300px] text-white px-4 md:px-8 py-2"
             >
               →
             </button>
@@ -195,55 +204,81 @@ const Home = () => {
             ref={swiperRef}
             modules={[Navigation]}
             spaceBetween={10}
-            slidesPerView={2}
+            slidesPerView={1.5}
             loop={false}
             className="product-slider"
             onSlideChange={(swiper) => {
               setCurrentProduct(products[swiper.activeIndex]);
             }}
           >
-            {products.map((product) => (
-              <SwiperSlide
-                key={product.id}
-                className="!w-[300px] md:!w-[350px]" // Tăng width của slide
-              >
-                <div
-                  className={`bg-gray-50 cursor-pointer group relative h-full ${currentProduct.id === product.id ? 'bg-gray-200' : ''}`}
-                  onClick={() => setCurrentProduct(product)}
-                >
-                  <div className="relative w-full h-[400px]">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover object-center"
-                    />
-                    <p className="absolute bottom-0 left-0 bg-white/80 px-2 py-1 text-xs md:text-base font-bold">
-                      {formatCurrency(product.price)}
-                    </p>
-                    <div className="absolute inset-0 bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <button className="bg-[#5AA1E3] text-white px-4 py-1 text-xs md:text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        BUY
-                      </button>
-                    </div>
-                  </div>
-                  <div className="p-2 md:p-4">
-                    <span className="uppercase text-xs md:text-sm line-clamp-1">
-                      {product.name}
-                    </span>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {product.tags.map((tag) => (
-                        <span
-                          key={tag.tagId}
-                          className="text-[10px] md:text-xs text-gray-500"
-                        >
-                          #{tag.tagName}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
+            {loading
+              ? Array.from({ length: 10 }).map((_, index) => (
+                  <SwiperSlide key={index} className="!w-[300px] md:!w-[350px]">
+                    <Skeleton variant="rectangular" width="100%" height={350} />
+                  </SwiperSlide>
+                ))
+              : products.map((product) => (
+                  <SwiperSlide
+                    key={product.id}
+                    className="!w-[300px] md:!w-[350px]"
+                  >
+                    {!product.image ||
+                    product.image.trim() === '' ||
+                    !product.name ||
+                    !product.price ? (
+                      <Skeleton
+                        variant="rectangular"
+                        width="100%"
+                        height={350}
+                      />
+                    ) : (
+                      <div
+                        className={`bg-gray-50 cursor-pointer group relative h-full ${currentProduct.id === product.id ? 'bg-gray-200' : ''}`}
+                        onClick={() => setCurrentProduct(product)}
+                      >
+                        <div className="relative w-full h-[350px]">
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-full object-cover object-center"
+                            onError={(e) =>
+                              (e.currentTarget.src =
+                                'https://placehold.co/300x300')
+                            }
+                          />
+                          <p className="absolute bottom-0 left-0 bg-white/80 px-2 py-1 text-xs md:text-base font-bold">
+                            {formatCurrency(product.price)}
+                          </p>
+                          <div className="absolute inset-0 bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <button
+                              className="bg-[#5AA1E3] text-white px-4 py-1 text-xs md:text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                              onClick={() =>
+                                navigate(`/productDetail/${product.id}`)
+                              }
+                            >
+                              View Detail
+                            </button>
+                          </div>
+                        </div>
+                        <div className="p-2 md:p-4">
+                          <span className="uppercase text-xs md:text-sm line-clamp-1">
+                            {product.name}
+                          </span>
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {product.tags.map((tag) => (
+                              <span
+                                key={tag.tagId}
+                                className="text-[10px] md:text-xs text-gray-500"
+                              >
+                                #{tag.tagName}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </SwiperSlide>
+                ))}
           </Swiper>
 
           <div className="text-center mt-8">
