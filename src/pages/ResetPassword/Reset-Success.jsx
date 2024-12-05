@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import React from 'react';
 
 const ResetSuccess = () => {
   const navigate = useNavigate();

@@ -5,7 +5,8 @@ import './styles/custom-button.css';
 import { Link } from 'react-router-dom';
 import InputField from '../components/Form/Input';
 import GoogleSignInButton from '../components/Form/GG';
-
+import React from 'react';
+import ChatPopup from '../components/Chat/ChatPopup';
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -186,6 +187,7 @@ export default function LoginForm() {
             Sign in
           </button>
         </form>
+        <ChatPopup />
       </div>
     </div>
   );

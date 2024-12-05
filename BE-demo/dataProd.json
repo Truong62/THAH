@@ -4,9 +4,10 @@
     "productName": "Nike Air Force 1",
     "productDescription": "Classic Nike Air Force 1 shoes for casual wear.",
     "brandName": "Nike",
+    "price": "100000",
     "tag": [
-      {"tagId": 1, "tagName": "Nike"},
-      {"tagId": 2, "tagName": "AirForce1"}
+      { "tagId": 1, "tagName": "Nike" },
+      { "tagId": 2, "tagName": "AirForce1" }
     ],
     "imagePath": "https://images.pexels.com/photos/1620871/pexels-photo-1620871.jpeg"
   },
@@ -15,9 +16,11 @@
     "productName": "Adidas Ultraboost",
     "productDescription": "Adidas Ultraboost running shoes for ultimate comfort.",
     "brandName": "Adidas",
+    "price": "100000",
+
     "tag": [
-      {"tagId": 3, "tagName": "Adidas"},
-      {"tagId": 4, "tagName": "Running"}
+      { "tagId": 3, "tagName": "Adidas" },
+      { "tagId": 4, "tagName": "Running" }
     ],
     "imagePath": "https://images.unsplash.com/photo-1519638399535-1b036603ac77"
   },
@@ -26,9 +29,11 @@
     "productName": "Vans Sk8-Hi",
     "productDescription": "High-top Vans Sk8-Hi for a skateboarding style.",
     "brandName": "Vans",
+    "price": "100000",
+
     "tag": [
-      {"tagId": 5, "tagName": "Vans"},
-      {"tagId": 6, "tagName": "Skateboarding"}
+      { "tagId": 5, "tagName": "Vans" },
+      { "tagId": 6, "tagName": "Skateboarding" }
     ],
     "imagePath": "https://cdn.pixabay.com/photo/2013/07/13/12/46/shoes-185401_960_720.png"
   },
@@ -37,9 +42,11 @@
     "productName": "Converse Chuck Taylor All Star",
     "productDescription": "Timeless Converse Chuck Taylor sneakers.",
     "brandName": "Converse",
+    "price": "100000",
+
     "tag": [
-      {"tagId": 7, "tagName": "Converse"},
-      {"tagId": 8, "tagName": "Classic"}
+      { "tagId": 7, "tagName": "Converse" },
+      { "tagId": 8, "tagName": "Classic" }
     ],
     "imagePath": "https://images.unsplash.com/photo-1554284126-a0b59373df48"
   },
@@ -48,9 +55,11 @@
     "productName": "New Balance 574",
     "productDescription": "New Balance 574 for retro-modern style.",
     "brandName": "New Balance",
+    "price": "100000",
+
     "tag": [
-      {"tagId": 9, "tagName": "NewBalance"},
-      {"tagId": 10, "tagName": "Retro"}
+      { "tagId": 9, "tagName": "NewBalance" },
+      { "tagId": 10, "tagName": "Retro" }
     ],
     "imagePath": "https://images.unsplash.com/photo-1571650925508-d60e0f8a8e68"
   },
@@ -59,9 +68,11 @@
     "productName": "Nike Air Jordan 1",
     "productDescription": "Nike Air Jordan 1 basketball shoes.",
     "brandName": "Nike",
+    "price": "100000",
+
     "tag": [
-      {"tagId": 11, "tagName": "Nike"},
-      {"tagId": 12, "tagName": "AirJordan"}
+      { "tagId": 11, "tagName": "Nike" },
+      { "tagId": 12, "tagName": "AirJordan" }
     ],
     "imagePath": "https://images.pexels.com/photos/3707982/pexels-photo-3707982.jpeg"
   },
@@ -70,9 +81,11 @@
     "productName": "Adidas NMD R1",
     "productDescription": "Adidas NMD R1, a streetwear favorite.",
     "brandName": "Adidas",
+    "price": "100000",
+
     "tag": [
-      {"tagId": 3, "tagName": "Adidas"},
-      {"tagId": 13, "tagName": "NMD"}
+      { "tagId": 3, "tagName": "Adidas" },
+      { "tagId": 13, "tagName": "NMD" }
     ],
     "imagePath": "https://images.pexels.com/photos/700707/pexels-photo-700707.jpeg"
   },
@@ -81,9 +94,11 @@
     "productName": "Puma Suede Classic",
     "productDescription": "Iconic Puma Suede Classic sneakers.",
     "brandName": "Puma",
+    "price": "100000",
+
     "tag": [
-      {"tagId": 14, "tagName": "Puma"},
-      {"tagId": 15, "tagName": "Classic"}
+      { "tagId": 14, "tagName": "Puma" },
+      { "tagId": 15, "tagName": "Classic" }
     ],
     "imagePath": "https://images.unsplash.com/photo-1587583770126-75f0a6a9732a"
   },
@@ -92,9 +107,11 @@
     "productName": "Reebok Classic Leather",
     "productDescription": "Comfortable Reebok Classic Leather shoes.",
     "brandName": "Reebok",
+    "price": "100000",
+
     "tag": [
-      {"tagId": 16, "tagName": "Reebok"},
-      {"tagId": 17, "tagName": "Leather"}
+      { "tagId": 16, "tagName": "Reebok" },
+      { "tagId": 17, "tagName": "Leather" }
     ],
     "imagePath": "https://images.unsplash.com/photo-1516820542533-5e95c8c12aa8"
   },
@@ -103,9 +120,11 @@
     "productName": "Asics Gel-Kayano",
     "productDescription": "Asics Gel-Kayano for long-distance running.",
     "brandName": "Asics",
+    "price": "100000",
+
     "tag": [
-      {"tagId": 18, "tagName": "Asics"},
-      {"tagId": 19, "tagName": "Running"}
+      { "tagId": 18, "tagName": "Asics" },
+      { "tagId": 19, "tagName": "Running" }
     ],
     "imagePath": "https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg"
   }

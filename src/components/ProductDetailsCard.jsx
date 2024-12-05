@@ -14,6 +14,7 @@ import Collapse from '@mui/material/Collapse'; // Import Collapse for descriptio
 import Button from '@mui/material/Button'; // Import Button for toggling
 import useDeviceType from '../hooks/useDeviceType'; // Import the device type hook
 import WarningAmberIcon from '@mui/icons-material/WarningAmber'; // Import WarningAmberIcon
+import React from 'react';
 
 const SlideTransition = (props) => {
   return <Slide {...props} direction="left" />;

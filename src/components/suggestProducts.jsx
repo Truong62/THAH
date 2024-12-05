@@ -6,6 +6,7 @@ import { truncateDescription } from '../utils/truncateDescription';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const SuggestProducts = ({ products }) => {
   const navigate = useNavigate();

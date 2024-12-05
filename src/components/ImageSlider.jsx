@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import Video from '../assets/intro.mp4';
 import { motion } from 'framer-motion';
+import React from 'react';
 
 const ImageSlider = () => {
   useEffect(() => {

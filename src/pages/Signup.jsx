@@ -9,6 +9,7 @@ import userData from '../user.json';
 import Checkbox from '@mui/material/Checkbox';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import React from 'react';
 
 export default function SignUpForm() {
   const [fullName, setFullName] = useState('');
