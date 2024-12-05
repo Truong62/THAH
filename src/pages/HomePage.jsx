@@ -28,6 +28,7 @@ const Home = () => {
   });
   const swiperRef = useRef(null);
 
+  // todo @hiep viết một hook useFetchApi đi bn đừng dùng này cố gắng tư duy tái sử dụng sau còn làm nhiều lần fetchApi
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -39,6 +40,7 @@ const Home = () => {
           },
         });
 
+        // todo @hiep viết type cho đỡ báo wrn
         const formattedProducts = response.data.data.map((product) => ({
           id: product.productId,
           name: product.productName,
@@ -57,6 +59,7 @@ const Home = () => {
         console.error('Fail to get data:', error);
       } finally {
         setLoading(false); // Đặt loading thành false sau khi tải xong
+        // todo @hiep vẫn comment này b:))))
       }
     };
 
@@ -82,6 +85,7 @@ const Home = () => {
 
   return (
     <div className="max-w-[1440px] mx-auto">
+      {/*todo @hiep herder :)))*/}
       <nav className="flex flex-col md:flex-row justify-between items-center py-4 px-4 md:px-6">
         <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-8 mb-4 md:mb-0">
           <a
@@ -113,7 +117,6 @@ const Home = () => {
           CONTACT US
         </button>
       </nav>
-
       <div className="relative w-full h-[200px] md:h-[400px] my-4 md:my-8">
         <video
           className="w-full h-full object-cover"
@@ -122,6 +125,7 @@ const Home = () => {
           muted
           playsInline
         >
+          {/*todo @hiep check trường hợp ở ios*/}
           <source src={introVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -131,7 +135,6 @@ const Home = () => {
           </h1>
         </div>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 px-4 md:px-6">
         <div className="col-span-1 md:col-span-6">
           <div className="aspect-square overflow-hidden group">
@@ -142,6 +145,7 @@ const Home = () => {
               muted
               playsInline
             >
+              {/*todo @hiep check trường hợp ở ios*/}
               <source src={introVideo2} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
@@ -283,12 +287,12 @@ const Home = () => {
 
           <div className="text-center mt-8">
             <button className="w-full md:w-auto bg-[#5AA1E3] text-white px-8 md:px-16 py-2">
+              {/*// todo @hiep dùng <Link></Link> báo trên nhóm rồi mà b :)))*/}
               <a href="/products">SEE MORE PRODUCTS</a>
             </button>
           </div>
         </div>
       </div>
-
       <div className="flex items-center justify-center gap-2 md:gap-4 my-8 md:my-12 px-4">
         <div className="h-px bg-gray-300 w-16 md:w-32"></div>
         <span className="text-lg md:text-xl">NEWEST</span>
@@ -297,5 +301,7 @@ const Home = () => {
     </div>
   );
 };
+
+// todo @hiep clean lại nhé b))))
 
 export default Home;
