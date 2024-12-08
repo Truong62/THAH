@@ -1,4 +1,5 @@
 import Header from '../components/Header/Header';
+import BreadCrumb from '../components/BreadCrumb';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/Layout';
 import StrategyIcon from '../components/SvgIcon/StrategyIcon';
@@ -26,6 +27,7 @@ const Company = () => {
   return (
     <>
       <Header />
+      <BreadCrumb />
       <div className="col-span-1">
         <iframe
           width="100%"
@@ -86,7 +88,7 @@ const Company = () => {
               injected humour
             </p>
           </motion.div>
-          <div className="flex flex-col md:flex-row justify-between gap-4 my-4">
+          <div className="flex flex-wrap md:flex-nowrap gap-4 my-4">
             {STATS.map((stat, index) => (
               <motion.div
                 key={index}
@@ -95,7 +97,9 @@ const Company = () => {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={cardVariants}
-                className="w-full md:w-1/3 p-8 md:p-20 text-center bg-blue-50 rounded-md shadow-md hover:shadow-lg"
+                className={`${
+                  index === 2 ? 'w-full' : 'w-[calc(50%-0.5rem)]'
+                } md:w-1/3 p-8 md:p-20 text-center bg-blue-50 rounded-md shadow-md hover:shadow-lg`}
               >
                 <h1 className="text-2xl font-bold text-blue-600">
                   {stat.title}
@@ -104,50 +108,60 @@ const Company = () => {
               </motion.div>
             ))}
           </div>
-          <div className="flex flex-wrap md:flex-nowrap justify-between gap-6">
-            <div className="w-full md:w-1/3 px-16 py-10 rounded-md border border-gray-300 text-center flex flex-col items-center mb-6 md:mb-0">
-              <div className="mb-4">
+
+          <div className="flex flex-wrap md:flex-nowrap justify-between gap-4">
+            <div className="w-[calc(50%-0.5rem)] md:w-1/3 px-8 py-6 rounded-md border border-gray-300 flex flex-col items-center text-center">
+              <div className="flex items-center justify-center mb-4">
                 <StrategyIcon />
               </div>
-              <h1 className="font-bold text-xl mb-2">Strategy</h1>
-              <p className="text-sm mb-4">
+              <h1 className="font-bold text-sm md:text-base mb-2">Strategy</h1>
+              <p className="text-xs md:text-sm mb-4">
                 There are many variations of passage of Lorem Ipsum available,
                 but the majority have suffered alteration.
               </p>
-              <a className="font-bold text-blue-400" href="#">
+              <a
+                className="font-bold text-blue-400 text-sm md:text-base"
+                href="#"
+              >
                 Learn More
               </a>
             </div>
 
-            <div className="w-full md:w-1/3 px-16 py-10 rounded-md bg-blue-400 border border-gray-300 text-center flex flex-col items-center mb-6 md:mb-0">
-              <div className="mb-4">
+            <div className="w-[calc(50%-0.5rem)] md:w-1/3 px-8 py-6 rounded-md bg-blue-400 border border-gray-300 flex flex-col items-center text-center">
+              <div className="flex items-center justify-center mb-4">
                 <TechnologyIcon />
               </div>
-              <h1 className="font-bold text-xl mb-2">Technology</h1>
-              <p className="text-sm mb-4">
+              <h1 className="font-bold text-sm md:text-base mb-2 text-white">
+                Technology
+              </h1>
+              <p className="text-xs md:text-sm mb-4 text-white">
                 There are many variations of passage of Lorem Ipsum available,
                 but the majority have suffered alteration.
               </p>
-              <a className="font-bold text-white" href="#">
+              <a className="font-bold text-white text-sm md:text-base" href="#">
                 Learn More
               </a>
             </div>
 
-            <div className="w-full md:w-1/3 px-16 py-10 rounded-md border border-gray-300 text-center flex flex-col items-center">
-              <div className="mb-4">
+            <div className="w-full md:w-1/3 px-8 py-6 rounded-md border border-gray-300 flex flex-col items-center text-center">
+              <div className="flex items-center justify-center mb-4">
                 <ConsultingIcon />
               </div>
-              <h1 className="font-bold text-xl mb-2">Consulting</h1>
-              <p className="text-sm mb-4">
+              <h1 className="font-bold text-sm md:text-base mb-2">
+                Consulting
+              </h1>
+              <p className="text-xs md:text-sm mb-4">
                 There are many variations of passage of Lorem Ipsum available,
                 but the majority have suffered alteration.
               </p>
-              <a className="font-bold text-blue-400" href="#">
+              <a
+                className="font-bold text-blue-400 text-sm md:text-base"
+                href="#"
+              >
                 Learn More
               </a>
             </div>
           </div>
-          ;
         </div>
       </Layout>
       <Footer />
