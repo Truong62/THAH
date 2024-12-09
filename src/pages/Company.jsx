@@ -68,7 +68,7 @@ const Company = () => {
               transition={{ duration: 1.4 }}
               className="absolute inset-0 flex items-center justify-center"
             >
-              <h1 className="text-white text-8xl font-bold p-4 rounded-lg">
+              <h1 className="text-white text-5xl font-bold p-4 rounded-lg">
                 Sneaker Store
               </h1>
             </motion.div>
