@@ -58,21 +58,22 @@ const Company = () => {
               </p>
             </div>
           </motion.div>
-          <div className="relative">
-            <div className="w-full h-[500px] object-cover rounded-xl flex justify-center">
-              <BannerCompany />
+          <div className="relative w-full h-[300px] sm:h-[200px] md:h-[400px] overflow-hidden mt-8">
+            <div className="absolute inset-0">
+              <BannerCompany className="w-full h-[500px] object-cover" />
             </div>
             <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.4 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2 }}
               className="absolute inset-0 flex items-center justify-center"
             >
-              <h1 className="text-white text-5xl font-bold p-4 rounded-lg">
+              <h1 className="text-white text-4xl sm:text-5xl font-bold p-4 rounded-lg bg-opacity-60 ">
                 Sneaker Store
               </h1>
             </motion.div>
           </div>
+
           <motion.div
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
