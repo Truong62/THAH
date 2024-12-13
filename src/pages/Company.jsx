@@ -1,5 +1,4 @@
 import Header from '../components/Header/Header';
-import BreadCrumb from '../components/BreadCrumb';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/Layout';
 import StrategyIcon from '../components/SvgIcon/StrategyIcon';
@@ -98,7 +97,6 @@ const Company = () => {
   return (
     <>
       <Header />
-      <BreadCrumb />
       <div className="col-span-1">
         <iframe
           width="100%"
