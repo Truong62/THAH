@@ -1,17 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import Header from '../components/Header/Header';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { Collapse, IconButton } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import useFetchApi from '../hooks/useFetchApi';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { formatCurrency } from '../utils/formatCurrency';
 import introVideo from '../assets/intro.mp4';
 import introVideo2 from '../assets/intro2.mp4';
-import useFetchApi from '../hooks/useFetchApi';
-import Header from '../components/Header/Header';
 import SkeletonProduct from '../components/Skeleton/SkeletonProducts';
 const Home = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const Home = () => {
     data: products,
     loading,
     error,
-  } = useFetchApi('http://localhost:3000/api/product', {
+  } = useFetchApi('http://localhost:5000/api/product', {
     limit: 10,
     page: 1,
     order: 'desc',
@@ -81,7 +81,7 @@ const Home = () => {
 
   return (
     <div className="max-w-[1440px] mx-auto">
-      <Header></Header>
+      <Header />
 
       <div className="relative w-full h-[200px] md:h-[400px] my-4 md:my-8">
         <video
@@ -105,7 +105,7 @@ const Home = () => {
         <div className="col-span-1 md:col-span-6">
           <div className="aspect-square overflow-hidden group">
             <video
-              className="w-full h-full object-cover"
+              className="aspect-square object-cover w-full h-full"
               autoPlay
               loop
               muted
@@ -187,22 +187,18 @@ const Home = () => {
                     className="!w-[300px] md:!w-[350px]"
                   >
                     <div className="bg-gray-50 p-4 h-full">
-                      {/* Ảnh skeleton: Vuông */}
                       <div className="mb-4">
                         <SkeletonProduct shape="square" size="10rem" />
                       </div>
 
-                      {/* Tên sản phẩm skeleton: Hình chữ nhật */}
                       <div className="mb-2">
                         <SkeletonProduct width="80%" height="1rem" />
                       </div>
 
-                      {/* Giá sản phẩm skeleton: Hình chữ nhật nhỏ */}
                       <div className="mb-2">
                         <SkeletonProduct width="50%" height="1rem" />
                       </div>
 
-                      {/* Tags skeleton: Nhiều hình chữ nhật nhỏ */}
                       <div className="flex flex-wrap gap-2">
                         {Array.from({ length: 3 }).map((_, tagIndex) => (
                           <SkeletonProduct
@@ -236,22 +232,18 @@ const Home = () => {
                     !product.name ||
                     !product.price ? (
                       <div className="bg-gray-50 p-4 h-full">
-                        {/* Ảnh skeleton */}
                         <div className="mb-4">
                           <SkeletonProduct shape="square" size="10rem" />
                         </div>
 
-                        {/* Tên sản phẩm skeleton */}
                         <div className="mb-2">
                           <SkeletonProduct width="80%" height="1rem" />
                         </div>
 
-                        {/* Giá sản phẩm skeleton */}
                         <div className="mb-2">
                           <SkeletonProduct width="50%" height="1rem" />
                         </div>
 
-                        {/* Tags skeleton */}
                         <div className="flex flex-wrap gap-2">
                           {Array.from({ length: 3 }).map((_, tagIndex) => (
                             <SkeletonProduct
@@ -315,7 +307,7 @@ const Home = () => {
 
           <div className="text-center mt-8">
             <button className="w-full md:w-auto bg-[#5AA1E3] text-white px-8 md:px-16 py-2">
-              <Link to="/products">SEE MORE PRODUCTS</Link>{' '}
+              <a href="/products">SEE MORE PRODUCTS</a>
             </button>
           </div>
         </div>
