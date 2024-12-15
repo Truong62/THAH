@@ -1,3 +1,5 @@
 {
-  "editor.fontFamily": "Cascadia Mono, 'Courier New', monospace"
+  "editor.fontFamily": "Fira Code",
+  "window.zoomLevel": 0,
+  "editor.fontLigatures": true
 }
