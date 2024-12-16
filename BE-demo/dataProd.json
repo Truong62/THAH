@@ -4,6 +4,7 @@
     "productName": "Nike Air Force 1",
     "productDescription": "Classic Nike Air Force 1 shoes for casual wear.",
     "brandName": "Nike",
+    "price": "100000",
     "tag": [
       { "tagId": 1, "tagName": "Nike" },
       { "tagId": 2, "tagName": "AirForce1" }
@@ -15,6 +16,8 @@
     "productName": "Adidas Ultraboost",
     "productDescription": "Adidas Ultraboost running shoes for ultimate comfort.",
     "brandName": "Adidas",
+    "price": "100000",
+
     "tag": [
       { "tagId": 3, "tagName": "Adidas" },
       { "tagId": 4, "tagName": "Running" }
@@ -26,6 +29,8 @@
     "productName": "Vans Sk8-Hi",
     "productDescription": "High-top Vans Sk8-Hi for a skateboarding style.",
     "brandName": "Vans",
+    "price": "100000",
+
     "tag": [
       { "tagId": 5, "tagName": "Vans" },
       { "tagId": 6, "tagName": "Skateboarding" }
@@ -37,6 +42,8 @@
     "productName": "Converse Chuck Taylor All Star",
     "productDescription": "Timeless Converse Chuck Taylor sneakers.",
     "brandName": "Converse",
+    "price": "100000",
+
     "tag": [
       { "tagId": 7, "tagName": "Converse" },
       { "tagId": 8, "tagName": "Classic" }
@@ -48,6 +55,8 @@
     "productName": "New Balance 574",
     "productDescription": "New Balance 574 for retro-modern style.",
     "brandName": "New Balance",
+    "price": "100000",
+
     "tag": [
       { "tagId": 9, "tagName": "NewBalance" },
       { "tagId": 10, "tagName": "Retro" }
@@ -59,6 +68,8 @@
     "productName": "Nike Air Jordan 1",
     "productDescription": "Nike Air Jordan 1 basketball shoes.",
     "brandName": "Nike",
+    "price": "100000",
+
     "tag": [
       { "tagId": 11, "tagName": "Nike" },
       { "tagId": 12, "tagName": "AirJordan" }
@@ -70,6 +81,8 @@
     "productName": "Adidas NMD R1",
     "productDescription": "Adidas NMD R1, a streetwear favorite.",
     "brandName": "Adidas",
+    "price": "100000",
+
     "tag": [
       { "tagId": 3, "tagName": "Adidas" },
       { "tagId": 13, "tagName": "NMD" }
@@ -81,6 +94,8 @@
     "productName": "Puma Suede Classic",
     "productDescription": "Iconic Puma Suede Classic sneakers.",
     "brandName": "Puma",
+    "price": "100000",
+
     "tag": [
       { "tagId": 14, "tagName": "Puma" },
       { "tagId": 15, "tagName": "Classic" }
@@ -92,6 +107,8 @@
     "productName": "Reebok Classic Leather",
     "productDescription": "Comfortable Reebok Classic Leather shoes.",
     "brandName": "Reebok",
+    "price": "100000",
+
     "tag": [
       { "tagId": 16, "tagName": "Reebok" },
       { "tagId": 17, "tagName": "Leather" }
@@ -103,6 +120,8 @@
     "productName": "Asics Gel-Kayano",
     "productDescription": "Asics Gel-Kayano for long-distance running.",
     "brandName": "Asics",
+    "price": "100000",
+
     "tag": [
       { "tagId": 18, "tagName": "Asics" },
       { "tagId": 19, "tagName": "Running" }

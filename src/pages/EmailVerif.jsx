@@ -3,26 +3,26 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import userData from '../user.json';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../components/Icon/Back';
+import React from 'react';
 
 export default function EmailVerification() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { email, password } = location.state || {}; // Nhận email và password từ state
+  const { email, password } = location.state || {};
 
   const [otp, setOtp] = useState(['', '', '', '']);
   const [error, setError] = useState('');
-  const [isDarkMode, setIsDarkMode] = useState(true); // State for dark mode
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  // Kiểm tra nếu không có email thì chuyển hướng về trang đăng ký
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
     if (!email) {
-      navigate('/signup'); // Chuyển hướng về trang đăng ký nếu không có email
+      navigate('/signup');
     }
     return () => {
       document.body.style.overflow = 'unset';
@@ -30,23 +30,20 @@ export default function EmailVerification() {
   }, [email, navigate]);
 
   const handleChange = (index, value) => {
-    // Kiểm tra xem giá trị nhập vào có phải là số không
     if (!/^\d*$/.test(value)) {
-      return; // Nếu không phải số, không làm gì cả
+      return;
     }
 
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Move to the next input if the current one is filled
     if (value && index < otp.length - 1) {
       const nextInput = document.getElementById(`otp-input-${index + 1}`);
       if (nextInput) {
         nextInput.focus();
       }
     } else if (!value && index > 0) {
-      // Move to the previous input if the current one is empty
       const prevInput = document.getElementById(`otp-input-${index - 1}`);
       if (prevInput) {
         prevInput.focus();

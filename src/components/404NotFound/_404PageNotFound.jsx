@@ -1,4 +1,5 @@
 import Header from '../Header/Header';
+import React from 'react';
 
 export default function PageNotFound() {
   return (
