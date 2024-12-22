@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux'; // Import useSelector
+import { useSelector } from 'react-redux';
 import CartModal from '../Cart/CartModal.jsx';
 
 /**
@@ -31,52 +31,52 @@ const Header = () => {
 
   return (
     <div className="container flex flex-col mx-auto sticky top-0 left-0 right-0 z-50 bg-white">
-      <div className="relative flex flex-wrap items-center justify-between w-full group py-7 shrink-0">
-        <div className="flex items-center">
+      <div className="relative flex items-center justify-between w-full group py-7 shrink-0 md:py-2">
+        <div className="flex items-center md:ml-2">
           <Link to={'/'}>
             <img
-              className="w-[50px] rounded-2xl"
+              className="w-[50px] rounded-lg"
               src="https://yt3.googleusercontent.com/HnAnUZS7d8LFtPHaHRtPH9nMoUmrsBBy_FDD-T-YQIycPW55peuWo1NO_rxPIswDbukXYlk7=s160-c-k-c0x00ffffff-no-rj"
               alt=""
             />
           </Link>
-          <div className="flex items-center ml-3 shadow-lg w-[250px] rounded-full p-4">
+          <div className="flex items-center ml-3 hover:shadow-lg w-[250px] rounded-full p-4 transition-all duration-500 md:w-auto">
             <input
-              className="h-full outline-none"
+              className="h-full outline-none md:w-auto"
               placeholder="Search ...."
             ></input>
           </div>
         </div>
-        <div className="items-center justify-between hidden gap-12 text-black md:flex">
+        <div className="items-center justify-between hidden md:gap-6 gap-12 text-black md:flex">
           <Link
             to={'/products'}
-            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/products' ? 'bg-[#A8DCE7]' : ''}`}
+            className={`text-sm font-bold px-5 py-2 md:px-3 md:py-1 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/products' ? 'bg-[#A8DCE7]' : ''}`}
           >
             Products
           </Link>
           <Link
             to={'/pricing'}
-            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/pricing' ? 'bg-[#A8DCE7]' : ''}`}
+            className={`text-sm font-bold px-5 py-2 md:px-3 md:py-1 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/pricing' ? 'bg-[#A8DCE7]' : ''}`}
           >
             Pricing
           </Link>
           <Link
             to={'/blogs'}
-            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/blogs' ? 'bg-[#A8DCE7]' : ''}`}
+            className={`text-sm font-bold px-5 py-2 md:px-3 md:py-1 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/blogs' ? 'bg-[#A8DCE7]' : ''}`}
           >
             Blogs
           </Link>
           <Link
             to={'/company'}
-            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/company' ? 'bg-[#A8DCE7]' : ''}`}
+            className={`text-sm font-bold px-5 py-2 md:px-3 md:py-1 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/company' ? 'bg-[#A8DCE7]' : ''}`}
           >
             Company
           </Link>
         </div>
-        <div className="items-center hidden gap-8 md:flex">
+        <div className="items-center hidden gap-8 md:flex md:gap-6">
           <Link
             to="/cart"
-            className={`text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/cart' ? 'bg-[#A8DCE7]' : ''}`}
+            className={`text-sm font-bold px-5 py-2 md:px-3 md:py-1 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/cart' ? 'bg-[#A8DCE7]' : ''}`}
           >
             <button className="relative flex items-center py-2 text-sm font-bold text-gray-800 hover:text-[#272B3B] transition duration-300">
               <FontAwesomeIcon icon={faCartShopping} className="mr-2" />
