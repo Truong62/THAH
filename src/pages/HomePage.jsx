@@ -13,6 +13,7 @@ import { formatCurrency } from '../utils/formatCurrency';
 import introVideo from '../assets/intro.mp4';
 import introVideo2 from '../assets/intro2.mp4';
 import SkeletonProduct from '../components/Skeleton/SkeletonProducts';
+
 const Home = () => {
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
@@ -27,6 +28,8 @@ const Home = () => {
   });
   const [formattedProducts, setFormattedProducts] = useState([]);
   const swiperRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [progress] = useState(0);
 
   const {
     data: products,
@@ -64,7 +67,6 @@ const Home = () => {
       const currentIndex = formattedProducts.findIndex(
         (p) => p.id === currentProduct.id
       );
-
       if (direction === 'next') {
         if (currentIndex < formattedProducts.length - 1) {
           setCurrentProduct(formattedProducts[currentIndex + 1]);
@@ -79,16 +81,22 @@ const Home = () => {
     }
   };
 
+  const handleProgressVisibility = () => {
+    setIsVisible(true);
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 3000);
+  };
+
   return (
     <div className="max-w-[1440px] mx-auto">
       <Header />
-
       <div className="relative w-full h-[200px] md:h-[400px] my-4 md:my-8">
         <video
           className="w-full h-full object-cover"
           autoPlay
-          loop
           muted
+          loop
           playsInline
         >
           <source src={introVideo} type="video/mp4" />
@@ -154,7 +162,7 @@ const Home = () => {
             POWERFUL MEANS OF SELF-EXPRESSION AND TRANSFORMATION.
           </p>
 
-          <div className="flex gap-2 md:gap-4 mb-8">
+          <div className="flex gap-2 md:gap-4 mb-10">
             <button
               onClick={() => handleNavigation('prev')}
               className="slider-prev border border-gray-300 w-full md:w-[300px] px-4 md:px-8 py-2 hover:border-black"
@@ -173,12 +181,14 @@ const Home = () => {
             ref={swiperRef}
             modules={[Navigation]}
             spaceBetween={10}
-            slidesPerView={1.5}
+            slidesPerView="auto"
             loop={false}
-            className="product-slider"
-            onSlideChange={(swiper) => {
-              setCurrentProduct(formattedProducts[swiper.activeIndex]);
+            navigation={false}
+            freeMode={true}
+            onSlideChange={() => {
+              handleProgressVisibility();
             }}
+            onTouchStart={handleProgressVisibility}
           >
             {loading
               ? Array.from({ length: 10 }).map((_, index) => (
@@ -227,90 +237,75 @@ const Home = () => {
                       })
                     }
                   >
-                    {!product.image ||
-                    product.image.trim() === '' ||
-                    !product.name ||
-                    !product.price ? (
-                      <div className="bg-gray-50 p-4 h-full">
-                        <div className="mb-4">
-                          <SkeletonProduct shape="square" size="10rem" />
+                    <div
+                      className={`bg-gray-50 cursor-pointer group relative h-full ${
+                        currentProduct.id === product.id ? 'bg-gray-200' : ''
+                      }`}
+                    >
+                      <div className="relative w-full h-[350px]">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-cover object-center"
+                          onError={(e) =>
+                            (e.currentTarget.src =
+                              'https://placehold.co/300x300')
+                          }
+                        />
+                        <p className="absolute bottom-0 left-0 bg-white/80 px-2 py-1 text-xs md:text-base font-bold">
+                          {formatCurrency(product.price)}
+                        </p>
+                        <div className="absolute inset-0 bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <button
+                            className="bg-[#5AA1E3] text-white px-4 py-1 text-xs md:text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+                            onClick={() =>
+                              navigate(`/productDetail/${product.id}`)
+                            }
+                          >
+                            View Detail
+                          </button>
                         </div>
-
-                        <div className="mb-2">
-                          <SkeletonProduct width="80%" height="1rem" />
-                        </div>
-
-                        <div className="mb-2">
-                          <SkeletonProduct width="50%" height="1rem" />
-                        </div>
-
-                        <div className="flex flex-wrap gap-2">
-                          {Array.from({ length: 3 }).map((_, tagIndex) => (
-                            <SkeletonProduct
-                              key={`tag-skeleton-${tagIndex}`}
-                              width="4rem"
-                              height="0.8rem"
-                            />
+                      </div>
+                      <div className="p-2 md:p-4">
+                        <span className="uppercase text-xs md:text-sm line-clamp-1">
+                          {product.name}
+                        </span>
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {product.tags.map((tag) => (
+                            <span
+                              key={tag.tagId}
+                              className="text-[10px] md:text-xs text-gray-500"
+                            >
+                              #{tag.tagName}
+                            </span>
                           ))}
                         </div>
                       </div>
-                    ) : (
-                      <div
-                        className={`bg-gray-50 cursor-pointer group relative h-full ${
-                          currentProduct.id === product.id ? 'bg-gray-200' : ''
-                        }`}
-                      >
-                        <div className="relative w-full h-[350px]">
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            className="w-full h-full object-cover object-center"
-                            onError={(e) =>
-                              (e.currentTarget.src =
-                                'https://placehold.co/300x300')
-                            }
-                          />
-                          <p className="absolute bottom-0 left-0 bg-white/80 px-2 py-1 text-xs md:text-base font-bold">
-                            {formatCurrency(product.price)}
-                          </p>
-                          <div className="absolute inset-0 bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button
-                              className="bg-[#5AA1E3] text-white px-4 py-1 text-xs md:text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
-                              onClick={() =>
-                                navigate(`/productDetail/${product.id}`)
-                              }
-                            >
-                              View Detail
-                            </button>
-                          </div>
-                        </div>
-                        <div className="p-2 md:p-4">
-                          <span className="uppercase text-xs md:text-sm line-clamp-1">
-                            {product.name}
-                          </span>
-                          <div className="flex flex-wrap gap-1 mt-1">
-                            {product.tags.map((tag) => (
-                              <span
-                                key={tag.tagId}
-                                className="text-[10px] md:text-xs text-gray-500"
-                              >
-                                #{tag.tagName}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    )}
+                    </div>
                   </SwiperSlide>
                 ))}
           </Swiper>
 
           <div className="text-center mt-8">
-            <button className="w-full md:w-auto bg-[#5AA1E3] text-white px-8 md:px-16 py-2">
-              <a href="/products">SEE MORE PRODUCTS</a>
+            <button
+              onClick={() => navigate('/products')}
+              className="w-full md:w-auto bg-[#5AA1E3] text-white px-8 md:px-16 py-2"
+            >
+              SEE MORE PRODUCTS
             </button>
           </div>
         </div>
+      </div>
+
+      <div
+        className={`transition-opacity duration-500 fixed bottom-0 left-0 w-full h-2 bg-gray-300 ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <div
+          className="h-full bg-blue-500 transition-all"
+          style={{ width: `${progress}%` }}
+        ></div>
       </div>
 
       <div className="flex items-center justify-center gap-2 md:gap-4 my-8 md:my-12 px-4">
