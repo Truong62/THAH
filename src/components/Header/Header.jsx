@@ -5,7 +5,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
 import CartModal from '../Cart/CartModal.jsx';
 import SidebarContainer from './Sidebar';
-import { Button } from 'primereact/Button';
+import Button from '@mui/material/Button';
 
 /**
  *
@@ -97,9 +97,7 @@ const Header = () => {
             <Link to="/signup">Sign up</Link>
           </button>
         </div>
-        <button icon="pi pi-arrow-right" onClick={() => setVisibleRight(true)}>
-          dădawdawdaw
-        </button>
+        <Button onClick={() => setVisibleRight(true)}>Open drawer</Button>
         <SidebarContainer {...{ visibleRight, setVisibleRight }} />
       </div>
       <CartModal isOpen={isModalOpen} onClose={handleCloseModal}></CartModal>
