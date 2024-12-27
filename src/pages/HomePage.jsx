@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { Collapse, IconButton } from '@mui/material';
+import { Collapse, IconButton, Alert, Button } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import useFetchApi from '../hooks/useFetchApi';
@@ -28,7 +28,6 @@ const Home = () => {
   });
   const [formattedProducts, setFormattedProducts] = useState([]);
   const swiperRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
   const [progress] = useState(0);
 
   const {
@@ -41,22 +40,28 @@ const Home = () => {
     order: 'desc',
   });
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    const newFormattedProducts = products.map((product) => ({
-      id: product.productId,
-      name: product.productName,
-      description: product.productDescription,
-      brand: product.brandName,
-      image: product.imagePath || 'https://placehold.co/300x300',
-      tags: product.tag,
-      price: product.price,
-    }));
-    setFormattedProducts(newFormattedProducts);
-    if (newFormattedProducts.length > 0) {
+    if (error) {
+      setErrorMessage(`Error: ${error.message}`);
+    } else {
+      setErrorMessage('');
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (products && products.length > 0) {
+      const newFormattedProducts = products.map((product) => ({
+        id: product.productId,
+        name: product.productName,
+        description: product.productDescription,
+        brand: product.brandName,
+        image: product.imagePath || 'https://placehold.co/300x300',
+        tags: product.tag,
+        price: product.price,
+      }));
+      setFormattedProducts(newFormattedProducts);
       setCurrentProduct(newFormattedProducts[0]);
     }
   }, [products]);
@@ -81,16 +86,10 @@ const Home = () => {
     }
   };
 
-  const handleProgressVisibility = () => {
-    setIsVisible(true);
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 3000);
-  };
-
   return (
     <div className="max-w-[1440px] mx-auto">
       <Header />
+
       <div className="relative w-full h-[200px] md:h-[400px] my-4 md:my-8">
         <video
           className="w-full h-full object-cover"
@@ -98,10 +97,20 @@ const Home = () => {
           muted
           loop
           playsInline
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+            document.getElementById('fallback-image').style.display = 'block';
+          }}
         >
           <source src={introVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <img
+          id="fallback-image"
+          src="https://placehold.co/300x300"
+          alt="Fallback"
+          style={{ display: 'none' }}
+        />
         <div className="absolute inset-0 flex items-center justify-center">
           <h1 className="text-white text-3xl md:text-8xl font-light text-center drop-shadow-lg">
             SHIFTED COUNTER
@@ -185,10 +194,6 @@ const Home = () => {
             loop={false}
             navigation={false}
             freeMode={true}
-            onSlideChange={() => {
-              handleProgressVisibility();
-            }}
-            onTouchStart={handleProgressVisibility}
           >
             {loading
               ? Array.from({ length: 10 }).map((_, index) => (
@@ -285,7 +290,23 @@ const Home = () => {
                   </SwiperSlide>
                 ))}
           </Swiper>
-
+          {errorMessage ? (
+            <Alert
+              severity="error"
+              action={
+                <Button
+                  color="inherit"
+                  size="small"
+                  onClick={() => window.location.reload()}
+                >
+                  Reload
+                </Button>
+              }
+              className="mb-6 max-w-4xl mx-auto"
+            >
+              {errorMessage}
+            </Alert>
+          ) : null}
           <div className="text-center mt-8">
             <button
               onClick={() => navigate('/products')}
@@ -298,9 +319,7 @@ const Home = () => {
       </div>
 
       <div
-        className={`transition-opacity duration-500 fixed bottom-0 left-0 w-full h-2 bg-gray-300 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
-        }`}
+        className={`transition-opacity duration-500 fixed bottom-0 left-0 w-full h-2 bg-gray-300`}
       >
         <div
           className="h-full bg-blue-500 transition-all"

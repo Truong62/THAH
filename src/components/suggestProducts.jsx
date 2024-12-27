@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import CardProduct from './Card/Card.jsx';
 import { formatCurrency } from '../utils/formatCurrency.js';
 import { Swiper, SwiperSlide } from 'swiper/react';
