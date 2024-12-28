@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from '../pages/Home';
+import HomePage from '../pages/HomePage';
 import Blogs from '../pages/Blogs';
 import Product from '../pages/Product';
 import ProductDetail from '../pages/ProductDetail';
@@ -15,6 +15,7 @@ import ResetSuccess from '../pages/ResetPassword/Reset-Success';
 import EmailVerification from '../pages/EmailVerif';
 import Congratulations from '../pages/Congratulations';
 import Company from '../pages/Company';
+import React from 'react';
 
 /**
  *
@@ -24,7 +25,7 @@ import Company from '../pages/Company';
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home></Home>} />
+      <Route path="/" element={<HomePage></HomePage>} />
       <Route path="/blogs" element={<Blogs></Blogs>} />
       <Route path="/products" element={<Product></Product>} />
       <Route path="/products/:link" element={<ProductDetail></ProductDetail>} />

@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import React from 'react';
+
 const TrophyIcon = ({ width = 69, height = 70, className = '' }) => {
   return (
     <svg

@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import { formatCurrency } from '../utils/formatCurrency'; // Ensure this utility is imported
+import { formatCurrency } from '../utils/formatCurrency';
+import React from 'react';
 
 /**
  *

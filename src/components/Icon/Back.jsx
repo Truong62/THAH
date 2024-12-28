@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import React from 'react';
+
 const BackIcon = ({
   width = 22,
   height = 22,

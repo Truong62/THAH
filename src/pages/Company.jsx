@@ -7,6 +7,7 @@ import ConsultingIcon from '../components/SvgIcon/ConsultingIcon';
 import BannerCompany from '../components/SvgIcon/bannerCompany';
 import { motion } from 'framer-motion';
 import { STATS } from '../utils/Company/company';
+import React from 'react';
 
 const Company = () => {
   const cardVariants = {

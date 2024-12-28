@@ -6,6 +6,7 @@ import FilterSummary from '../FilterSummary';
 import Pagination from '../Pagination';
 import useDeviceType from '../../hooks/useDeviceType';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 /**
  *
@@ -74,7 +75,7 @@ const ProductList = ({
           endMessage={<p className="text-center">You have seen all products</p>}
         >
           <div className="grid gap-2 sm:gap-3 lg:gap-5 mb-10 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-            {products.map((product, index) => (
+            {currentItems.map((product, index) => (
               <CardProduct
                 key={index}
                 nameProduct={product.productName}
@@ -84,7 +85,7 @@ const ProductList = ({
                 )}
                 price={formatCurrency(product.variants[0].price)}
                 brand={product.brandName}
-                mainImage={product.variants[0].images[0]}
+                imageUrl={product.variants[0].images[0]}
                 onClick={() => onProductClick(product.productName)}
               />
             ))}
@@ -119,11 +120,11 @@ const ProductList = ({
   );
 };
 
-export default ProductList;
-
 ProductList.propTypes = {
-  products: PropTypes.object,
+  products: PropTypes.array.isRequired,
   selectedCategory: PropTypes.object.isRequired,
   onRemoveCategory: PropTypes.func.isRequired,
   onProductClick: PropTypes.func.isRequired,
 };
+
+export default ProductList;

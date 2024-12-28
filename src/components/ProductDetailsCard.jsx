@@ -4,16 +4,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import products from '../data.json'; // Import the products array
-import { formatCurrency } from '../utils/formatCurrency'; // Import formatCurrency
+import products from '../data.json';
+import { formatCurrency } from '../utils/formatCurrency';
 import { addToCart, updateQuantity } from '../redux/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import Snackbar from '@mui/material/Snackbar'; // Import Snackbar
-import Slide from '@mui/material/Slide'; // Import Slide for transition
-import Collapse from '@mui/material/Collapse'; // Import Collapse for description
-import Button from '@mui/material/Button'; // Import Button for toggling
-import useDeviceType from '../hooks/useDeviceType'; // Import the device type hook
-import WarningAmberIcon from '@mui/icons-material/WarningAmber'; // Import WarningAmberIcon
+import Snackbar from '@mui/material/Snackbar';
+import Slide from '@mui/material/Slide';
+import Collapse from '@mui/material/Collapse';
+import Button from '@mui/material/Button';
+import useDeviceType from '../hooks/useDeviceType';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import React from 'react';
 
 const SlideTransition = (props) => {
   return <Slide {...props} direction="left" />;

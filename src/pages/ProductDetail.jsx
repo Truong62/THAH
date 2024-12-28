@@ -5,6 +5,7 @@ import BreadCrumb from '../components/BreadCrumb';
 import ProductDetailsCard from '../components/ProductDetailsCard';
 import SuggestProducts from '../components/suggestProducts';
 import products from '../data.json';
+import React from 'react';
 
 /**
  *

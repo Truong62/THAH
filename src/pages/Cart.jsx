@@ -12,34 +12,7 @@ const CartPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [alert, setAlert] = useState(null);
-  const [visibleItems, setVisibleItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-  const [lastScrollTop, setLastScrollTop] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
-      if (
-        scrollTop > lastScrollTop &&
-        currentPage * itemsPerPage < cartItems.length
-      ) {
-        setCurrentPage((prevPage) => prevPage + 1);
-      } else if (scrollTop < lastScrollTop && currentPage > 1) {
-        setCurrentPage((prevPage) => prevPage - 1);
-      }
-      setLastScrollTop(Math.max(scrollTop, 0));
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentPage, lastScrollTop, cartItems.length]);
-
-  useEffect(() => {
-    setVisibleItems(cartItems.slice(0, currentPage * itemsPerPage));
-  }, [currentPage, cartItems]);
 
   useEffect(() => {
     const newSubtotal = cartItems.reduce(
@@ -84,10 +57,10 @@ const CartPage = () => {
         {alert && <Alert severity="warning">{alert}</Alert>}
         <div className="flex flex-col lg:flex-row">
           <div className="w-full lg:w-2/3 pr-4">
-            {visibleItems.length === 0 ? (
+            {cartItems.length === 0 ? (
               <p>Your cart is empty.</p>
             ) : (
-              visibleItems.map((item) => {
+              cartItems.map((item) => {
                 const key = `${item.id}-${item.color}-${item.size}`;
                 return (
                   <div
@@ -174,7 +147,8 @@ const CartPage = () => {
               })
             )}
           </div>
-          <div className="w-full lg:w-1/3 pl-4 lg:sticky lg:top-0 hidden lg:block">
+          {/* Phần Summary nằm bên phải trên màn hình lớn */}
+          <div className="hidden lg:block w-full lg:w-1/3 pl-4">
             <h2 className="text-xl font-bold mb-4">Summary</h2>
             <div className="flex justify-between mb-2">
               <span>Subtotal</span>
@@ -206,9 +180,11 @@ const CartPage = () => {
             </button>
           </div>
         </div>
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white p-4 shadow-md">
+        {/* Phần Summary cho thiết bị di động nằm dưới cùng */}
+        <div className="w-full lg:hidden mt-4">
+          <h2 className="text-xl font-bold mb-4">Summary</h2>
           <div className="flex justify-between mb-2">
-            <span>{cartItems.length} Items</span>
+            <span>Subtotal</span>
             <span>{formatCurrency(subtotal)}</span>
           </div>
           <div className="flex justify-between mb-2">
@@ -224,8 +200,9 @@ const CartPage = () => {
             <span className="text-red-500">{formatCurrency(subtotal)}</span>
           </div>
           <button
-            className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 
-            ${cartItems.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${
+              cartItems.length === 0 ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
             onClick={handleCheckout}
             disabled={cartItems.length === 0}
           >
