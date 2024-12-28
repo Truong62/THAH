@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
@@ -6,6 +7,8 @@ import { useSelector } from 'react-redux';
 import CartModal from '../Cart/CartModal.jsx';
 import SidebarContainer from './Sidebar';
 import Button from '@mui/material/Button';
+import { TfiAlignJustify } from 'react-icons/tfi';
+import useDeviceType from '../../hooks/useDeviceType';
 
 /**
  *
@@ -17,6 +20,7 @@ const Header = () => {
   const [visibleRight, setVisibleRight] = useState(false);
   const cartItems = useSelector((state) => state.cart || []);
   const uniqueItemsCount = cartItems.length;
+  const { isMobile } = useDeviceType();
 
   const handleCloseModal = () => setIsModalOpen(false);
 
@@ -34,7 +38,7 @@ const Header = () => {
 
   return (
     <div className="container flex flex-col mx-auto sticky top-0 left-0 right-0 z-50 bg-white">
-      <div className="relative flex items-center justify-between w-full group py-7 shrink-0 md:py-2">
+      <div className="relative flex items-center justify-between w-full group lg:py-7 mx-2 shrink-0 md:py-2">
         <div className="flex items-center md:ml-2">
           <Link to={'/'}>
             <img
@@ -97,8 +101,19 @@ const Header = () => {
             <Link to="/signup">Sign up</Link>
           </button>
         </div>
-        <Button onClick={() => setVisibleRight(true)}>Open drawer</Button>
-        <SidebarContainer {...{ visibleRight, setVisibleRight }} />
+        {isMobile && (
+          <>
+            <Button
+              style={{ fontSize: '25px' }}
+              onClick={() => setVisibleRight(true)}
+            >
+              <TfiAlignJustify />
+            </Button>
+            <SidebarContainer
+              {...{ visibleRight, setVisibleRight, activeLink }}
+            />
+          </>
+        )}
       </div>
       <CartModal isOpen={isModalOpen} onClose={handleCloseModal}></CartModal>
     </div>

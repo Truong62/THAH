@@ -19,8 +19,8 @@ const useFetchApi = (url, params = {}) => {
       }
     };
 
-    fetchData();
-  }, [url, JSON.stringify(params)]);
+    fetchData().then();
+  }, [url]);
 
   return { data, loading, error };
 };
