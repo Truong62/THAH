@@ -9,8 +9,6 @@ const ImageSlider = () => {
     const userAgent = window.navigator.userAgent;
     const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
 
-    console.log(isIOS);
-
     if (isIOS) {
       const videoElements = document.querySelectorAll('video');
       videoElements.forEach((video) => {
