@@ -8,6 +8,7 @@ import BannerCompany from '../components/SvgIcon/bannerCompany';
 import { motion } from 'framer-motion';
 import { STATS } from '../utils/Company/company';
 import React from 'react';
+import './style.scss'
 
 const Company = () => {
   const cardVariants = {
@@ -43,7 +44,7 @@ const Company = () => {
     ));
 
   const renderFeatureCards = () => (
-    <div className="flex flex-wrap md:flex-nowrap justify-between gap-4">
+    <div className="baner-css">
       {[
         {
           icon: <StrategyIcon />,
@@ -73,7 +74,7 @@ const Company = () => {
       ].map((feature, index) => (
         <div
           key={index}
-          className={`w-[calc(50%-0.5rem)] md:w-1/3 px-8 py-6 rounded-md border border-gray-300 flex flex-col items-center text-center ${
+          className={`w-full md:w-1/3 px-8 py-6 rounded-md border border-gray-300 flex flex-col items-center text-center ${
             feature.bgStyle || ''
           }`}
         >
