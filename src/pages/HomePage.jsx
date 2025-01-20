@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import { Collapse, IconButton, Alert, Button } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -13,6 +13,7 @@ import { formatCurrency } from '../utils/formatCurrency';
 import introVideo from '../assets/intro.mp4';
 import introVideo2 from '../assets/intro2.mp4';
 import SkeletonProduct from '../components/Skeleton/SkeletonProducts';
+import HotProducts from '../components/Home/HotProducts';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -188,7 +189,11 @@ const Home = () => {
 
           <Swiper
             ref={swiperRef}
-            modules={[Navigation]}
+            modules={[Navigation, Autoplay]}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
             spaceBetween={10}
             slidesPerView="auto"
             loop={false}
@@ -332,6 +337,8 @@ const Home = () => {
         <span className="text-lg md:text-xl">NEWEST</span>
         <div className="h-px bg-gray-300 w-16 md:w-32"></div>
       </div>
+
+      <HotProducts />
     </div>
   );
 };
