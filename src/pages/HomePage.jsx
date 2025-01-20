@@ -14,6 +14,7 @@ import introVideo from '../assets/intro.mp4';
 import introVideo2 from '../assets/intro2.mp4';
 import SkeletonProduct from '../components/Skeleton/SkeletonProducts';
 import HotProducts from '../components/Home/HotProducts';
+import Footer from '../components/Footer/Footer';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -338,7 +339,17 @@ const Home = () => {
         <div className="h-px bg-gray-300 w-16 md:w-32"></div>
       </div>
 
+      <div className="flex items-center justify-center gap-2 md:gap-4 my-8 md:my-12 px-4">
+        <div className="h-px bg-gray-300 w-16 md:w-32"></div>
+        <span className="text-lg md:text-xl">HOT PRODUCTS</span>
+        <div className="h-px bg-gray-300 w-16 md:w-32"></div>
+      </div>
       <HotProducts />
+      <div className="flex items-center justify-center gap-2 md:gap-4 my-8 md:my-12 px-4">
+        <div className="h-px bg-gray-300 w-16 md:w-32"></div>
+        <div className="h-px bg-gray-300 w-16 md:w-32"></div>
+      </div>
+      <Footer></Footer>
     </div>
   );
 };
