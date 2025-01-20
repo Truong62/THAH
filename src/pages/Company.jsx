@@ -8,6 +8,7 @@ import BannerCompany from '../components/SvgIcon/bannerCompany';
 import { motion } from 'framer-motion';
 import { STATS } from '../utils/Company/company';
 import React from 'react';
+import './style.scss'
 
 const Company = () => {
   const cardVariants = {
@@ -24,6 +25,77 @@ const Company = () => {
     },
   };
 
+  const renderStatsCards = () =>
+    STATS.map((stat, index) => (
+      <motion.div
+        key={index}
+        custom={stat.direction}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={cardVariants}
+        className={`${
+          index === 2 ? 'w-full' : 'w-[calc(50%-0.5rem)]'
+        } md:w-1/3 p-8 md:p-20 text-center bg-blue-50 rounded-md shadow-md hover:shadow-lg`}
+      >
+        <h1 className="text-2xl font-bold text-blue-600">{stat.title}</h1>
+        <p className="text-sm text-gray-600">{stat.description}</p>
+      </motion.div>
+    ));
+
+  const renderFeatureCards = () => (
+    <div className="baner-css">
+      {[
+        {
+          icon: <StrategyIcon />,
+          title: 'Strategy',
+          description:
+            'There are many variations of passage of Lorem Ipsum available, but the majority have suffered alteration.',
+          linkText: 'Learn More',
+          linkStyle: 'text-blue-400',
+        },
+        {
+          icon: <TechnologyIcon />,
+          title: 'Technology',
+          description:
+            'There are many variations of passage of Lorem Ipsum available, but the majority have suffered alteration.',
+          linkText: 'Learn More',
+          linkStyle: 'text-white',
+          bgStyle: 'bg-blue-400 text-white',
+        },
+        {
+          icon: <ConsultingIcon />,
+          title: 'Consulting',
+          description:
+            'There are many variations of passage of Lorem Ipsum available, but the majority have suffered alteration.',
+          linkText: 'Learn More',
+          linkStyle: 'text-blue-400',
+        },
+      ].map((feature, index) => (
+        <div
+          key={index}
+          className={`w-full md:w-1/3 px-8 py-6 rounded-md border border-gray-300 flex flex-col items-center text-center ${
+            feature.bgStyle || ''
+          }`}
+        >
+          <div className="flex items-center justify-center mb-4">
+            {feature.icon}
+          </div>
+          <h1 className="font-bold text-sm md:text-base mb-2">
+            {feature.title}
+          </h1>
+          <p className="text-xs md:text-sm mb-4">{feature.description}</p>
+          <a
+            className={`font-bold text-sm md:text-base ${feature.linkStyle}`}
+            href="#"
+          >
+            {feature.linkText}
+          </a>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <>
       <Header />
@@ -38,7 +110,6 @@ const Company = () => {
           src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=hai%20b%C3%A0%20tr%C6%B0ng,%20h%C3%A0%20N%E1%BB%99i%20+(My%20Business%20Name)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
         ></iframe>
       </div>
-
       <Layout>
         <div className="mt-8 mb-8">
           <motion.div
@@ -57,17 +128,17 @@ const Company = () => {
               </p>
             </div>
           </motion.div>
-          <div className="relative">
-            <div className="w-full h-[500px] object-cover rounded-xl flex justify-center">
-              <BannerCompany />
+          <div className="relative w-full h-[300px] sm:h-[200px] md:h-[400px] overflow-hidden mt-8">
+            <div className="absolute inset-0">
+              <BannerCompany className="w-full h-[500px] object-cover" />
             </div>
             <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.4 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2 }}
               className="absolute inset-0 flex items-center justify-center"
             >
-              <h1 className="text-white text-8xl font-bold p-4 rounded-lg">
+              <h1 className="text-white text-4xl sm:text-5xl font-bold p-4 rounded-lg bg-opacity-60">
                 Sneaker Store
               </h1>
             </motion.div>
@@ -87,68 +158,10 @@ const Company = () => {
               injected humour
             </p>
           </motion.div>
-          <div className="flex flex-col md:flex-row justify-between gap-4 my-4">
-            {STATS.map((stat, index) => (
-              <motion.div
-                key={index}
-                custom={stat.direction}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
-                variants={cardVariants}
-                className="w-full md:w-1/3 p-8 md:p-20 text-center bg-blue-50 rounded-md shadow-md hover:shadow-lg"
-              >
-                <h1 className="text-2xl font-bold text-blue-600">
-                  {stat.title}
-                </h1>
-                <p className="text-sm text-gray-600">{stat.description}</p>
-              </motion.div>
-            ))}
+          <div className="flex flex-wrap md:flex-nowrap gap-4 my-4">
+            {renderStatsCards()}
           </div>
-          <div className="flex flex-wrap md:flex-nowrap justify-between gap-6">
-            <div className="w-full md:w-1/3 px-16 py-10 rounded-md border border-gray-300 text-center flex flex-col items-center mb-6 md:mb-0">
-              <div className="mb-4">
-                <StrategyIcon />
-              </div>
-              <h1 className="font-bold text-xl mb-2">Strategy</h1>
-              <p className="text-sm mb-4">
-                There are many variations of passage of Lorem Ipsum available,
-                but the majority have suffered alteration.
-              </p>
-              <a className="font-bold text-blue-400" href="#">
-                Learn More
-              </a>
-            </div>
-
-            <div className="w-full md:w-1/3 px-16 py-10 rounded-md bg-blue-400 border border-gray-300 text-center flex flex-col items-center mb-6 md:mb-0">
-              <div className="mb-4">
-                <TechnologyIcon />
-              </div>
-              <h1 className="font-bold text-xl mb-2">Technology</h1>
-              <p className="text-sm mb-4">
-                There are many variations of passage of Lorem Ipsum available,
-                but the majority have suffered alteration.
-              </p>
-              <a className="font-bold text-white" href="#">
-                Learn More
-              </a>
-            </div>
-
-            <div className="w-full md:w-1/3 px-16 py-10 rounded-md border border-gray-300 text-center flex flex-col items-center">
-              <div className="mb-4">
-                <ConsultingIcon />
-              </div>
-              <h1 className="font-bold text-xl mb-2">Consulting</h1>
-              <p className="text-sm mb-4">
-                There are many variations of passage of Lorem Ipsum available,
-                but the majority have suffered alteration.
-              </p>
-              <a className="font-bold text-blue-400" href="#">
-                Learn More
-              </a>
-            </div>
-          </div>
-          ;
+          {renderFeatureCards()}
         </div>
       </Layout>
       <Footer />
