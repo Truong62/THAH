@@ -15,8 +15,9 @@
 }
 
 video {
-  border-radius: 20px !important;
+  border-radius: 8px !important;
   border: rgba(0, 0, 0, 0.5) 1px solid;
+  filter: brightness(0.8);
 }
 
 video::-webkit-media-controls {

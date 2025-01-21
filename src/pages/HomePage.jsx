@@ -13,6 +13,7 @@ import { formatCurrency } from '../utils/formatCurrency';
 import introVideo from '../assets/intro.mp4';
 import introVideo2 from '../assets/intro2.mp4';
 import SkeletonProduct from '../components/Skeleton/SkeletonProducts';
+import Newest from '../components/Newest';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -122,7 +123,7 @@ const Home = () => {
         <div className="col-span-1 md:col-span-6">
           <div className="aspect-square overflow-hidden group">
             <video
-              className="aspect-square object-cover w-full h-full"
+              className="aspect-square object-cover w-full h-full rounded-none"
               autoPlay
               loop
               muted
@@ -336,6 +337,7 @@ const Home = () => {
         <span className="text-lg md:text-xl">NEWEST</span>
         <div className="h-px bg-gray-300 w-16 md:w-32"></div>
       </div>
+        <Newest />
     </div>
   );
 };
