@@ -15,6 +15,7 @@ import introVideo2 from '../assets/intro2.mp4';
 import SkeletonProduct from '../components/Skeleton/SkeletonProducts';
 import HotProducts from '../components/Home/HotProducts';
 import Footer from '../components/Footer/Footer';
+import Newest from '../components/Home/Newest';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -338,7 +339,7 @@ const Home = () => {
         <span className="text-lg md:text-xl">NEWEST</span>
         <div className="h-px bg-gray-300 w-16 md:w-32"></div>
       </div>
-
+      <Newest />
       <div className="flex items-center justify-center gap-2 md:gap-4 my-8 md:my-12 px-4">
         <div className="h-px bg-gray-300 w-16 md:w-32"></div>
         <span className="text-lg md:text-xl">HOT PRODUCTS</span>
