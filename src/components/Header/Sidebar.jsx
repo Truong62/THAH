@@ -79,5 +79,5 @@ export default SidebarContainer;
 SidebarContainer.propTypes = {
   setVisibleRight: PropTypes.func,
   visibleRight: PropTypes.bool,
-  activeLink: PropTypes.bool,
+  activeLink: PropTypes.string,
 };
