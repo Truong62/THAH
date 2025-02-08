@@ -8,7 +8,7 @@ import BannerCompany from '../components/SvgIcon/bannerCompany';
 import { motion } from 'framer-motion';
 import { STATS } from '../utils/Company/company';
 import React from 'react';
-import './style.scss'
+import './style.scss';
 
 const Company = () => {
   const cardVariants = {
