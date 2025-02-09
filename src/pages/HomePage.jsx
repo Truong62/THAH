@@ -3,9 +3,8 @@ import Header from '../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
-import { Collapse, IconButton, Alert, Button } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Collapse, IconButton, Alert } from '@mui/material';
+import { Button } from 'primereact/button';
 import useFetchApi from '../hooks/useFetchApi';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -16,7 +15,8 @@ import SkeletonProduct from '../components/Skeleton/SkeletonProducts';
 import HotProducts from '../components/Home/HotProducts';
 import Footer from '../components/Footer/Footer';
 import Newest from '../components/Home/Newest';
-
+import BrandHome from '../components/Home/BrandHome';
+import FeatureList from '../components/Home/FeatureList';
 const Home = () => {
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
@@ -120,7 +120,7 @@ const Home = () => {
           </h1>
         </div>
       </div>
-
+      <FeatureList></FeatureList>
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 px-4 md:px-6">
         <div className="col-span-1 md:col-span-6">
           <div className="aspect-square overflow-hidden group">
@@ -154,11 +154,7 @@ const Home = () => {
                     },
                   }}
                 >
-                  {expanded ? (
-                    <KeyboardArrowUpIcon />
-                  ) : (
-                    <KeyboardArrowDownIcon />
-                  )}
+                  {/* {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />} */}
                   <span className="text-sm ml-2">
                     {expanded ? 'Show Less' : 'See More'}
                   </span>
@@ -348,8 +344,10 @@ const Home = () => {
       <HotProducts />
       <div className="flex items-center justify-center gap-2 md:gap-4 my-8 md:my-12 px-4">
         <div className="h-px bg-gray-300 w-16 md:w-32"></div>
+        <span className="text-lg md:text-xl">BRANDS COLLABS</span>
         <div className="h-px bg-gray-300 w-16 md:w-32"></div>
       </div>
+      <BrandHome />
       <Footer></Footer>
     </div>
   );

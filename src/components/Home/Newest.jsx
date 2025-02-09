@@ -1,21 +1,42 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import data from '../../data.json';
+import CardProduct from '../Card/Card';
+import { formatCurrency } from '../../utils/formatCurrency';
+import { truncateDescription } from '../../utils/truncateDescription';
+
 const Newest = () => {
-  const defaultImage = 'https://via.placeholder.com/300?text=Product+Image';
+  const navigate = useNavigate();
+
+  if (!data || data.length === 0) {
+    return <div>No products available</div>;
+  }
+
+  const sortedProducts = data.sort(
+    (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)
+  );
+
+  const newestProducts = sortedProducts.slice(0, 4);
+
   return (
     <div className="p-4 bg-gray-100 rounded shadow">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {Array.from({ length: 4 }).map((_, index) => (
-          <div key={index} className="bg-white p-2 rounded shadow text-center">
-            <img
-              src={defaultImage}
-              alt={`Product ${index + 1}`}
-              className="w-full h-auto mb-2 rounded"
-            />
-            <p className="font-medium">Product {index + 1}</p>
-          </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {newestProducts.map((product, index) => (
+          <CardProduct
+            key={index}
+            nameProduct={product.productName}
+            description={truncateDescription(product.productDescription, 30)}
+            price={formatCurrency(product.variants[0].price)}
+            brand={product.brand}
+            nameTag={product.tag}
+            imageUrl={product.variants[0].images[0]}
+            onClick={() => navigate(`/products/${product.productName}`)}
+            badgeText="NEW"
+          />
         ))}
       </div>
     </div>
   );
 };
+
 export default Newest;

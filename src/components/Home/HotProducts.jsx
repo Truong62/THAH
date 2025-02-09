@@ -3,28 +3,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { useNavigate } from 'react-router-dom';
-// import useFetchApi from '../../hooks/useFetchApi';
 import { Navigation, Autoplay } from 'swiper/modules';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { truncateDescription } from '../../utils/truncateDescription';
+import CardProduct from '../Card/Card';
 import products from '../../data.json';
+import { truncateDescription } from '../../utils/truncateDescription';
 import { formatCurrency } from '../../utils/formatCurrency';
-const FashionBanner = () => {
-  // const { data: products, error } = useFetchApi(
-  //   'http://localhost:5000/api/product',
-  //   {
-  //     limit: 10,
-  //     order: 'desc',
-  //   }
-  // );
 
+const HotProduct = () => {
   const navigate = useNavigate();
-
-  // if (error) {
-  //   return (
-  //     <div className="text-center text-red-500">Error: {error.message}</div>
-  //   );
-  // }
 
   return (
     <div className="bg-white">
@@ -45,54 +31,28 @@ const FashionBanner = () => {
         }}
       >
         {products.map((product, index) => {
+          const handleProductClick = () => {
+            navigate(`/products/${product.productName}`);
+          };
+
           return (
-            <SwiperSlide key={index} className="flex justify-center">
-              <div
-                onClick={() => {
-                  navigate(`/products/${product.id}`);
-                }}
-                className="cursor-pointer bg-white shadow-md w-80 h-auto relative flex flex-col justify-between overflow-hidden border rounded-lg p-4"
-              >
-                <div className="absolute top-2 right-2">
-                  <button
-                    className="bg-white  text-black px-4 py-2 rounded hover:bg-white shadow-md"
-                    // onClick={() => handleAddToCart(product)}
-                  >
-                    <AddShoppingCartIcon />
-                  </button>{' '}
-                </div>
-                <img
-                  src={product.variants[0].images[0]}
-                  alt={product.productName}
-                  className="w-full h-48 object-cover object-center mb-4"
+            <SwiperSlide
+              key={index}
+              className="flex justify-center items-center p-4"
+            >
+              <div className="w-[22rem] h-auto">
+                <CardProduct
+                  nameProduct={product.productName}
+                  description={truncateDescription(
+                    product.productDescription,
+                    40
+                  )}
+                  price={formatCurrency(product.variants[0].price)}
+                  brand={product.brand}
+                  nameTag={product.tags || []}
+                  imageUrl={product.variants[0].images[0]}
+                  onClick={handleProductClick}
                 />
-                <div className="flex-grow">
-                  <h2 className="text-lg font-semibold text-gray-800 truncate">
-                    {product.productName}
-                  </h2>
-                  <p className="text-sm text-gray-500 mb-2">
-                    {truncateDescription(product.productDescription, 40)}
-                  </p>
-                  <div className="flex justify-between items-center mb-2">
-                    <div>
-                      {product.isSale && (
-                        <span className="text-red-500 line-through mr-2">
-                          ${product.originalPrice}
-                        </span>
-                      )}
-                      <span className="text-lg font-bold text-gray-800">
-                        {formatCurrency(product.variants[0].price)}
-                      </span>
-                    </div>
-                    <span className="text-sm text-gray-600">
-                      {product.category}
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
-                    <span className="text-sm text-gray-600 ml-2">(20)</span>
-                  </div>
-                </div>
               </div>
             </SwiperSlide>
           );
@@ -102,4 +62,4 @@ const FashionBanner = () => {
   );
 };
 
-export default FashionBanner;
+export default HotProduct;

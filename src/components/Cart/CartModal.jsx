@@ -1,10 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { PrimeIcons } from 'primereact/api';
 import { formatCurrency } from '../../utils/formatCurrency.js';
 import { updateQuantity } from '../../redux/cart/cartSlice.js';
-import Alert from '@mui/material/Alert';
+import { Toast } from 'primereact/toast';
 import PropTypes from 'prop-types';
 
 /**
@@ -17,7 +16,7 @@ import PropTypes from 'prop-types';
 const CartModal = ({ isOpen, onClose }) => {
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const [alert, setAlert] = React.useState(null);
+  const toastRef = React.useRef(null);
 
   if (!isOpen) return null;
 
@@ -30,19 +29,29 @@ const CartModal = ({ isOpen, onClose }) => {
 
   const handleQuantityChange = (id, color, size, quantity) => {
     if (quantity < 1) {
-      setAlert('Quantity cannot be less than 1');
+      toastRef.current.show({
+        severity: 'warn',
+        summary: 'Invalid Quantity',
+        detail: 'Quantity cannot be less than 1',
+        life: 3000,
+      });
       return;
     }
     dispatch(updateQuantity({ id, color, size, quantity }));
-    setAlert(null);
   };
 
   const handleRemoveItem = () => {
-    setAlert('Item removed from cart');
+    toastRef.current.show({
+      severity: 'info',
+      summary: 'Item Removed',
+      detail: 'Item removed from cart',
+      life: 3000,
+    });
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end">
+      <Toast ref={toastRef} />
       <div className="bg-white w-1/3 h-full p-6 shadow-lg">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">
@@ -52,10 +61,9 @@ const CartModal = ({ isOpen, onClose }) => {
             onClick={onClose}
             className="text-gray-500 bg-gray-200 p-2 rounded"
           >
-            <FontAwesomeIcon icon={faXmark} />
+            <i className={PrimeIcons.TIMES}></i>
           </button>
         </div>
-        {alert && <Alert severity="warning">{alert}</Alert>}
         {cartItems.length === 0 ? (
           <div className="flex flex-col items-center">
             <p>No item in cart.</p>
@@ -90,7 +98,7 @@ const CartModal = ({ isOpen, onClose }) => {
                         )
                       }
                     >
-                      -
+                      <i className={PrimeIcons.MINUS}></i>
                     </button>
                     <input
                       type="number"
@@ -116,7 +124,7 @@ const CartModal = ({ isOpen, onClose }) => {
                         )
                       }
                     >
-                      +
+                      <i className={PrimeIcons.PLUS}></i>
                     </button>
                   </div>
                   <button
@@ -125,7 +133,7 @@ const CartModal = ({ isOpen, onClose }) => {
                       handleRemoveItem(item.id, item.color, item.size)
                     }
                   >
-                    Remove
+                    <i className={PrimeIcons.TRASH}></i> Remove
                   </button>
                 </div>
                 <p className="text-lg font-bold text-red-500">

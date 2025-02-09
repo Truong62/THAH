@@ -4,6 +4,7 @@
     "productDescription": "The Nike Air Force 1 '07 is a classic basketball shoe that has been reimagined for everyday wear. It features a durable leather upper with a padded collar and tongue for comfort, while the iconic Air cushioning provides lightweight support. The bold Nike Swoosh logo and 'AIR' branding on the heel add a touch of style, making it a versatile choice for any sneaker enthusiast.",
     "brandId": 1,
     "brandName": "Nike",
+    "dateAdded": "2025-02-06",
     "variants": [
       {
         "colorId": 1,
@@ -100,6 +101,7 @@
     "productDescription": "Adidas UltraBoost",
     "brandId": 2,
     "brandName": "Adidas",
+    "dateAdded": "2025-02-06",
     "variants": [
       {
         "colorId": 1,
@@ -160,6 +162,7 @@
     "productDescription": "Puma RS-X",
     "brandId": 3,
     "brandName": "Puma",
+    "dateAdded": "2025-01-06",
     "variants": [
       {
         "colorId": 1,
@@ -220,13 +223,14 @@
     "productDescription": "Reebok Classic",
     "brandId": 4,
     "brandName": "Reebok",
+    "dateAdded": "2025-02-06",
     "variants": [
       {
         "colorId": 1,
         "colorName": "Grey",
         "price": 90000,
         "images": [
-          "https://placehold.co/300",
+          "https://th.bing.com/th/id/OIP.3Ocntd9Dn4TneQRPYPJlWQAAAA?rs=1&pid=ImgDetMain",
           "https://placehold.co/300",
           "https://placehold.co/300",
           "https://placehold.co/300",
@@ -280,13 +284,14 @@
     "productDescription": "New Balance 574",
     "brandId": 5,
     "brandName": "New Balance",
+    "dateAdded": "2025-02-06",
     "variants": [
       {
         "colorId": 1,
         "colorName": "Navy",
         "price": 105000,
         "images": [
-          "https://placehold.co/300",
+          "https://th.bing.com/th/id/OIP.FvA2Wll7Jwm90mHPxX2BlwAAAA?rs=1&pid=ImgDetMain",
           "https://placehold.co/300",
           "https://placehold.co/300",
           "https://placehold.co/300",
@@ -340,6 +345,7 @@
     "productDescription": "Asics Gel-Lyte",
     "brandId": 6,
     "brandName": "Asics",
+    "dateAdded": "2025/1/12",
     "variants": [
       {
         "colorId": 1,

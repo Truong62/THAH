@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { motion } from 'framer-motion';
+import 'primeicons/primeicons.css';
 
 /**
  *
@@ -18,44 +20,51 @@ const CardProduct = ({
   description,
   price,
   brand,
-  nameTag = [],
   imageUrl,
   onClick,
 }) => {
   return (
-    <div onClick={onClick} className="cursor-pointer">
-      <div className="h-full bg-white rounded-lg p-3 border-gray-200 border ease-in-out flex flex-col justify-between">
-        <div
-          className="overflow-hidden rounded-t-lg"
-          style={{ aspectRatio: '1 / 1' }}
-        >
-          <img
-            src={imageUrl}
-            alt={nameProduct}
-            className="w-full h-auto object-cover transition-all duration-500 ease-in-out transform hover:scale-110"
-          />
-        </div>
-        <span className="font-semibold text-gray-500 mt-2">{brand}</span>
-        <h4 className="text-xl font-bold mb-2">{nameProduct}</h4>
-        <div className="flex items-center gap-1.25 text-sm">
-          {Array.isArray(nameTag) ? (
-            nameTag.map((item, index) => (
-              <p key={index} className="px-2 rounded-xl bg-[#A8DCE7] mr-2">
-                {item}
-              </p>
-            ))
-          ) : (
-            <p className="px-2 rounded-xl bg-[#A8DCE7] mr-2">{nameTag}</p>
-          )}
-        </div>
-        <div className="mt-2 max-h-[50px] min-h-[50px]">{description}</div>
-        <div className="grid justify-end mt-3 ">
-          <p className="text-[#101422] text-lg font-bold px-1 py-2 border-2 border-[#A8DCE7] rounded-lg">
-            {price}
-          </p>
+    <motion.div
+      onClick={onClick}
+      className="cursor-pointer bg-white rounded-lg shadow-md p-4 flex flex-col justify-between"
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+    >
+      <motion.div
+        className="overflow-hidden rounded-lg"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+      >
+        <img
+          src={imageUrl}
+          alt={nameProduct}
+          className="w-full h-48 object-cover rounded-lg"
+        />
+      </motion.div>
+
+      <div className="mt-4 flex justify-between items-center">
+        <span className="text-sm text-gray-400">{brand}</span>
+        <div className="bg-white text-gray-700 px-2 py-1 rounded-lg shadow-sm text-xs font-bold">
+          <i className="pi pi-star-fill text-yellow-500 mr-1"></i>5.0
         </div>
       </div>
-    </div>
+
+      <h4 className="text-lg font-bold mt-2 text-gray-800">{nameProduct}</h4>
+
+      <div className="text-sm text-gray-500 mt-1">{description}</div>
+
+      <div className="flex items-center justify-between mt-4">
+        <p className="text-lg font-semibold text-gray-800">{price}</p>
+        <motion.button
+          className="bg-gray-100 text-gray-600 p-2 rounded-full"
+          whileHover={{ scale: 1.1, backgroundColor: '#e5e7eb' }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <i className="pi pi-search text-xl"></i>
+        </motion.button>
+      </div>
+    </motion.div>
   );
 };
 
@@ -63,10 +72,10 @@ export default CardProduct;
 
 CardProduct.propTypes = {
   nameProduct: PropTypes.string,
-  description: PropTypes.string,
-  price: PropTypes.number | PropTypes.string,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
   brand: PropTypes.string,
   nameTag: PropTypes.arrayOf(PropTypes.string),
-  imageUrl: PropTypes.string,
+  imageUrl: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };

@@ -1,12 +1,8 @@
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Sidebar } from 'primereact/sidebar';
+import { Button } from 'primereact/button';
 
 /**
  *
@@ -17,60 +13,56 @@ import { Link } from 'react-router-dom';
  * @constructor
  */
 const SidebarContainer = ({ visibleRight, setVisibleRight, activeLink }) => {
-  const DrawerList = (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onClick={() => setVisibleRight(false)}
+  return (
+    <Sidebar
+      visible={visibleRight}
+      position="right"
+      onHide={() => setVisibleRight(false)}
+      className="p-sidebar-sm"
     >
-      <List>
-        {['Products', 'Pricing', 'Blogs', 'Company'].map((text, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton>
-              {/*@todo sau them icon sau*/}
-              {/*<ListItemIcon>*/}
-              {/*  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}*/}
-              {/*</ListItemIcon>*/}
+      <div className="p-4">
+        <ul className="list-none p-0 m-0">
+          {['Products', 'Pricing', 'Blogs', 'Company'].map((text, index) => (
+            <li key={index} className="mb-2">
               <Link
                 to={`/${text}`}
-                className={`text-sm font-bold px-5 py-2 md:px-3 md:py-1 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${activeLink === '/products' ? 'bg-[#A8DCE7]' : ''}`}
+                className={`block text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${
+                  activeLink === `/${text.toLowerCase()}` ? 'bg-[#A8DCE7]' : ''
+                }`}
+                onClick={() => setVisibleRight(false)}
               >
                 {text}
               </Link>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <button className="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">
-              <Link to="/login">Log In</Link>
-            </button>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <button className="flex items-center px-4 py-2 text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300">
-              <Link to="/signup">Sign up</Link>
-            </button>
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Box>
-  );
-
-  return (
-    <div>
-      <Drawer
-        anchor="right"
-        open={visibleRight}
-        onClose={() => setVisibleRight(false)}
-      >
-        {DrawerList}
-      </Drawer>
-    </div>
+            </li>
+          ))}
+        </ul>
+        <hr className="my-4" />
+        <ul className="list-none p-0 m-0">
+          <li className="mb-2">
+            <Button
+              label="Log In"
+              className="w-full text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300"
+              onClick={() => setVisibleRight(false)}
+            >
+              <Link to="/login" className="text-white block w-full h-full">
+                Log In
+              </Link>
+            </Button>
+          </li>
+          <li>
+            <Button
+              label="Sign Up"
+              className="w-full text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300"
+              onClick={() => setVisibleRight(false)}
+            >
+              <Link to="/signup" className="text-white block w-full h-full">
+                Sign Up
+              </Link>
+            </Button>
+          </li>
+        </ul>
+      </div>
+    </Sidebar>
   );
 };
 

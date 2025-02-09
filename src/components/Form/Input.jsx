@@ -1,7 +1,6 @@
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { PrimeIcons } from 'primereact/api';
 
 const InputField = ({
   label,
@@ -16,10 +15,10 @@ const InputField = ({
   isDarkMode,
 }) => {
   return (
-    <div className=" w-full max-w-[436px]">
+    <div className="w-full max-w-[436px]">
       <label
         className="block text-sm font-medium"
-        style={{ color: 'rgba(128, 129, 145, 1)' }} // Đặt màu cho label
+        style={{ color: 'rgba(128, 129, 145, 1)' }}
       >
         {label}
       </label>
@@ -48,9 +47,9 @@ const InputField = ({
             className="absolute inset-y-0 right-2 flex items-center text-gray-500"
           >
             {showPassword ? (
-              <VisibilityOffIcon className="text-gray-500" />
+              <i className={PrimeIcons.EYE_SLASH}></i>
             ) : (
-              <VisibilityIcon className="text-gray-500" />
+              <i className={PrimeIcons.EYE}></i>
             )}
           </button>
         )}
@@ -63,6 +62,7 @@ const InputField = ({
     </div>
   );
 };
+
 InputField.propTypes = {
   label: PropTypes.string.isRequired,
   type: PropTypes.string,

@@ -3,16 +3,16 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../../components/Icon/Back';
-import InputField from '../../components/Form/Input'; // Import InputField
+import InputField from '../../components/Form/Input';
 
 export default function CreateNewPassword() {
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
-  const [isDarkMode, setIsDarkMode] = useState(true); // State for dark mode
-  const [showNewPassword, setShowNewPassword] = useState(false); // State to toggle visibility of new password
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State to toggle visibility of confirm password
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -29,7 +29,7 @@ export default function CreateNewPassword() {
       setError('Password must be at least 8 characters.');
     } else {
       console.log('New password set:', newPassword);
-      navigate('/reset-success'); // Redirect to a success page
+      navigate('/reset-success');
     }
   };
 

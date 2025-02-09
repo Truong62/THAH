@@ -1,14 +1,11 @@
-// ... existing imports ...
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import './styles/custom-button.css';
 import InputField from '../components/Form/Input';
 import GoogleSignInButton from '../components/Form/GG';
 import userData from '../user.json';
 import Checkbox from '@mui/material/Checkbox';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import { Toast } from 'primereact/toast';
 import React from 'react';
 
 export default function SignUpForm() {
@@ -21,8 +18,7 @@ export default function SignUpForm() {
   const [fullNameError, setFullNameError] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const toast = useRef(null);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -52,11 +48,7 @@ export default function SignUpForm() {
             '* This account is not activated. Please check your email for the activation code.'
           );
           valid = false;
-        } //check xem email đã được đăng kí hay chưa
-        //  else {
-        //   setEmailError('* This email is already registered');
-        //   valid = false;
-        // }
+        }
       }
     }
 
@@ -71,8 +63,12 @@ export default function SignUpForm() {
     }
 
     if (!termsAccepted) {
-      setSnackbarMessage('* You must accept the terms and conditions.');
-      setSnackbarOpen(true);
+      toast.current.show({
+        severity: 'warn',
+        summary: 'Warning',
+        detail: '* You must accept the terms and conditions.',
+        life: 3000,
+      });
       valid = false;
     }
 
@@ -102,13 +98,6 @@ export default function SignUpForm() {
     setIsDarkMode(!isDarkMode);
   };
 
-  const handleSnackbarClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setSnackbarOpen(false);
-  };
-
   return (
     <>
       <div
@@ -120,11 +109,11 @@ export default function SignUpForm() {
         }}
       >
         <div className="absolute top-4 right-4">
-          <LightbulbIcon
+          <i
+            className={`pi pi-lightbulb cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
             onClick={toggleDarkMode}
-            className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-            fontSize="large"
-          />
+            style={{ fontSize: '24px' }}
+          ></i>
         </div>
         <div
           className="absolute w-full h-full bottom-0 transform translate-y-1/2"
@@ -157,7 +146,7 @@ export default function SignUpForm() {
           <form
             onSubmit={handleSubmit}
             style={{ fontFamily: 'Epilogue' }}
-            className="w-full flex flex-col items-center gap-y-3" // Giảm khoảng cách tổng thể giữa các nhóm
+            className="w-full flex flex-col items-center gap-y-3"
           >
             <div className="w-full flex flex-col items-center">
               <InputField
@@ -252,20 +241,7 @@ export default function SignUpForm() {
           </form>
         </div>
       </div>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={3000}
-        onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      >
-        <MuiAlert
-          onClose={handleSnackbarClose}
-          severity="warning"
-          sx={{ width: '100%' }}
-        >
-          {snackbarMessage}
-        </MuiAlert>
-      </Snackbar>
+      <Toast ref={toast} position="top-right" />
     </>
   );
 }

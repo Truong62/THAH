@@ -1,0 +1,6 @@
+:root {
+  --swiper-theme-color: #000;
+}
+.swiper-pagination {
+  position: relative;
+}

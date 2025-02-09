@@ -13,10 +13,8 @@ const SuggestProducts = ({ products }) => {
 
   const handleProductClick = (productName) => {
     navigate(`/products/${productName}`);
-
     window.scrollTo(0, 0);
     window.location.href = `/product/${productName}`;
-
     window.location.reload();
   };
 
@@ -49,16 +47,18 @@ const SuggestProducts = ({ products }) => {
         }}
       >
         {products.map((item, index) => (
-          <SwiperSlide key={index} className="flex justify-center">
-            <CardProduct
-              nameProduct={item.nameProduct}
-              description={truncateDescription(item.productDescription, 60)}
-              price={formatCurrency(item.variants[0].price)}
-              brand={item.brandName}
-              nameTag={item.nameTag}
-              imageUrl={item.variants[0].images[0]}
-              onClick={() => handleProductClick(item.productName)}
-            />
+          <SwiperSlide key={index} className="flex justify-center items-center">
+            <div className="w-[22rem] h-auto">
+              <CardProduct
+                nameProduct={item.nameProduct}
+                description={truncateDescription(item.productDescription, 30)}
+                price={formatCurrency(item.variants[0].price)}
+                brand={item.brandName}
+                nameTag={item.nameTag}
+                imageUrl={item.variants[0].images[0]}
+                onClick={() => handleProductClick(item.productName)}
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
