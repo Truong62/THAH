@@ -33,7 +33,7 @@
 }
 .custom-checkbox .p-checkbox-box {
   background-color: rgba(29, 192, 113, 1); /* Màu nền */
-  border-color: rgba(29, 192, 113, 1);    /* Màu viền */
+  border-color: rgba(29, 192, 113, 1); /* Màu viền */
 }
 
 .custom-checkbox .p-checkbox-box.p-highlight {
