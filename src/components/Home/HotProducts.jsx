@@ -24,10 +24,11 @@ const HotProduct = () => {
         }}
         loop={true}
         breakpoints={{
-          425: { slidesPerView: 1 },
-          683: { slidesPerView: 2 },
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
+          0: { slidesPerView: 1, spaceBetween: 10 },
+          425: { slidesPerView: 1, spaceBetween: 15 },
+          683: { slidesPerView: 2, spaceBetween: 20 },
+          768: { slidesPerView: 3, spaceBetween: 20 },
+          1024: { slidesPerView: 4, spaceBetween: 20 },
         }}
       >
         {products.map((product, index) => {

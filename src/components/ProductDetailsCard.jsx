@@ -6,13 +6,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import products from '../data.json';
 import { formatCurrency } from '../utils/formatCurrency';
-import { addToCart, updateQuantity } from '../redux/cart/cartSlice';
+import { addToCart, updateQuantity, buyNow } from '../redux/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Toast } from 'primereact/toast';
 import { Panel } from 'primereact/panel';
 import useDeviceType from '../hooks/useDeviceType';
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+import PrivacyForUser from './PrivacyForUser';
 
 const ProductDetailsCard = () => {
   const { link } = useParams();
@@ -65,6 +66,44 @@ const ProductDetailsCard = () => {
         className: `border relative rounded-lg opacity-90 ${toastStyles[type]} p-4 flex flex-col items-center justify-center`,
       });
     }
+  };
+
+  const handleBuyNow = () => {
+    if (!selectedColor || !selectedSize) {
+      showToast(
+        'warning',
+        'Incomplete Selection',
+        'Please select both a color and a size before buying.'
+      );
+      return;
+    }
+
+    const sizeInfo = currentVariant?.productColorSize?.find(
+      (size) => size.sizeValue === selectedSize
+    );
+
+    if (!sizeInfo || sizeInfo.quantity === 0) {
+      showToast(
+        'warning',
+        'Size Unavailable',
+        'The selected size is out of stock. Please choose another one.'
+      );
+      return;
+    }
+
+    const productToCheckout = {
+      id: product?.brandId,
+      name: product?.productName,
+      price: currentVariant?.price,
+      color: selectedColor,
+      size: selectedSize,
+      quantity: 1,
+      image: currentVariant?.images[0],
+      stock: sizeInfo?.quantity,
+    };
+    console.log('Buy Now clicked:', productToCheckout);
+    dispatch(buyNow(productToCheckout));
+    window.location.href = '/checkout';
   };
 
   const handleAddToCart = () => {
@@ -140,7 +179,6 @@ const ProductDetailsCard = () => {
   return (
     <div className="flex flex-col md:flex-row rounded-lg bg-white p-6 max-w-6xl mx-auto">
       <Toast ref={toast} />
-
       <div className="relative w-full md:w-2/3 mb-4 md:mb-0 md:mr-6">
         {isMobile ? (
           <Swiper
@@ -200,8 +238,28 @@ const ProductDetailsCard = () => {
             </div>
           </>
         )}
+
+        {/* Mô tả sản phẩm chỉ hiển thị ở dưới slider nếu là desktop */}
+        {!isMobile && (
+          <Panel
+            header={
+              <div className="flex items-center gap-2 text-lg font-semibold p-2">
+                <i className="pi pi-info-circle text-blue-500"></i>
+                Description about the product: {product?.productName}
+              </div>
+            }
+            toggleable
+            collapsed
+            className="mt-4"
+          >
+            <p className="text-gray-700 p-4 leading-relaxed">
+              {product?.productDescription}
+            </p>
+          </Panel>
+        )}
       </div>
 
+      {/* Thông tin sản phẩm */}
       <div className="w-full md:w-1/3">
         <div className="text-4xl font-bold mb-2">{product?.productName}</div>
         <div className="text-red-500 text-xl font-bold">
@@ -251,6 +309,12 @@ const ProductDetailsCard = () => {
               </motion.div>
             ))}
           </div>
+          <span className="font-bold text-x text-grey-50">Stock:</span>
+          <span className="text-gray-500 text-x">
+            {currentVariant?.productColorSize?.find(
+              (size) => size.sizeValue === selectedSize
+            )?.quantity || 0}
+          </span>
         </div>
 
         <div className="flex flex-col gap-2 mb-2">
@@ -258,9 +322,11 @@ const ProductDetailsCard = () => {
             className="p-button-outlined p-button-rounded p-button-lg bg-[#A8DCE7] text-white rounded-lg p-3"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={handleBuyNow}
           >
             Buy Now
           </motion.button>
+
           <motion.button
             className="p-button-rounded p-button-lg bg-[#272B3B] text-white rounded-lg p-3"
             onClick={handleAddToCart}
@@ -270,22 +336,26 @@ const ProductDetailsCard = () => {
             Add To Cart
           </motion.button>
         </div>
+        <PrivacyForUser />
 
-        <Panel
-          header={
-            <div className="flex items-center gap-2 text-lg font-semibold p-2">
-              <i className="pi pi-info-circle text-blue-500"></i> Description
-              about the product: {product?.productName}
-            </div>
-          }
-          toggleable
-          collapsed
-          className="mt-4"
-        >
-          <p className="text-gray-700 p-4 leading-relaxed">
-            {product?.productDescription}
-          </p>
-        </Panel>
+        {/* Mô tả sản phẩm hiển thị ở phần thông tin sản phẩm nếu là mobile */}
+        {isMobile && (
+          <Panel
+            header={
+              <div className="flex items-center gap-2 text-lg font-semibold p-2">
+                <i className="pi pi-info-circle text-blue-500"></i>
+                Description about the product: {product?.productName}
+              </div>
+            }
+            toggleable
+            collapsed
+            className="mt-4"
+          >
+            <p className="text-gray-700 p-4 leading-relaxed">
+              {product?.productDescription}
+            </p>
+          </Panel>
+        )}
       </div>
     </div>
   );

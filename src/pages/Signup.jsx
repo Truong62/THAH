@@ -4,8 +4,7 @@ import './styles/custom-button.css';
 import InputField from '../components/Form/Input';
 import GoogleSignInButton from '../components/Form/GG';
 import userData from '../user.json';
-import Checkbox from '@mui/material/Checkbox';
-import { Toast } from 'primereact/toast';
+// import { Toast } from 'primereact/toast';
 import React from 'react';
 
 export default function SignUpForm() {
@@ -21,58 +20,61 @@ export default function SignUpForm() {
   const toast = useRef(null);
   const navigate = useNavigate();
 
+  const [termsError, setTermsError] = useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    let valid = true;
+    let errors = {
+      fullNameError: '',
+      emailError: '',
+      passwordError: '',
+      termsError: '',
+    };
 
-    setEmailError('');
-    setPasswordError('');
-    setFullNameError('');
-
-    if (fullName === '') {
-      setFullNameError('* Full Name is required');
-      valid = false;
-    }
+    if (!fullName) errors.fullNameError = '* Full Name is required';
 
     if (!email) {
-      setEmailError('* Email is required');
-      valid = false;
+      errors.emailError = '* Email is required';
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setEmailError('* Email is invalid');
-      valid = false;
+      errors.emailError = '* Email is invalid';
     } else {
       const user = userData.find((user) => user.email === email);
-      if (user) {
-        if (!user.isActive) {
-          setEmailError(
-            '* This account is not activated. Please check your email for the activation code.'
-          );
-          valid = false;
-        }
+      if (user && !user.isActive) {
+        errors.emailError =
+          '* This account is not activated. Please check your email.';
       }
     }
 
     if (!password) {
-      setPasswordError('* Password is required');
-      valid = false;
-      return;
+      errors.passwordError = '* Password is required';
     } else if (password.length < 8) {
-      setPasswordError('* Password must be 8 characters');
-      valid = false;
-      return;
+      errors.passwordError = '* Password must be at least 8 characters';
     }
 
     if (!termsAccepted) {
+      errors.termsError = '* You must accept the terms and conditions.';
+    }
+
+    setFullNameError(errors.fullNameError);
+    setEmailError(errors.emailError);
+    setPasswordError(errors.passwordError);
+    setTermsError(errors.termsError);
+
+    if (errors.termsError) {
       toast.current.show({
         severity: 'warn',
         summary: 'Warning',
-        detail: '* You must accept the terms and conditions.',
+        detail: errors.termsError,
         life: 3000,
       });
-      valid = false;
     }
 
-    if (valid) {
+    if (
+      !errors.fullNameError &&
+      !errors.emailError &&
+      !errors.passwordError &&
+      !errors.termsError
+    ) {
       navigate('/email-verification', { state: { email, password } });
     }
   };
@@ -204,17 +206,40 @@ export default function SignUpForm() {
 
             <div className="flex flex-col w-auto mb-4">
               <div className="flex items-start">
-                <Checkbox
-                  size="small"
+                <input
+                  type="checkbox"
+                  id="terms"
                   checked={termsAccepted}
-                  onChange={() => setTermsAccepted(!termsAccepted)}
-                  sx={{
-                    color: 'rgba(29, 192, 113, 1)',
-                    '&.Mui-checked': { color: 'rgba(29, 192, 113, 1)' },
-                    '& .MuiSvgIcon-root': { width: 20, height: 20 },
+                  onChange={() => {
+                    setTermsAccepted(!termsAccepted);
+                    if (!termsAccepted) setTermsError(''); // Xóa lỗi khi người dùng chọn
                   }}
+                  className={`hidden peer ${termsError ? 'border-red-500' : ''}`}
                 />
-                <span className="text-sm text-gray-500 ml-1">
+                <label
+                  htmlFor="terms"
+                  className={`w-5 h-5 border-2 rounded-md flex items-center justify-center cursor-pointer peer-checked:border-[rgba(29,192,113,1)] peer-checked:bg-[rgba(29,192,113,1)] transition-all ${
+                    termsError ? 'border-red-500' : 'border-gray-400'
+                  }`}
+                >
+                  {termsAccepted && (
+                    <svg
+                      className="w-3 h-3 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  )}
+                </label>
+                <span className="text-sm text-gray-500 ml-2">
                   I agree to the{' '}
                   <Link to="#" className="text-purple-600 underline">
                     Terms of Use
@@ -226,6 +251,9 @@ export default function SignUpForm() {
                   .
                 </span>
               </div>
+              {termsError && (
+                <div className="text-red-500 text-sm mt-1">{termsError}</div>
+              )}
             </div>
 
             <button
@@ -241,7 +269,7 @@ export default function SignUpForm() {
           </form>
         </div>
       </div>
-      <Toast ref={toast} position="top-right" />
+      {/* <Toast ref={toast} position="top-right" /> */}
     </>
   );
 }
