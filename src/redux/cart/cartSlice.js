@@ -1,9 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-/**
- *
- * @returns {any|*[]}
- */
 const loadState = () => {
   try {
     const serializedState = localStorage.getItem('cart');
@@ -59,8 +55,13 @@ const cartSlice = createSlice({
       saveState(newState);
       return newState;
     },
+    buyNow: (state, action) => {
+      state.push(action.payload);
+      saveState(state);
+    },
   },
 });
 
-export const { addToCart, updateQuantity, removeItem } = cartSlice.actions;
+export const { addToCart, updateQuantity, removeItem, buyNow } =
+  cartSlice.actions;
 export default cartSlice.reducer;

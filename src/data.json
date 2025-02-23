@@ -4,6 +4,7 @@
     "productDescription": "The Nike Air Force 1 '07 is a classic basketball shoe that has been reimagined for everyday wear. It features a durable leather upper with a padded collar and tongue for comfort, while the iconic Air cushioning provides lightweight support. The bold Nike Swoosh logo and 'AIR' branding on the heel add a touch of style, making it a versatile choice for any sneaker enthusiast.",
     "brandId": 1,
     "brandName": "Nike",
+    "dateAdded": "2025-02-06",
     "variants": [
       {
         "colorId": 1,
@@ -100,6 +101,7 @@
     "productDescription": "Adidas UltraBoost",
     "brandId": 2,
     "brandName": "Adidas",
+    "dateAdded": "2025-02-06",
     "variants": [
       {
         "colorId": 1,
@@ -107,12 +109,12 @@
         "price": 120000,
         "images": [
           "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/d762c5e2-ae49-4208-99df-484594b51e5f/AIR+FORCE+1+%2707.png",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300x300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -132,13 +134,13 @@
         "colorName": "White",
         "price": 130000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -160,19 +162,20 @@
     "productDescription": "Puma RS-X",
     "brandId": 3,
     "brandName": "Puma",
+    "dateAdded": "2025-02-06",
     "variants": [
       {
         "colorId": 1,
         "colorName": "Green",
         "price": 110000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -192,13 +195,13 @@
         "colorName": "Yellow",
         "price": 115000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -220,19 +223,20 @@
     "productDescription": "Reebok Classic",
     "brandId": 4,
     "brandName": "Reebok",
+    "dateAdded": "2025-02-06",
     "variants": [
       {
         "colorId": 1,
         "colorName": "Grey",
         "price": 90000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://th.bing.com/th/id/OIP.3Ocntd9Dn4TneQRPYPJlWQAAAA?rs=1&pid=ImgDetMain",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -252,13 +256,13 @@
         "colorName": "Pink",
         "price": 95000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -280,19 +284,20 @@
     "productDescription": "New Balance 574",
     "brandId": 5,
     "brandName": "New Balance",
+    "dateAdded": "2025-02-06",
     "variants": [
       {
         "colorId": 1,
         "colorName": "Navy",
         "price": 105000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://th.bing.com/th/id/OIP.FvA2Wll7Jwm90mHPxX2BlwAAAA?rs=1&pid=ImgDetMain",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -312,13 +317,13 @@
         "colorName": "Orange",
         "price": 110000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -340,19 +345,20 @@
     "productDescription": "Asics Gel-Lyte",
     "brandId": 6,
     "brandName": "Asics",
+    "dateAdded": "2025/1/12",
     "variants": [
       {
         "colorId": 1,
         "colorName": "Purple",
         "price": 98000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -372,13 +378,13 @@
         "colorName": "Brown",
         "price": 102000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -406,13 +412,13 @@
         "colorName": "White",
         "price": 85000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -432,13 +438,13 @@
         "colorName": "Black",
         "price": 90000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -466,13 +472,13 @@
         "colorName": "Black/White",
         "price": 95000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -492,13 +498,13 @@
         "colorName": "Red/White",
         "price": 100000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -526,13 +532,13 @@
         "colorName": "White",
         "price": 115000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -552,13 +558,13 @@
         "colorName": "Pink",
         "price": 120000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -586,13 +592,13 @@
         "colorName": "Blue",
         "price": 130000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {
@@ -612,13 +618,13 @@
         "colorName": "Green",
         "price": 135000,
         "images": [
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300",
-          "https://via.placeholder.com/300"
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300",
+          "https://placehold.co/300"
         ],
         "productColorSize": [
           {

@@ -28,21 +28,20 @@ const CheckoutPage = React.memo(() => {
 
   useEffect(() => {
     axios
-      .get('https://vapi.vnappmob.com/api/province/')
-      .then((response) => setProvinces(response.data.results))
+      .get('https://provinces.open-api.vn/api/?depth=1')
+      .then((response) => setProvinces(response.data))
       .catch((error) => console.error('Error fetching provinces:', error));
   }, []);
 
   const handleProvinceChange = useCallback(
     (e, setFieldValue) => {
-      const provinceId = e.target.value;
-      const province = provinces.find((p) => p.province_id === provinceId);
-      setFieldValue('selectedProvince', province ? province.province_name : '');
-
+      const provinceCode = e.target.value;
+      const province = provinces.find((p) => p.code === provinceCode);
+      setFieldValue('selectedProvince', province ? province.name : '');
       axios
-        .get(`https://vapi.vnappmob.com/api/province/district/${provinceId}`)
+        .get(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`)
         .then((response) => {
-          setDistricts(response.data.results);
+          setDistricts(response.data.districts);
           setWards([]);
           setFieldValue('selectedDistrict', '');
           setFieldValue('selectedWard', '');
@@ -54,14 +53,13 @@ const CheckoutPage = React.memo(() => {
 
   const handleDistrictChange = useCallback(
     (e, setFieldValue) => {
-      const districtId = e.target.value;
-      const district = districts.find((d) => d.district_id === districtId);
-      setFieldValue('selectedDistrict', district ? district.district_name : '');
-
+      const districtCode = e.target.value;
+      const district = districts.find((d) => d.code === districtCode);
+      setFieldValue('selectedDistrict', district ? district.name : '');
       axios
-        .get(`https://vapi.vnappmob.com/api/province/ward/${districtId}`)
+        .get(`https://provinces.open-api.vn/api/d/${districtCode}?depth=2`)
         .then((response) => {
-          setWards(response.data.results);
+          setWards(response.data.wards);
           setFieldValue('selectedWard', '');
         })
         .catch((error) => console.error('Error fetching wards:', error));
@@ -71,9 +69,9 @@ const CheckoutPage = React.memo(() => {
 
   const handleWardChange = useCallback(
     (e, setFieldValue) => {
-      const wardId = e.target.value;
-      const ward = wards.find((w) => w.ward_id === wardId);
-      setFieldValue('selectedWard', ward ? ward.ward_name : '');
+      const wardCode = e.target.value;
+      const ward = wards.find((w) => w.code === wardCode);
+      setFieldValue('selectedWard', ward ? ward.name : '');
     },
     [wards]
   );
@@ -226,8 +224,8 @@ const CheckoutPage = React.memo(() => {
                       name="selectedProvince"
                       value={
                         provinces.find(
-                          (p) => p.province_name === values.selectedProvince
-                        )?.province_id || ''
+                          (p) => p.name === values.selectedProvince
+                        )?.code || ''
                       }
                       onChange={(e) => handleProvinceChange(e, setFieldValue)}
                       displayEmpty
@@ -241,14 +239,12 @@ const CheckoutPage = React.memo(() => {
                         <em>Select Province</em>
                       </MenuItem>
                       {provinces.map((province) => (
-                        <MenuItem
-                          key={province.province_id}
-                          value={province.province_id}
-                        >
-                          {province.province_name}
+                        <MenuItem key={province.code} value={province.code}>
+                          {province.name}
                         </MenuItem>
                       ))}
                     </Select>
+
                     {errors.selectedProvince && touched.selectedProvince && (
                       <div className="text-red-500">
                         {errors.selectedProvince}
@@ -260,8 +256,8 @@ const CheckoutPage = React.memo(() => {
                       name="selectedDistrict"
                       value={
                         districts.find(
-                          (d) => d.district_name === values.selectedDistrict
-                        )?.district_id || ''
+                          (d) => d.name === values.selectedDistrict
+                        )?.code || ''
                       }
                       onChange={(e) => handleDistrictChange(e, setFieldValue)}
                       displayEmpty
@@ -275,14 +271,12 @@ const CheckoutPage = React.memo(() => {
                         <em>Select District</em>
                       </MenuItem>
                       {districts.map((district) => (
-                        <MenuItem
-                          key={district.district_id}
-                          value={district.district_id}
-                        >
-                          {district.district_name}
+                        <MenuItem key={district.code} value={district.code}>
+                          {district.name}
                         </MenuItem>
                       ))}
                     </Select>
+
                     {errors.selectedDistrict && touched.selectedDistrict && (
                       <div className="text-red-500">
                         {errors.selectedDistrict}
@@ -293,8 +287,8 @@ const CheckoutPage = React.memo(() => {
                     <Select
                       name="selectedWard"
                       value={
-                        wards.find((w) => w.ward_name === values.selectedWard)
-                          ?.ward_id || ''
+                        wards.find((w) => w.name === values.selectedWard)
+                          ?.code || ''
                       }
                       onChange={(e) => handleWardChange(e, setFieldValue)}
                       displayEmpty
@@ -307,8 +301,8 @@ const CheckoutPage = React.memo(() => {
                         <em>Select Ward</em>
                       </MenuItem>
                       {wards.map((ward) => (
-                        <MenuItem key={ward.ward_id} value={ward.ward_id}>
-                          {ward.ward_name}
+                        <MenuItem key={ward.code} value={ward.code}>
+                          {ward.name}
                         </MenuItem>
                       ))}
                     </Select>

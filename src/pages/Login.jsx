@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import userData from '../user.json';
 import './styles/custom-button.css';
 import { Link } from 'react-router-dom';
@@ -100,11 +99,11 @@ export default function LoginForm() {
       }}
     >
       <div className="absolute top-4 right-4">
-        <LightbulbIcon
+        <i
+          className={`pi pi-lightbulb cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
+          style={{ fontSize: '2rem' }}
           onClick={toggleDarkMode}
-          className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-          fontSize="large"
-        />
+        ></i>
       </div>
       <div
         className="absolute w-full h-full bottom-0 transform translate-y-1/2"

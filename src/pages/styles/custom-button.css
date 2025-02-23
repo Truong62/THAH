@@ -4,24 +4,14 @@
 }
 
 .custom-button:hover {
-  background-color: rgba(
-    34,
-    197,
-    94,
-    1
-  ); /* Change to your desired hover color */
+  background-color: rgba(34, 197, 94, 1);
 }
 .custom-button-su {
   background-color: rgba(16, 20, 34, 1);
 }
 
 .custom-button-su:hover {
-  background-color: rgba(
-    16,
-    20,
-    34,
-    1
-  ); /* Change to your desired hover color */
+  background-color: rgba(16, 20, 34, 1);
 }
 
 .input-error {
@@ -30,14 +20,27 @@
 }
 
 .error-message {
-  margin-top: 2px; /* Điều chỉnh khoảng cách theo ý muốn */
-  color: red; /* Màu chữ cho thông báo lỗi */
-  font-size: 0.875rem; /* Kích thước chữ nhỏ hơn */
+  margin-top: 2px;
+  color: red;
+  font-size: 0.875rem;
 }
 
 @media (max-width: 768px) {
   .login-form {
-    width: 327px; /* Set width for smaller screens */
-    height: 511px; /* Set height for smaller screens */
+    width: 327px;
+    height: 511px;
   }
+}
+.custom-checkbox .p-checkbox-box {
+  background-color: rgba(29, 192, 113, 1); /* Màu nền */
+  border-color: rgba(29, 192, 113, 1); /* Màu viền */
+}
+
+.custom-checkbox .p-checkbox-box.p-highlight {
+  background-color: rgba(29, 192, 113, 1); /* Màu khi được chọn */
+  border-color: rgba(29, 192, 113, 1);
+}
+
+.custom-checkbox .p-checkbox-box.p-highlight .p-checkbox-icon {
+  color: white; /* Màu icon tick */
 }

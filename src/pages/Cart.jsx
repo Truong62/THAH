@@ -42,7 +42,8 @@ const CartPage = () => {
   };
 
   const handleCheckout = () => {
-    if (cartItems.length === 0) {
+    const buyNowItem = localStorage.getItem('buyNow');
+    if (cartItems.length === 0 && !buyNowItem) {
       setAlert('Your cart is empty. Please add items before checking out.');
       return;
     }
