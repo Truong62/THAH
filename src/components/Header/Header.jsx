@@ -23,9 +23,9 @@ const Header = () => {
     const path = window.location.pathname.split('/');
     if (path.length > 1) {
       setActiveLink(`/${path[1]}`);
-    } else {
-      setActiveLink('/');
+      return;
     }
+    setActiveLink('/');
   }, []);
 
   return (
