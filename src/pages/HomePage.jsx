@@ -91,7 +91,6 @@ const Home = () => {
   return (
     <React.Fragment>
       <Header />
-      <LoadingRoute />
       <div className="max-w-[1440px] mx-auto">
         <div className="relative w-full h-[200px] md:h-[400px] my-4 md:my-8">
           <video

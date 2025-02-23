@@ -9,7 +9,6 @@ import SidebarContainer from './Sidebar';
 import Button from '@mui/material/Button';
 import { TfiAlignJustify } from 'react-icons/tfi';
 import useDeviceType from '../../hooks/useDeviceType';
-import LoadingRoute from '../LoadingRoute/LoadingRoute';
 
 /**
  *
