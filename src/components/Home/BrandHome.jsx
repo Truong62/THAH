@@ -38,7 +38,7 @@ const brands = [
   {
     name: 'Reebok',
     image:
-      'https://logos-download.com/wp-content/uploads/2016/02/Reebok_Logo_2014.png',
+      'https://logos-world.net/wp-content/uploads/2020/05/Reebok-Logo-1993.png',
   },
   {
     name: 'Bitis',
@@ -59,7 +59,7 @@ const brands = [
 
 const Brands = () => {
   return (
-    <div className="p-5">
+    <div className="">
       <div className="hidden md:grid grid-cols-5 gap-4">
         {brands.map((brand, index) => (
           <div

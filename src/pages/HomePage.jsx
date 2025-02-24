@@ -3,8 +3,8 @@ import Header from '../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
-import { Collapse, IconButton, Alert } from '@mui/material';
 import { Button } from 'primereact/button';
+import { Message } from 'primereact/message';
 import useFetchApi from '../hooks/useFetchApi';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -137,29 +137,14 @@ const Home = () => {
               </video>
             </div>
             <div className="mt-4">
-              <Collapse in={expanded} collapsedSize={48}>
-                <p
-                  className="text-l text-gray-600"
-                  style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}
-                ></p>
-              </Collapse>
               {currentProduct.description.length > 150 && (
                 <div className="flex items-center">
-                  <IconButton
+                  <Button
+                    icon={expanded ? 'pi pi-chevron-up' : 'pi pi-chevron-down'}
                     onClick={() => setExpanded(!expanded)}
-                    sx={{
-                      color: '#5AA1E3',
-                      '&:hover': {
-                        backgroundColor: 'transparent',
-                        color: '#4890d2',
-                      },
-                    }}
-                  >
-                    {/* {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />} */}
-                    <span className="text-sm ml-2">
-                      {expanded ? 'Show Less' : 'See More'}
-                    </span>
-                  </IconButton>
+                    className="p-button-text text-[#5AA1E3] hover:text-[#4890d2]"
+                    label={expanded ? 'Show Less' : 'See More'}
+                  />
                 </div>
               )}
             </div>
@@ -294,23 +279,21 @@ const Home = () => {
                     </SwiperSlide>
                   ))}
             </Swiper>
-            {errorMessage ? (
-              <Alert
-                severity="error"
-                action={
-                  <Button
-                    color="inherit"
-                    size="small"
-                    onClick={() => window.location.reload()}
-                  >
-                    Reload
-                  </Button>
-                }
-                className="mb-6 max-w-4xl mx-auto"
-              >
-                {errorMessage}
-              </Alert>
-            ) : null}
+            {!loading && errorMessage && (
+              <div className="flex flex-col items-center justify-center mb-6 max-w-4xl mx-auto p-4 border border-red-300 rounded-lg bg-red-50">
+                <Message
+                  severity=""
+                  text={errorMessage}
+                  className="w-full text-center"
+                />
+                <Button
+                  label="Reload"
+                  onClick={() => window.location.reload()}
+                  className="mt-3 p-button-danger p-button-outlined p-2 rounded border border-red-300 bg-red-300  rounded-lg opacity-90 hover:opacity-100 transition duration-300"
+                />
+              </div>
+            )}
+
             <div className="text-center mt-8">
               <button
                 onClick={() => navigate('/products')}

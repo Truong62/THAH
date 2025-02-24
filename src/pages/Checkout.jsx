@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { formatCurrency } from '../utils/formatCurrency';
@@ -8,12 +7,10 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
 
-// eslint-disable-next-line react/display-name
-const CheckoutPage = React.memo(() => {
+const CheckoutPage = () => {
   const cartItems = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const [provinces, setProvinces] = useState([]);
@@ -33,48 +30,36 @@ const CheckoutPage = React.memo(() => {
       .catch((error) => console.error('Error fetching provinces:', error));
   }, []);
 
-  const handleProvinceChange = useCallback(
-    (e, setFieldValue) => {
-      const provinceCode = e.target.value;
-      const province = provinces.find((p) => p.code === provinceCode);
-      setFieldValue('selectedProvince', province ? province.name : '');
-      axios
-        .get(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`)
-        .then((response) => {
-          setDistricts(response.data.districts);
-          setWards([]);
-          setFieldValue('selectedDistrict', '');
-          setFieldValue('selectedWard', '');
-        })
-        .catch((error) => console.error('Error fetching districts:', error));
-    },
-    [provinces]
-  );
+  const handleProvinceChange = useCallback((e, setFieldValue) => {
+    const provinceCode = e.value;
+    setFieldValue('selectedProvince', provinceCode);
+    axios
+      .get(`https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`)
+      .then((response) => {
+        setDistricts(response.data.districts);
+        setWards([]);
+        setFieldValue('selectedDistrict', '');
+        setFieldValue('selectedWard', '');
+      })
+      .catch((error) => console.error('Error fetching districts:', error));
+  }, []);
 
-  const handleDistrictChange = useCallback(
-    (e, setFieldValue) => {
-      const districtCode = e.target.value;
-      const district = districts.find((d) => d.code === districtCode);
-      setFieldValue('selectedDistrict', district ? district.name : '');
-      axios
-        .get(`https://provinces.open-api.vn/api/d/${districtCode}?depth=2`)
-        .then((response) => {
-          setWards(response.data.wards);
-          setFieldValue('selectedWard', '');
-        })
-        .catch((error) => console.error('Error fetching wards:', error));
-    },
-    [districts]
-  );
+  const handleDistrictChange = useCallback((e, setFieldValue) => {
+    const districtCode = e.value;
+    setFieldValue('selectedDistrict', districtCode);
+    axios
+      .get(`https://provinces.open-api.vn/api/d/${districtCode}?depth=2`)
+      .then((response) => {
+        setWards(response.data.wards);
+        setFieldValue('selectedWard', '');
+      })
+      .catch((error) => console.error('Error fetching wards:', error));
+  }, []);
 
-  const handleWardChange = useCallback(
-    (e, setFieldValue) => {
-      const wardCode = e.target.value;
-      const ward = wards.find((w) => w.code === wardCode);
-      setFieldValue('selectedWard', ward ? ward.name : '');
-    },
-    [wards]
-  );
+  const handleWardChange = useCallback((e, setFieldValue) => {
+    const wardCode = e.value;
+    setFieldValue('selectedWard', wardCode);
+  }, []);
 
   const validationSchema = useMemo(
     () =>
@@ -96,21 +81,34 @@ const CheckoutPage = React.memo(() => {
 
   const handleCheckout = useCallback(
     (values) => {
-      console.log('Order Information:', {
+      const selectedProvince =
+        provinces.find((p) => p.code === values.selectedProvince)?.name || '';
+      const selectedDistrict =
+        districts.find((d) => d.code === values.selectedDistrict)?.name || '';
+      const selectedWard =
+        wards.find((w) => w.code === values.selectedWard)?.name || '';
+
+      const orderData = {
         ...values,
+        selectedProvince,
+        selectedDistrict,
+        selectedWard,
         cartItems,
-      });
+      };
+
+      console.log('Order Information:', orderData);
+      // axios.post('/api/checkout', orderData).then(...).catch(...);
     },
-    [cartItems]
+    [cartItems, provinces, districts, wards]
   );
 
   return (
-    <React.Fragment>
+    <>
       <Header />
       <div className="max-w-6xl mx-auto p-6">
         <h1 className="text-3xl font-bold mb-4">Checkout</h1>
         <div className="flex flex-col md:flex-row">
-          <div className="w-full md:w-1/2 p-4 -mt-2">
+          <div className="w-full md:w-1/2 p-4">
             <h2 className="text-2xl font-bold mb-4">Your Order</h2>
             <h2 className="text-2xl font-bold">Order Summary</h2>
             <div className="flex justify-between font-bold mb-4">
@@ -161,158 +159,212 @@ const CheckoutPage = React.memo(() => {
             >
               {({ setFieldValue, values, errors, touched }) => (
                 <Form className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="col-span-1 md:col-span-2">
-                    <TextField
-                      fullWidth
+                  <div className="col-span-2">
+                    <label
+                      htmlFor="fullName"
+                      className="block text-gray-700 font-medium mb-1"
+                    >
+                      Full Name
+                    </label>
+                    <InputText
                       id="fullName"
                       name="fullName"
-                      label="Full Name"
                       value={values.fullName}
                       onChange={(e) =>
                         setFieldValue('fullName', e.target.value)
                       }
-                      error={touched.fullName && Boolean(errors.fullName)}
-                      helperText={touched.fullName && errors.fullName}
+                      placeholder="Enter your full name"
+                      className={`w-full p-3 border rounded-lg ${
+                        errors.fullName && touched.fullName
+                          ? 'border-red-500'
+                          : 'border-gray-300'
+                      }`}
                     />
+                    {errors.fullName && touched.fullName && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.fullName}
+                      </p>
+                    )}
                   </div>
+
                   <div>
-                    <TextField
-                      fullWidth
+                    <label
+                      htmlFor="email"
+                      className="block text-gray-700 font-medium mb-1"
+                    >
+                      Email
+                    </label>
+                    <InputText
                       id="email"
                       name="email"
-                      label="Email"
                       value={values.email}
                       onChange={(e) => setFieldValue('email', e.target.value)}
-                      error={touched.email && Boolean(errors.email)}
-                      helperText={touched.email && errors.email}
+                      placeholder="Enter your email"
+                      className={`w-full p-3 border rounded-lg ${
+                        errors.email && touched.email
+                          ? 'border-red-500'
+                          : 'border-gray-300'
+                      }`}
                     />
+                    {errors.email && touched.email && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
+
                   <div>
-                    <TextField
-                      fullWidth
+                    <label
+                      htmlFor="phoneNumber"
+                      className="block text-gray-700 font-medium mb-1"
+                    >
+                      Phone Number
+                    </label>
+                    <InputText
                       id="phoneNumber"
                       name="phoneNumber"
-                      label="Phone Number"
                       value={values.phoneNumber}
                       onChange={(e) =>
                         setFieldValue('phoneNumber', e.target.value)
                       }
-                      error={touched.phoneNumber && Boolean(errors.phoneNumber)}
-                      helperText={touched.phoneNumber && errors.phoneNumber}
+                      placeholder="Enter your phone number"
+                      className={`w-full p-3 border rounded-lg ${
+                        errors.phoneNumber && touched.phoneNumber
+                          ? 'border-red-500'
+                          : 'border-gray-300'
+                      }`}
                     />
+                    {errors.phoneNumber && touched.phoneNumber && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.phoneNumber}
+                      </p>
+                    )}
                   </div>
-                  <div className="col-span-1 md:col-span-2">
-                    <TextField
-                      fullWidth
+
+                  <div className="col-span-2">
+                    <label
+                      htmlFor="detailAddress"
+                      className="block text-gray-700 font-medium mb-1"
+                    >
+                      Detail Address
+                    </label>
+                    <InputText
                       id="detailAddress"
                       name="detailAddress"
-                      label="Detail Address"
-                      multiline
-                      rows={4}
                       value={values.detailAddress}
                       onChange={(e) =>
                         setFieldValue('detailAddress', e.target.value)
                       }
-                      error={
-                        touched.detailAddress && Boolean(errors.detailAddress)
-                      }
-                      helperText={touched.detailAddress && errors.detailAddress}
+                      placeholder="Enter your address"
+                      className={`w-full p-3 border rounded-lg ${
+                        errors.detailAddress && touched.detailAddress
+                          ? 'border-red-500'
+                          : 'border-gray-300'
+                      }`}
                     />
+                    {errors.detailAddress && touched.detailAddress && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.detailAddress}
+                      </p>
+                    )}
                   </div>
+
                   <div>
-                    <Select
-                      name="selectedProvince"
-                      value={
-                        provinces.find(
-                          (p) => p.name === values.selectedProvince
-                        )?.code || ''
-                      }
+                    <label
+                      htmlFor="province"
+                      className="block text-gray-700 font-medium mb-1"
+                    >
+                      Province
+                    </label>
+                    <Dropdown
+                      value={values.selectedProvince}
+                      options={provinces.map((p) => ({
+                        label: p.name,
+                        value: p.code,
+                      }))}
                       onChange={(e) => handleProvinceChange(e, setFieldValue)}
-                      displayEmpty
-                      fullWidth
-                      error={
-                        touched.selectedProvince &&
-                        Boolean(errors.selectedProvince)
-                      }
-                    >
-                      <MenuItem value="">
-                        <em>Select Province</em>
-                      </MenuItem>
-                      {provinces.map((province) => (
-                        <MenuItem key={province.code} value={province.code}>
-                          {province.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-
+                      placeholder="Select Province"
+                      className={`w-full py-3 px-4 border rounded-xl transition duration-200
+                        ${
+                          errors.selectedProvince && touched.selectedProvince
+                            ? 'border-red-500 focus:ring-2 focus:ring-red-400'
+                            : 'border-gray-300 focus:ring-2 focus:ring-blue-400 hover:border-blue-500'
+                        }
+                      `}
+                      panelClassName="max-h-60 overflow-auto rounded-lg shadow-lg bg-white border border-gray-200 p-2"
+                    />
                     {errors.selectedProvince && touched.selectedProvince && (
-                      <div className="text-red-500">
+                      <p className="text-red-500 text-sm mt-1">
                         {errors.selectedProvince}
-                      </div>
+                      </p>
                     )}
                   </div>
-                  <div>
-                    <Select
-                      name="selectedDistrict"
-                      value={
-                        districts.find(
-                          (d) => d.name === values.selectedDistrict
-                        )?.code || ''
-                      }
-                      onChange={(e) => handleDistrictChange(e, setFieldValue)}
-                      displayEmpty
-                      fullWidth
-                      error={
-                        touched.selectedDistrict &&
-                        Boolean(errors.selectedDistrict)
-                      }
-                    >
-                      <MenuItem value="">
-                        <em>Select District</em>
-                      </MenuItem>
-                      {districts.map((district) => (
-                        <MenuItem key={district.code} value={district.code}>
-                          {district.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
 
-                    {errors.selectedDistrict && touched.selectedDistrict && (
-                      <div className="text-red-500">
-                        {errors.selectedDistrict}
-                      </div>
-                    )}
-                  </div>
-                  <div className="col-span-1 md:col-span-2">
-                    <Select
-                      name="selectedWard"
-                      value={
-                        wards.find((w) => w.name === values.selectedWard)
-                          ?.code || ''
-                      }
-                      onChange={(e) => handleWardChange(e, setFieldValue)}
-                      displayEmpty
-                      fullWidth
-                      error={
-                        touched.selectedWard && Boolean(errors.selectedWard)
-                      }
+                  <div>
+                    <label
+                      htmlFor="district"
+                      className="block text-gray-700 font-medium mb-1"
                     >
-                      <MenuItem value="">
-                        <em>Select Ward</em>
-                      </MenuItem>
-                      {wards.map((ward) => (
-                        <MenuItem key={ward.code} value={ward.code}>
-                          {ward.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    {errors.selectedWard && touched.selectedWard && (
-                      <div className="text-red-500">{errors.selectedWard}</div>
+                      District
+                    </label>
+                    <Dropdown
+                      value={values.selectedDistrict}
+                      options={districts.map((d) => ({
+                        label: d.name,
+                        value: d.code,
+                      }))}
+                      onChange={(e) => handleDistrictChange(e, setFieldValue)}
+                      placeholder="Select District"
+                      className={`w-full py-3 px-4 border rounded-xl transition duration-200
+                        ${
+                          errors.selectedDistrict && touched.selectedDistrict
+                            ? 'border-red-500 focus:ring-2 focus:ring-red-400'
+                            : 'border-gray-300 focus:ring-2 focus:ring-blue-400 hover:border-blue-500'
+                        }
+                      `}
+                      panelClassName="max-h-60 overflow-auto rounded-lg shadow-lg bg-white border border-gray-200 p-2"
+                    />
+                    {errors.selectedDistrict && touched.selectedDistrict && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.selectedDistrict}
+                      </p>
                     )}
                   </div>
+
+                  <div className="col-span-2">
+                    <label
+                      htmlFor="ward"
+                      className="block text-gray-700 font-medium mb-1"
+                    >
+                      Ward
+                    </label>
+                    <Dropdown
+                      value={values.selectedWard}
+                      options={wards.map((w) => ({
+                        label: w.name,
+                        value: w.code,
+                      }))}
+                      onChange={(e) => handleWardChange(e, setFieldValue)}
+                      placeholder="Select Ward"
+                      className={`w-full py-3 px-4 border rounded-xl transition duration-200
+                        ${
+                          errors.selectedWard && touched.selectedWard
+                            ? 'border-red-500 focus:ring-2 focus:ring-red-400'
+                            : 'border-gray-300 focus:ring-2 focus:ring-blue-400 hover:border-blue-500'
+                        }
+                      `}
+                      panelClassName="max-h-60 overflow-auto rounded-lg shadow-lg bg-white border border-gray-200 p-2"
+                    />
+                    {errors.selectedWard && touched.selectedWard && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.selectedWard}
+                      </p>
+                    )}
+                  </div>
+
                   <button
                     type="submit"
-                    className="w-full py-2 bg-black text-white font-bold rounded-full hover:bg-gray-800 col-span-1 md:col-span-2"
+                    className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200 col-span-2"
                   >
                     Checkout
                   </button>
@@ -323,8 +375,8 @@ const CheckoutPage = React.memo(() => {
         </div>
       </div>
       <Footer />
-    </React.Fragment>
+    </>
   );
-});
+};
 
 export default CheckoutPage;

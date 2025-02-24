@@ -19,7 +19,7 @@ const ProductDetail = () => {
       <Layout>
         <BreadCrumb />
         <ProductDetailsCard />
-        <div className="py-4 text-center">
+        <div className=" text-center">
           <h2 className="text-xl font-bold text-gray-800">
             Product Suggestions
           </h2>
