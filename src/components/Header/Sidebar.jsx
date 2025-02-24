@@ -4,30 +4,28 @@ import { Link } from 'react-router-dom';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
 
-/**
- *
- * @param visibleRight
- * @param setVisibleRight
- * @param activeLink
- * @returns {JSX.Element}
- * @constructor
- */
 const SidebarContainer = ({ visibleRight, setVisibleRight, activeLink }) => {
   return (
     <Sidebar
       visible={visibleRight}
       position="right"
       onHide={() => setVisibleRight(false)}
-      className="p-sidebar-sm"
+      className="w-80 md:w-96 p-sidebar-sm bg-white shadow-lg"
     >
-      <div className="p-4">
-        <ul className="list-none p-0 m-0">
-          {['Products', 'Pricing', 'Blogs', 'Company'].map((text, index) => (
-            <li key={index} className="mb-2">
+      <div className="p-6 flex flex-col h-full">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+          Sneaker Store
+        </h2>
+
+        <ul className="list-none space-y-4 flex-1">
+          {['Products', 'Pricing', 'Blogs', 'Company'].map((text) => (
+            <li key={text}>
               <Link
-                to={`/${text}`}
-                className={`block text-sm font-bold px-5 py-2 rounded-xl transition-all duration-500 hover:bg-[#A8DCE7] ${
-                  activeLink === `/${text.toLowerCase()}` ? 'bg-[#A8DCE7]' : ''
+                to={`/${text.toLowerCase()}`}
+                className={`block text-lg font-semibold px-5 py-3 rounded-lg transition-all duration-300 ${
+                  activeLink === `/${text.toLowerCase()}`
+                    ? 'bg-[#A8DCE7] text-black'
+                    : 'hover:bg-gray-200 text-gray-700'
                 }`}
                 onClick={() => setVisibleRight(false)}
               >
@@ -36,31 +34,16 @@ const SidebarContainer = ({ visibleRight, setVisibleRight, activeLink }) => {
             </li>
           ))}
         </ul>
-        <hr className="my-4" />
-        <ul className="list-none p-0 m-0">
-          <li className="mb-2">
-            <Button
-              label="Log In"
-              className="w-full text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300"
-              onClick={() => setVisibleRight(false)}
-            >
-              <Link to="/login" className="text-white block w-full h-full">
-                Log In
-              </Link>
+        <div className="flex items-center justify-center space-x-2 flex-nowrap">
+          <Link to="/login">
+            <Button className="p-button-text  font-semibold">Log In</Button>
+          </Link>
+          <Link to="/signup">
+            <Button className="p-button-rounded text-gray-700 p-button-primary font-semibold">
+              Sign Up
             </Button>
-          </li>
-          <li>
-            <Button
-              label="Sign Up"
-              className="w-full text-sm font-bold rounded-xl bg-purple-blue-100 text-purple-blue-600 hover:bg-purple-blue-600 hover:text-white transition duration-300"
-              onClick={() => setVisibleRight(false)}
-            >
-              <Link to="/signup" className="text-white block w-full h-full">
-                Sign Up
-              </Link>
-            </Button>
-          </li>
-        </ul>
+          </Link>
+        </div>
       </div>
     </Sidebar>
   );

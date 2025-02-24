@@ -57,7 +57,7 @@ const CardProduct = ({
       <div className="flex items-center justify-between mt-4">
         <p className="text-lg font-semibold text-gray-800">{price}</p>
         <motion.button
-          className="bg-gray-100 text-gray-600 p-2 rounded-full"
+          className=" text-gray-600 p-2 rounded-full"
           whileHover={{ scale: 1.1, backgroundColor: '#e5e7eb' }}
           whileTap={{ scale: 0.9 }}
         >

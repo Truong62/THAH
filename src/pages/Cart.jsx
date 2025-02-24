@@ -49,6 +49,7 @@ const CartPage = () => {
     }
     navigate('/checkout');
   };
+  console.log('Cart Items after reload:', cartItems);
 
   return (
     <React.Fragment>
@@ -134,7 +135,7 @@ const CartPage = () => {
                       </button>
                       <Button
                         icon="pi pi-trash"
-                        className="ml-4 text-black"
+                        className="p-button-danger"
                         onClick={() =>
                           handleRemoveItem(item.id, item.color, item.size)
                         }
@@ -148,8 +149,7 @@ const CartPage = () => {
               })
             )}
           </div>
-          {/* Phần Summary nằm bên phải trên màn hình lớn */}
-          <div className="hidden lg:block w-full lg:w-1/3 pl-4">
+          <div className="w-full lg:w-1/3 pl-4 mt-6 lg:mt-0">
             <h2 className="text-xl font-bold mb-4">Summary</h2>
             <div className="flex justify-between mb-2">
               <span>Subtotal</span>
