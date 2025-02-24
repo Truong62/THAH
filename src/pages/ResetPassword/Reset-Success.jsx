@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import React from 'react';
 
 const ResetSuccess = () => {
@@ -29,11 +28,11 @@ const ResetSuccess = () => {
       style={{ fontFamily: 'Epilogue', padding: '24px' }}
     >
       <div className="absolute top-4 right-4">
-        <LightbulbIcon
+        <i
+          className={`pi pi-lightbulb cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
+          style={{ fontSize: '2rem' }}
           onClick={toggleDarkMode}
-          className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-          fontSize="large"
-        />
+        ></i>
       </div>
       <div
         className="absolute w-full h-full bottom-0 transform translate-y-1/2"
