@@ -29,7 +29,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="container flex flex-col mx-auto sticky top-0 left-0 right-0 z-50 bg-white">
+    <div className="container flex flex-col mx-auto top-0 left-0 right-0 z-50 bg-white">
       <div className="relative flex items-center justify-between w-full group lg:py-7 mx-2 shrink-0 md:py-2">
         <div className="flex items-center md:ml-2">
           <Link to={'/'}>

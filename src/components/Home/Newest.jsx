@@ -19,22 +19,20 @@ const Newest = () => {
   const newestProducts = sortedProducts.slice(0, 4);
 
   return (
-    <div className="p-4 bg-gray-100 rounded shadow">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {newestProducts.map((product, index) => (
-          <CardProduct
-            key={index}
-            nameProduct={product.productName}
-            description={truncateDescription(product.productDescription, 30)}
-            price={formatCurrency(product.variants[0].price)}
-            brand={product.brand}
-            nameTag={product.tag}
-            imageUrl={product.variants[0].images[0]}
-            onClick={() => navigate(`/products/${product.productName}`)}
-            badgeText="NEW"
-          />
-        ))}
-      </div>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {newestProducts.map((product, index) => (
+        <CardProduct
+          key={index}
+          nameProduct={product.productName}
+          description={truncateDescription(product.productDescription, 30)}
+          price={formatCurrency(product.variants[0].price)}
+          brand={product.brand}
+          nameTag={product.tag}
+          imageUrl={product.variants[0].images[0]}
+          onClick={() => navigate(`/products/${product.productName}`)}
+          badgeText="NEW"
+        />
+      ))}
     </div>
   );
 };
