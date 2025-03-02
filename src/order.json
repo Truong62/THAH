@@ -1,0 +1,118 @@
+[
+  {
+    "orderId": 1,
+    "orderCode": "ORD0012325",
+    "customerName": "Nguyễn Hoàng Hiệp",
+    "phoneNumber": "0987654321",
+    "email": "hiephoang@gmail.com",
+    "detailAddress": "Số 1, Đại Cồ Việt, Hai Bà Trưng, Hà Nội",
+    "orderDate": "2023-10-01",
+    "status": "Delivered",
+    "cartItems": [
+      {
+        "productId": 11,
+        "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/fc4622c4-2769-4665-aa6e-42c974a7705e/AIR+FORCE+1+%2707.png",
+        "productName": "Nike AirForce 1",
+        "quantity": 1,
+        "size": 36
+      },
+      {
+        "productId": 11,
+        "image": "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/fc4622c4-2769-4665-aa6e-42c974a7705e/AIR+FORCE+1+%2707.png",
+        "productName": "Nike AirForce 1",
+        "quantity": 1,
+        "size": 41
+      }
+    ]
+  },
+  {
+    "orderId": 2,
+    "orderCode": "ORD0012326",
+    "customerName": "Jane Smith",
+    "phoneNumber": "N/A",
+    "email": "N/A",
+    "detailAddress": "N/A",
+    "orderDate": "2023-10-02",
+    "status": "Pending",
+    "cartItems": [
+      {
+        "productId": 103,
+        "image": "https://via.placeholder.com/100",
+        "productName": "Product C",
+        "quantity": 1,
+        "size": "N/A"
+      },
+      {
+        "productId": 104,
+        "image": "https://via.placeholder.com/100",
+        "productName": "Product D",
+        "quantity": 3,
+        "size": "N/A"
+      }
+    ]
+  },
+  {
+    "orderId": 3,
+    "orderCode": "ORD0012327",
+    "customerName": "Alice Johnson",
+    "phoneNumber": "N/A",
+    "email": "N/A",
+    "detailAddress": "N/A",
+    "orderDate": "2023-10-03",
+    "status": "Delivered",
+    "cartItems": [
+      {
+        "productId": 105,
+        "image": "https://via.placeholder.com/100",
+        "productName": "Product E",
+        "quantity": 1,
+        "size": "N/A"
+      }
+    ]
+  },
+  {
+    "orderId": 4,
+    "orderCode": "ORD0012328",
+    "customerName": "Bob Brown",
+    "phoneNumber": "N/A",
+    "email": "N/A",
+    "detailAddress": "N/A",
+    "orderDate": "2023-10-04",
+    "status": "Cancelled",
+    "cartItems": [
+      {
+        "productId": 106,
+        "image": "https://via.placeholder.com/100",
+        "productName": "Product F",
+        "quantity": 2,
+        "size": "N/A"
+      },
+      {
+        "productId": 107,
+        "image": "https://via.placeholder.com/100",
+        "productName": "Product G",
+        "quantity": 1,
+        "size": "N/A"
+      }
+    ]
+  },
+  {
+    "orderId": 5,
+    "orderCode": "ORD0012329",
+    "customerName": "Charlie Davis",
+    "phoneNumber": "N/A",
+    "email": "N/A",
+    "detailAddress": "N/A",
+    "orderDate": "2023-10-05",
+    "status": "Order Confirmed",
+    "cartItems": [
+      {
+        "productId": 108,
+        "image": "https://via.placeholder.com/100",
+        "productName": "Product H",
+        "quantity": 4,
+        "size": "N/A"
+      }
+    ]
+  }
+]

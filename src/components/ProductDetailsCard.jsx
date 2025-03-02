@@ -119,7 +119,6 @@ const ProductDetailsCard = () => {
     const sizeInfo = currentVariant?.productColorSize?.find(
       (size) => size.sizeValue === selectedSize
     );
-
     if (!sizeInfo || sizeInfo.quantity === 0) {
       showToast(
         'warning',
@@ -137,7 +136,8 @@ const ProductDetailsCard = () => {
     );
 
     if (existingItem) {
-      if (existingItem.quantity >= sizeInfo.quantity) {
+      const newQuantity = existingItem.quantity + 1;
+      if (newQuantity > sizeInfo.quantity) {
         showToast(
           'warning',
           'Stock Limit Reached',
@@ -145,27 +145,26 @@ const ProductDetailsCard = () => {
         );
         return;
       }
-
       dispatch(
         updateQuantity({
           id: product.brandId,
           color: selectedColor,
           size: selectedSize,
-          quantity: existingItem.quantity + 1,
+          quantity: newQuantity,
         })
       );
       showToast('success', 'Cart Updated', 'Item quantity has been updated.');
     } else {
       dispatch(
         addToCart({
-          id: product?.brandId,
-          name: product?.productName,
-          price: currentVariant?.price,
+          id: product.brandId,
+          name: product.productName,
+          price: currentVariant.price,
           color: selectedColor,
           size: selectedSize,
           quantity: 1,
-          image: currentVariant?.images[0],
-          stock: sizeInfo?.quantity,
+          image: currentVariant.images[0],
+          stock: sizeInfo.quantity,
         })
       );
       showToast(

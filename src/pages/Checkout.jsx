@@ -8,6 +8,7 @@ import Footer from '../components/Footer/Footer';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { InputText } from 'primereact/inputtext';
+import { InputTextarea } from 'primereact/inputtextarea';
 import { Dropdown } from 'primereact/dropdown';
 
 const CheckoutPage = () => {
@@ -70,6 +71,8 @@ const CheckoutPage = () => {
           .required('Email is required'),
         phoneNumber: Yup.string()
           .required('Phone number is required')
+          .min(9, 'Phone number must have at least 9 characters')
+          .max(11, 'Phone number must have at most 11 characters')
           .matches(/^[0-9]+$/, 'Phone number must be numeric'),
         detailAddress: Yup.string().required('Address is required'),
         selectedProvince: Yup.string().required('Province is required'),
@@ -248,9 +251,11 @@ const CheckoutPage = () => {
                     >
                       Detail Address
                     </label>
-                    <InputText
+                    <InputTextarea
                       id="detailAddress"
                       name="detailAddress"
+                      autoResize
+                      rows={2}
                       value={values.detailAddress}
                       onChange={(e) =>
                         setFieldValue('detailAddress', e.target.value)

@@ -55,7 +55,7 @@ const Header = () => {
         </div>
 
         <nav className="hidden md:flex space-x-6">
-          {['Products', 'Pricing', 'Blogs', 'Company'].map((text) => (
+          {['Products', 'Tracking', 'Blogs', 'Company'].map((text) => (
             <Link
               key={text}
               to={`/${text.toLowerCase()}`}

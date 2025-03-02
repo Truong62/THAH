@@ -18,7 +18,7 @@ const SidebarContainer = ({ visibleRight, setVisibleRight, activeLink }) => {
         </h2>
 
         <ul className="list-none space-y-4 flex-1">
-          {['Products', 'Pricing', 'Blogs', 'Company'].map((text) => (
+          {['Products', 'Order Status', 'Blogs', 'Company'].map((text) => (
             <li key={text}>
               <Link
                 to={`/${text.toLowerCase()}`}
