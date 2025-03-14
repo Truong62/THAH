@@ -27,7 +27,6 @@ const CardProduct = ({
     <motion.div
       onClick={onClick}
       className="cursor-pointer bg-white rounded-lg shadow-md p-4 flex flex-col justify-between"
-      whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
     >
       <motion.div
@@ -36,10 +35,12 @@ const CardProduct = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
       >
-        <img
+        <motion.img
           src={imageUrl}
           alt={nameProduct}
           className="w-full h-48 object-cover rounded-lg"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.3 }}
         />
       </motion.div>
 
@@ -60,9 +61,7 @@ const CardProduct = ({
           className=" text-gray-600 p-2 rounded-full"
           whileHover={{ scale: 1.1, backgroundColor: '#e5e7eb' }}
           whileTap={{ scale: 0.9 }}
-        >
-          <i className="pi pi-search text-xl"></i>
-        </motion.button>
+        ></motion.button>
       </div>
     </motion.div>
   );
