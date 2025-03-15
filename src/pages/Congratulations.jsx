@@ -16,10 +16,6 @@ const Congratulations = () => {
     }
   }, [navigate]);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 

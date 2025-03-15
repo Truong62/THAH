@@ -11,7 +11,7 @@ export default function EmailVerification() {
 
   const [otp, setOtp] = useState(['', '', '', '']);
   const [error, setError] = useState('');
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode] = useState(true);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
