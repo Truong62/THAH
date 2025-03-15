@@ -3,6 +3,7 @@ import CardProduct from './Card/Card.jsx';
 import { formatCurrency } from '../utils/formatCurrency.js';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { truncateDescription } from '../utils/truncateDescription';
+import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import PropTypes from 'prop-types';
@@ -19,36 +20,30 @@ const SuggestProducts = ({ products }) => {
   };
 
   return (
-    <div className="my-8">
+    <div className="my-8 overflow-visible">
       <Swiper
         spaceBetween={20}
-        className="w-full pb-10"
+        slidesPerView={4}
+        modules={[Navigation, Autoplay]}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        loop={true}
         breakpoints={{
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          480: {
-            slidesPerView: 1.5,
-            spaceBetween: 15,
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-          },
+          0: { slidesPerView: 1, spaceBetween: 10 },
+          425: { slidesPerView: 1, spaceBetween: 15 },
+          683: { slidesPerView: 2, spaceBetween: 20 },
+          768: { slidesPerView: 3, spaceBetween: 20 },
+          1024: { slidesPerView: 4, spaceBetween: 20 },
         }}
       >
         {products.map((item, index) => (
-          <SwiperSlide key={index} className="flex justify-center items-center">
-            <div className="w-[22rem] h-auto">
+          <SwiperSlide
+            key={index}
+            className="flex items-stretch justify-center pb-4"
+          >
+            <div className="w-full h-auto flex flex-col justify-between">
               <CardProduct
                 nameProduct={item.nameProduct}
                 description={truncateDescription(item.productDescription, 30)}

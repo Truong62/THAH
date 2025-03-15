@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { formatCurrency } from '../utils/formatCurrency';
 import { updateQuantity, removeItem } from '../redux/cart/cartSlice';
-import Alert from '@mui/material/Alert';
+import { Message } from 'primereact/message';
+import { Button } from 'primereact/button';
 import Header from '../components/Header/Header';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
@@ -49,13 +49,20 @@ const CartPage = () => {
     }
     navigate('/checkout');
   };
+  console.log('Cart Items after reload:', cartItems);
 
   return (
     <React.Fragment>
       <Header />
       <div className="max-w-6xl mx-auto p-6">
         <h1 className="text-3xl font-bold mb-4">Bag</h1>
-        {alert && <Alert severity="warning">{alert}</Alert>}
+        {alert && (
+          <Message
+            severity=""
+            text={alert}
+            className="bg-orange-500 text-white w-full p-2 mb-4 rounded"
+          />
+        )}
         <div className="flex flex-col lg:flex-row">
           <div className="w-full lg:w-2/3 pr-4">
             {cartItems.length === 0 ? (
@@ -98,25 +105,20 @@ const CartPage = () => {
                       </button>
                       <input
                         type="number"
-                        value={item.quantity}
+                        value={item.quantity ?? ''}
                         onChange={(e) => {
-                          const newQuantity = parseInt(e.target.value);
-                          if (newQuantity < 1) {
-                            setAlert('Quantity cannot be less than 1');
-                          } else if (newQuantity > item.stock) {
-                            setAlert('Not enough stock available');
-                          } else {
-                            handleQuantityChange(
-                              item.id,
-                              item.color,
-                              item.size,
-                              newQuantity,
-                              item.stock
-                            );
-                          }
+                          const newQuantity = parseInt(e.target.value) || 0;
+                          handleQuantityChange(
+                            item.id,
+                            item.color,
+                            item.size,
+                            newQuantity,
+                            item.stock
+                          );
                         }}
                         className="w-12 text-center border mx-2"
                       />
+
                       <button
                         className="px-2"
                         onClick={() =>
@@ -131,14 +133,13 @@ const CartPage = () => {
                       >
                         +
                       </button>
-                      <button
-                        className="ml-4 text-black"
+                      <Button
+                        icon="pi pi-trash"
+                        className="p-button-danger"
                         onClick={() =>
                           handleRemoveItem(item.id, item.color, item.size)
                         }
-                      >
-                        <DeleteIcon />
-                      </button>
+                      />
                     </div>
                     <p className="text-lg font-bold text-black w-full lg:w-1/3 text-right">
                       {formatCurrency(item.price * item.quantity)}
@@ -148,8 +149,7 @@ const CartPage = () => {
               })
             )}
           </div>
-          {/* Phần Summary nằm bên phải trên màn hình lớn */}
-          <div className="hidden lg:block w-full lg:w-1/3 pl-4">
+          <div className="w-full lg:w-1/3 pl-4 mt-6 lg:mt-0">
             <h2 className="text-xl font-bold mb-4">Summary</h2>
             <div className="flex justify-between mb-2">
               <span>Subtotal</span>
@@ -180,38 +180,6 @@ const CartPage = () => {
               PayPal
             </button>
           </div>
-        </div>
-        {/* Phần Summary cho thiết bị di động nằm dưới cùng */}
-        <div className="w-full lg:hidden mt-4">
-          <h2 className="text-xl font-bold mb-4">Summary</h2>
-          <div className="flex justify-between mb-2">
-            <span>Subtotal</span>
-            <span>{formatCurrency(subtotal)}</span>
-          </div>
-          <div className="flex justify-between mb-2">
-            <span>Estimated Shipping & Handling</span>
-            <span>Free</span>
-          </div>
-          <div className="flex justify-between mb-2">
-            <span>Estimated Tax</span>
-            <span>-</span>
-          </div>
-          <div className="flex justify-between font-bold mb-4">
-            <span>Total</span>
-            <span className="text-red-500">{formatCurrency(subtotal)}</span>
-          </div>
-          <button
-            className={`w-full py-2 bg-black text-white font-bold rounded mb-2 hover:bg-gray-800 ${
-              cartItems.length === 0 ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
-            onClick={handleCheckout}
-            disabled={cartItems.length === 0}
-          >
-            Continue to Checkout
-          </button>
-          <button className="w-full py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-600">
-            PayPal
-          </button>
         </div>
       </div>
     </React.Fragment>

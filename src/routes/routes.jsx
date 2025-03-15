@@ -6,6 +6,7 @@ const HomePage = lazy(() => import('../pages/HomePage'));
 const Blogs = lazy(() => import('../pages/Blogs'));
 const Product = lazy(() => import('../pages/Product'));
 const ProductDetail = lazy(() => import('../pages/ProductDetail'));
+const Tracking = lazy(() => import('../pages/Tracking'));
 const PageNotFound = lazy(
   () => import('../components/404NotFound/_404PageNotFound')
 );
@@ -35,6 +36,7 @@ const AppRoutes = () => {
         <Route path="/products/:link" element={<ProductDetail />} />
         <Route path="/productdetails" element={<ProductDetail />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/tracking" element={<Tracking />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/signup" element={<SignUpForm />} />
         <Route path="/login" element={<LoginForm />} />

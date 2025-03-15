@@ -1,10 +1,8 @@
-// src/pages/ForgotPassword.js
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../../components/Icon/Back';
-import InputField from '../../components/Form/Input'; // Import InputField
-import userData from '../../user.json'; // Import dữ liệu người dùng
+import InputField from '../../components/Form/Input';
+import userData from '../../user.json';
 import React from 'react';
 
 export default function ForgotPassword() {
@@ -19,7 +17,6 @@ export default function ForgotPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Kiểm tra xem email có tồn tại trong dữ liệu không
     const user = userData.find((user) => user.email === email);
 
     if (!email) {
@@ -61,11 +58,13 @@ export default function ForgotPassword() {
       }}
     >
       <div className="absolute top-4 right-4">
-        <LightbulbIcon
-          onClick={toggleDarkMode}
-          className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-          fontSize="large"
-        />
+        <div className="absolute top-4 right-4">
+          <i
+            className={`pi pi-lightbulb cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
+            onClick={toggleDarkMode}
+            style={{ fontSize: '24px' }}
+          ></i>
+        </div>
       </div>
       <div
         className="absolute w-full h-full bottom-0 transform translate-y-1/2"
