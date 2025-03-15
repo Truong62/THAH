@@ -10,4 +10,5 @@ export default defineConfig({
     loader: 'jsx',
     include: /src\/.*\.[tj]sx?$/,
   },
+  base: './',
 });
