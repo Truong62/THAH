@@ -2,24 +2,59 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/Layout';
 import BreadCrumb from '../components/BreadCrumb';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { blogPosts } from '../data/dataBlog';
+import './style.scss';
 
 const Blogs = () => {
   const featuredPosts = blogPosts.slice(0, 2);
+  const column1Ref = useRef(null);
+  const column2Ref = useRef(null);
+  const [stickyColumn, setStickyColumn] = useState(null);
+
+  useEffect(() => {
+    function checkColumnHeights() {
+      const column1 = column1Ref.current;
+      const column2 = column2Ref.current;
+
+      if (!column1 || !column2) return;
+
+      const height1 = column1.getBoundingClientRect().height;
+      const height2 = column2.getBoundingClientRect().height;
+
+      if (height1 < height2) {
+        setStickyColumn('column1');
+      } else if (height2 < height1) {
+        setStickyColumn('column2');
+      } else {
+        setStickyColumn(null);
+      }
+    }
+
+    const timer = setTimeout(checkColumnHeights, 500);
+    window.addEventListener('resize', checkColumnHeights);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', checkColumnHeights);
+    };
+  }, []);
+
   return (
     <>
       <Header />
       <Layout>
-        <BreadCrumb />
         <div className="container mx-auto px-4 max-w-6xl">
+          <BreadCrumb />
           <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">
             Sneaker Blog
           </h1>
-
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Main Content */}
-            <div className="w-full lg:w-2/3">
+          <div className="flex flex-col lg:flex-row gap-8 relative">
+            <div
+              ref={column1Ref}
+              id="column1"
+              className={`w-full lg:w-2/3 ${stickyColumn === 'column1' ? 'lg:sticky lg:top-0' : ''}`}
+            >
               {blogPosts.map((post) => (
                 <div
                   key={post.id}
@@ -87,7 +122,11 @@ const Blogs = () => {
               ))}
             </div>
 
-            <div className="w-full lg:w-1/3">
+            <div
+              ref={column2Ref}
+              id="column2"
+              className={`w-full lg:w-1/3 ${stickyColumn === 'column2' ? 'lg:sticky lg:top-0' : ''}`}
+            >
               <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
                 <div className="text-center">
                   <img

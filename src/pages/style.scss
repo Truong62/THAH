@@ -10,4 +10,10 @@
   }
 }
 
-// flex flex-wrap lg:flex-nowrap justify-between gap-4 flex-col
+@media (min-width: 1024px) {
+  #column2 {
+    position: sticky;
+    top: 86px;
+    height: fit-content;
+  }
+}

@@ -10,7 +10,7 @@ import React from 'react';
  */
 const Layout = ({ children, w = '1280px' }) => {
   return (
-    <div className="my-0 mx-auto" style={{ maxWidth: w }}>
+    <div className="my-0 mx-auto" style={{ maxWidth: w || '1280px' }}>
       {children}
     </div>
   );
