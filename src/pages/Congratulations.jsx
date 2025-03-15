@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TrophyIcon from '../components/Icon/Trophy';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
+// @todo hiep sót mất 1 icon này
+// import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import React from 'react';
 
 const Congratulations = () => {
@@ -43,11 +44,12 @@ const Congratulations = () => {
       style={{ fontFamily: 'Epilogue' }}
     >
       <div className="absolute top-4 right-4">
-        <LightbulbIcon
-          onClick={toggleDarkMode}
-          className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-          fontSize="large"
-        />
+        {/*@todo hiep sót mất 1 icon này*/}
+        {/*<LightbulbIcon*/}
+        {/*  onClick={toggleDarkMode}*/}
+        {/*  className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}*/}
+        {/*  fontSize="large"*/}
+        {/*/>*/}
       </div>
       <div
         className="absolute w-full h-full bottom-0 transform translate-y-1/2"

@@ -13,10 +13,6 @@ export default function EmailVerification() {
   const [error, setError] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(true);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
@@ -71,7 +67,7 @@ export default function EmailVerification() {
       className={`relative flex items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
     >
       <div className="absolute top-4 right-4">
-        @todo hiep sót mất 1 icon này
+        {/*@todo hiep sót mất 1 icon này*/}
         {/*<LightbulbIcon*/}
         {/*  onClick={toggleDarkMode}*/}
         {/*  className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}*/}
