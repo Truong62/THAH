@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import userData from '../user.json';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import BackIcon from '../components/Icon/Back';
 import React from 'react';
 
@@ -72,11 +71,12 @@ export default function EmailVerification() {
       className={`relative flex items-center justify-center min-h-screen ${isDarkMode ? 'bg-[rgba(19,19,26,1)]' : 'bg-white'}`}
     >
       <div className="absolute top-4 right-4">
-        <LightbulbIcon
-          onClick={toggleDarkMode}
-          className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}
-          fontSize="large"
-        />
+        @todo hiep sót mất 1 icon này
+        {/*<LightbulbIcon*/}
+        {/*  onClick={toggleDarkMode}*/}
+        {/*  className={`cursor-pointer ${isDarkMode ? 'text-yellow-500' : 'text-gray-800'}`}*/}
+        {/*  fontSize="large"*/}
+        {/*/>*/}
       </div>
       <div
         className="absolute w-full h-full bottom-0 transform translate-y-1/2"

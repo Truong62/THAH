@@ -23,7 +23,6 @@ const Header = () => {
     const path = window.location.pathname.split('/');
     setActiveLink(path.length > 1 ? `/${path[1]}` : '/');
   }, []);
-  console.log(document.querySelector('.pi-shopping-cart'));
 
   return (
     <header className="sticky top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 p-2">
@@ -32,7 +31,7 @@ const Header = () => {
           <Link to="/">
             <img
               className="w-12 h-12 rounded-lg"
-              src="https://yt3.googleusercontent.com/HnAnUZS7d8LFtPHaHRtPH9nMoUmrsBBy_FDD-T-YQIycPW55peuWo1NO_rxPIswDbukXYlk7=s160-c-k-c0x00ffffff-no-rj"
+              src="https://cdn2.futurepedia.io/2024-11-26T18-51-51.356Z-MtXWJEI4O08DkXhcFo8z7VXOEe00XPWLb.webp?w=1920"
               alt="Logo"
             />
           </Link>
