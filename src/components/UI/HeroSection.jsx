@@ -30,7 +30,7 @@ const HeroSection = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button className="border border-stone-300 hover:border-stone-400 bg-transparent text-stone-900 rounded-lg px-6 py-6 font-medium transition-all duration-300 flex items-center space-x-2 text-base">
-                <Link to="/best-sellers">
+                <Link to="/products">
                   <div className="flex gap-3">
                     <ShoppingSvg />
                     <span>BUY NOW</span>
