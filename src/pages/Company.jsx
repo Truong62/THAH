@@ -5,6 +5,7 @@ import StrategyIcon from '../components/SvgIcon/StrategyIcon';
 import TechnologyIcon from '../components/SvgIcon/TechnologyIcon';
 import ConsultingIcon from '../components/SvgIcon/ConsultingIcon';
 import BannerCompany from '../components/SvgIcon/bannerCompany';
+import BreadCrumb from '../components/BreadCrumb';
 import { motion } from 'framer-motion';
 import { STATS } from '../utils/Company/company';
 import React from 'react';
@@ -99,6 +100,7 @@ const Company = () => {
   return (
     <>
       <Header />
+      <BreadCrumb />
       <div className="col-span-1">
         <iframe
           width="100%"
