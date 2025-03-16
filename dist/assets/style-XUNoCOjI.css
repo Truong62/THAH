@@ -1,0 +1,1 @@
+.baner-css{display:flex;justify-content:space-between;gap:15px}@media (max-width: 456px){.baner-css{flex-direction:column}}@media (min-width: 1024px){#column2{position:sticky;top:86px;height:fit-content}}

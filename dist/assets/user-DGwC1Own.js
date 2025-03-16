@@ -1,0 +1,1 @@
+const e=[{role:"admin",email:"admin@gmail.com",password:"admin1234",active_code:"1234",reset_code:"2231",isActive:!0},{role:"user",email:"user@gmail.com",password:"user1234",active_code:"2341",reset_code:"2221",isActive:!0},{role:"user",email:"user2@gmail.com",password:"user1234",active_code:"3412",reset_code:"2201",isActive:!0}];export{e as u};
