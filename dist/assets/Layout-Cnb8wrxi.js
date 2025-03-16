@@ -1,1 +1,0 @@
-import{j as t}from"./index-bip1bZJL.js";import{P as s}from"./index-B1eWHYHJ.js";const p=({children:o,w:r="1280px"})=>t.jsx("div",{className:"my-0 mx-auto",style:{maxWidth:r||"1280px"},children:o});p.propTypes={children:s.node,w:s.string};export{p as L};
